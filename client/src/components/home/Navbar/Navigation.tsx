@@ -3,7 +3,7 @@ import React from "react";
 
 const Navigation = () => {
   return (
-    <div className="hidden lg:block">
+    <div className="hidden xl:block">
       <ul className="lg:flex gap-10 text-main-color text-[18px]">
         <li>
           <a href="#">Home</a>
