@@ -43,7 +43,7 @@
         {
             "id": 9,
             "name": "PostgreSQL",
-            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1686584016/Skills/Postgresql_azpxgs.png"
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1719863295/Skills/tp0pymuxc3dsmn2bj9xy.png"
         },
         {
             "id": 10,
@@ -57,11 +57,6 @@
         },
         {
             "id": 12,
-            "name": "GIT",
-            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1663646265/Skills/Git_jc9vm1.png"
-        },
-        {
-            "id": 13,
             "name": "Github",
             "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1686766714/Skills/github-mark-white_fqk8w5.png"
         }

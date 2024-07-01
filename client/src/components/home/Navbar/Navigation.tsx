@@ -6,19 +6,19 @@ const Navigation = () => {
     <div className="hidden xl:block">
       <ul className="lg:flex gap-10 text-main-color text-[18px]">
         <li>
-          <a href="#">Home</a>
+          <a href="#" className="hover:text-white transition-all ease-in duration-150">Home</a>
         </li>
         <li>
-          <a href="#aboutMe">Sobre mí</a>
+          <a href="#aboutMe" className="hover:text-white transition-all ease-in duration-150">Sobre mí</a>
         </li>
         <li>
-          <a href="#techStack">Tech Stack</a>
+          <a href="#techStack" className="hover:text-white transition-all ease-in duration-150">Tech Stack</a>
         </li>
         <li>
-          <a href="#projects">Proyectos</a>
+          <a href="#projects" className="hover:text-white transition-all ease-in duration-150">Proyectos</a>
         </li>
         <li>
-          <Link href="/contact">Contacto</Link>
+          <Link href="/contact" className="hover:text-white transition-all ease-in duration-150">Contacto</Link>
         </li>
       </ul>
     </div>

@@ -3,14 +3,14 @@ import React from "react";
 const SocialMedia = () => {
   return (
     <div className="hidden xl:flex xl:gap-5">
-      <a href="https://github.com/lucio1907" target="_blank">
-        <img src="/Github.webp" alt="github" />
+      <a href="https://github.com/lucio1907" className="hover:rounded-3xl hover:shadow-xl hover:shadow-slate-600 hover:bg-black transition-all ease-in duration-150" target="_blank">
+        <img src="/Github.webp" alt="github" className="w-[30px] h-[30px]" />
       </a>
-      <a href="https://x.com/Lu_Gastellu" target="_blank">
-        <img src="/Twitter.webp" alt="twitter" />
+      <a href="https://x.com/Lu_Gastellu" className="hover:rounded-3xl hover:shadow-xl hover:shadow-slate-600 hover:bg-slate-600 transition-all ease-in duration-150" target="_blank">
+        <img src="/Twitter.webp" alt="twitter" className="w-[30px] h-[30px]" />
       </a>
-      <a href="https://www.linkedin.com/in/luciogastellu/" target="_blank">
-        <img src="/Linkedin.webp" alt="linkedin" />
+      <a href="https://www.linkedin.com/in/luciogastellu/" className="hover:rounded-3xl hover:shadow-xl hover:shadow-[#0b65c3] hover:bg-[#0b65c3] transition-all ease-in duration-150" target="_blank">
+        <img src="/Linkedin.webp" alt="linkedin" className="w-[30px] h-[30px]" />
       </a>
     </div>
   );

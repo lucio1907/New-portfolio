@@ -19,7 +19,7 @@ const HomeView = (): React.ReactElement => {
             </p>
             <Link
               href="/contact"
-              className="bg-gradient p-2 text-center w-[150px] max-w-[300px] font-semibold text-white rounded mb-5 md:w-[200px] md:p-4 md:mb-10 md:text-[21px] lg:mb-0 lg:text-[24px] lg:p-3 lg:rounded-xl"
+              className="bg-gradient p-2 text-center w-[150px] max-w-[300px] font-semibold text-white rounded mb-5 md:w-[200px] md:p-4 md:mb-10 md:text-[21px] lg:mb-0 lg:text-[24px] lg:p-3 lg:rounded-lg"
             >
               Contactame
             </Link>
