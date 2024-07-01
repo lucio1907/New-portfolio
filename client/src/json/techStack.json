@@ -1,0 +1,69 @@
+{
+    "stacks": [
+        {
+            "id": 1,
+            "name": "HTML",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1663646265/Skills/HTML_rwjnd2.png"
+        },
+        {
+            "id": 2,
+            "name": "CSS",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1663646265/Skills/CSS_vh9tkx.png"
+        },
+        {
+            "id": 3,
+            "name": "Javascript",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1663646266/Skills/JavaScript_mkixyu.png"
+        },
+        {
+            "id": 4,
+            "name": "Typescript",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1664410987/Skills/typescript-2_i681na.svg"
+        },
+        {
+            "id": 5,
+            "name": "React JS",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1663646266/Skills/react_dv1qlp.png"
+        },
+        {
+            "id": 6,
+            "name": "Tailwind CSS",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1663646266/Skills/Tailwind_pfvyrg.png"
+        },
+        {
+            "id": 7,
+            "name": "Node JS",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1686579147/Skills/nodejs_un63q9.png"
+        },
+        {
+            "id": 8,
+            "name": "Express JS",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1686764472/Skills/expressjs_qps24q.png"
+        },
+        {
+            "id": 9,
+            "name": "PostgreSQL",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1686584016/Skills/Postgresql_azpxgs.png"
+        },
+        {
+            "id": 10,
+            "name": "MongoDB",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1686764628/Skills/mongodblogo_o325fe.png"
+        },
+        {
+            "id": 11,
+            "name": "Python",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1689176949/Skills/python_ik1hay.png"
+        },
+        {
+            "id": 12,
+            "name": "GIT",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1663646265/Skills/Git_jc9vm1.png"
+        },
+        {
+            "id": 13,
+            "name": "Github",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1686766714/Skills/github-mark-white_fqk8w5.png"
+        }
+    ]
+}

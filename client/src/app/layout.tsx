@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${poppins.className} bg-[#191919]`}>{children}</body>
+      <body className={`${poppins.className} bg-[#191919] scroll-smooth`}>{children}</body>
     </html>
   );
 }

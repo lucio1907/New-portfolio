@@ -3,8 +3,30 @@
 @tailwind utilities;
 
 @layer utilities {
-    .text-gradient {
-      @apply bg-clip-text text-transparent;
-      background-image: linear-gradient(to right, #13B0F5, #E70FAA);
-    }
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(to right, #13B0F5, #E70FAA);
   }
+  .bg-gradient {
+    background-image: linear-gradient(to right, #13B0F5, #E70FAA);
+  }
+}
+
+.jump {
+  display: flex;
+  border-radius: 50%;
+  position: relative;
+  animation: jump 4s ease-in-out infinite;
+}
+
+@keyframes jump {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(10px);
+  }
+}

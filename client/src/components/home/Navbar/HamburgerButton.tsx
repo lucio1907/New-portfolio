@@ -13,7 +13,7 @@ const HamburgerButton = ({ onClickEvent }: Props) => {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-6 w-[40px] h-[40px] md:w-[50px] md:h-[50px]"
+        className="size-6 w-[40px] h-[40px] md:w-[60px] md:h-[60px]"
         color="#A7A7A7"
       >
         <path

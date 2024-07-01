@@ -25,19 +25,19 @@ const HamburgerNavigation = ({
 
   return (
     <div
-      className={`w-full h-full bg-slate-800 absolute -bottom-[100px] md:-bottom-[120px] transition-all ease-in duration-500 xl:hidden ${
+      className={`w-full h-dvh bg-slate-800 absolute top-[100px] md:-bottom-[120px] transition-all ease-in duration-500 xl:hidden ${
         isClicked ? "left-0" : "-left-[2000px]"
       }`}
     >
       <div className="w-full h-full flex justify-center">
-        <ul className="w-1/2 h-full flex flex-col justify-center items-center gap-5 md:gap-10 text-xl md:text-2xl text-white">
+        <ul className="w-1/2 h-full flex flex-col justify-center items-center gap-5 md:gap-10 text-xl md:text-3xl text-white">
           {navigation.map((item: string, index: number) => (
             <li key={index}>
               <a href={`#${linkFormat(item) === 'home' ? '' : linkFormat(item)}`} onClick={() => setIsClicked(false)}>{item}</a>
             </li>
           ))}
           <li>
-            <Link href="/contact">Contact</Link>
+            <Link href="/contact">Contacto</Link>
           </li>
         </ul>
       </div>

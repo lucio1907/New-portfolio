@@ -4,7 +4,7 @@ import '../../../app/globals.css'
 const Logo = () => {
   return (
     <div>
-        <h2 className='font-semibold text-gradient text-2xl md:text-3xl'>{`<Lucio Gastellu />`}</h2>
+        <a href='#' className='font-semibold text-gradient text-2xl md:text-3xl'>{`<LG />`}</a>
     </div>
   )
 }
