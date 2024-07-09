@@ -9,7 +9,7 @@ type TechStack = {
 
 const TechStack = (): React.ReactElement => {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full" id="techstack">
       <div className="flex flex-col justify-center items-center">
         <h2 className="font-bold text-[#CCCCCC] text-xl md:text-2xl lg:text-3xl">
           Tech Stack
