@@ -1,4 +1,5 @@
 import AboutMePage from "@/components/aboutme/AboutMePage";
+import ContactMe from "@/components/contact/ContactMe";
 import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/home/Navbar/Navbar";
 import HomeView from "@/components/home/homepage/HomeView";
@@ -15,6 +16,7 @@ const Home = () => {
         <AboutMePage/>
         <TechStack />
         <Projects/>
+        <ContactMe/>
       </div>
       <Footer/>
     </div>
