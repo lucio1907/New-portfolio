@@ -15,7 +15,7 @@ type ExperienciesTypes = {
 const Experiencies = () => {
   return (
     <div className="w-full h-full">
-      <div className="flex flex-col gap-10 py-3 px-8 lg:items-center lg:flex-row lg:px-24">
+      <div className="flex flex-col gap-10 py-3 px-8 lg:items-center lg:flex-row lg:px-36">
         {WorkExperiences.experiencies.map((item: ExperienciesTypes) => (
           <div
             key={item.id}

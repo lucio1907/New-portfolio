@@ -1,6 +1,7 @@
 import AboutMePage from "@/components/aboutme/AboutMePage";
 import Navbar from "@/components/home/Navbar/Navbar";
 import HomeView from "@/components/home/homepage/HomeView";
+import Projects from "@/components/projects/Projects";
 import TechStack from "@/components/stack/TechStack";
 import React from "react";
 
@@ -12,6 +13,7 @@ const Home = () => {
         <HomeView />
         <AboutMePage/>
         <TechStack />
+        <Projects/>
       </div>
     </div>
   );

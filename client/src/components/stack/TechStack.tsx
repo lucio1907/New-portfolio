@@ -11,7 +11,7 @@ const TechStack = (): React.ReactElement => {
   return (
     <div className="w-full h-full" id="techstack">
       <div className="flex flex-col justify-center items-center">
-        <h2 className="font-bold text-[#CCCCCC] text-xl md:text-2xl lg:text-3xl">
+        <h2 className="font-bold text-[#CCCCCC] text-2xl lg:text-3xl">
           Tech Stack
         </h2>
         <p className="text-main-color px-5 text-center mt-2 md:text-xl lg:mt-5">

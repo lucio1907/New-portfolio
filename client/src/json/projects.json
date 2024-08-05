@@ -1,0 +1,40 @@
+{
+    "projects": [
+        {
+            "id": 1,
+            "projectName": "Ecommerce CoClothes",
+            "description": "Proyecto final de Coderhouse en donde pude poner a prueba mis habilidades con React e implementar una base de datos para traer la información",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1722878301/Projects/znnvtcdeayilgbqbc6az.webp",
+            "techStack": "React JS, Tailwind, Firebase",
+            "codeLink": "https://github.com/lucio1907/Ecommerce-React",
+            "livePreview": "https://ecommerce-react-coder.vercel.app/"
+        },
+        {
+            "id": 2,
+            "projectName": "Control de gastos mensuales",
+            "description": "Aplicación web para controlar los gastos mensuales, utilizando React JS para su desarrollo",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1722878301/Projects/zqlbbr4tx5kv5eycjtsz.webp",
+            "techStack": "React JS, CSS",
+            "codeLink": "https://github.com/lucio1907/Control-de-Gastos-Mensuales",
+            "livePreview": "https://control-de-gastos-mensuales.vercel.app/"
+        },
+        {
+            "id": 3,
+            "projectName": "Cotizador de cripto monedas",
+            "description": "Proyecto destinado a la obtención de valores actuales de criptomonedas, con el objetivo de demostrar la integración y el uso efectivo de APIs.",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1722878301/Projects/lqt10sootyoa4j71f1fi.webp",
+            "techStack": "React JS, Node, styled components",
+            "codeLink": "https://github.com/lucio1907/Cripto-Prices-React",
+            "livePreview": "https://cotizador-cripto-react.vercel.app/"
+        },
+        {
+            "id": 4,
+            "projectName": "Trivia Track",
+            "description": "Proyecto final de Coderhouse en donde puse a prueba mis habilidades con Vanilla Javascript",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1722878305/Projects/fo1id36tdydbimaw7r4e.webp",
+            "techStack": "HTML, CSS, JS",
+            "codeLink": "https://github.com/lucio1907/Proyecto-Final-JavaScript-Coder ",
+            "livePreview": "https://lucio1907.github.io/Proyecto-Final-JavaScript-Coder/"
+        }
+    ]
+}
