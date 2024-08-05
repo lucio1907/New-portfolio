@@ -1,4 +1,5 @@
 import AboutMePage from "@/components/aboutme/AboutMePage";
+import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/home/Navbar/Navbar";
 import HomeView from "@/components/home/homepage/HomeView";
 import Projects from "@/components/projects/Projects";
@@ -15,6 +16,7 @@ const Home = () => {
         <TechStack />
         <Projects/>
       </div>
+      <Footer/>
     </div>
   );
 };
