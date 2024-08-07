@@ -34,3 +34,17 @@ html {
     transform: translateY(10px);
   }
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  /* background-image: linear-gradient(to right, #13B0F5, #E70FAA); */
+  background-color: #143f52;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #191919;
+}

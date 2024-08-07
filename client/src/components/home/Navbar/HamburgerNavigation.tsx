@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 
-const navigation: string[] = ["Home", "Sobre mí", "Tech Stack", "Proyectos"];
+const navigation: string[] = ["Home", "Sobre mí", "Tech Stack", "Proyectos", "Contacto"];
 
 const linkFormat = (item: string): string => item.replace(/\s+/g, "").toLowerCase();
 
@@ -36,9 +36,6 @@ const HamburgerNavigation = ({
               <a href={`#${linkFormat(item) === 'home' ? '' : linkFormat(item)}`} onClick={() => setIsClicked(false)}>{item}</a>
             </li>
           ))}
-          <li>
-            <Link href="/contact">Contacto</Link>
-          </li>
         </ul>
       </div>
     </div>

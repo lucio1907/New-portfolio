@@ -1,6 +1,5 @@
 import React from "react";
 import "../../../app/globals.css";
-import Link from "next/link";
 
 const HomeView = (): React.ReactElement => {
   return (
@@ -17,12 +16,12 @@ const HomeView = (): React.ReactElement => {
               Apasionado en crear aplicaciones y traerlas a la vida utilizando
               código.
             </p>
-            <Link
-              href="/contact"
+            <a
+              href="#contacto"
               className="bg-gradient p-2 text-center w-[150px] max-w-[300px] font-semibold text-white rounded mb-5 md:w-[200px] md:p-4 md:mb-10 md:text-[21px] lg:mb-0 lg:text-[24px] lg:p-3 lg:rounded-lg"
             >
               Contactame
-            </Link>
+            </a>
           </div>
         </div>
         <div className="jump bg-gradient mt-5 border border-slate-300 z-[-1]">

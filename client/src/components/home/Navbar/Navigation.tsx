@@ -18,7 +18,7 @@ const Navigation = () => {
           <a href="#proyectos" className="hover:text-white transition-all ease-in duration-150">Proyectos</a>
         </li>
         <li>
-          <Link href="/contact" className="hover:text-white transition-all ease-in duration-150">Contacto</Link>
+          <Link href="#contacto" className="hover:text-white transition-all ease-in duration-150">Contacto</Link>
         </li>
       </ul>
     </div>
