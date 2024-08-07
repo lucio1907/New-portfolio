@@ -26,11 +26,9 @@ const HomeView = (): React.ReactElement => {
           </div>
         </div>
         <div className="jump bg-gradient mt-5 border border-slate-300 z-[-1]">
-          <Image
+          <img
             src="/MeMemoji.webp"
             alt="me-emoji"
-            width={250}
-            height={250}
             className="w-[250px] h-[250px] max-w-[500px] max-h-[500px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px]"
           />
         </div>
