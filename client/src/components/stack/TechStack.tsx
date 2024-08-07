@@ -1,5 +1,6 @@
 import React from "react";
 import Tech from "../../json/techStack.json";
+import Image from "next/image";
 
 type TechStack = {
   id: number;
@@ -24,9 +25,11 @@ const TechStack = (): React.ReactElement => {
           {Tech.stacks.map((item: TechStack) => (
             <div key={item.id} className="flex justify-center">
               <div>
-                <img
+                <Image
                   src={item.image}
                   alt={item.name}
+                  width={100}
+                  height={100}
                   className="w-[100px] h-[100px]"
                 />
               </div>

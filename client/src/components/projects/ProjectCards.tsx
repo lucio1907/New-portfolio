@@ -2,6 +2,7 @@ import React from "react";
 import Projects from "@/json/projects.json";
 import LinkChainSvg from "../svgs/LinkChainSvg";
 import GithubSvg from "../svgs/GithubSvg";
+import Image from "next/image";
 
 interface ProjectsTypes {
   id: number;
@@ -21,11 +22,15 @@ const ProjectCards = (): React.ReactElement => {
           key={items.id}
           className="bg-[#363636] rounded-2xl text-main-color md:max-w-[500px] h-full flex flex-col"
         >
-          <img
-            src={items.image}
-            alt={items.projectName}
-            className="rounded-t-2xl md:max-w-[500px]"
-          />
+          <div className="relative w-full h-64 rounded-t-2xl md:max-w-[500px]">
+            <Image
+              src={items.image}
+              alt={items.projectName}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-t-2xl"
+            />
+          </div>
 
           <div className="p-5 flex-grow flex flex-col justify-between">
             <div>

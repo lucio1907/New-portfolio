@@ -16,8 +16,8 @@ const Footer = (): React.ReactElement => {
             </a>
           </div>
           <p className="text-main-color mb-5 lg:mb-10 md:text-xl">
-            "Un buen programador es alguien que siempre busca una forma más
-            eficiente de hacer las cosas". - Bill Gates
+            &quot;Un buen programador es alguien que siempre busca una forma más
+            eficiente de hacer las cosas&quot;. - Bill Gates
           </p>
         </div>
 
