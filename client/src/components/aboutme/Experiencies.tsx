@@ -13,13 +13,15 @@ type ExperienciesTypes = {
 };
 
 const Experiencies = () => {
+  const reversedExperiences = [...WorkExperiences.experiencies].reverse();
+
   return (
     <div className="w-full h-full">
-      <div className="flex flex-col gap-10 py-3 px-8 lg:items-center lg:flex-row lg:px-36">
-        {WorkExperiences.experiencies.map((item: ExperienciesTypes) => (
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-3 px-8 lg:px-36">
+        {reversedExperiences.map((item: ExperienciesTypes) => (
           <div
             key={item.id}
-            className="flex flex-col bg-[#242424] p-3 rounded-lg lg:w-1/2 lg:p-8 lg:hover:shadow-sm lg:hover:shadow-[#E70FAA] transition-all ease-in duration-150"
+            className="flex flex-col bg-[#242424] p-5 rounded-lg lg:w-full lg:p-8 lg:hover:shadow-sm lg:hover:shadow-[#E70FAA] transition-all ease-in duration-150"
           >
             <p className="text-[#CCCCCC] text-[18px] lg:text-[21px]">
               {item.position}

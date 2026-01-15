@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import "../../../app/globals.css";
+import DownloadSvg from "@/components/svgs/DownloadSvg";
 
 const HomeView = (): React.ReactElement => {
   return (
@@ -17,12 +18,22 @@ const HomeView = (): React.ReactElement => {
               Apasionado en crear aplicaciones y traerlas a la vida utilizando
               código.
             </p>
+            <div className="flex flex-col sm:flex-row sm:gap-5">
             <a
               href="#contacto"
               className="bg-gradient p-2 text-center w-[150px] max-w-[300px] font-semibold text-white rounded mb-5 md:w-[200px] md:p-4 md:mb-10 md:text-[21px] lg:mb-0 lg:text-[24px] lg:p-3 lg:rounded-lg"
             >
-              Contactame
+              Contáctame
             </a>
+            <a
+              href="/CV-LucioGastellu.pdf"
+              download="CV-LucioGastellu.pdf"
+              className="flex items-center gap-2 text-nowrap hover:text-[#c81f95] transition-all ease-out p-2 text-center w-[150px] max-w-[300px] font-medium text-[#e424ab] rounded mb-5 md:w-[200px] md:p-4 md:mb-10 md:text-[21px] lg:mb-0 lg:text-[21px] lg:p-3 lg:rounded-lg"
+            >
+              Descargar CV
+              <DownloadSvg/>
+            </a>
+            </div>
           </div>
         </div>
         <div className="jump bg-gradient mt-5 border border-slate-300 z-[-1]">

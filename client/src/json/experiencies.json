@@ -15,6 +15,14 @@
             "position": "Software Developer Jr",
             "workModality": "Full-time",
             "timelapse": "Dic 2023 - May 2024"
+        },
+        {
+            "id": 3,
+            "company": "No Country",
+            "country": "Argentina",
+            "position": "Backend Developer (Voluntariado)",
+            "workModality": "Full-time",
+            "timelapse": "Nov 2025 - Dic 2025"
         }
     ]
 }
