@@ -26,8 +26,8 @@ const HomeView = (): React.ReactElement => {
               Contáctame
             </a>
             <a
-              href="/CV-LucioGastellu.pdf"
-              download="CV-LucioGastellu.pdf"
+              href="/CV-LucioGastellu-Backend.pdf"
+              download="CV-LucioGastellu-Backend.pdf"
               className="flex items-center gap-2 text-nowrap hover:text-[#c81f95] transition-all ease-out p-2 text-center w-[150px] max-w-[300px] font-medium text-[#e424ab] rounded mb-5 md:w-[200px] md:p-4 md:mb-10 md:text-[21px] lg:mb-0 lg:text-[21px] lg:p-3 lg:rounded-lg"
             >
               Descargar CV
