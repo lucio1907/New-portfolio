@@ -44,6 +44,15 @@
       "techStack": "Typescript, React JS, TailwindCSS",
       "codeLink": "https://github.com/NexusDigitalWeb/NexusNewDesign",
       "livePreview": "https://nexus-new-design.vercel.app/"
+    },
+    {
+      "id": 6,
+      "projectName": "FitnessApp (API)",
+      "description": "Proyecto personal de aplicación fitness API RESTful",
+      "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1770307659/Projects/Gemini_Generated_Image_jxub5ujxub5ujxub-Editado_qwhvbn.webp",
+      "techStack": "NodeJS, Express, Typescript, PostgreSQL",
+      "codeLink": "https://github.com/lucio1907/FitnessAPP/tree/main/api",
+      "livePreview": ""
     }
   ]
 }

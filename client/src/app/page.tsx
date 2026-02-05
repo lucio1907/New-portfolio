@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div className="w-full h-full">
       <Navbar />
-      <div className="flex flex-col gap-[100px] md:gap-[150px] mt-20">
+      <div className="flex flex-col gap-[100px] md:gap-[250px] mt-20">
         <HomeView />
         <AboutMePage/>
         <TechStack />

@@ -9,9 +9,9 @@ const AboutMePage = () => {
           Sobre mí
         </h2>
         <p className="mt-5 text-main-color px-3 md:px-5 lg:text-xl lg:px-32">
-          ¡Hola! Soy Lucio, Desarrollador Full Stack. Desde siempre he sido un
+          ¡Hola! Soy Lucio, Desarrollador Backend. Desde siempre he sido un
           apasionado de la tecnología, lo que me llevó a sumergirme en este
-          increíble mundo. Actualmente, me enfoco más en el lado del servidor
+          increíble mundo. Actualmente, mi enfoque es en el lado del servidor
           (Backend), ya que es donde más destaco. Sin embargo, también poseo
           experiencia en el lado del cliente (Frontend), por lo que puedo
           trabajar en ambos aspectos sin problemas.

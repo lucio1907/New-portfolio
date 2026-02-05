@@ -45,7 +45,7 @@ const ProjectCards = (): React.ReactElement => {
             </div>
 
             <div className="flex justify-between px-1 md:px-10 lg:pb-2 mt-5">
-              <div className="flex gap-2">
+              {items.livePreview && (<div className="flex gap-2">
                 <LinkChainSvg />
                 <a
                   href={items.livePreview}
@@ -54,8 +54,8 @@ const ProjectCards = (): React.ReactElement => {
                 >
                   Link al proyecto
                 </a>
-              </div>
-              <div className="flex gap-2">
+              </div>)}
+              <div className={`flex gap-2 ${!items.livePreview && 'w-full justify-center'}`}>
                 <GithubSvg />
                 <a
                   href={items.codeLink}

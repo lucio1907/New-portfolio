@@ -59,6 +59,16 @@
             "id": 12,
             "name": "Github",
             "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1686766714/Skills/github-mark-white_fqk8w5.png"
+        },
+        {
+            "id": 13,
+            "name": "Java",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1770302653/Skills/pngegg_uwpkpy.png"
+        },
+        {
+            "id": 14,
+            "name": "Spring Boot",
+            "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1770301789/Skills/spring_boot_symbol-logo_brandlogos.net_tkqz9-300x300_ugbike.png"
         }
     ]
 }

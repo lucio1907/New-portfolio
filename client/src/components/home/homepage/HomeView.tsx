@@ -5,13 +5,13 @@ import DownloadSvg from "@/components/svgs/DownloadSvg";
 
 const HomeView = (): React.ReactElement => {
   return (
-    <div className="w-full h-full mt-5 md:mt-10 lg:mt-24" id="#">
+    <div className="w-full h-[65dvh] mt-5 md:mt-10 lg:mt-24" id="#">
       <div className="w-full h-full flex flex-col justify-center items-center lg:flex-row lg:gap-[100px]">
         <div className="p-5 sm:w-[70%] lg:w-[45%] lg:mt-5">
           <h1 className="text-[26px] font-bold text-[#D9D9D9] md:text-[35px] lg:text-[50px]">
             Hola!👋, mi nombre es{" "}
             <span className="text-gradient">Lucio Gastellu</span> y soy
-            Desarrollador Full Stack.{" "}
+            Desarrollador Backend.{" "}
           </h1>
           <div className="flex flex-col items-center lg:items-start gap-14">
             <p className="text-main-color text-[15px] mt-5 md:text-[18px]">
