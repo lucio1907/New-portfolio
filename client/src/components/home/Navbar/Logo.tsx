@@ -1,12 +1,15 @@
-import React from 'react'
-import '../../../app/globals.css'
+import React from "react";
 
 const Logo = () => {
   return (
-    <div className='hover:scale-110 transition-all ease-in duration-150'>
-        <a href='#' className='font-semibold text-gradient text-2xl md:text-3xl '>{`<LG />`}</a>
-    </div>
-  )
-}
+    <a
+      href="#top"
+      className="flex items-center gap-0.5 font-mono text-base font-semibold tracking-[0.02em] text-foreground md:text-lg"
+    >
+      <span className="text-accent">&lt;</span>LG
+      <span className="text-accent">/&gt;</span>
+    </a>
+  );
+};
 
-export default Logo
+export default Logo;

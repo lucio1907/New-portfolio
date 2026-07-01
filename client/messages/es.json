@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "title": "Lucio Gastellu",
+    "description": "Lucio Gastellu professional portfolio",
+    "keywords": [
+      "Professional",
+      "Web",
+      "Development",
+      "UI",
+      "Data",
+      "Dev",
+      "Frontend",
+      "Backend",
+      "Software",
+      "System",
+      "Databases"
+    ]
+  },
+  "nav": {
+    "about": "Sobre mí",
+    "techStack": "Tech Stack",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "label": "// DESARROLLADOR FULL STACK",
+    "greeting": "Hola 👋, soy",
+    "tagline": "Apasionado por crear aplicaciones y darles vida a través del código.",
+    "ctaContact": "Contáctame",
+    "ctaDownloadCV": "Descargar CV"
+  },
+  "about": {
+    "label": "Sobre mí",
+    "heading": "Construyo la lógica detrás de las cosas.",
+    "bio1": "¡Hola! Soy Lucio, Desarrollador Full Stack con base en el stack MERN/PERN. Construyo interfaces dinámicas con React y diseño servicios backend eficientes con Node.js, Express y Java/Spring Boot, siempre pensando en el funcionamiento integral de los sistemas.",
+    "bio2": "Escribo código limpio y escalable, buscando optimizar la experiencia del usuario y el rendimiento del servidor. Incorporo herramientas de IA como Claude Code a mi flujo de trabajo para acelerar el desarrollo, y estoy aquí para ayudarte con tu próximo proyecto.",
+    "experienceLabel": "Experiencia"
+  },
+  "techStack": {
+    "label": "Tech Stack",
+    "subtitle": "Tecnologías con las que estoy trabajando actualmente.",
+    "categories": {
+      "languages": "Lenguajes",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "tools": "Datos & Tools"
+    }
+  },
+  "projects": {
+    "label": "Proyectos",
+    "subtitle": "Una selección de proyectos que he construido.",
+    "comingSoon": "// Más proyectos próximamente...",
+    "liveLink": "Ver demo ↗",
+    "codeLink": "Código"
+  },
+  "contact": {
+    "label": "Contacto",
+    "heading": "Demos vida a tus ideas.",
+    "subtitle": "¿Tienes un proyecto en mente? Escríbeme y hablemos.",
+    "rows": {
+      "phone": "Teléfono",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter / X"
+    },
+    "quote": "\"Un buen programador es alguien que siempre busca una forma más eficiente de hacer las cosas.\""
+  },
+  "footer": {
+    "note": "© 2026 · Diseñado & desarrollado por Lucio Gastellu."
+  }
+}

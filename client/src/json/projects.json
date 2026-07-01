@@ -3,7 +3,10 @@
     {
       "id": 1,
       "projectName": "Ecommerce CoClothes",
-      "description": "Proyecto final de Coderhouse en donde pude poner a prueba mis habilidades con React e implementar una base de datos para traer la información",
+      "description": {
+        "es": "Proyecto final de Coderhouse en donde pude poner a prueba mis habilidades con React e implementar una base de datos para traer la información",
+        "en": "Final project from Coderhouse where I put my React skills to the test and implemented a database to fetch information."
+      },
       "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1722878301/Projects/znnvtcdeayilgbqbc6az.webp",
       "techStack": "React JS, Tailwind, Firebase",
       "codeLink": "https://github.com/lucio1907/Ecommerce-React",
@@ -12,7 +15,10 @@
     {
       "id": 2,
       "projectName": "Control de gastos mensuales",
-      "description": "Aplicación web para controlar los gastos mensuales, utilizando React JS para su desarrollo",
+      "description": {
+        "es": "Aplicación web para controlar los gastos mensuales, utilizando React JS para su desarrollo",
+        "en": "Web application to track monthly expenses, built with React JS."
+      },
       "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1722878301/Projects/zqlbbr4tx5kv5eycjtsz.webp",
       "techStack": "React JS, CSS",
       "codeLink": "https://github.com/lucio1907/Control-de-Gastos-Mensuales",
@@ -20,39 +26,50 @@
     },
     {
       "id": 3,
-      "projectName": "Cotizador de cripto monedas",
-      "description": "Proyecto destinado a la obtención de valores actuales de criptomonedas, con el objetivo de demostrar la integración y el uso efectivo de APIs.",
-      "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1722878301/Projects/lqt10sootyoa4j71f1fi.webp",
-      "techStack": "React JS, Node, styled components",
-      "codeLink": "https://github.com/lucio1907/Cripto-Prices-React",
-      "livePreview": "https://cotizador-cripto-react.vercel.app/"
-    },
-    {
-      "id": 4,
-      "projectName": "Trivia Track",
-      "description": "Proyecto final de Coderhouse en donde puse a prueba mis habilidades con Vanilla Javascript",
-      "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1722878305/Projects/fo1id36tdydbimaw7r4e.webp",
-      "techStack": "HTML, CSS, JS",
-      "codeLink": "https://github.com/lucio1907/Proyecto-Final-JavaScript-Coder ",
-      "livePreview": "https://lucio1907.github.io/Proyecto-Final-JavaScript-Coder/"
-    },
-    {
-      "id": 5,
       "projectName": "Nexus Digital Services",
-      "description": "Proyecto personal de consultoría IT",
+      "description": {
+        "es": "Proyecto personal de consultoría IT",
+        "en": "Personal IT consulting project."
+      },
       "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1756139867/Projects/Screenshot-from-2025-08-25-13-29-20_bcynf3.webp",
       "techStack": "Typescript, React JS, TailwindCSS",
       "codeLink": "https://github.com/NexusDigitalWeb/NexusNewDesign",
       "livePreview": "https://nexus-new-design.vercel.app/"
     },
     {
-      "id": 6,
+      "id": 4,
       "projectName": "FitnessApp (API)",
-      "description": "Proyecto personal de aplicación fitness API RESTful",
+      "description": {
+        "es": "Proyecto personal de aplicación fitness API RESTful",
+        "en": "Personal project — a RESTful fitness API application."
+      },
       "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1770307659/Projects/Gemini_Generated_Image_jxub5ujxub5ujxub-Editado_qwhvbn.webp",
       "techStack": "NodeJS, Express, Typescript, PostgreSQL",
       "codeLink": "https://github.com/lucio1907/FitnessAPP/tree/main/api",
       "livePreview": ""
-    }
+    },
+    {
+      "id": 5,
+      "projectName": "Nadira Decants",
+      "description": {
+        "es": "Proyecto Ecommerce para la venta de perfumes, desarrollado con Next JS y TailwindCSS",
+        "en": "Ecommerce project for selling perfumes, built with Next JS and TailwindCSS."
+      },
+      "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1782934812/Skills/Screenshot_from_2026-06-29_17-22-57_ipo1ul.png",
+      "techStack": "NextJS, TailwindCSS, Typescript",
+      "codeLink": "https://github.com/lucio1907/Nadira-Decants",
+      "livePreview": "https://www.nadiradecants.com.ar/"
+    },
+    {
+      "id": 6,
+      "projectName": "SitioHoy",
+      "description": {
+        "es": "Proyecto en conjunto, dedicado a la venta de sitios web con entrega en menos de 24hs.",
+        "en": "Collaborative project focused on selling websites with delivery in less than 24 hours."
+      },
+      "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1782935276/Skills/Screenshot_from_2026-07-01_16-46-44_afxzf3.png",
+      "techStack": "HTML, CSS, JS",
+      "codeLink": "",
+      "livePreview": "https://sitiohoy.com.ar/"} 
   ]
 }

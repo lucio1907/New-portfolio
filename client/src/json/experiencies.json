@@ -1,28 +1,60 @@
 {
-    "experiencies": [
-        {
-            "id": 1,
-            "company": "Toyota",
-            "country": "Argentina",
-            "position": "Infraestructura IT",
-            "workModality": "Full-time",
-            "timelapse": "Ene 2023 - Abr 2023"
-        },
-        {
-            "id": 2,
-            "company": "Nexus Digital",
-            "country": "Argentina",
-            "position": "Software Developer Jr",
-            "workModality": "Full-time",
-            "timelapse": "Dic 2023 - May 2024"
-        },
-        {
-            "id": 3,
-            "company": "No Country",
-            "country": "Argentina",
-            "position": "Backend Developer (Voluntariado)",
-            "workModality": "Full-time",
-            "timelapse": "Nov 2025 - Dic 2025"
-        }
-    ]
+  "experiencies": [
+    {
+      "id": 1,
+      "company": "Toyota",
+      "country": "Argentina",
+      "position": {
+        "es": "Infraestructura IT",
+        "en": "IT Infrastructure"
+      },
+      "workModality": "Full-time",
+      "timelapse": {
+        "es": "Ene 2023 - Abr 2023",
+        "en": "Jan 2023 - Apr 2023"
+      }
+    },
+    {
+      "id": 2,
+      "company": "Nexus Digital",
+      "country": "Argentina",
+      "position": {
+        "es": "Frontend Developer",
+        "en": "Frontend Developer"
+      },
+      "workModality": "Full-time",
+      "timelapse": {
+        "es": "Dic 2023 - May 2024",
+        "en": "Dec 2023 - May 2024"
+      }
+    },
+    {
+      "id": 3,
+      "company": "No Country",
+      "country": "Argentina",
+      "position": {
+        "es": "Backend Developer (Voluntariado)",
+        "en": "Backend Developer (Volunteer)"
+      },
+      "workModality": "Full-time",
+      "timelapse": {
+        "es": "Nov 2025 - Dic 2025",
+        "en": "Nov 2025 - Dec 2025"
+      }
+    },
+    {
+      "id": 4,
+      "company": "SitioHoy",
+      "country": "Argentina",
+      "position": {
+        "es": "Software Developer",
+        "en": "Software Developer"
+      },
+      "workModality": "Full-time",
+      "timelapse": {
+        "es": "Mar 2026 - Presente",
+        "en": "Mar 2026 - Present"
+      }
+    }
+  ]
 }

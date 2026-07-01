@@ -1,51 +1,65 @@
 import React from "react";
+import { useLocale } from "next-intl";
 import WorkExperiences from "../../json/experiencies.json";
-import BuildingSvg from "../svgs/BuildingSvg";
-import LocationSvg from "../svgs/LocationSvg";
+import { StaggerContainer, StaggerItem } from "../motion/Reveal";
+
+type Locale = "es" | "en";
 
 type ExperienciesTypes = {
   id: number;
   company: string;
   country: string;
-  position: string;
+  position: Record<Locale, string>;
   workModality: string;
-  timelapse: string;
+  timelapse: Record<Locale, string>;
 };
 
 const Experiencies = () => {
+  const locale = useLocale() as Locale;
   const reversedExperiences = [...WorkExperiences.experiencies].reverse();
 
   return (
-    <div className="w-full h-full">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-3 px-8 lg:px-36">
-        {reversedExperiences.map((item: ExperienciesTypes) => (
-          <div
+    <StaggerContainer className="flex flex-col">
+      {reversedExperiences.map((item: ExperienciesTypes, index: number) => {
+        const isCurrent = index === 0;
+        const isLast = index === reversedExperiences.length - 1;
+
+        return (
+          <StaggerItem
             key={item.id}
-            className="flex flex-col bg-[#242424] p-5 rounded-lg lg:w-full lg:p-8 lg:hover:shadow-sm lg:hover:shadow-[#E70FAA] transition-all ease-in duration-150"
+            className={`relative border-l border-white/10 pl-7 ${
+              isLast ? "pb-1" : "pb-[30px]"
+            }`}
           >
-            <p className="text-[#CCCCCC] text-[18px] lg:text-[21px]">
-              {item.position}
-            </p>
-
-            <div className="flex text-main-color gap-5 mt-2 lg:mt-3">
-              <p className="flex justify-center gap-2 lg:text-[18px]">
-                <BuildingSvg />
-                {item.company}
-              </p>
-              <p className="flex justify-center gap-2 lg:text-[18px]">
-                <LocationSvg />
-                {item.country}
-              </p>
+            <span
+              className={`absolute -left-[5px] top-[5px] h-[9px] w-[9px] rounded-full ${
+                isCurrent
+                  ? "bg-accent shadow-[0_0_0_4px_rgba(79,140,255,0.15)]"
+                  : "bg-[#3f3f46]"
+              }`}
+            />
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <span className="text-[17px] font-semibold text-foreground">
+                {item.position[locale]}
+              </span>
+              <span className="whitespace-nowrap font-mono text-xs text-faint">
+                {item.timelapse[locale]}
+              </span>
             </div>
-
-            <div className="flex flex-col text-main-color lg:text-[18px] lg:mt-2">
-              <p>{item.workModality}</p>
-              <p>{item.timelapse}</p>
+            <div
+              className={`mt-1.5 font-mono text-[13px] ${
+                isCurrent ? "text-accent" : "text-dim"
+              }`}
+            >
+              {item.company}
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
+            <div className="mt-1 text-[13px] text-faint-2">
+              {item.country} · {item.workModality}
+            </div>
+          </StaggerItem>
+        );
+      })}
+    </StaggerContainer>
   );
 };
 

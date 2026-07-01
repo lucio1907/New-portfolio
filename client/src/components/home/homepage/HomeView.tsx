@@ -1,50 +1,143 @@
+"use client";
+
 import React from "react";
-import Image from "next/image";
-import "../../../app/globals.css";
-import DownloadSvg from "@/components/svgs/DownloadSvg";
+import { useTranslations } from "next-intl";
+import { motion } from "framer-motion";
+import { FadeIn } from "@/components/motion/Reveal";
 
 const HomeView = (): React.ReactElement => {
+  const t = useTranslations("hero");
+
   return (
-    <div className="w-full h-[65dvh] mt-5 md:mt-10 lg:mt-24" id="#">
-      <div className="w-full h-full flex flex-col justify-center items-center lg:flex-row lg:gap-[100px]">
-        <div className="p-5 sm:w-[70%] lg:w-[45%] lg:mt-5">
-          <h1 className="text-[26px] font-bold text-[#D9D9D9] md:text-[35px] lg:text-[50px]">
-            Hola!👋, mi nombre es{" "}
-            <span className="text-gradient">Lucio Gastellu</span> y soy
-            Desarrollador Backend.{" "}
+    <header
+      id="top"
+      className="mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-12 px-5 pb-24 pt-32 md:px-10 md:pb-28 md:pt-40 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pb-32 lg:pt-44"
+    >
+      <div>
+        <FadeIn delay={0}>
+          <p className="mb-7 font-mono text-[13px] tracking-[0.16em] text-accent">
+            {t("label")}
+          </p>
+        </FadeIn>
+
+        <FadeIn delay={0.08}>
+          <h1 className="mb-7 text-hero text-foreground">
+            <span className="mb-2.5 block text-[0.5em] font-medium tracking-[-0.01em] text-faint-2">
+              {t("greeting")}
+            </span>
+            <span className="block">
+              Lucio
+              <br />
+              Gastellu<span className="text-accent">.</span>
+            </span>
           </h1>
-          <div className="flex flex-col items-center lg:items-start gap-14">
-            <p className="text-main-color text-[15px] mt-5 md:text-[18px]">
-              Apasionado en crear aplicaciones y traerlas a la vida utilizando
-              código.
-            </p>
-            <div className="flex flex-col sm:flex-row sm:gap-5">
-            <a
+        </FadeIn>
+
+        <FadeIn delay={0.16}>
+          <p className="mb-10 max-w-[440px] text-[19px] leading-[1.6] text-muted">
+            {t("tagline")}
+          </p>
+        </FadeIn>
+
+        <FadeIn delay={0.24}>
+          <div className="mb-11 flex flex-wrap gap-3.5">
+            <motion.a
               href="#contacto"
-              className="bg-gradient p-2 text-center w-[150px] max-w-[300px] font-semibold text-white rounded mb-5 md:w-[200px] md:p-4 md:mb-10 md:text-[21px] lg:mb-0 lg:text-[24px] lg:p-3 lg:rounded-lg"
+              whileHover={{
+                y: -2,
+                transition: { type: "spring", stiffness: 300, damping: 18 },
+              }}
+              whileTap={{ scale: 0.97 }}
+              className="rounded-btn bg-accent px-6 py-3.5 font-mono text-sm font-medium text-background transition-shadow duration-200 hover:shadow-cta"
             >
-              Contáctame
+              {t("ctaContact")}
+            </motion.a>
+            <motion.a
+              href="/CV-LucioGastellu.pdf"
+              target="_blank"
+              whileTap={{ scale: 0.97 }}
+              className="rounded-btn border border-white/[0.16] px-6 py-3.5 font-mono text-sm font-medium text-foreground transition-colors duration-200 hover:border-accent/60 hover:bg-accent/[0.08]"
+            >
+              {t("ctaDownloadCV")}
+            </motion.a>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.32}>
+          <div className="flex flex-wrap items-center gap-4">
+            <span className="font-mono text-xs text-faint">FIND ME —</span>
+            <a
+              href="https://github.com/lucio1907"
+              target="_blank"
+              className="font-mono text-[13px] text-dim transition-colors duration-200 hover:text-foreground"
+            >
+              GitHub
             </a>
             <a
-              href="/CV-LucioGastellu-Backend.pdf"
-              download="CV-LucioGastellu-Backend.pdf"
-              className="flex items-center gap-2 text-nowrap hover:text-[#c81f95] transition-all ease-out p-2 text-center w-[150px] max-w-[300px] font-medium text-[#e424ab] rounded mb-5 md:w-[200px] md:p-4 md:mb-10 md:text-[21px] lg:mb-0 lg:text-[21px] lg:p-3 lg:rounded-lg"
+              href="https://x.com/Lu_Gastellu"
+              target="_blank"
+              className="font-mono text-[13px] text-dim transition-colors duration-200 hover:text-foreground"
             >
-              Descargar CV
-              <DownloadSvg/>
+              Twitter
             </a>
-            </div>
+            <a
+              href="https://www.linkedin.com/in/luciogastellu/"
+              target="_blank"
+              className="font-mono text-[13px] text-dim transition-colors duration-200 hover:text-foreground"
+            >
+              LinkedIn
+            </a>
           </div>
-        </div>
-        <div className="jump bg-gradient mt-5 border border-slate-300 z-[-1]">
-          <img
-            src="/MeMemoji.webp"
-            alt="me-emoji"
-            className="w-[250px] h-[250px] max-w-[500px] max-h-[500px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px]"
-          />
-        </div>
+        </FadeIn>
       </div>
-    </div>
+
+      <FadeIn delay={0.4}>
+        <motion.div
+          animate={{ y: [0, -9, 0, 6, 0], rotate: [0, 0.6, 0, -0.5, 0] }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            times: [0, 0.3, 0.55, 0.8, 1],
+          }}
+          className="overflow-hidden rounded-card border border-border bg-terminal shadow-terminal"
+        >
+          <div className="flex items-center gap-2 border-b border-border-soft bg-white/[0.02] px-4 py-3.5">
+            <span className="h-[11px] w-[11px] rounded-full bg-[#ff5f57]" />
+            <span className="h-[11px] w-[11px] rounded-full bg-[#febc2e]" />
+            <span className="h-[11px] w-[11px] rounded-full bg-[#28c840]" />
+            <span className="ml-2 font-mono text-[11px] text-faint">
+              developer.ts
+            </span>
+          </div>
+          <pre className="overflow-x-auto px-5 py-[22px] font-mono text-[13px] leading-[1.9] text-[#c9c9d1]">
+            <span className="text-syntax-keyword">const</span>{" "}
+            <span className="text-syntax-var">dev</span>{" "}
+            <span className="text-dim">=</span> {"{"}
+            {"\n"}  <span className="text-syntax-prop">name</span>:{" "}
+            <span className="text-syntax-string">&quot;Lucio Gastellu Arrieta&quot;</span>,
+            {"\n"}  <span className="text-syntax-prop">role</span>:{" "}
+            <span className="text-syntax-string">&quot;Full Stack Developer & AI&quot;</span>,
+            {"\n"}  <span className="text-syntax-prop">location</span>:{" "}
+            <span className="text-syntax-string">&quot;Argentina&quot;</span>,
+            {"\n"}  <span className="text-syntax-prop">languages</span>: {"{ "}
+            <span className="text-syntax-prop">english</span>:{" "}
+            <span className="text-syntax-string">&quot;B2&quot;</span>,{" "}
+            <span className="text-syntax-prop">spanish</span>:{" "}
+            <span className="text-syntax-string">&quot;Native&quot;</span>
+            {" },"}
+            {"\n"}  <span className="text-syntax-prop">focus</span>: [
+            <span className="text-syntax-string">&quot;Systems Development&quot;</span>,{" "}
+            <span className="text-syntax-string">&quot;AI&quot;</span>],
+            {"\n"}  <span className="text-syntax-prop">available</span>:{" "}
+            <span className="text-syntax-bool">true</span>
+            <span className="animate-blink text-accent">_</span>
+            {"\n"}
+            {"}"}
+          </pre>
+        </motion.div>
+      </FadeIn>
+    </header>
   );
 };
 

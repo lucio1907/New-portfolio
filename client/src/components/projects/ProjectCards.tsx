@@ -1,13 +1,16 @@
 import React from "react";
+import { useLocale, useTranslations } from "next-intl";
 import Projects from "@/json/projects.json";
-import LinkChainSvg from "../svgs/LinkChainSvg";
-import GithubSvg from "../svgs/GithubSvg";
 import Image from "next/image";
+import { StaggerContainer } from "../motion/Reveal";
+import HoverLiftCard from "../motion/HoverLiftCard";
+
+type Locale = "es" | "en";
 
 interface ProjectsTypes {
   id: number;
   projectName: string;
-  description: string;
+  description: Record<Locale, string>;
   image: string;
   techStack: string;
   codeLink: string;
@@ -15,61 +18,74 @@ interface ProjectsTypes {
 }
 
 const ProjectCards = (): React.ReactElement => {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-20 p-5 mt-5">
-      {Projects.projects.map((items: ProjectsTypes) => (
-        <div
-          key={items.id}
-          className="bg-[#363636] rounded-2xl text-main-color md:max-w-[500px] h-full flex flex-col"
-        >
-          <div className="relative w-full h-64 rounded-t-2xl md:max-w-[500px]">
-            <Image
-              src={items.image}
-              alt={items.projectName}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-t-2xl"
-            />
-          </div>
+  const locale = useLocale() as Locale;
+  const t = useTranslations("projects");
 
-          <div className="p-5 flex-grow flex flex-col justify-between">
-            <div>
-              <h3 className="text-[#CCCCCC] text-xl font-semibold my-5">
-                {items.projectName}
-              </h3>
-              <p className="">{items.description}</p>
-              <p className="mt-5">
-                <span className="text-[#f5f5f5]">Tech stack:</span>{" "}
-                {items.techStack}
-              </p>
+  return (
+    <StaggerContainer className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {Projects.projects.map((item: ProjectsTypes) => {
+        const tags = item.techStack.split(",").map((tag) => tag.trim());
+
+        return (
+          <HoverLiftCard
+            key={item.id}
+            className="card-surface group flex flex-col overflow-hidden transition-[border-color,box-shadow] duration-300 ease-out hover:border-border-hover hover:shadow-card"
+          >
+            <div className="relative aspect-[16/10] overflow-hidden border-b border-border-soft">
+              <Image
+                src={item.image}
+                alt={item.projectName}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              />
+              {!item.livePreview && (
+                <span className="absolute right-3 top-3 rounded-[5px] border border-accent/40 px-[7px] py-[3px] font-mono text-[10px] text-accent">
+                  API
+                </span>
+              )}
             </div>
 
-            <div className="flex justify-between px-1 md:px-10 lg:pb-2 mt-5">
-              {items.livePreview && (<div className="flex gap-2">
-                <LinkChainSvg />
+            <div className="flex flex-1 flex-col p-[22px]">
+              <h3 className="mb-2.5 text-[19px] font-semibold text-foreground">
+                {item.projectName}
+              </h3>
+              <p className="mb-[18px] flex-1 text-[14.5px] leading-[1.6] text-muted">
+                {item.description[locale]}
+              </p>
+              <div className="mb-5 flex flex-wrap gap-[7px]">
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-[6px] border border-white/10 px-[9px] py-1 font-mono text-[11px] text-dim"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="flex gap-[18px]">
+                {item.livePreview && (
+                  <a
+                    href={item.livePreview}
+                    target="_blank"
+                    className="font-mono text-[12.5px] text-accent"
+                  >
+                    {t("liveLink")}
+                  </a>
+                )}
                 <a
-                  href={items.livePreview}
+                  href={item.codeLink}
                   target="_blank"
-                  className="underline underline-offset-2 text-white"
+                  className="font-mono text-[12.5px] text-dim"
                 >
-                  Link al proyecto
-                </a>
-              </div>)}
-              <div className={`flex gap-2 ${!items.livePreview && 'w-full justify-center'}`}>
-                <GithubSvg />
-                <a
-                  href={items.codeLink}
-                  target="_blank"
-                  className="underline underline-offset-2 text-white"
-                >
-                  Ver código
+                  {t("codeLink")}
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      ))}
-    </div>
+          </HoverLiftCard>
+        );
+      })}
+    </StaggerContainer>
   );
 };
 

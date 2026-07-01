@@ -1,19 +1,32 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 import ProjectCards from "./ProjectCards";
+import SectionHeader from "@/components/common/SectionHeader";
+import { FadeIn } from "@/components/motion/Reveal";
 
 const Projects = (): React.ReactElement => {
-  return (
-    <div className="flex flex-col justify-center items-center" id="proyectos">
-      <h2 className="font-bold text-[#CCCCCC] text-2xl lg:text-3xl">
-        Proyectos
-      </h2>
-      <p className="text-main-color px-5 text-center mt-2 md:text-xl lg:mt-5">
-        Proyectos que he realizado.
-      </p>
+  const t = useTranslations("projects");
 
-      <ProjectCards/>
-      <h3 className="text-main-color px-5 text-center mt-2 md:text-xl lg:mt-5 animate-pulse">Más proyectos próximamente...</h3>
-    </div>
+  return (
+    <section
+      id="proyectos"
+      className="mx-auto max-w-[1200px] scroll-mt-20 px-5 py-[100px] md:px-10"
+    >
+      <SectionHeader number="03" label={t("label")} />
+      <FadeIn>
+        <p className="mb-12 max-w-[520px] text-lg text-muted">
+          {t("subtitle")}
+        </p>
+      </FadeIn>
+
+      <ProjectCards />
+
+      <FadeIn>
+        <p className="mt-10 text-center font-mono text-[13px] text-faint">
+          {t("comingSoon")}
+        </p>
+      </FadeIn>
+    </section>
   );
 };
 

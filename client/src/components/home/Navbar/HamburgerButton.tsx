@@ -1,27 +1,33 @@
 import React from "react";
 
 type Props = {
+  isOpen: boolean;
   onClickEvent: () => void;
 };
 
-const HamburgerButton = ({ onClickEvent }: Props) => {
+const HamburgerButton = ({ isOpen, onClickEvent }: Props) => {
   return (
-    <button onClick={onClickEvent} className="xl:hidden">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="size-6 w-[40px] h-[40px] md:w-[60px] md:h-[60px]"
-        color="#A7A7A7"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-        />
-      </svg>
+    <button
+      onClick={onClickEvent}
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      aria-expanded={isOpen}
+      className="flex h-[26px] w-[26px] flex-col items-center justify-center gap-[6px] lg:hidden md:h-[30px] md:w-[30px]"
+    >
+      <span
+        className={`h-[1.5px] w-[22px] bg-dim transition-all duration-300 ease-out ${
+          isOpen ? "translate-y-[7.5px] rotate-45 bg-accent" : ""
+        }`}
+      />
+      <span
+        className={`h-[1.5px] w-[22px] bg-dim transition-all duration-300 ease-out ${
+          isOpen ? "opacity-0" : "opacity-100"
+        }`}
+      />
+      <span
+        className={`h-[1.5px] w-[22px] bg-dim transition-all duration-300 ease-out ${
+          isOpen ? "-translate-y-[7.5px] -rotate-45 bg-accent" : ""
+        }`}
+      />
     </button>
   );
 };

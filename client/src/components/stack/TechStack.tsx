@@ -1,43 +1,50 @@
 import React from "react";
-import Tech from "../../json/techStack.json";
-import Image from "next/image";
+import { useTranslations } from "next-intl";
+import TechStackData from "../../json/techStack.json";
+import SectionHeader from "@/components/common/SectionHeader";
+import { FadeIn, StaggerContainer, StaggerItem } from "../motion/Reveal";
 
-type TechStack = {
+type Category = {
   id: number;
-  name: string;
-  image: string;
+  key: string;
+  items: string[];
 };
 
 const TechStack = (): React.ReactElement => {
-  return (
-    <div className="w-full h-full" id="techstack">
-      <div className="flex flex-col justify-center items-center">
-        <h2 className="font-bold text-[#CCCCCC] text-2xl lg:text-3xl">
-          Tech Stack
-        </h2>
-        <p className="text-main-color px-5 text-center mt-2 md:text-xl lg:mt-5">
-          Tecnologías con las que estoy trabajando actualmente.
-        </p>
-      </div>
+  const t = useTranslations("techStack");
 
-      <div className="w-full flex flex-col justify-center items-center">
-        <div className="flex flex-wrap justify-center mx-10 gap-10 my-14 md:gap-16 lg:my-16 lg:gap-20 lg:w-[60%]">
-          {Tech.stacks.map((item: TechStack) => (
-            <div key={item.id} className="flex justify-center">
-              <div>
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  width={100}
-                  height={100}
-                  className="w-[100px] h-[100px]"
-                />
-              </div>
+  return (
+    <section
+      id="techstack"
+      className="mx-auto max-w-[1200px] scroll-mt-20 px-5 py-[100px] md:px-10"
+    >
+      <SectionHeader number="02" label={t("label")} />
+      <FadeIn>
+        <p className="mb-12 max-w-[520px] text-lg text-muted">
+          {t("subtitle")}
+        </p>
+      </FadeIn>
+
+      <StaggerContainer className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+        {TechStackData.categories.map((category: Category) => (
+          <StaggerItem
+            key={category.id}
+            className="rounded-panel border border-border bg-gradient-to-b from-white/[0.02] to-transparent p-6"
+          >
+            <div className="mb-[18px] font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
+              {t(`categories.${category.key}`)}
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
+            <div className="flex flex-col gap-3">
+              {category.items.map((item) => (
+                <span key={item} className="font-mono text-sm text-[#d4d4d8]">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </StaggerItem>
+        ))}
+      </StaggerContainer>
+    </section>
   );
 };
 

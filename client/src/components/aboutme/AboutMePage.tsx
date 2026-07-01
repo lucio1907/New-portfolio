@@ -1,28 +1,42 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 import Experiencies from "./Experiencies";
+import SectionHeader from "@/components/common/SectionHeader";
+import { FadeIn } from "@/components/motion/Reveal";
 
 const AboutMePage = () => {
+  const t = useTranslations("about");
+
   return (
-    <div className="w-full h-full" id="sobremí">
-      <div className="p-5 flex flex-col">
-        <h2 className="font-bold text-[#CCCCCC] text-2xl text-center lg:text-3xl">
-          Sobre mí
-        </h2>
-        <p className="mt-5 text-main-color px-3 md:px-5 lg:text-xl lg:px-32">
-          ¡Hola! Soy Lucio, Desarrollador Backend. Desde siempre he sido un
-          apasionado de la tecnología, lo que me llevó a sumergirme en este
-          increíble mundo. Actualmente, mi enfoque es en el lado del servidor
-          (Backend), ya que es donde más destaco. Sin embargo, también poseo
-          experiencia en el lado del cliente (Frontend), por lo que puedo
-          trabajar en ambos aspectos sin problemas.
-        </p>
-        <p className="text-main-color px-5 mt-5 lg:text-xl lg:px-32">
-          Estoy aquí para ayudarte con cualquier proyecto tecnológico que tengas
-          en mente.
-        </p>
+    <section
+      id="sobremí"
+      className="mx-auto max-w-[1200px] scroll-mt-20 px-5 py-[100px] md:px-10"
+    >
+      <SectionHeader number="01" label={t("label")} className="mb-14" />
+
+      <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-[72px]">
+        <FadeIn>
+          <div>
+            <h2 className="mb-7 text-h2 text-foreground">{t("heading")}</h2>
+            <p className="mb-5 text-[17px] leading-[1.7] text-muted">
+              {t("bio1")}
+            </p>
+            <p className="text-[17px] leading-[1.7] text-muted">
+              {t("bio2")}
+            </p>
+          </div>
+        </FadeIn>
+
+        <div>
+          <FadeIn>
+            <div className="mb-[26px] font-mono text-xs uppercase tracking-[0.12em] text-faint">
+              {t("experienceLabel")}
+            </div>
+          </FadeIn>
+          <Experiencies />
+        </div>
       </div>
-      <Experiencies />
-    </div>
+    </section>
   );
 };
 

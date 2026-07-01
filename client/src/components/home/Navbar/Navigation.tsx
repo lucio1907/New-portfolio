@@ -1,27 +1,25 @@
-import Link from "next/link";
+"use client";
+
 import React from "react";
+import { useTranslations } from "next-intl";
+import { navLinks } from "./navLinks";
 
 const Navigation = () => {
+  const t = useTranslations("nav");
+
   return (
-    <div className="hidden xl:block">
-      <ul className="lg:flex gap-10 text-main-color text-[18px]">
-        <li>
-          <a href="#" className="hover:text-white transition-all ease-in duration-150">Home</a>
+    <ul className="hidden items-center gap-7 font-mono text-[13px] lg:flex">
+      {navLinks.map((link) => (
+        <li key={link.key}>
+          <a
+            href={link.href}
+            className="text-dim transition-colors duration-200 hover:text-foreground"
+          >
+            {t(link.key)}
+          </a>
         </li>
-        <li>
-          <a href="#sobremí" className="hover:text-white transition-all ease-in duration-150">Sobre mí</a>
-        </li>
-        <li>
-          <a href="#techstack" className="hover:text-white transition-all ease-in duration-150">Tech Stack</a>
-        </li>
-        <li>
-          <a href="#proyectos" className="hover:text-white transition-all ease-in duration-150">Proyectos</a>
-        </li>
-        <li>
-          <Link href="#contacto" className="hover:text-white transition-all ease-in duration-150">Contacto</Link>
-        </li>
-      </ul>
-    </div>
+      ))}
+    </ul>
   );
 };
 
