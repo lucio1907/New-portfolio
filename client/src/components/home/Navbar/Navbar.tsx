@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="glass fixed left-0 right-0 top-0 z-50 flex items-center justify-between border-b border-border-soft px-5 py-5 md:px-10">
+      <nav className="fixed inset-x-3 top-3 z-50 mx-auto flex max-w-[1240px] items-center justify-between rounded-card border-3 border-ink bg-white px-3 py-2.5 shadow-brutal md:inset-x-6 md:px-4">
         <Logo />
         <div className="flex items-center gap-2 md:gap-3">
           <Navigation />

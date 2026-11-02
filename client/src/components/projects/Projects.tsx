@@ -12,11 +12,11 @@ const Projects = (): React.ReactElement => {
   return (
     <section
       id="proyectos"
-      className="mx-auto max-w-[1200px] scroll-mt-20 px-5 py-[100px] md:px-10"
+      className="mx-auto max-w-[1240px] scroll-mt-28 px-5 py-24 md:px-10"
     >
-      <SectionHeader number="03" label={t("label")} />
+      <SectionHeader number="03" label={t("label")} color="bg-green" />
       <FadeIn>
-        <p className="mb-12 max-w-[520px] text-lg text-muted">
+        <p className="mb-10 max-w-[560px] text-lg font-medium text-ink-soft">
           {t("subtitle")}
         </p>
       </FadeIn>
@@ -26,7 +26,7 @@ const Projects = (): React.ReactElement => {
       </ProjectsBug>
 
       <FadeIn>
-        <p className="mt-10 text-center font-mono text-[13px] text-faint">
+        <p className="mt-14 text-center font-mono text-sm font-bold text-ink-soft">
           {t("comingSoon")}
         </p>
       </FadeIn>

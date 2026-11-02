@@ -35,84 +35,55 @@ const HamburgerNavigation = ({
     };
   }, [isClicked, setIsClicked]);
 
+  const colors = ["bg-pink", "bg-blue text-white", "bg-green", "bg-lilac"];
+
   return (
     <div
-      className={`fixed inset-0 z-40 bg-background lg:hidden ${
+      className={`fixed inset-0 z-40 bg-yellow lg:hidden ${
         isClicked ? "pointer-events-auto" : "pointer-events-none"
       }`}
       style={{
         clipPath: isClicked
-          ? "circle(150% at calc(100% - 32px) 32px)"
-          : "circle(0% at calc(100% - 32px) 32px)",
-        transition: "clip-path 550ms cubic-bezier(0.16, 1, 0.3, 1)",
+          ? "circle(150% at calc(100% - 40px) 40px)"
+          : "circle(0% at calc(100% - 40px) 40px)",
+        transition: "clip-path 500ms cubic-bezier(0.16, 1, 0.3, 1)",
       }}
     >
-      <div className="pointer-events-none absolute inset-0 bg-grid-fade" aria-hidden />
-
-      <div className="relative flex h-full w-full flex-col overflow-y-auto px-8 pb-10 pt-24 md:px-16">
-        <p className="mb-8 font-mono text-xs tracking-[0.16em] text-accent">
-          {"// MENU"}
-        </p>
-
-        <ul className="flex flex-col">
+      <div className="relative flex h-full w-full flex-col overflow-y-auto px-6 pb-10 pt-28 md:px-16">
+        <ul className="flex flex-col gap-4">
           {navLinks.map((link, index) => (
             <li
               key={link.key}
-              className="border-b border-border-soft transition-all duration-500 ease-out"
+              className="transition-all duration-300 ease-out"
               style={{
                 transitionDelay: isClicked ? `${index * 60}ms` : "0ms",
                 opacity: isClicked ? 1 : 0,
-                transform: isClicked ? "translateX(0)" : "translateX(16px)",
+                transform: isClicked
+                  ? `rotate(${index % 2 === 0 ? -1.5 : 1.5}deg)`
+                  : "translateX(24px)",
               }}
             >
               <a
                 href={link.href}
                 onClick={() => setIsClicked(false)}
-                className="group flex items-baseline gap-4 py-4"
+                className={`brutal-btn w-full justify-between px-5 py-4 text-3xl ${colors[index % colors.length]}`}
               >
-                <span className="font-mono text-xs text-accent">
-                  0{index + 1}
-                </span>
-                <span className="text-3xl font-semibold text-foreground transition-colors duration-200 group-hover:text-accent md:text-4xl">
-                  {t(link.key)}
-                </span>
-                <span className="ml-auto font-mono text-lg text-accent opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 md:-translate-x-2">
-                  →
-                </span>
+                {t(link.key)}
+                <span aria-hidden="true">→</span>
               </a>
             </li>
           ))}
         </ul>
 
-        <div
-          className="mt-14 flex flex-wrap items-center gap-4 transition-all duration-500 ease-out"
-          style={{
-            transitionDelay: isClicked ? `${navLinks.length * 60}ms` : "0ms",
-            opacity: isClicked ? 1 : 0,
-            transform: isClicked ? "translateY(0)" : "translateY(8px)",
-          }}
-        >
-          <span className="font-mono text-xs text-faint">FIND ME —</span>
-          <a
-            href="https://github.com/lucio1907"
-            target="_blank"
-            className="font-mono text-[13px] text-dim transition-colors duration-200 hover:text-foreground"
-          >
+        <div className="mt-12 flex flex-wrap gap-3">
+          <a href="https://github.com/lucio1907" target="_blank" rel="noreferrer" className="brutal-chip bg-white">
             GitHub
           </a>
-          <a
-            href="https://x.com/Lu_Gastellu"
-            target="_blank"
-            className="font-mono text-[13px] text-dim transition-colors duration-200 hover:text-foreground"
-          >
-            Twitter
-          </a>
-          <a
-            href="https://www.linkedin.com/in/luciogastellu/"
-            target="_blank"
-            className="font-mono text-[13px] text-dim transition-colors duration-200 hover:text-foreground"
-          >
+          <a href="https://www.linkedin.com/in/luciogastellu/" target="_blank" rel="noreferrer" className="brutal-chip bg-white">
             LinkedIn
+          </a>
+          <a href="https://x.com/Lu_Gastellu" target="_blank" rel="noreferrer" className="brutal-chip bg-white">
+            X / Twitter
           </a>
         </div>
       </div>

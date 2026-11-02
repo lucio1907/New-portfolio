@@ -46,13 +46,21 @@ const writeStorage = (state: BugsState): void => {
   }
 };
 
+const hydrateFrom = (raw: string | null): BugsState =>
+  bugsReducer(initialBugsState, { type: "hydrate", fixed: parseStoredBugs(raw) });
+
+// Other tabs (or frames) of the site share localStorage; keep them in sync.
+const onStorage = (event: StorageEvent): void => {
+  if (event.key !== STORAGE_KEY) return;
+  current = hydrateFrom(event.newValue);
+  listeners.forEach((listener) => listener());
+};
+
 const load = (): void => {
   if (loaded) return;
   loaded = true;
-  current = bugsReducer(initialBugsState, {
-    type: "hydrate",
-    fixed: parseStoredBugs(readStorage()),
-  });
+  current = hydrateFrom(readStorage());
+  window.addEventListener("storage", onStorage);
 };
 
 const subscribe = (listener: Listener): (() => void) => {

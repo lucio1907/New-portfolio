@@ -23,12 +23,30 @@
     "contact": "Contacto"
   },
   "hero": {
-    "label": "// DESARROLLADOR FULL STACK",
-    "greeting": "Hola 👋, soy",
+    "label": "Desarrollador Full Stack",
+    "greeting": "Hola, soy",
     "tagline": "Construyo y lanzo productos reales de extremo a extremo: React y TypeScript en el frontend, FastAPI y Node.js en el backend, PostgreSQL debajo.",
     "ctaContact": "Contáctame",
     "ctaDownloadCV": "Descargar CV",
-    "availability": "Disponible para nuevos roles · Buenos Aires, Argentina"
+    "availability": "Disponible para nuevos roles · Buenos Aires, Argentina",
+    "findMe": "Encontrame en",
+    "card": {
+      "title": "DEV PASS",
+      "name": "Nombre",
+      "role": "Rol",
+      "base": "Base",
+      "langs": "Idiomas",
+      "status": "Estado",
+      "roleValue": "Full Stack + IA",
+      "baseValue": "Buenos Aires, AR",
+      "langsValue": "EN B2 · ES nativo",
+      "statusValue": "Disponible"
+    },
+    "stickers": {
+      "friday": "Deploya los viernes",
+      "ai": "AI-native",
+      "coffee": "Funciona a mate"
+    }
   },
   "about": {
     "label": "Sobre mí",

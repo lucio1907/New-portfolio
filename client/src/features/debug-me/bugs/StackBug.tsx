@@ -52,22 +52,29 @@ const StackBug = ({ children }: { children: React.ReactNode }) => {
       </BugNotice>
 
       {!fixed && (
-        <div className="mb-6 flex flex-wrap items-center gap-3 font-mono text-[13px]">
-          <span
+        <div className="mb-8 flex flex-col gap-3">
+          <div className="flex items-center gap-3 font-mono text-sm font-bold">
+            {t("loading")}
+          </div>
+          <div
             aria-hidden="true"
-            className="h-4 w-4 rounded-full border-2 border-white/15 border-t-accent motion-safe:animate-spin"
-          />
-          <span className="text-dim">{t("loading")}</span>
+            className="h-6 overflow-hidden rounded-full border-3 border-ink bg-white"
+          >
+            <div className="hazard-tape h-full w-2/3 border-r-3 border-ink [background-size:40px_40px] motion-safe:animate-stripes" />
+          </div>
           {phase === "failed" && (
-            <span role="alert" className="text-error">
+            <p
+              role="alert"
+              className="w-fit rounded-btn border-2 border-ink bg-red px-3 py-1.5 font-mono text-sm font-bold"
+            >
               {t("firstError")}
-            </span>
+            </p>
           )}
         </div>
       )}
 
       <div
-        className={`transition-opacity duration-500 ${fixed ? "opacity-100" : "opacity-70"}`}
+        className={`transition-opacity duration-500 ${fixed ? "opacity-100" : "opacity-75"}`}
       >
         {children}
       </div>

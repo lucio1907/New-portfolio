@@ -2,48 +2,51 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
+import { BUG_IDS } from "../model/bugs";
 import { useDebugMe } from "../useDebugMe";
 import BugIcon from "./BugIcon";
 
 const BugHud = (): React.ReactElement => {
   const t = useTranslations("debug.hud");
-  const { fixed, total, deployed, fixAll, reset } = useDebugMe();
-  const percent = Math.round((fixed / total) * 100);
+  const { state, fixed, total, deployed, fixAll, reset } = useDebugMe();
 
   return (
     <aside
       aria-label={t("region")}
-      className="glass fixed bottom-3 left-3 right-3 z-40 flex items-center gap-3 rounded-card border border-border px-4 py-3 shadow-terminal sm:left-auto sm:right-6 sm:bottom-6 sm:w-[440px]"
+      className={`fixed bottom-3 left-3 right-3 z-40 flex items-center gap-3 rounded-card border-3 border-ink px-3 py-3 shadow-brutal sm:bottom-6 sm:left-auto sm:right-6 sm:w-[460px] ${
+        deployed ? "bg-green" : "bg-white"
+      }`}
     >
       <BugIcon
-        className={`h-5 w-5 shrink-0 ${deployed ? "text-success" : "text-error"}`}
+        className={`h-8 w-8 shrink-0 sm:h-9 sm:w-9 ${deployed ? "text-yellow" : "text-red motion-safe:animate-wiggle"}`}
       />
 
       <div className="min-w-0 flex-1">
         <p
           role="status"
           aria-atomic="true"
-          className="font-mono text-[12.5px] leading-snug text-foreground"
+          className="font-mono text-[12px] font-bold leading-snug sm:text-[13px]"
         >
           {deployed ? `✓ ${t("deployed")}` : t("status", { fixed, total })}
         </p>
-        <div
-          aria-hidden="true"
-          className="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10"
-        >
-          <div
-            className={`h-full rounded-full transition-[width] duration-500 ease-out ${
-              deployed ? "bg-success" : "bg-accent"
-            }`}
-            style={{ width: `${percent}%` }}
-          />
+        <div aria-hidden="true" className="mt-1.5 flex gap-1">
+          {BUG_IDS.map((id) => (
+            <span
+              key={id}
+              className={`h-2.5 flex-1 rounded-sm border-2 border-ink transition-colors duration-300 ${
+                state[id] ? "bg-ink" : "bg-paper"
+              }`}
+            />
+          ))}
         </div>
       </div>
 
       <button
         type="button"
         onClick={deployed ? reset : fixAll}
-        className="min-h-[44px] shrink-0 rounded-btn border border-white/[0.16] px-3 font-mono text-[11.5px] font-medium text-foreground transition-colors duration-200 hover:border-accent/60 hover:bg-accent/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className={`brutal-btn min-h-[44px] max-w-[48%] px-3 py-1.5 text-[12.5px] leading-tight sm:max-w-none sm:shrink-0 sm:text-[13px] ${
+          deployed ? "bg-white" : "bg-yellow"
+        }`}
       >
         {deployed ? t("reset") : t("recruiter")}
       </button>

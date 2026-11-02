@@ -8,30 +8,21 @@ const IncidentBanner = (): React.ReactElement => {
   const t = useTranslations("debug.incident");
   const { fixed, total, deployed } = useDebugMe();
 
+  if (deployed) {
+    return (
+      <p className="sticker mb-7 rotate-1 bg-green">✓ {t("resolved")}</p>
+    );
+  }
+
   return (
-    <div
-      className={`mb-8 inline-flex max-w-full items-start gap-3 rounded-row border px-4 py-3 font-mono text-[12.5px] leading-[1.6] ${
-        deployed
-          ? "border-success/30 bg-success/[0.06] text-success"
-          : "border-error/30 bg-error/[0.06] text-error"
-      }`}
-    >
-      <span
-        aria-hidden="true"
-        className={`mt-[7px] h-2 w-2 shrink-0 rounded-full ${
-          deployed ? "bg-success" : "bg-error motion-safe:animate-pulse"
-        }`}
-      />
-      <span>
-        {!deployed && (
-          <span className="mr-2 font-medium tracking-[0.08em]">
-            {t("label")}
-          </span>
-        )}
-        <span className={deployed ? undefined : "text-foreground/85"}>
-          {deployed ? t("resolved") : t("broken", { remaining: total - fixed })}
+    <div className="mb-7 flex max-w-[560px] overflow-hidden rounded-card border-3 border-ink bg-white shadow-brutal -rotate-1">
+      <span aria-hidden="true" className="hazard-tape w-4 shrink-0 border-r-3 border-ink" />
+      <p className="px-4 py-3 text-[15px] font-medium leading-[1.5]">
+        <span className="mr-2 inline-block rounded-md border-2 border-ink bg-red px-1.5 font-mono text-xs font-bold text-ink">
+          {t("label")}
         </span>
-      </span>
+        {t("broken", { remaining: total - fixed })}
+      </p>
     </div>
   );
 };

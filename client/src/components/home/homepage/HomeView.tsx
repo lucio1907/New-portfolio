@@ -5,147 +5,149 @@ import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { FadeIn } from "@/components/motion/Reveal";
 import IncidentBanner from "@/features/debug-me/components/IncidentBanner";
+import TechMarquee from "./TechMarquee";
+
+const socials = [
+  { label: "GitHub", href: "https://github.com/lucio1907" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/luciogastellu/" },
+  { label: "X / Twitter", href: "https://x.com/Lu_Gastellu" },
+] as const;
 
 const HomeView = (): React.ReactElement => {
   const t = useTranslations("hero");
 
+  const passRows = [
+    { label: t("card.name"), value: "Lucio Gastellu Arrieta" },
+    { label: t("card.role"), value: t("card.roleValue") },
+    { label: t("card.base"), value: t("card.baseValue") },
+    { label: t("card.langs"), value: t("card.langsValue") },
+  ];
+
   return (
-    <header
-      id="top"
-      className="mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-12 px-5 pb-24 pt-32 md:px-10 md:pb-28 md:pt-40 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pb-32 lg:pt-44"
-    >
-      <div>
-        <IncidentBanner />
-        <FadeIn delay={0}>
-          <p className="mb-7 font-mono text-[13px] tracking-[0.16em] text-accent">
-            {t("label")}
-          </p>
-        </FadeIn>
+    <header id="top" className="pt-28 md:pt-32">
+      <div className="mx-auto grid max-w-[1240px] grid-cols-1 items-center gap-14 px-5 pb-20 md:px-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-10 lg:pb-24">
+        <div>
+          <IncidentBanner />
 
-        <FadeIn delay={0.08}>
-          <h1 className="mb-7 text-hero text-foreground">
-            <span className="mb-2.5 block text-[0.5em] font-medium tracking-[-0.01em] text-faint-2">
-              {t("greeting")}
+          <FadeIn delay={0}>
+            <span className="sticker mb-6 -rotate-2 bg-blue text-white">
+              {t("label")}
             </span>
-            <span className="block">
-              Lucio
-              <br />
-              Gastellu<span className="text-accent">.</span>
-            </span>
-          </h1>
-        </FadeIn>
+          </FadeIn>
 
-        <FadeIn delay={0.16}>
-          <p className="mb-5 max-w-[520px] text-[19px] leading-[1.6] text-muted">
-            {t("tagline")}
-          </p>
-          <p className="mb-10 flex items-center gap-2.5 font-mono text-[13px] text-dim">
-            <span
-              aria-hidden="true"
-              className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(52,211,153,0.15)]"
-            />
-            {t("availability")}
-          </p>
-        </FadeIn>
+          <FadeIn delay={0.06}>
+            <h1 className="mb-7 text-hero text-ink">
+              <span className="mb-3 block text-[0.3em] font-bold tracking-[-0.01em] text-ink-soft">
+                {t("greeting")}
+              </span>
+              <span className="block">Lucio</span>
+              <span className="marker block w-fit pr-2">
+                Gastellu<span className="text-pink">.</span>
+              </span>
+            </h1>
+          </FadeIn>
 
-        <FadeIn delay={0.24}>
-          <div className="mb-11 flex flex-wrap gap-3.5">
-            <motion.a
-              href="#contacto"
-              whileHover={{
-                y: -2,
-                transition: { type: "spring", stiffness: 300, damping: 18 },
-              }}
-              whileTap={{ scale: 0.97 }}
-              className="rounded-btn bg-accent px-6 py-3.5 font-mono text-sm font-medium text-background transition-shadow duration-200 hover:shadow-cta"
-            >
-              {t("ctaContact")}
-            </motion.a>
-            <motion.a
-              href="/CV-LucioGastellu.pdf"
-              target="_blank"
-              whileTap={{ scale: 0.97 }}
-              className="rounded-btn border border-white/[0.16] px-6 py-3.5 font-mono text-sm font-medium text-foreground transition-colors duration-200 hover:border-accent/60 hover:bg-accent/[0.08]"
-            >
-              {t("ctaDownloadCV")}
-            </motion.a>
-          </div>
-        </FadeIn>
+          <FadeIn delay={0.12}>
+            <p className="mb-6 max-w-[560px] text-lg font-medium leading-[1.6] text-ink-soft md:text-xl">
+              {t("tagline")}
+            </p>
+            <p className="brutal-chip mb-9 bg-green">
+              <span
+                aria-hidden="true"
+                className="h-2.5 w-2.5 rounded-full border-2 border-ink bg-white motion-safe:animate-pulse"
+              />
+              {t("availability")}
+            </p>
+          </FadeIn>
 
-        <FadeIn delay={0.32}>
-          <div className="flex flex-wrap items-center gap-4">
-            <span className="font-mono text-xs text-faint">FIND ME —</span>
-            <a
-              href="https://github.com/lucio1907"
-              target="_blank"
-              className="font-mono text-[13px] text-dim transition-colors duration-200 hover:text-foreground"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://x.com/Lu_Gastellu"
-              target="_blank"
-              className="font-mono text-[13px] text-dim transition-colors duration-200 hover:text-foreground"
-            >
-              Twitter
-            </a>
-            <a
-              href="https://www.linkedin.com/in/luciogastellu/"
-              target="_blank"
-              className="font-mono text-[13px] text-dim transition-colors duration-200 hover:text-foreground"
-            >
-              LinkedIn
-            </a>
-          </div>
+          <FadeIn delay={0.18}>
+            <div className="mb-9 flex flex-wrap gap-4">
+              <a href="#contacto" className="brutal-btn bg-pink text-lg">
+                {t("ctaContact")}
+                <span aria-hidden="true">→</span>
+              </a>
+              <a
+                href="/CV-LucioGastellu.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="brutal-btn bg-white text-lg"
+              >
+                {t("ctaDownloadCV")}
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.24}>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="font-mono text-sm font-bold text-ink-soft">
+                {t("findMe")}:
+              </span>
+              {socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="brutal-chip bg-white transition-colors duration-150 hover:bg-yellow"
+                >
+                  {social.label}
+                </a>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+
+        <FadeIn delay={0.2} className="relative mx-auto w-full max-w-[400px] pb-6 pt-12">
+          <motion.div
+            initial={{ rotate: 2 }}
+            animate={{ rotate: 2 }}
+            whileHover={{ rotate: 0, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 260, damping: 18 }}
+            className="brutal-card overflow-hidden shadow-brutal-lg"
+          >
+            <div className="flex items-center justify-between border-b-3 border-ink bg-pink px-5 py-3">
+              <span className="font-mono text-sm font-bold tracking-[0.12em]">
+                {t("card.title")}
+              </span>
+              <span className="font-mono text-sm font-bold">#0413</span>
+            </div>
+            <dl className="flex flex-col gap-3.5 px-5 py-5">
+              {passRows.map((row) => (
+                <div key={row.label} className="flex flex-col">
+                  <dt className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-ink-soft">
+                    {row.label}
+                  </dt>
+                  <dd className="text-lg font-bold leading-tight">{row.value}</dd>
+                </div>
+              ))}
+              <div className="flex flex-col">
+                <dt className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-ink-soft">
+                  {t("card.status")}
+                </dt>
+                <dd className="mt-1">
+                  <span className="brutal-chip bg-green">
+                    ✓ {t("card.statusValue")}
+                  </span>
+                </dd>
+              </div>
+            </dl>
+            <div aria-hidden="true" className="barcode mx-5 mb-5 h-10" />
+          </motion.div>
+
+          <span className="sticker absolute left-2 top-0 -rotate-6 bg-yellow">
+            {t("stickers.friday")}
+          </span>
+          <span className="sticker absolute -right-2 top-1/2 rotate-6 bg-lilac md:-right-6">
+            {t("stickers.ai")} ✦
+          </span>
+          <span className="sticker absolute -bottom-2 left-6 -rotate-3 bg-white">
+            {t("stickers.coffee")}
+          </span>
         </FadeIn>
       </div>
 
-      <FadeIn delay={0.4}>
-        <motion.div
-          animate={{ y: [0, -9, 0, 6, 0], rotate: [0, 0.6, 0, -0.5, 0] }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut",
-            times: [0, 0.3, 0.55, 0.8, 1],
-          }}
-          className="overflow-hidden rounded-card border border-border bg-terminal shadow-terminal"
-        >
-          <div className="flex items-center gap-2 border-b border-border-soft bg-white/[0.02] px-4 py-3.5">
-            <span className="h-[11px] w-[11px] rounded-full bg-[#ff5f57]" />
-            <span className="h-[11px] w-[11px] rounded-full bg-[#febc2e]" />
-            <span className="h-[11px] w-[11px] rounded-full bg-[#28c840]" />
-            <span className="ml-2 font-mono text-[11px] text-faint">
-              developer.ts
-            </span>
-          </div>
-          <pre className="overflow-x-auto px-5 py-[22px] font-mono text-[13px] leading-[1.9] text-[#c9c9d1]">
-            <span className="text-syntax-keyword">const</span>{" "}
-            <span className="text-syntax-var">dev</span>{" "}
-            <span className="text-dim">=</span> {"{"}
-            {"\n"}  <span className="text-syntax-prop">name</span>:{" "}
-            <span className="text-syntax-string">&quot;Lucio Gastellu Arrieta&quot;</span>,
-            {"\n"}  <span className="text-syntax-prop">role</span>:{" "}
-            <span className="text-syntax-string">&quot;Full Stack Developer & AI&quot;</span>,
-            {"\n"}  <span className="text-syntax-prop">location</span>:{" "}
-            <span className="text-syntax-string">&quot;Argentina&quot;</span>,
-            {"\n"}  <span className="text-syntax-prop">languages</span>: {"{ "}
-            <span className="text-syntax-prop">english</span>:{" "}
-            <span className="text-syntax-string">&quot;B2&quot;</span>,{" "}
-            <span className="text-syntax-prop">spanish</span>:{" "}
-            <span className="text-syntax-string">&quot;Native&quot;</span>
-            {" },"}
-            {"\n"}  <span className="text-syntax-prop">focus</span>: [
-            <span className="text-syntax-string">&quot;Systems Development&quot;</span>,{" "}
-            <span className="text-syntax-string">&quot;AI&quot;</span>],
-            {"\n"}  <span className="text-syntax-prop">available</span>:{" "}
-            <span className="text-syntax-bool">true</span>
-            <span className="animate-blink text-accent">_</span>
-            {"\n"}
-            {"}"}
-          </pre>
-        </motion.div>
-      </FadeIn>
+      <TechMarquee />
     </header>
   );
 };

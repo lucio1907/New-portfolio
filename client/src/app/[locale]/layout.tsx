@@ -80,7 +80,7 @@ export default async function RootLayout({
         </Script>
       </head>
       <body
-        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans bg-background text-muted scroll-smooth`}
+        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans text-ink antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           <MotionProvider>{children}</MotionProvider>

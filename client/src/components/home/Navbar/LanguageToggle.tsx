@@ -8,9 +8,9 @@ const LanguageToggle = () => {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+  const nextLocale = locale === "es" ? "en" : "es";
 
   const toggleLocale = () => {
-    const nextLocale = locale === "es" ? "en" : "es";
     const hash = typeof window !== "undefined" ? window.location.hash : "";
     router.replace(`${pathname}${hash}`, { locale: nextLocale });
   };
@@ -19,11 +19,12 @@ const LanguageToggle = () => {
     <button
       type="button"
       onClick={toggleLocale}
-      aria-label="Toggle language"
-      className="flex items-center gap-1.5 rounded-full border border-white/[0.14] px-3 py-[7px] font-mono text-xs font-medium text-foreground transition-colors duration-200 hover:border-accent/60 hover:bg-accent/[0.08]"
+      aria-label={nextLocale === "en" ? "Switch to English" : "Cambiar a español"}
+      className="brutal-btn min-h-[42px] bg-pink px-3 font-mono text-[13px]"
     >
-      <span className="text-accent">◐</span>
-      {locale === "es" ? "ES / EN" : "EN / ES"}
+      {locale.toUpperCase()}
+      <span aria-hidden="true">→</span>
+      {nextLocale.toUpperCase()}
     </button>
   );
 };

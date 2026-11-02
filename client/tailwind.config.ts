@@ -9,22 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0a0a0b",
-        surface: "#0f0f11",
-        "surface-2": "#141416",
-        "surface-3": "#0e0e10",
-        border: "rgba(255,255,255,0.08)",
-        "border-soft": "rgba(255,255,255,0.06)",
-        "border-hover": "rgba(79,140,255,0.4)",
-        accent: "#4f8cff",
-        error: "#ff6b6b",
-        warn: "#fbbf24",
-        success: "#34d399",
-        foreground: "#ededed",
-        muted: "#a1a1aa",
-        dim: "#8a8a90",
-        faint: "#52525b",
-        "faint-2": "#71717a",
+        paper: "#FFF4E0",
+        ink: "#141414",
+        "ink-soft": "#3D3D3D",
+        yellow: "#FFD23F",
+        pink: "#FF6B9E",
+        blue: "#4361EE",
+        green: "#2BC48A",
+        red: "#FF4F4F",
+        lilac: "#C3B1FF",
+        terminal: "#16161A",
         syntax: {
           keyword: "#c586c0",
           var: "#4fc1ff",
@@ -39,29 +33,25 @@ const config: Config = {
       },
       fontSize: {
         hero: [
-          "clamp(40px, 5.4vw, 76px)",
-          { lineHeight: "1.02", letterSpacing: "-0.03em", fontWeight: "600" },
+          "clamp(56px, 9vw, 128px)",
+          { lineHeight: "0.9", letterSpacing: "-0.04em", fontWeight: "700" },
         ],
         h2: [
-          "clamp(28px, 3.4vw, 44px)",
-          { lineHeight: "1.15", letterSpacing: "-0.025em", fontWeight: "600" },
+          "clamp(34px, 4.6vw, 60px)",
+          { lineHeight: "1", letterSpacing: "-0.03em", fontWeight: "700" },
         ],
-        "contact-h2": [
-          "clamp(36px, 5vw, 68px)",
-          { lineHeight: "1.05", letterSpacing: "-0.03em", fontWeight: "600" },
-        ],
-        "email-link": ["clamp(16px, 2.2vw, 24px)", { lineHeight: "1.3" }],
       },
       boxShadow: {
-        card: "0 30px 60px -30px rgba(0,0,0,0.9)",
-        terminal: "0 40px 80px -30px rgba(0,0,0,0.8)",
-        cta: "0 14px 30px -8px rgba(79,140,255,0.5)",
+        "brutal-sm": "2px 2px 0 0 #141414",
+        brutal: "4px 4px 0 0 #141414",
+        "brutal-lg": "7px 7px 0 0 #141414",
+      },
+      borderWidth: {
+        3: "3px",
       },
       borderRadius: {
-        btn: "8px",
-        card: "14px",
-        panel: "12px",
-        row: "10px",
+        btn: "10px",
+        card: "16px",
       },
       keyframes: {
         blink: {
@@ -75,10 +65,25 @@ const config: Config = {
           "60%": { transform: "translate(-1px, 0)" },
           "80%": { transform: "translate(1px, 1px)" },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-4deg)" },
+          "50%": { transform: "rotate(4deg)" },
+        },
+        stripes: {
+          from: { backgroundPosition: "0 0" },
+          to: { backgroundPosition: "40px 0" },
+        },
       },
       animation: {
         blink: "blink 1.1s step-end infinite",
         glitch: "glitch 2.4s steps(1) infinite",
+        marquee: "marquee 32s linear infinite",
+        wiggle: "wiggle 0.9s ease-in-out infinite",
+        stripes: "stripes 0.8s linear infinite",
       },
     },
   },

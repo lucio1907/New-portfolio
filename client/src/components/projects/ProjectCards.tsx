@@ -23,16 +23,14 @@ const ProjectCards = (): React.ReactElement => {
   const t = useTranslations("projects");
 
   return (
-    <StaggerContainer className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <StaggerContainer className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       {Projects.projects.map((item: ProjectsTypes, index: number) => {
         const tags = item.techStack.split(",").map((tag) => tag.trim());
 
         return (
           <ProjectSlot key={item.id} index={index}>
-            <HoverLiftCard
-              className="card-surface group flex flex-col overflow-hidden transition-[border-color,box-shadow] duration-300 ease-out hover:border-border-hover hover:shadow-card"
-            >
-              <div className="relative aspect-[16/10] overflow-hidden border-b border-border-soft">
+            <HoverLiftCard className="brutal-card group flex flex-col overflow-hidden transition-shadow duration-150 hover:shadow-brutal-lg">
+              <div className="relative aspect-[16/10] overflow-hidden border-b-3 border-ink bg-paper">
                 <Image
                   src={item.image}
                   alt={item.projectName}
@@ -41,35 +39,33 @@ const ProjectCards = (): React.ReactElement => {
                   className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                 />
                 {!item.livePreview && (
-                  <span className="absolute right-3 top-3 rounded-[5px] border border-accent/40 px-[7px] py-[3px] font-mono text-[10px] text-accent">
+                  <span className="sticker absolute right-3 top-3 rotate-6 bg-lilac font-mono text-xs">
                     API
                   </span>
                 )}
               </div>
 
-              <div className="flex flex-1 flex-col p-[22px]">
-                <h3 className="mb-2.5 text-[19px] font-semibold text-foreground">
+              <div className="flex flex-1 flex-col p-5">
+                <h3 className="mb-2 text-xl font-bold leading-tight">
                   {item.projectName}
                 </h3>
-                <p className="mb-[18px] flex-1 text-[14.5px] leading-[1.6] text-muted">
+                <p className="mb-4 flex-1 text-[15px] leading-[1.6] text-ink-soft">
                   {item.description[locale]}
                 </p>
-                <div className="mb-5 flex flex-wrap gap-[7px]">
+                <ul className="mb-5 flex flex-wrap gap-2">
                   {tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-[6px] border border-white/10 px-[9px] py-1 font-mono text-[11px] text-dim"
-                    >
+                    <li key={tag} className="brutal-chip bg-paper px-2.5 py-0.5 font-mono text-xs">
                       {tag}
-                    </span>
+                    </li>
                   ))}
-                </div>
-                <div className="flex gap-[18px]">
+                </ul>
+                <div className="flex flex-wrap gap-3">
                   {item.livePreview && (
                     <a
                       href={item.livePreview}
                       target="_blank"
-                      className="font-mono text-[12.5px] text-accent"
+                      rel="noreferrer"
+                      className="brutal-btn min-h-[42px] bg-yellow px-4 text-sm"
                     >
                       {t("liveLink")}
                     </a>
@@ -77,7 +73,8 @@ const ProjectCards = (): React.ReactElement => {
                   <a
                     href={item.codeLink}
                     target="_blank"
-                    className="font-mono text-[12.5px] text-dim"
+                    rel="noreferrer"
+                    className="brutal-btn min-h-[42px] bg-white px-4 text-sm"
                   >
                     {t("codeLink")}
                   </a>

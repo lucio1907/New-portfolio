@@ -23,62 +23,64 @@ const contactRows = [
   },
 ] as const;
 
+const ROW_COLORS = ["bg-yellow", "bg-lilac", "bg-blue text-white", "bg-pink"];
+
 const ContactMe = (): React.ReactElement => {
   const t = useTranslations("contact");
 
   return (
     <section
       id="contacto"
-      className="scroll-mt-20 border-t border-border-soft bg-gradient-to-b from-transparent to-accent/[0.04]"
+      className="scroll-mt-28 border-y-3 border-ink bg-yellow"
     >
-      <div className="mx-auto max-w-[1200px] px-5 pb-20 pt-[110px] md:px-10">
-        <SectionHeader number="04" label={t("label")} className="mb-11" />
+      <div className="mx-auto max-w-[1240px] px-5 pb-20 pt-24 md:px-10">
+        <SectionHeader number="04" label={t("label")} color="bg-white" className="mb-10" />
 
         <ContactBug />
 
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
           <FadeIn>
             <div>
-              <h2 className="mb-6 text-contact-h2 text-foreground">
-                {t("heading")}
-              </h2>
-              <p className="mb-9 max-w-[440px] text-lg text-muted">
+              <h3 className="mb-5 text-h2 text-ink">{t("heading")}</h3>
+              <p className="mb-8 max-w-[460px] text-lg font-medium text-ink-soft">
                 {t("subtitle")}
               </p>
               <a
                 href="mailto:luciogastellu.dev@gmail.com"
-                className="inline-flex items-center gap-3 border-b border-accent/40 pb-2 font-mono text-email-link text-foreground transition-colors duration-200 hover:text-accent"
+                className="brutal-btn max-w-full break-all bg-white py-3 font-mono text-base md:text-xl"
               >
-                <span className="text-accent">→</span>{" "}
+                <span aria-hidden="true" className="text-pink">
+                  →
+                </span>
                 luciogastellu.dev@gmail.com
               </a>
             </div>
           </FadeIn>
 
           <FadeIn delay={0.12}>
-            <div className="flex flex-col gap-4">
-              {contactRows.map((row) => (
-                <a
-                  key={row.key}
-                  href={row.href}
-                  target={row.key === "phone" ? undefined : "_blank"}
-                  className="flex items-center justify-between rounded-row border border-border px-[18px] py-4 transition-colors duration-200 hover:border-accent/40 hover:bg-accent/5"
-                >
-                  <span className="font-mono text-xs text-faint">
-                    {t(`rows.${row.key}`)}
-                  </span>
-                  <span className="font-mono text-[13px] text-foreground">
-                    {row.value}
-                  </span>
-                </a>
+            <ul className="flex flex-col gap-4">
+              {contactRows.map((row, index) => (
+                <li key={row.key}>
+                  <a
+                    href={row.href}
+                    target={row.key === "phone" ? undefined : "_blank"}
+                    rel={row.key === "phone" ? undefined : "noreferrer"}
+                    className={`brutal-btn w-full justify-between py-3 ${ROW_COLORS[index % ROW_COLORS.length]}`}
+                  >
+                    <span className="font-mono text-xs uppercase tracking-[0.12em]">
+                      {t(`rows.${row.key}`)}
+                    </span>
+                    <span className="font-mono text-sm">{row.value}</span>
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </FadeIn>
         </div>
 
         <FadeIn>
-          <blockquote className="mt-20 border-t border-border-soft pt-10 font-mono text-sm leading-[1.7] text-faint-2">
-            <span className="text-muted">{t("quote")}</span> — Bill Gates
+          <blockquote className="mt-16 max-w-[720px] -rotate-1 rounded-card border-3 border-dashed border-ink bg-white/60 px-6 py-5 font-mono text-sm font-medium leading-[1.7]">
+            {t("quote")} <span className="font-bold">— Bill Gates</span>
           </blockquote>
         </FadeIn>
       </div>

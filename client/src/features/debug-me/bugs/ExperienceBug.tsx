@@ -33,7 +33,7 @@ const moveItem = <T,>(items: readonly T[], from: number, to: number): T[] => {
 };
 
 const controlClassName =
-  "flex h-8 w-8 items-center justify-center rounded-[6px] border border-white/10 font-mono text-[13px] text-dim transition-colors hover:border-warn/50 hover:text-warn focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-warn disabled:pointer-events-none disabled:opacity-30";
+  "flex h-9 w-9 cursor-pointer items-center justify-center rounded-btn border-2 border-ink bg-white font-mono text-sm font-bold text-ink shadow-brutal-sm transition-colors hover:bg-yellow active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:pointer-events-none disabled:opacity-30";
 
 type ExperienceBugProps = {
   /** Experiences in the correct order (newest first). */
@@ -165,7 +165,7 @@ const DraggableEntry = ({
       dragListener={false}
       dragControls={dragControls}
       onDragEnd={onDragEnd}
-      className={`${entryClassName(isLast)} rounded-r-row bg-background`}
+      className={entryClassName(isLast)}
     >
       <ExperienceEntry
         item={item}

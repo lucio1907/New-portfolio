@@ -9,49 +9,80 @@ html {
 
 body {
   overflow-x: hidden;
+  background-color: #fff4e0;
+  background-image: radial-gradient(rgba(20, 20, 20, 0.14) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+@layer components {
+  .brutal-card {
+    @apply rounded-card border-3 border-ink bg-white shadow-brutal;
+  }
+
+  .brutal-btn {
+    @apply inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-btn border-3 border-ink px-5 font-bold text-ink shadow-brutal transition-[transform,box-shadow] duration-150 ease-out hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg active:translate-x-1 active:translate-y-1 active:shadow-none disabled:cursor-wait disabled:opacity-60;
+  }
+
+  .brutal-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border-2 border-ink px-3 py-1 text-sm font-bold text-ink;
+  }
+
+  .sticker {
+    @apply inline-flex items-center rounded-btn border-3 border-ink px-3 py-1.5 font-bold text-ink shadow-brutal-sm;
+  }
 }
 
 @layer utilities {
-  .card-surface {
-    @apply bg-surface border border-border rounded-card;
+  .hazard-tape {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      #ffd23f 0 12px,
+      #141414 12px 24px
+    );
   }
-  .glass {
-    background-color: rgba(10, 10, 11, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+
+  .marker {
+    background-image: linear-gradient(
+      transparent 58%,
+      #ffd23f 58%,
+      #ffd23f 92%,
+      transparent 92%
+    );
   }
-  .bg-grid-fade {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+
+  .barcode {
+    background-image: repeating-linear-gradient(
+      90deg,
+      #141414 0 2px,
+      transparent 2px 4px,
+      #141414 4px 7px,
+      transparent 7px 9px
+    );
   }
-  .bg-terminal {
-    background: linear-gradient(180deg, #141416, #0e0e10);
-  }
+}
+
+*:focus-visible {
+  outline: 3px solid #4361ee;
+  outline-offset: 3px;
 }
 
 ::selection {
-  background: #4f8cff;
-  color: #0a0a0b;
+  background: #ffd23f;
+  color: #141414;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #26262a;
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #3a3a42;
+  background-color: #141414;
+  border: 3px solid #fff4e0;
+  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #0a0a0b;
+  background-color: #fff4e0;
 }
 
 @media (prefers-reduced-motion: reduce) {

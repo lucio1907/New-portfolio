@@ -30,7 +30,7 @@ const AboutBug = ({ children }: { children: React.ReactNode }) => {
           width={112}
           height={112}
           priority={false}
-          className="h-28 w-28 rounded-full border border-border bg-surface-2 object-cover"
+          className="h-28 w-28 rounded-full border-3 border-ink bg-yellow object-cover shadow-brutal-sm"
         />
         <AnimatePresence>
           {!fixed && (
@@ -51,9 +51,9 @@ const AboutBug = ({ children }: { children: React.ReactNode }) => {
                   ? { duration: 0 }
                   : { duration: 9, repeat: Infinity, ease: "linear" }
               }
-              className="absolute left-0 top-0 flex h-11 w-11 items-center justify-center rounded-full text-error focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-error"
+              className="absolute left-0 top-0 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full text-red"
             >
-              <BugIcon className="h-6 w-6 drop-shadow-[0_0_6px_rgba(255,107,107,0.6)]" />
+              <BugIcon className="h-10 w-10" />
             </motion.button>
           )}
         </AnimatePresence>

@@ -53,7 +53,7 @@ const ProjectsBug = ({ cardCount, children }: ProjectsBugProps) => {
   };
 
   return (
-    <div className="overflow-x-clip">
+    <div className="-mx-5 overflow-x-clip px-5 py-2 md:-mx-10 md:px-10">
       <BugNotice fixed={fixed} hint={t("hint")} fixedText={t("applied")}>
         <button type="button" onClick={fix} className={bugActionClassName}>
           {t("apply")}

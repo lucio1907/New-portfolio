@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { subscribeDeploy } from "../useDebugMe";
 
-const COLORS = ["#4f8cff", "#34d399", "#fbbf24", "#c586c0", "#ededed"];
+const COLORS = ["#FFD23F", "#FF6B9E", "#4361EE", "#2BC48A", "#C3B1FF", "#141414"];
 const PARTICLES = 140;
 const DURATION_MS = 2600;
 const GRAVITY = 0.18;
