@@ -4,6 +4,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { FadeIn } from "@/components/motion/Reveal";
+import IncidentBanner from "@/features/debug-me/components/IncidentBanner";
 
 const HomeView = (): React.ReactElement => {
   const t = useTranslations("hero");
@@ -14,6 +15,7 @@ const HomeView = (): React.ReactElement => {
       className="mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-12 px-5 pb-24 pt-32 md:px-10 md:pb-28 md:pt-40 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pb-32 lg:pt-44"
     >
       <div>
+        <IncidentBanner />
         <FadeIn delay={0}>
           <p className="mb-7 font-mono text-[13px] tracking-[0.16em] text-accent">
             {t("label")}

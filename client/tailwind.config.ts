@@ -4,6 +4,7 @@ const config: Config = {
   content: [
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -16,6 +17,9 @@ const config: Config = {
         "border-soft": "rgba(255,255,255,0.06)",
         "border-hover": "rgba(79,140,255,0.4)",
         accent: "#4f8cff",
+        error: "#ff6b6b",
+        warn: "#fbbf24",
+        success: "#34d399",
         foreground: "#ededed",
         muted: "#a1a1aa",
         dim: "#8a8a90",
@@ -64,9 +68,17 @@ const config: Config = {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0" },
         },
+        glitch: {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "20%": { transform: "translate(-2px, 1px)" },
+          "40%": { transform: "translate(2px, -1px)" },
+          "60%": { transform: "translate(-1px, 0)" },
+          "80%": { transform: "translate(1px, 1px)" },
+        },
       },
       animation: {
         blink: "blink 1.1s step-end infinite",
+        glitch: "glitch 2.4s steps(1) infinite",
       },
     },
   },

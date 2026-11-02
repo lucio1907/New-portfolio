@@ -85,5 +85,53 @@
   },
   "footer": {
     "note": "© 2026 · Designed & built with code."
+  },
+  "debug": {
+    "incident": {
+      "label": "INCIDENT #0413",
+      "broken": "I deployed to production on a Friday. Help me fix it: {remaining, plural, one {# bug left} other {# bugs left}}.",
+      "resolved": "All systems operational. Thanks for the hotfix."
+    },
+    "hud": {
+      "status": "{fixed} of {total} bugs fixed",
+      "deployed": "Deploy successful",
+      "recruiter": "I am a recruiter, fix it all",
+      "reset": "Break it again",
+      "region": "Debug progress"
+    },
+    "about": {
+      "hint": "// a bug is crawling over my photo. Catch it.",
+      "catch": "Catch the bug",
+      "caught": "Caught. About section stable."
+    },
+    "stack": {
+      "loading": "Loading tech stack…",
+      "hint": "// the loader has been spinning since Friday.",
+      "retry": "Retry",
+      "retrying": "Retrying…",
+      "firstError": "ETIMEDOUT: coffee not found. Try again.",
+      "loaded": "Tech stack loaded."
+    },
+    "experience": {
+      "hint": "// timeline is shuffled. Sort it by date.",
+      "sort": "Sort by date",
+      "moveUp": "Move {company} up",
+      "moveDown": "Move {company} down",
+      "dragHandle": "Drag to reorder {company}",
+      "sorted": "Timeline sorted."
+    },
+    "projects": {
+      "hint": "// someone shipped position: absolute.",
+      "apply": "Apply display: grid",
+      "applied": "Layout fixed."
+    },
+    "contact": {
+      "hint": "// the deploy pipeline is failing.",
+      "command": "npm run deploy",
+      "error": "Error: missing env CONTACT_EMAIL",
+      "setEnv": "Set CONTACT_EMAIL",
+      "running": "Deploying…",
+      "success": "✓ Deploy successful"
+    }
   }
 }

@@ -7,17 +7,14 @@ import Projects from "@/components/projects/Projects";
 import TechStack from "@/components/stack/TechStack";
 import GridBackground from "@/components/motion/GridBackground";
 import { setRequestLocale } from "next-intl/server";
+import BugHud from "@/features/debug-me/components/BugHud";
 
-const Home = async ({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) => {
+const Home = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
   setRequestLocale(locale);
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full pb-24 sm:pb-0">
       <GridBackground />
       <div className="relative z-10">
         <Navbar />
@@ -30,6 +27,7 @@ const Home = async ({
         </main>
         <Footer />
       </div>
+      <BugHud />
     </div>
   );
 };

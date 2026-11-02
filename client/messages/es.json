@@ -85,5 +85,53 @@
   },
   "footer": {
     "note": "© 2026 · Diseñado & desarrollado por Lucio Gastellu."
+  },
+  "debug": {
+    "incident": {
+      "label": "INCIDENTE #0413",
+      "broken": "Deployé a producción un viernes. Ayudame a arreglarlo: {remaining, plural, one {queda # bug} other {quedan # bugs}}.",
+      "resolved": "Todos los sistemas operativos. Gracias por el hotfix."
+    },
+    "hud": {
+      "status": "{fixed} de {total} bugs arreglados",
+      "deployed": "Deploy exitoso",
+      "recruiter": "Soy recruiter, arreglalo vos",
+      "reset": "Romperlo de nuevo",
+      "region": "Progreso de debug"
+    },
+    "about": {
+      "hint": "// hay un bug caminando sobre mi foto. Atrapalo.",
+      "catch": "Atrapar el bug",
+      "caught": "Atrapado. Sección Sobre mí estable."
+    },
+    "stack": {
+      "loading": "Cargando tech stack…",
+      "hint": "// el loader está girando desde el viernes.",
+      "retry": "Reintentar",
+      "retrying": "Reintentando…",
+      "firstError": "ETIMEDOUT: coffee not found. Probá de nuevo.",
+      "loaded": "Tech stack cargado."
+    },
+    "experience": {
+      "hint": "// la línea de tiempo está desordenada. Ordenala por fecha.",
+      "sort": "Ordenar por fecha",
+      "moveUp": "Subir {company}",
+      "moveDown": "Bajar {company}",
+      "dragHandle": "Arrastrar para reordenar {company}",
+      "sorted": "Línea de tiempo ordenada."
+    },
+    "projects": {
+      "hint": "// alguien deployó position: absolute.",
+      "apply": "Aplicar display: grid",
+      "applied": "Layout arreglado."
+    },
+    "contact": {
+      "hint": "// el pipeline de deploy está fallando.",
+      "command": "npm run deploy",
+      "error": "Error: missing env CONTACT_EMAIL",
+      "setEnv": "Definir CONTACT_EMAIL",
+      "running": "Deployando…",
+      "success": "✓ Deploy exitoso"
+    }
   }
 }
