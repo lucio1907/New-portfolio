@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import Experiencies from "./Experiencies";
 import SectionHeader from "@/components/common/SectionHeader";
 import { FadeIn } from "@/components/motion/Reveal";
+import AboutBug from "@/features/debug-me/bugs/AboutBug";
 
 type EducationEntry = {
   title: string;
@@ -23,7 +24,7 @@ const AboutMePage = () => {
 
       <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-[72px]">
         <FadeIn>
-          <div>
+          <AboutBug>
             <h2 className="mb-7 text-h2 text-foreground">{t("heading")}</h2>
             <p className="mb-5 text-[17px] leading-[1.7] text-muted">
               {t("bio1")}
@@ -58,7 +59,7 @@ const AboutMePage = () => {
               {t("languagesLabel")}
             </div>
             <p className="mt-3 text-[15px] text-muted">{t("languages")}</p>
-          </div>
+          </AboutBug>
         </FadeIn>
 
         <div>
