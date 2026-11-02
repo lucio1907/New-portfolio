@@ -151,6 +151,37 @@
       "running": "Deploying…",
       "success": "✓ Deploy successful",
       "pending": "✓ CONTACT_EMAIL set. Deploy blocked: {remaining, plural, one {# bug} other {# bugs}} still open."
+    },
+    "challenge": {
+      "open": "Fix it in code",
+      "close": "Hide code",
+      "run": "Run tests",
+      "running": "Running…",
+      "reset": "Reset code",
+      "editorLabel": "Code editor: {file}",
+      "summary": "{passed} of {total} tests passing",
+      "passed": "All tests green. Bug fixed!",
+      "timeout": "Timed out. Is there an infinite loop?",
+      "error": "Error: {message}",
+      "hintLabel": "Need a hint?",
+      "hints": {
+        "stack": "Two bugs: one is about promises, the other one about counting.",
+        "experience": "Strings cannot be subtracted, and sort() changes the original array."
+      },
+      "tests": {
+        "stack": {
+          "firstTry": "returns the stack on the first try",
+          "retries": "retries after a failed attempt",
+          "givesUp": "gives up after the last retry"
+        },
+        "experience": {
+          "newestFirst": "sorts newest first",
+          "sameYear": "compares months of the same year",
+          "noMutation": "does not mutate the original array"
+        }
+      },
+      "testPassed": "passed",
+      "testFailed": "failed"
     }
   }
 }

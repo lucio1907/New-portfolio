@@ -151,6 +151,37 @@
       "running": "Deployando…",
       "success": "✓ Deploy exitoso",
       "pending": "✓ CONTACT_EMAIL definido. Deploy bloqueado: {remaining, plural, one {queda # bug abierto} other {quedan # bugs abiertos}}."
+    },
+    "challenge": {
+      "open": "Arreglalo en código",
+      "close": "Ocultar código",
+      "run": "Correr tests",
+      "running": "Corriendo…",
+      "reset": "Restaurar código",
+      "editorLabel": "Editor de código: {file}",
+      "summary": "{passed} de {total} tests pasando",
+      "passed": "Todos los tests en verde. ¡Bug arreglado!",
+      "timeout": "Se agotó el tiempo. ¿Hay un loop infinito?",
+      "error": "Error: {message}",
+      "hintLabel": "¿Necesitás una pista?",
+      "hints": {
+        "stack": "Hay dos bugs: uno tiene que ver con promesas, el otro con contar.",
+        "experience": "Los strings no se pueden restar, y sort() modifica el array original."
+      },
+      "tests": {
+        "stack": {
+          "firstTry": "devuelve el stack al primer intento",
+          "retries": "reintenta después de un intento fallido",
+          "givesUp": "se rinde después del último intento"
+        },
+        "experience": {
+          "newestFirst": "ordena del más nuevo al más viejo",
+          "sameYear": "compara meses del mismo año",
+          "noMutation": "no modifica el array original"
+        }
+      },
+      "testPassed": "pasó",
+      "testFailed": "falló"
     }
   }
 }

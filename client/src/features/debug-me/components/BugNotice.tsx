@@ -31,4 +31,7 @@ const BugNotice = ({
 export const bugActionClassName =
   "brutal-btn min-h-[44px] bg-pink px-4 font-mono text-sm";
 
+export const bugSecondaryActionClassName =
+  "brutal-btn min-h-[44px] bg-white px-4 font-mono text-sm";
+
 export default BugNotice;

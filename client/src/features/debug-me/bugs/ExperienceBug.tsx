@@ -11,7 +11,12 @@ import ExperienceEntry, {
 import { StaggerContainer, StaggerItem } from "@/components/motion/Reveal";
 import { useBug } from "../useDebugMe";
 import { useFinePointer } from "../useFinePointer";
-import BugNotice, { bugActionClassName } from "../components/BugNotice";
+import BugNotice, {
+  bugActionClassName,
+  bugSecondaryActionClassName,
+} from "../components/BugNotice";
+import CodeChallenge from "../challenges/CodeChallenge";
+import { EXPERIENCE_CHALLENGE } from "../challenges/jsChallenges";
 
 /**
  * Deterministic shuffle (odd positions first, then even ones). It never returns
@@ -43,6 +48,8 @@ type ExperienceBugProps = {
 /** Bug 3: the experience timeline ships shuffled; sort it by date. */
 const ExperienceBug = ({ items }: ExperienceBugProps) => {
   const t = useTranslations("debug.experience");
+  const tc = useTranslations("debug.challenge");
+  const [showCode, setShowCode] = useState(false);
   const locale = useLocale() as Locale;
   const { fixed, fix } = useBug("experience");
   const finePointer = useFinePointer();
@@ -64,6 +71,16 @@ const ExperienceBug = ({ items }: ExperienceBugProps) => {
     <BugNotice fixed={fixed} hint={t("hint")} fixedText={t("sorted")}>
       <button type="button" onClick={fix} className={bugActionClassName}>
         {t("sort")}
+      </button>
+      <button
+        type="button"
+        aria-expanded={showCode}
+        aria-controls="challenge-experience"
+        onClick={() => setShowCode((open) => !open)}
+        className={bugSecondaryActionClassName}
+      >
+        <span aria-hidden="true">{"</>"}</span>
+        {showCode ? tc("close") : tc("open")}
       </button>
     </BugNotice>
   );
@@ -93,6 +110,13 @@ const ExperienceBug = ({ items }: ExperienceBugProps) => {
   return (
     <>
       {notice}
+      {showCode && (
+        <CodeChallenge
+          challenge={EXPERIENCE_CHALLENGE}
+          fileName="sortTimeline.js"
+          onSolved={fix}
+        />
+      )}
       <Reorder.Group
         axis="y"
         values={order}

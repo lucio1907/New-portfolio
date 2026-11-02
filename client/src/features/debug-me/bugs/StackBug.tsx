@@ -3,7 +3,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useBug } from "../useDebugMe";
-import BugNotice, { bugActionClassName } from "../components/BugNotice";
+import BugNotice, {
+  bugActionClassName,
+  bugSecondaryActionClassName,
+} from "../components/BugNotice";
+import CodeChallenge from "../challenges/CodeChallenge";
+import { STACK_CHALLENGE } from "../challenges/jsChallenges";
 
 type Phase = "stuck" | "retrying" | "failed";
 
@@ -12,6 +17,8 @@ const RETRY_DELAY_MS = 800;
 /** Bug 2: the tech stack loader never finishes; the second retry works. */
 const StackBug = ({ children }: { children: React.ReactNode }) => {
   const t = useTranslations("debug.stack");
+  const tc = useTranslations("debug.challenge");
+  const [showCode, setShowCode] = useState(false);
   const { fixed, fix } = useBug("stack");
   const [phase, setPhase] = useState<Phase>("stuck");
   const attempts = useRef(0);
@@ -49,7 +56,25 @@ const StackBug = ({ children }: { children: React.ReactNode }) => {
         >
           {retrying ? t("retrying") : t("retry")}
         </button>
+        <button
+          type="button"
+          aria-expanded={showCode}
+          aria-controls="challenge-stack"
+          onClick={() => setShowCode((open) => !open)}
+          className={bugSecondaryActionClassName}
+        >
+          <span aria-hidden="true">{"</>"}</span>
+          {showCode ? tc("close") : tc("open")}
+        </button>
       </BugNotice>
+
+      {!fixed && showCode && (
+        <CodeChallenge
+          challenge={STACK_CHALLENGE}
+          fileName="loadStack.js"
+          onSolved={fix}
+        />
+      )}
 
       {!fixed && (
         <div className="mb-8 flex flex-col gap-3">
