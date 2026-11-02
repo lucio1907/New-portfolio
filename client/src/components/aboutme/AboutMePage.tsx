@@ -4,8 +4,15 @@ import Experiencies from "./Experiencies";
 import SectionHeader from "@/components/common/SectionHeader";
 import { FadeIn } from "@/components/motion/Reveal";
 
+type EducationEntry = {
+  title: string;
+  place: string;
+  period: string;
+};
+
 const AboutMePage = () => {
   const t = useTranslations("about");
+  const education = t.raw("education") as EducationEntry[];
 
   return (
     <section
@@ -24,6 +31,33 @@ const AboutMePage = () => {
             <p className="text-[17px] leading-[1.7] text-muted">
               {t("bio2")}
             </p>
+
+            <div className="mt-10 font-mono text-xs uppercase tracking-[0.12em] text-faint">
+              {t("educationLabel")}
+            </div>
+            <ul className="mt-4 flex flex-col gap-3">
+              {education.map((entry) => (
+                <li
+                  key={entry.title}
+                  className="flex flex-wrap items-baseline justify-between gap-3"
+                >
+                  <span className="text-[15px] text-foreground">
+                    {entry.title}{" "}
+                    <span className="font-mono text-[13px] text-dim">
+                      · {entry.place}
+                    </span>
+                  </span>
+                  <span className="font-mono text-xs text-faint">
+                    {entry.period}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 font-mono text-xs uppercase tracking-[0.12em] text-faint">
+              {t("languagesLabel")}
+            </div>
+            <p className="mt-3 text-[15px] text-muted">{t("languages")}</p>
           </div>
         </FadeIn>
 

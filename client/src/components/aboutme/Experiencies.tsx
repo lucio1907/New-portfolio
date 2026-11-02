@@ -12,6 +12,7 @@ type ExperienciesTypes = {
   position: Record<Locale, string>;
   workModality: string;
   timelapse: Record<Locale, string>;
+  highlights: Record<Locale, string[]>;
 };
 
 const Experiencies = () => {
@@ -56,6 +57,16 @@ const Experiencies = () => {
             <div className="mt-1 text-[13px] text-faint-2">
               {item.country} · {item.workModality}
             </div>
+            <ul className="mt-3 flex flex-col gap-1.5">
+              {item.highlights[locale].map((highlight) => (
+                <li
+                  key={highlight}
+                  className="relative pl-4 text-[14px] leading-[1.6] text-muted before:absolute before:left-0 before:text-faint before:content-['›']"
+                >
+                  {highlight}
+                </li>
+              ))}
+            </ul>
           </StaggerItem>
         );
       })}

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Lucio Gastellu",
-    "description": "Lucio Gastellu professional portfolio",
+    "description": "Lucio Gastellu — Desarrollador Full Stack (React, TypeScript, Node.js, Python, PostgreSQL). Flujo de trabajo AI-native.",
     "keywords": [
       "Professional",
       "Web",
@@ -25,25 +25,43 @@
   "hero": {
     "label": "// DESARROLLADOR FULL STACK",
     "greeting": "Hola 👋, soy",
-    "tagline": "Apasionado por crear aplicaciones y darles vida a través del código.",
+    "tagline": "Construyo y lanzo productos reales de extremo a extremo: React y TypeScript en el frontend, FastAPI y Node.js en el backend, PostgreSQL debajo.",
     "ctaContact": "Contáctame",
-    "ctaDownloadCV": "Descargar CV"
+    "ctaDownloadCV": "Descargar CV",
+    "availability": "Disponible para nuevos roles · Buenos Aires, Argentina"
   },
   "about": {
     "label": "Sobre mí",
-    "heading": "Construyo la lógica detrás de las cosas.",
-    "bio1": "¡Hola! Soy Lucio, Desarrollador Full Stack con base en el stack MERN/PERN. Construyo interfaces dinámicas con React y diseño servicios backend eficientes con Node.js, Express y Java/Spring Boot, siempre pensando en el funcionamiento integral de los sistemas.",
-    "bio2": "Escribo código limpio y escalable, buscando optimizar la experiencia del usuario y el rendimiento del servidor. Incorporo herramientas de IA como Claude Code a mi flujo de trabajo para acelerar el desarrollo, y estoy aquí para ayudarte con tu próximo proyecto.",
-    "experienceLabel": "Experiencia"
+    "heading": "AI-native, con ownership total del código.",
+    "bio1": "Soy Desarrollador Full Stack con experiencia construyendo y lanzando productos reales de extremo a extremo. Manejo React y TypeScript en el frontend, y me hago cargo de servicios en Python (FastAPI) y Node.js/Express en el backend, sobre PostgreSQL con diseño de schemas, optimización de queries y migraciones.",
+    "bio2": "La IA es una parte central de mi flujo diario: escribo prompts en inglés, uso MCP servers y skills, y desarrollo mis propios workflows agentic con herramientas como Claude Code, validando el output e integrando resultados sin perder ownership del código. Proactivo por default, con experiencia trabajando bajo Scrum.",
+    "experienceLabel": "Experiencia",
+    "educationLabel": "Educación",
+    "education": [
+      {
+        "title": "Analista en Sistemas",
+        "place": "UNSADA",
+        "period": "2025 - Presente"
+      },
+      {
+        "title": "Desarrollo Web Full Stack",
+        "place": "Coderhouse",
+        "period": "2022 - 2023"
+      }
+    ],
+    "languagesLabel": "Idiomas",
+    "languages": "Inglés B2 · Español (nativo)"
   },
   "techStack": {
     "label": "Tech Stack",
     "subtitle": "Tecnologías con las que estoy trabajando actualmente.",
     "categories": {
       "languages": "Lenguajes",
-      "backend": "Backend",
       "frontend": "Frontend",
-      "tools": "Datos & Tools"
+      "backend": "Backend",
+      "data": "Bases de datos",
+      "tools": "Herramientas y proceso",
+      "ai": "Workflow con IA"
     }
   },
   "projects": {

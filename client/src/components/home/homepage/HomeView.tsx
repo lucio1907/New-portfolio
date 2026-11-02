@@ -34,8 +34,15 @@ const HomeView = (): React.ReactElement => {
         </FadeIn>
 
         <FadeIn delay={0.16}>
-          <p className="mb-10 max-w-[440px] text-[19px] leading-[1.6] text-muted">
+          <p className="mb-5 max-w-[520px] text-[19px] leading-[1.6] text-muted">
             {t("tagline")}
+          </p>
+          <p className="mb-10 flex items-center gap-2.5 font-mono text-[13px] text-dim">
+            <span
+              aria-hidden="true"
+              className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(52,211,153,0.15)]"
+            />
+            {t("availability")}
           </p>
         </FadeIn>
 

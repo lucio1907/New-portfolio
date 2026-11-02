@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Lucio Gastellu",
-    "description": "Lucio Gastellu professional portfolio",
+    "description": "Lucio Gastellu — Full Stack Developer (React, TypeScript, Node.js, Python, PostgreSQL). AI-native workflow.",
     "keywords": [
       "Professional",
       "Web",
@@ -25,25 +25,43 @@
   "hero": {
     "label": "// FULL STACK DEVELOPER",
     "greeting": "Hi 👋, I'm",
-    "tagline": "Passionate about building applications and bringing them to life through code.",
+    "tagline": "I build and ship real products end to end: React and TypeScript on the frontend, FastAPI and Node.js on the backend, PostgreSQL underneath.",
     "ctaContact": "Get in touch",
-    "ctaDownloadCV": "Download CV"
+    "ctaDownloadCV": "Download CV",
+    "availability": "Available for new roles · Buenos Aires, Argentina"
   },
   "about": {
     "label": "About",
-    "heading": "I build the logic behind things.",
-    "bio1": "Hi! I'm Lucio, a Full Stack Developer grounded in the MERN/PERN stack. I build dynamic interfaces with React and design efficient backend services with Node.js, Express, and Java/Spring Boot, always thinking about how systems work as a whole.",
-    "bio2": "I write clean, scalable code, aiming to optimize both user experience and server performance. I bring AI tools like Claude Code into my workflow to speed up development, and I'm here to help with your next project.",
-    "experienceLabel": "Experience"
+    "heading": "AI-native, with full ownership of the code.",
+    "bio1": "I am a Full Stack Developer with experience building and launching real products end to end. I work with React and TypeScript on the frontend, and I own Python (FastAPI) and Node.js/Express services on the backend, on top of PostgreSQL with schema design, query optimization and migrations.",
+    "bio2": "AI is a core part of my daily workflow: I write prompts in English, use MCP servers and skills, and build my own agentic workflows with tools like Claude Code, validating the output and integrating results without losing ownership of the code. Proactive by default, used to working in Scrum teams.",
+    "experienceLabel": "Experience",
+    "educationLabel": "Education",
+    "education": [
+      {
+        "title": "Systems Analyst",
+        "place": "UNSADA",
+        "period": "2025 - Present"
+      },
+      {
+        "title": "Full Stack Web Development",
+        "place": "Coderhouse",
+        "period": "2022 - 2023"
+      }
+    ],
+    "languagesLabel": "Languages",
+    "languages": "English B2 · Spanish (native)"
   },
   "techStack": {
     "label": "Tech Stack",
     "subtitle": "Technologies I currently work with.",
     "categories": {
       "languages": "Languages",
-      "backend": "Backend",
       "frontend": "Frontend",
-      "tools": "Data & Tools"
+      "backend": "Backend",
+      "data": "Databases",
+      "tools": "Tools & Process",
+      "ai": "AI workflow"
     }
   },
   "projects": {

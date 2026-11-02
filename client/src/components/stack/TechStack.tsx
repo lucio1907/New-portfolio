@@ -25,7 +25,7 @@ const TechStack = (): React.ReactElement => {
         </p>
       </FadeIn>
 
-      <StaggerContainer className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+      <StaggerContainer className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {TechStackData.categories.map((category: Category) => (
           <StaggerItem
             key={category.id}
