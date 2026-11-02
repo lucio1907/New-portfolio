@@ -3,6 +3,8 @@ import { useTranslations } from "next-intl";
 import ProjectCards from "./ProjectCards";
 import SectionHeader from "@/components/common/SectionHeader";
 import { FadeIn } from "@/components/motion/Reveal";
+import ProjectsBug from "@/features/debug-me/bugs/ProjectsBug";
+import ProjectsData from "@/json/projects.json";
 
 const Projects = (): React.ReactElement => {
   const t = useTranslations("projects");
@@ -19,7 +21,9 @@ const Projects = (): React.ReactElement => {
         </p>
       </FadeIn>
 
-      <ProjectCards />
+      <ProjectsBug cardCount={ProjectsData.projects.length}>
+        <ProjectCards />
+      </ProjectsBug>
 
       <FadeIn>
         <p className="mt-10 text-center font-mono text-[13px] text-faint">
