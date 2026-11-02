@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import SectionHeader from "@/components/common/SectionHeader";
 import { FadeIn } from "@/components/motion/Reveal";
+import ContactBug from "@/features/debug-me/bugs/ContactBug";
 
 const contactRows = [
   { key: "phone", href: "tel:+543329402087", value: "+54 3329 402087" },
@@ -32,6 +33,8 @@ const ContactMe = (): React.ReactElement => {
     >
       <div className="mx-auto max-w-[1200px] px-5 pb-20 pt-[110px] md:px-10">
         <SectionHeader number="04" label={t("label")} className="mb-11" />
+
+        <ContactBug />
 
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
           <FadeIn>

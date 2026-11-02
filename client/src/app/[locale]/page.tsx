@@ -8,6 +8,7 @@ import TechStack from "@/components/stack/TechStack";
 import GridBackground from "@/components/motion/GridBackground";
 import { setRequestLocale } from "next-intl/server";
 import BugHud from "@/features/debug-me/components/BugHud";
+import Confetti from "@/features/debug-me/components/Confetti";
 
 const Home = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
@@ -28,6 +29,7 @@ const Home = async ({ params }: { params: Promise<{ locale: string }> }) => {
         <Footer />
       </div>
       <BugHud />
+      <Confetti />
     </div>
   );
 };

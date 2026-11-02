@@ -88,7 +88,12 @@ export const ProjectSlot = ({ index, children }: ProjectSlotProps) => {
       drag={canDrag}
       dragMomentum={false}
       onDragEnd={() => align(index)}
-      className={`flex [&>*]:w-full ${canDrag ? "cursor-grab active:cursor-grabbing" : ""}`}
+      // Images and links start a native HTML5 drag that cancels the pointer
+      // gesture and leaves framer-motion's drag lock stuck.
+      onDragStartCapture={(event: React.DragEvent) => {
+        if (canDrag) event.preventDefault();
+      }}
+      className={`flex [&>*]:w-full ${canDrag ? "cursor-grab select-none active:cursor-grabbing" : ""}`}
     >
       {children}
     </motion.div>

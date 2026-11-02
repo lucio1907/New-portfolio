@@ -131,7 +131,8 @@
       "error": "Error: missing env CONTACT_EMAIL",
       "setEnv": "Definir CONTACT_EMAIL",
       "running": "Deployando…",
-      "success": "✓ Deploy exitoso"
+      "success": "✓ Deploy exitoso",
+      "pending": "✓ CONTACT_EMAIL definido. Deploy bloqueado: {remaining, plural, one {queda # bug abierto} other {quedan # bugs abiertos}}."
     }
   }
 }

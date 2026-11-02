@@ -25,6 +25,7 @@ import {
 type Listener = () => void;
 
 const listeners = new Set<Listener>();
+const deployListeners = new Set<Listener>();
 let current: BugsState = initialBugsState;
 let loaded = false;
 
@@ -68,11 +69,24 @@ const getServerSnapshot = (): BugsState => initialBugsState;
 
 const dispatch = (action: BugsAction): void => {
   load();
-  const next = bugsReducer(current, action);
-  if (next === current) return;
+  const previous = current;
+  const next = bugsReducer(previous, action);
+  if (next === previous) return;
   current = next;
   writeStorage(current);
   listeners.forEach((listener) => listener());
+  if (!isDeployed(previous) && isDeployed(next)) {
+    deployListeners.forEach((listener) => listener());
+  }
+};
+
+/**
+ * Notifies when the visitor finishes fixing the site. Restored progress never
+ * triggers it, so a reload does not replay the celebration.
+ */
+export const subscribeDeploy = (listener: Listener): (() => void) => {
+  deployListeners.add(listener);
+  return () => deployListeners.delete(listener);
 };
 
 const fixAll = (): void => dispatch({ type: "fixAll" });

@@ -13,7 +13,7 @@ const BugHud = (): React.ReactElement => {
   return (
     <aside
       aria-label={t("region")}
-      className="glass fixed bottom-3 left-3 right-3 z-40 flex items-center gap-3 rounded-card border border-border px-4 py-3 shadow-terminal sm:left-auto sm:right-6 sm:bottom-6 sm:w-[360px]"
+      className="glass fixed bottom-3 left-3 right-3 z-40 flex items-center gap-3 rounded-card border border-border px-4 py-3 shadow-terminal sm:left-auto sm:right-6 sm:bottom-6 sm:w-[440px]"
     >
       <BugIcon
         className={`h-5 w-5 shrink-0 ${deployed ? "text-success" : "text-error"}`}
@@ -23,7 +23,7 @@ const BugHud = (): React.ReactElement => {
         <p
           role="status"
           aria-atomic="true"
-          className="truncate font-mono text-[12.5px] text-foreground"
+          className="font-mono text-[12.5px] leading-snug text-foreground"
         >
           {deployed ? `✓ ${t("deployed")}` : t("status", { fixed, total })}
         </p>
