@@ -166,7 +166,8 @@
       "hintLabel": "Need a hint?",
       "hints": {
         "stack": "Two bugs: one is about promises, the other one about counting.",
-        "experience": "Strings cannot be subtracted, and sort() changes the original array."
+        "experience": "Strings cannot be subtracted, and sort() changes the original array.",
+        "projects": "Think grid: columns and a gap. And something absolute has to go."
       },
       "tests": {
         "stack": {
@@ -182,6 +183,18 @@
       },
       "testPassed": "passed",
       "testFailed": "failed"
+    },
+    "css": {
+      "preview": "Live preview",
+      "ship": "Ship CSS",
+      "notYet": "Make every check pass to ship it.",
+      "checksLabel": "Checks",
+      "checks": {
+        "display": "display is grid",
+        "position": "no absolute positioning",
+        "gap": "cards have a gap",
+        "columns": "grid-template-columns is set"
+      }
     }
   }
 }

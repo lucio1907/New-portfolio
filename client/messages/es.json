@@ -166,7 +166,8 @@
       "hintLabel": "¿Necesitás una pista?",
       "hints": {
         "stack": "Hay dos bugs: uno tiene que ver con promesas, el otro con contar.",
-        "experience": "Los strings no se pueden restar, y sort() modifica el array original."
+        "experience": "Los strings no se pueden restar, y sort() modifica el array original.",
+        "projects": "Pensá en grid: columnas y un gap. Y hay algo absoluto que tiene que irse."
       },
       "tests": {
         "stack": {
@@ -182,6 +183,18 @@
       },
       "testPassed": "pasó",
       "testFailed": "falló"
+    },
+    "css": {
+      "preview": "Vista previa en vivo",
+      "ship": "Deployar CSS",
+      "notYet": "Hacé pasar todos los checks para deployar.",
+      "checksLabel": "Checks",
+      "checks": {
+        "display": "display es grid",
+        "position": "sin posicionamiento absoluto",
+        "gap": "las cards tienen separación (gap)",
+        "columns": "grid-template-columns está definido"
+      }
     }
   }
 }

@@ -5,7 +5,11 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useBug } from "../useDebugMe";
 import { useFinePointer } from "../useFinePointer";
-import BugNotice, { bugActionClassName } from "../components/BugNotice";
+import BugNotice, {
+  bugActionClassName,
+  bugSecondaryActionClassName,
+} from "../components/BugNotice";
+import CssChallenge from "../challenges/CssChallenge";
 
 // Deterministic offsets: random values would differ between server and client.
 const OFFSETS = [
@@ -35,6 +39,8 @@ type ProjectsBugProps = {
 /** Bug 4: project cards ship misaligned; drag each one home or apply grid. */
 const ProjectsBug = ({ cardCount, children }: ProjectsBugProps) => {
   const t = useTranslations("debug.projects");
+  const tc = useTranslations("debug.challenge");
+  const [showCode, setShowCode] = useState(false);
   const { fixed, fix } = useBug("projects");
   const finePointer = useFinePointer();
   const [aligned, setAligned] = useState<ReadonlySet<number>>(new Set());
@@ -58,7 +64,18 @@ const ProjectsBug = ({ cardCount, children }: ProjectsBugProps) => {
         <button type="button" onClick={fix} className={bugActionClassName}>
           {t("apply")}
         </button>
+        <button
+          type="button"
+          aria-expanded={showCode}
+          aria-controls="challenge-projects"
+          onClick={() => setShowCode((open) => !open)}
+          className={bugSecondaryActionClassName}
+        >
+          <span aria-hidden="true">{"</>"}</span>
+          {showCode ? tc("close") : tc("open")}
+        </button>
       </BugNotice>
+      {!fixed && showCode && <CssChallenge onSolved={fix} />}
       <ProjectsBugContext.Provider value={value}>
         {children}
       </ProjectsBugContext.Provider>
