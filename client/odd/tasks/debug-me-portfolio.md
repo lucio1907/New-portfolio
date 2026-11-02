@@ -15,13 +15,14 @@ Branch: feat/debug-me · Delivery: ask-on-risk · Test runner: none (exception: 
 ## Tasks
 | ID | Specs | Route | Status | Commit |
 |---|---|---|---|---|
-| T1 Content sync with CV | S2, S8 | inline | pending | |
-| T2 Engine: reducer, provider, HUD, recruiter button, broken banner | S3–S6, S8 | inline | pending | |
-| T3 Bugs 1–2 (photo, skills loader) | S3, S6, S7 | inline | pending | |
-| T4 Bugs 3–4 (timeline, projects layout) | S3, S6, S7 | inline | pending | |
-| T5 Bug 5 (deploy terminal) + success + confetti | S3, S4, S7 | inline | pending | |
+| T1 Content sync with CV | S2, S8 | inline | done | e4654ad |
+| T2 Engine: reducer, store, HUD, recruiter button, broken banner | S3–S6, S8 | inline | done | 50e304e |
+| T3 Bugs 1–2 (photo, skills loader) | S3, S6, S7 | inline | done | 8ce098b |
+| T4 Bugs 3–4 (timeline, projects layout) | S3, S6, S7 | inline | done (real-mouse drag pending manual check) | cf6784d, eb0513c |
+| T5 Bug 5 (deploy terminal) + success + confetti | S3, S4, S7 | inline | done | eb0513c |
 | T6 Logo, visual polish, a11y/perf pass | S6–S8 | inline | pending | |
 
 ## Log
 - L1 (2026-11-02): "/home/luciogastellu/Downloads/CV-LucioGastellu-FullStackAI.pdf mi CV lo podes analizar en esa ruta y baja a detalle "debug me""
 - L2 (2026-11-02): "retomá el portfolio Debug me desde engram". CV vs JSON conflict (current role, Nexus title/dates, Toyota title) → user chose "CV es la verdad". Plan approved.
+- L3 (2026-11-02): Verified in Chrome (dev, 1862px): hero info visible with zero interaction; all 5 bugs fixed via buttons only (keyboard path); HUD counts 0→5, recruiter fix-all and reset work; progress persists across reload; /es and /en copy OK. Drag: multi-step pointer events align a card; CDP left_click_drag did not, so real-mouse drag needs a manual check. Found and fixed: native img/link dragstart cancelled the gesture. Not verified: 375px mobile (window resize had no effect), reduced-motion emulation. Only hydration warning came from a browser extension attribute (cz-shortcut-listen). Next: T6.
