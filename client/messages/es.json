@@ -144,11 +144,7 @@
       "applied": "Layout arreglado."
     },
     "contact": {
-      "hint": "// el pipeline de deploy está fallando.",
-      "command": "npm run deploy",
-      "error": "Error: missing env CONTACT_EMAIL",
       "setEnv": "Definir CONTACT_EMAIL",
-      "running": "Deployando…",
       "success": "✓ Deploy exitoso",
       "pending": "✓ CONTACT_EMAIL definido. Deploy bloqueado: {remaining, plural, one {queda # bug abierto} other {quedan # bugs abiertos}}."
     },
@@ -194,6 +190,27 @@
         "position": "sin posicionamiento absoluto",
         "gap": "las cards tienen separación (gap)",
         "columns": "grid-template-columns está definido"
+      }
+    },
+    "terminal": {
+      "label": "Comando de terminal",
+      "placeholder": "escribí help",
+      "run": "Ejecutar",
+      "out": {
+        "intro": "// el pipeline de deploy está fallando. Escribí help, o usá el botón de abajo.",
+        "help": "Comandos: help, ls, whoami, export NOMBRE=valor, echo $NOMBRE, npm run deploy, clear, hire lucio",
+        "whoami": "visitante. Probablemente recruiter, quizás developer. Bienvenidos los dos.",
+        "hire": "Excelente elección. El email y el teléfono están justo abajo.",
+        "sudo": "Buen intento. Este incidente será reportado.",
+        "rm": "En mi portfolio no.",
+        "exportUsage": "uso: export NOMBRE=valor",
+        "invalidEmail": "\"{value}\" no es un email válido",
+        "exported": "{name} definido",
+        "npmUsage": "acá solo está disponible npm run deploy",
+        "missingEnv": "Error: missing env CONTACT_EMAIL",
+        "building": "compilando… listo",
+        "deploySuccess": "✓ Deploy exitoso",
+        "notFound": "comando no encontrado: {command}"
       }
     }
   }
