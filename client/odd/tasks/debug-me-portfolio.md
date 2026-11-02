@@ -12,6 +12,11 @@ Branch: feat/debug-me · Delivery: ask-on-risk · Test runner: none (exception: 
 - S7. Drag & drop is keyboard accessible; fast on mobile; respects prefers-reduced-motion.
 - S8. UI copy in EN and ES (next-intl); code/UI artifacts in English by default.
 - S9. Full visual redesign: "me gusta la idea pero no me gusta el diseño, quiero que lo rediseñes completamente, quiero que se vea divertido". Direction chosen: "Neo-brutalismo juguetón" (light background, thick black borders, hard offset shadows, saturated yellow/pink/blue, sticker-style badges). Game mechanics and content stay.
+- S10. "ya que aparece esa funcion para el recruiter, me gustaria que se pueda resolver algunos bugs con un codigo que no sea ni muy basico ni muy avanzado o que se puedan resolver de otra manera de ademas de tocar los botones". Buttons and the recruiter fix-all stay.
+- S11. Stack: intermediate JS challenge (async retry: missing await + off-by-one) checked by tests. Experience: JS sort challenge (newest first, string dates, no mutation) checked by tests.
+- S12. Visitor code runs only inside a terminable Web Worker with a timeout; never on the main thread, never touching the DOM.
+- S13. Projects: CSS editor with live preview; fixed when the rules pass (display grid, no absolute positioning, gap, columns).
+- S14. Contact: interactive terminal (`export CONTACT_EMAIL=...`, `npm run deploy`, `help`, extras). Every bug can also be fixed from the DevTools console (`debugMe.help()`).
 
 ## Tasks
 | ID | Specs | Route | Status | Commit |
@@ -22,6 +27,10 @@ Branch: feat/debug-me · Delivery: ask-on-risk · Test runner: none (exception: 
 | T4 Bugs 3–4 (timeline, projects layout) | S3, S6, S7 | inline | done (real-mouse drag pending manual check) | cf6784d, eb0513c |
 | T5 Bug 5 (deploy terminal) + success + confetti | S3, S4, S7 | inline | done | eb0513c |
 | T6 Neo-brutalist redesign of every section + HUD/bugs, logo, a11y/perf pass | S6–S9 | inline | redesign done; reduced-motion + real-mouse drag + Lighthouse pending | 57962a5 |
+| T7 Sandbox harness + challenge definitions + worker runner + `npm test` (node:test) | S11, S12 | inline | in progress | |
+| T8 Code challenge UI wired to Stack and Experience | S10, S11 | inline | pending | |
+| T9 CSS challenge with live preview for Projects | S10, S13 | inline | pending | |
+| T10 Interactive terminal for Contact + DevTools console API | S10, S14 | inline | pending | |
 
 ## Log
 - L1 (2026-11-02): "/home/luciogastellu/Downloads/CV-LucioGastellu-FullStackAI.pdf mi CV lo podes analizar en esa ruta y baja a detalle "debug me""
@@ -29,3 +38,4 @@ Branch: feat/debug-me · Delivery: ask-on-risk · Test runner: none (exception: 
 - L3 (2026-11-02): Verified in Chrome (dev, 1862px): hero info visible with zero interaction; all 5 bugs fixed via buttons only (keyboard path); HUD counts 0→5, recruiter fix-all and reset work; progress persists across reload; /es and /en copy OK. Drag: multi-step pointer events align a card; CDP left_click_drag did not, so real-mouse drag needs a manual check. Found and fixed: native img/link dragstart cancelled the gesture. Not verified: 375px mobile (window resize had no effect), reduced-motion emulation. Only hydration warning came from a browser extension attribute (cz-shortcut-listen). Next: T6.
 - L4 (2026-11-02): "me gusta la idea pero no me gusta el diseño, quiero que lo rediseñes completamente, quiero que se vea divertido" → chose "Neo-brutalismo juguetón". Added S9; T6 reopened as full redesign.
 - L5 (2026-11-02): Redesign shipped (57962a5): cream dotted bg, 3px ink borders, hard shadows, yellow/pink/blue/green/lilac, hero dev-pass card + stickers + tech marquee, card sections, sticker logo "LG". Verified in Chrome: all sections render, recruiter fix-all → deployed state + confetti, no horizontal scroll at 375px (iframe check), mobile HUD fits. Found and fixed: framer-motion inline transform overrides Tailwind rotate on motion elements; projects clip cut shifted cards; per-document store diverged across tabs → storage-event sync (verified on production build with 3 documents). `next build` fails while `next dev` shares .next (Turbopack font error); build passes alone.
+- L6 (2026-11-02): "ya que aparece esa funcion para el recruiter, me gustaria que se pueda resolver algunos bugs con un codigo que no sea ni muy basico ni muy avanzado o que se puedan resolver de otra manera de ademas de tocar los botones, agrega esta idea a engram para guardar en donde nos quedamos y arranca la ejecucion". Saved to Engram (portfolio/debug-me-code-challenges). Node 22.23 runs TS tests natively → `node --test`, no new deps. Risk: item 2 (sandbox for visitor code) → independent verifier at the end.
