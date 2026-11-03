@@ -16,38 +16,44 @@
       "Databases"
     ]
   },
-  "site": {
-    "skip": "Skip to content",
-    "nav": {
-      "label": "Sections",
+  "os": {
+    "desktopLabel": "LucioOS desktop",
+    "iconsLabel": "Apps",
+    "apps": {
       "about": "About",
       "experience": "Experience",
-      "stack": "Stack",
       "projects": "Projects",
-      "contact": "Contact"
+      "stack": "Stack",
+      "contact": "Contact",
+      "terminal": "Terminal",
+      "cv": "CV.pdf"
     },
-    "header": {
-      "cv": "CV",
-      "cvLabel": "Download CV (PDF)",
-      "home": "Lucio Gastellu, home"
+    "window": {
+      "close": "Close {title}",
+      "minimize": "Minimize {title}",
+      "back": "Back to the desktop"
     },
-    "hero": {
+    "taskbar": {
+      "label": "Taskbar",
+      "openWindows": "Open windows",
+      "standUp": "Stand up",
+      "clock": "Time in Buenos Aires: {time}"
+    },
+    "intro": {
+      "greeting": "Hi, I'm",
       "role": "Full Stack Developer",
-      "intro": "I build web products end to end: React and TypeScript on the frontend, Node.js and Python on the backend, PostgreSQL underneath. I use AI every day without losing control of the code.",
-      "available": "Available for new roles",
-      "location": "Buenos Aires, Argentina. Remote or hybrid.",
-      "email": "Email me",
+      "tagline": "I build web products end to end and work with AI every day. Take a seat at my computer and see what I do.",
+      "available": "Available for new roles.",
+      "location": "Buenos Aires, remote or hybrid.",
+      "sit": "Sit at the computer",
       "cv": "Download CV",
-      "projects": "See projects"
+      "direct": "Go straight to the desktop"
+    }
+  },
+  "site": {
+    "hero": {
+      "cv": "Download CV"
     },
-    "sections": {
-      "about": "About",
-      "experience": "Experience",
-      "stack": "Stack",
-      "projects": "Projects",
-      "contact": "Let's talk"
-    },
-    "coordinateLabel": "This section's coordinates on the planet",
     "experience": {
       "intro": "From IT support to full stack development."
     },
@@ -66,9 +72,6 @@
       "copy": "Copy email",
       "copied": "Email copied",
       "phone": "Phone"
-    },
-    "footer": {
-      "built": "Built with Next.js and Three.js."
     }
   },
   "about": {
@@ -105,9 +108,6 @@
       "ai": "AI workflow"
     }
   },
-  "projects": {
-    "label": "Projects"
-  },
   "contact": {
     "rows": {
       "phone": "Phone",
@@ -115,8 +115,5 @@
       "linkedin": "LinkedIn",
       "twitter": "Twitter / X"
     }
-  },
-  "footer": {
-    "note": "© 2026 · Designed & built with code."
   }
 }

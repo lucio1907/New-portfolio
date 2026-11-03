@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslations } from "next-intl";
-import Section from "./Section";
 import CopyEmail from "./CopyEmail";
 import { CV_HREF, EMAIL, PHONE, SOCIAL_LINKS } from "../lib/constants";
 
@@ -11,7 +10,8 @@ const Contact = () => {
   const tr = useTranslations("contact.rows");
 
   return (
-    <Section id="contact" title={t("sections.contact")} intro={t("contact.intro")}>
+    <div>
+      <p className="mb-6 text-haze">{t("contact.intro")}</p>
       <a
         href={`mailto:${EMAIL}`}
         className="font-display text-[clamp(1.2rem,2.5vw,1.9rem)] font-medium text-sun underline decoration-sun/30 underline-offset-[6px] transition-colors hover:decoration-sun"
@@ -41,7 +41,7 @@ const Contact = () => {
           </li>
         ))}
       </ul>
-    </Section>
+    </div>
   );
 };
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import TechStackData from "@/json/techStack.json";
-import Section from "./Section";
 
 /** Stack grouped by category as a plain definition list. */
 const Stack = () => {
@@ -9,7 +8,8 @@ const Stack = () => {
   const tc = useTranslations("techStack.categories");
 
   return (
-    <Section id="stack" title={t("sections.stack")} intro={t("stack.intro")}>
+    <div>
+      <p className="mb-6 text-haze">{t("stack.intro")}</p>
       <dl className="grid max-w-prose gap-x-8 gap-y-6 sm:grid-cols-2">
         {TechStackData.categories.map((category) => (
           <div key={category.key}>
@@ -26,7 +26,7 @@ const Stack = () => {
           </div>
         ))}
       </dl>
-    </Section>
+    </div>
   );
 };
 

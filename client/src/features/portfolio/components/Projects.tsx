@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import ProjectsData from "@/json/projects.json";
-import Section from "./Section";
 import { type Locale, type Project, projectTags, slugify } from "../lib/content";
 
 const projects = ProjectsData.projects as Project[];
@@ -13,7 +12,8 @@ const Projects = () => {
   const locale = useLocale() as Locale;
 
   return (
-    <Section id="projects" title={t("sections.projects")} intro={t("projects.intro")}>
+    <div>
+      <p className="mb-6 text-haze">{t("projects.intro")}</p>
       <ul className="max-w-[40rem] divide-y divide-orbit/70 border-y border-orbit/70">
         {projects.map((project) => {
           const slug = slugify(project.projectName);
@@ -59,7 +59,7 @@ const Projects = () => {
         })}
       </ul>
       <p className="mt-6 text-sm text-haze">{t("projects.more")}</p>
-    </Section>
+    </div>
   );
 };
 

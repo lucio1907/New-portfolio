@@ -1,7 +1,6 @@
 import React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import WorkExperiences from "@/json/experiencies.json";
-import Section from "./Section";
 import { type Experience as ExperienceItem, type Locale, sortByNewest } from "../lib/content";
 
 const experiences = sortByNewest(WorkExperiences.experiencies as ExperienceItem[]);
@@ -12,7 +11,8 @@ const Experience = () => {
   const locale = useLocale() as Locale;
 
   return (
-    <Section id="experience" title={t("sections.experience")} intro={t("experience.intro")}>
+    <div>
+      <p className="mb-6 text-haze">{t("experience.intro")}</p>
       <ol className="relative max-w-prose border-l border-orbit">
         {experiences.map((item, index) => (
           <li key={item.id} className="relative pb-10 pl-7 last:pb-0">
@@ -38,7 +38,7 @@ const Experience = () => {
           </li>
         ))}
       </ol>
-    </Section>
+    </div>
   );
 };
 

@@ -16,38 +16,44 @@
       "Databases"
     ]
   },
-  "site": {
-    "skip": "Saltar al contenido",
-    "nav": {
-      "label": "Secciones",
+  "os": {
+    "desktopLabel": "Escritorio de LucioOS",
+    "iconsLabel": "Aplicaciones",
+    "apps": {
       "about": "Sobre mí",
       "experience": "Experiencia",
-      "stack": "Stack",
       "projects": "Proyectos",
-      "contact": "Contacto"
+      "stack": "Stack",
+      "contact": "Contacto",
+      "terminal": "Terminal",
+      "cv": "CV.pdf"
     },
-    "header": {
-      "cv": "CV",
-      "cvLabel": "Descargar CV (PDF)",
-      "home": "Lucio Gastellu, inicio"
+    "window": {
+      "close": "Cerrar {title}",
+      "minimize": "Minimizar {title}",
+      "back": "Volver al escritorio"
     },
-    "hero": {
+    "taskbar": {
+      "label": "Barra de tareas",
+      "openWindows": "Ventanas abiertas",
+      "standUp": "Levantarse",
+      "clock": "Hora en Buenos Aires: {time}"
+    },
+    "intro": {
+      "greeting": "Hola, soy",
       "role": "Desarrollador Full Stack",
-      "intro": "Construyo productos web de punta a punta: React y TypeScript en el frontend, Node.js y Python en el backend, PostgreSQL debajo. Uso IA todos los días sin perder el control del código.",
-      "available": "Disponible para nuevos roles",
-      "location": "Buenos Aires, Argentina. Remoto o híbrido.",
-      "email": "Escribime",
+      "tagline": "Construyo productos web de punta a punta y trabajo con IA todos los días. Sentate en mi compu y mirá lo que hago.",
+      "available": "Disponible para nuevos roles.",
+      "location": "Buenos Aires, remoto o híbrido.",
+      "sit": "Sentarse a la compu",
       "cv": "Descargar CV",
-      "projects": "Ver proyectos"
+      "direct": "Ir directo al escritorio"
+    }
+  },
+  "site": {
+    "hero": {
+      "cv": "Descargar CV"
     },
-    "sections": {
-      "about": "Sobre mí",
-      "experience": "Experiencia",
-      "stack": "Stack",
-      "projects": "Proyectos",
-      "contact": "Hablemos"
-    },
-    "coordinateLabel": "Coordenadas de esta sección en el planeta",
     "experience": {
       "intro": "Del soporte técnico al desarrollo full stack."
     },
@@ -66,9 +72,6 @@
       "copy": "Copiar email",
       "copied": "Email copiado",
       "phone": "Teléfono"
-    },
-    "footer": {
-      "built": "Hecho con Next.js y Three.js."
     }
   },
   "about": {
@@ -105,9 +108,6 @@
       "ai": "Workflow con IA"
     }
   },
-  "projects": {
-    "label": "Proyectos"
-  },
   "contact": {
     "rows": {
       "phone": "Teléfono",
@@ -115,8 +115,5 @@
       "linkedin": "LinkedIn",
       "twitter": "Twitter / X"
     }
-  },
-  "footer": {
-    "note": "© 2026 · Diseñado & desarrollado por Lucio Gastellu."
   }
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslations } from "next-intl";
-import Section from "./Section";
 
 type EducationEntry = { title: string; place: string; period: string };
 
@@ -10,7 +9,7 @@ const About = () => {
   const education = ta.raw("education") as EducationEntry[];
 
   return (
-    <Section id="about" title={t("sections.about")}>
+    <div>
       <div className="max-w-prose space-y-4">
         <p className="text-[19px] font-medium leading-snug">{ta("heading")}</p>
         <p className="text-haze">{ta("bio1")}</p>
@@ -36,7 +35,7 @@ const About = () => {
           <p className="text-haze">{ta("languages")}</p>
         </div>
       </div>
-    </Section>
+    </div>
   );
 };
 

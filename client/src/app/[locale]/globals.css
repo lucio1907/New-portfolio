@@ -2,16 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* The site is a fixed app: the page never scrolls, windows scroll inside. */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
 html {
   color-scheme: dark;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  /* Sticky header height, so anchored sections are not hidden under it. */
-  scroll-padding-top: 5rem;
 }
 
 body {
-  overflow-x: hidden;
   @apply bg-night font-sans text-[17px] leading-[1.6] text-parchment antialiased;
 }
 
@@ -41,11 +44,63 @@ body {
     @apply text-sky underline decoration-sky/40 underline-offset-4 transition-colors hover:decoration-sky;
   }
 
-  /* Landmark coordinates shown next to each section heading. */
-  .coordinate {
-    @apply text-sm text-haze;
-    font-variant-numeric: tabular-nums;
+}
+
+/* ── LucioOS ─────────────────────────────────────────────────────────── */
+@layer components {
+  .os-intro {
+    @apply absolute bottom-6 left-4 right-4 z-10 max-w-md rounded-3xl border border-orbit/70 bg-night/85 p-6 shadow-2xl shadow-black/40 backdrop-blur-md transition-opacity duration-300 md:bottom-auto md:left-12 md:top-1/2 md:-translate-y-1/2 md:p-8;
   }
+  .os-intro[data-open="false"] {
+    @apply pointer-events-none opacity-0;
+  }
+
+  .os-desktop {
+    @apply absolute inset-0 z-20 flex flex-col bg-[radial-gradient(1px_1px_at_14%_22%,#EEE8DA_99%,transparent),radial-gradient(1px_1px_at_68%_14%,#EEE8DA_99%,transparent),radial-gradient(1.5px_1.5px_at_84%_58%,#EEE8DA_99%,transparent),radial-gradient(1px_1px_at_34%_76%,#A9AECC_99%,transparent),radial-gradient(1px_1px_at_52%_40%,#A9AECC_99%,transparent),radial-gradient(1200px_700px_at_70%_-10%,#24306E_0%,transparent_60%),linear-gradient(180deg,#121A48_0%,#0F1640_100%)];
+  }
+  .os-desktop[data-open="false"] {
+    display: none;
+  }
+
+  .os-icons {
+    @apply grid flex-1 grid-cols-3 content-center justify-items-center gap-x-2 gap-y-5 p-6 pb-24 sm:grid-cols-4 md:flex md:flex-col md:flex-wrap md:content-start md:items-start md:gap-1 md:p-4;
+  }
+
+  .os-window {
+    @apply fixed inset-x-0 bottom-14 top-0 z-30 flex flex-col overflow-hidden bg-night outline-none md:absolute md:inset-auto md:left-[var(--x)] md:top-[var(--y)] md:h-[min(78vh,760px)] md:w-[min(760px,calc(100vw-180px))] md:rounded-2xl md:border md:border-orbit md:bg-night/95 md:shadow-2xl md:shadow-black/50 md:backdrop-blur-xl;
+  }
+  .os-window[data-open="false"] {
+    display: none;
+  }
+  .os-window[data-focused="true"] {
+    @apply md:border-haze/60;
+  }
+
+  .os-titlebar {
+    @apply flex h-14 shrink-0 select-none items-center gap-3 border-b border-orbit/70 px-3 md:h-11 md:cursor-grab md:px-4 md:active:cursor-grabbing;
+  }
+  .os-back {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-parchment hover:bg-white/10 md:hidden;
+  }
+  .os-control {
+    @apply h-7 w-7 items-center justify-center rounded-md text-haze transition-colors hover:bg-white/10 hover:text-parchment;
+  }
+  .os-window-body {
+    @apply min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-6 md:px-8;
+  }
+
+  .os-taskbar {
+    @apply absolute inset-x-0 bottom-0 z-[60] flex h-14 items-center gap-3 border-t border-orbit/70 bg-night/90 px-3 backdrop-blur-xl md:px-4;
+  }
+}
+
+/* No JavaScript yet (or ever): CSS :target opens the desktop and windows. */
+html:not([data-hydrated]) .os-desktop:has(:target),
+html:not([data-hydrated]) .os-desktop:target {
+  display: flex;
+}
+html:not([data-hydrated]) .os-window:target {
+  display: flex;
 }
 
 *:focus-visible {
@@ -59,10 +114,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   *,
   *::before,
   *::after {
