@@ -2,16 +2,17 @@
 export type Tier = "high" | "medium" | "low";
 
 export type QualitySettings = {
-  planetDetail: number;
-  oceanDetail: number;
+  /** Radial segments for cylinders, lathes and cones. */
+  curveSegments: number;
+  /** Stars visible through the window. */
   stars: number;
   maxDpr: number;
 };
 
 export const QUALITY: Record<Tier, QualitySettings> = {
-  high: { planetDetail: 30, oceanDetail: 14, stars: 1500, maxDpr: 1.5 },
-  medium: { planetDetail: 20, oceanDetail: 10, stars: 900, maxDpr: 1.25 },
-  low: { planetDetail: 14, oceanDetail: 7, stars: 500, maxDpr: 1.25 },
+  high: { curveSegments: 16, stars: 600, maxDpr: 1.5 },
+  medium: { curveSegments: 12, stars: 400, maxDpr: 1.25 },
+  low: { curveSegments: 8, stars: 220, maxDpr: 1.25 },
 };
 
 export const initialTier = ({ mobile, cores }: { mobile: boolean; cores: number }): Tier => {

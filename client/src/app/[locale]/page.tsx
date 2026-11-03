@@ -7,7 +7,6 @@ import Stack from "@/features/portfolio/components/Stack";
 import Projects from "@/features/portfolio/components/Projects";
 import Contact from "@/features/portfolio/components/Contact";
 import Footer from "@/features/portfolio/components/Footer";
-import PlanetStage from "@/features/planet/components/PlanetStage";
 
 const Home = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
@@ -25,7 +24,6 @@ const Home = async ({ params }: { params: Promise<{ locale: string }> }) => {
           <Projects />
           <Contact />
         </main>
-        <PlanetStage />
       </div>
       <Footer />
     </>
