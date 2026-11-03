@@ -8,6 +8,7 @@ import {
 } from "three";
 import { type Tuple3, box, merge, shape, tag } from "./geometry.ts";
 import { createRandom } from "./random.ts";
+import { DECOR, HOTSPOT_IDS, type HotspotName } from "./hotspotMap.ts";
 import type { QualitySettings } from "./quality.ts";
 
 /**
@@ -15,19 +16,8 @@ import type { QualitySettings } from "./quality.ts";
  * is y = 0, the back wall is at z ≈ -1.25 and the camera looks in from +z.
  */
 
-/** Interactive objects. Ids live in the `objectId` vertex attribute. */
-export const HOTSPOT_IDS = {
-  monitor: 0,
-  mate: 1,
-  books: 2,
-  notes: 3,
-  boxes: 4,
-  phone: 5,
-  chair: 6,
-} as const;
-export type HotspotName = keyof typeof HOTSPOT_IDS;
-/** Everything that is not interactive. */
-export const DECOR = -1;
+/** Interactive objects (ids live in the `objectId` vertex attribute). */
+export { DECOR, HOTSPOT_IDS, type HotspotName };
 
 /** Outer limits of the room (with a little slack for float32 rounding). */
 export const ROOM_BOUNDS = { min: [-2.06, -0.06, -1.32] as Tuple3, max: [2.06, 2.62, 1.63] as Tuple3 };
@@ -236,9 +226,10 @@ export const buildSkylineGeometry = (seed: number): BufferGeometry => {
       }
     }
   }
-  // The Obelisco: a tall, slightly tapered shaft with a pyramid tip.
-  parts.push(shape(new CylinderGeometry(0.07, 0.1, 2.2, 4), "#D9D3C3", [1.36, 1.3, z + 0.4], [0, Math.PI / 4, 0]));
-  parts.push(shape(new ConeGeometry(0.07, 0.16, 4), "#D9D3C3", [1.36, 2.48, z + 0.4], [0, Math.PI / 4, 0]));
+  // The Obelisco: a tall, slightly tapered shaft with a pyramid tip, placed
+  // where the camera sees through the window.
+  parts.push(shape(new CylinderGeometry(0.06, 0.09, 1.6, 4), "#D9D3C3", [-0.12, 1.0, z + 0.4], [0, Math.PI / 4, 0]));
+  parts.push(shape(new ConeGeometry(0.06, 0.14, 4), "#D9D3C3", [-0.12, 1.87, z + 0.4], [0, Math.PI / 4, 0]));
   const merged = merge(parts);
   merged.computeVertexNormals();
   return merged;

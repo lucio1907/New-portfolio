@@ -1,19 +1,7 @@
 import { Box3, type BufferGeometry, type Ray, Vector3 } from "three";
-import type { AppId } from "../../os/lib/apps.ts";
-import { HOTSPOT_IDS, type HotspotName } from "./furniture.ts";
+import { HOTSPOTS, hotspotById } from "./hotspotMap.ts";
 
-/** What each object in the room opens (`null` = just sit at the desktop). */
-export const HOTSPOTS: ReadonlyArray<{ name: HotspotName; id: number; app: AppId | null }> = [
-  { name: "monitor", id: HOTSPOT_IDS.monitor, app: null },
-  { name: "chair", id: HOTSPOT_IDS.chair, app: null },
-  { name: "mate", id: HOTSPOT_IDS.mate, app: "about" },
-  { name: "books", id: HOTSPOT_IDS.books, app: "experience" },
-  { name: "notes", id: HOTSPOT_IDS.notes, app: "stack" },
-  { name: "boxes", id: HOTSPOT_IDS.boxes, app: "projects" },
-  { name: "phone", id: HOTSPOT_IDS.phone, app: "contact" },
-];
-
-export const hotspotById = (id: number) => HOTSPOTS.find((hotspot) => hotspot.id === id) ?? null;
+export { HOTSPOTS, hotspotById };
 
 /** Small objects get a margin so they are easy to hit, also with a finger. */
 const PADDING = 0.04;

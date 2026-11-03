@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Lucio Gastellu — portfolio
 
-## Getting Started
+A portfolio you sit down at. Visitors land in a small 3D desk room at night, built entirely in code with Three.js. Clicking an object opens a section; sitting at the computer opens **LucioOS**, a desktop where every section is a window. Recruiters get plain, fast HTML; developers get a terminal and live render stats.
 
-First, run the development server:
+## Quick path
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000/es (or /en)
+npm test           # pure logic: windows, terminal, geometry, picking, camera
+npx tsc --noEmit && npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Try it: click the mate, the books or the phone; or press <kbd>`</kbd> for render stats; or open the Terminal and type `help`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How it works
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+| Layer | What it does | Where |
+|-------|--------------|-------|
+| Content | Server-rendered sections (about, experience, projects, stack, contact) from `src/json` and `messages/` | `src/features/portfolio` |
+| LucioOS | No-scroll desktop: icons, draggable windows (sheets on phones), taskbar, deep links (`/es#projects`), terminal | `src/features/os` |
+| Room | Procedural low-poly desk room, hotspots, sit/stand camera flight, stats probe | `src/features/room` |
+| Experience | Tiny shared store: room → sitting → desktop, open windows, stats toggle | `src/features/experience` |
 
-## Learn More
+Pure logic lives in `lib/` folders with `node:test` tests; components stay thin.
 
-To learn more about Next.js, take a look at the following resources:
+## Performance
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Budget | Measured |
+|--------|----------|
+| three.js out of the initial load | lazy chunk after `requestIdleCallback`, ~240 KB gzip |
+| ≤ 10 draw calls | 5 (whole room merged into one geometry) |
+| ≤ 60k triangles | ~2.2k |
+| No idle rendering | `frameloop="demand"`, 0 fps at rest, frozen while LucioOS covers the room |
+| 0 downloaded models or textures | everything is geometry and shaders built in code |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Picking narrows down with each object's box and confirms on its triangles (no scene-wide raycasts). Hover glow is a shader uniform, not an extra mesh.
 
-## Deploy on Vercel
+## Accessibility and fallbacks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- No WebGL, reduced motion or data saving → LucioOS opens directly.
+- Every room object has a keyboard twin (Tab, Enter); windows close with Esc; focus moves into the window in front.
+- Without JavaScript, `#about`, `#projects`… still open their window through CSS `:target`.
+- English and Spanish via `next-intl`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Checklist before shipping
+
+- [ ] `npm test`, `npx tsc --noEmit`, `npm run lint` pass
+- [ ] `npx next build` keeps three.js out of the initial scripts
+- [ ] Room, LucioOS and terminal checked on a real phone and desktop

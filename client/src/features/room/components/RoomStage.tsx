@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { useRender3DStatus } from "../hooks/useCanRender3D";
-import { HOTSPOTS, hotspotById } from "../lib/hotspots";
+import { HOTSPOTS, hotspotById } from "../lib/hotspotMap";
 import { dispatchDesktop, dispatchExperience, getSnapshot, setRoomReady, useExperience, useStatsVisible } from "@/features/experience/store";
 import StatsOverlay, { type RenderStats } from "./StatsOverlay";
 import type { AppId } from "@/features/os/lib/apps";
