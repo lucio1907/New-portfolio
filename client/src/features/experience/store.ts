@@ -60,3 +60,17 @@ const subscribe = (listener: () => void) => {
 
 export const useExperience = (): Snapshot =>
   useSyncExternalStore(subscribe, getSnapshot, () => SERVER_SNAPSHOT);
+
+/** Developer overlay with live rendering stats (toggled with ` or `stats`). */
+let statsVisible = false;
+const statsListeners = new Set<() => void>();
+export const toggleStats = () => {
+  statsVisible = !statsVisible;
+  statsListeners.forEach((listener) => listener());
+};
+const subscribeStats = (listener: () => void) => {
+  statsListeners.add(listener);
+  return () => statsListeners.delete(listener);
+};
+export const useStatsVisible = (): boolean =>
+  useSyncExternalStore(subscribeStats, () => statsVisible, () => false);

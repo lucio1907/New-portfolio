@@ -9,8 +9,6 @@ import { APPS, type AppId } from "../lib/apps";
 import { type DesktopState, focusedApp } from "../lib/windows";
 import { CV_HREF } from "@/features/portfolio/lib/constants";
 
-/** Apps shown as desktop icons (the terminal joins in a later unit). */
-const DESKTOP_APPS = APPS.filter((app) => app.id !== "terminal");
 
 /** Cascade so new windows never open exactly on top of each other. */
 const cascade = (app: AppId) => {
@@ -42,7 +40,7 @@ const Desktop = ({ visible, desktop, contents, onStandUp }: DesktopProps) => {
   return (
     <div id="desktop" data-open={visible} aria-label={t("desktopLabel")} className="os-desktop">
       <nav aria-label={t("iconsLabel")} className="os-icons">
-        {DESKTOP_APPS.map(({ id }) => (
+        {APPS.map(({ id }) => (
           <a key={id} href={`#${id}`} className={iconClassName}>
             <Tile app={id} />
             {t(`apps.${id}`)}

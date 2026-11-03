@@ -5,7 +5,8 @@ import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { useRender3DStatus } from "../hooks/useCanRender3D";
 import { HOTSPOTS, hotspotById } from "../lib/hotspots";
-import { dispatchDesktop, dispatchExperience, getSnapshot, setRoomReady, useExperience } from "@/features/experience/store";
+import { dispatchDesktop, dispatchExperience, getSnapshot, setRoomReady, useExperience, useStatsVisible } from "@/features/experience/store";
+import StatsOverlay, { type RenderStats } from "./StatsOverlay";
 import type { AppId } from "@/features/os/lib/apps";
 
 /** Sit down at the computer, opening an app on arrival when given. */
@@ -40,6 +41,8 @@ const RoomStage = () => {
   const [rendered, setRendered] = useState(false);
   const [hover, setHover] = useState<Hover>(null);
   const [focusId, setFocusId] = useState<number | null>(null);
+  const statsVisible = useStatsVisible();
+  const [stats, setStats] = useState<RenderStats | null>(null);
   const inRoom = experience.mode === "room";
 
   const onRendered = useCallback(() => {
@@ -74,9 +77,18 @@ const RoomStage = () => {
       </div>
       {status === "ready" && (
         <div className={`absolute inset-0 transition-opacity duration-700 ${rendered ? "opacity-100" : "opacity-0"}`}>
-          <RoomCanvas onRendered={onRendered} highlight={highlight} onHover={onHover} onActivate={onActivate} />
+          <RoomCanvas
+            onRendered={onRendered}
+            highlight={highlight}
+            onHover={onHover}
+            onActivate={onActivate}
+            statsEnabled={statsVisible}
+            onStats={setStats}
+          />
         </div>
       )}
+
+      {statsVisible && <StatsOverlay stats={status === "ready" ? stats : null} />}
 
       {hovered && (
         <p

@@ -6,6 +6,7 @@ import Experience from "@/features/portfolio/components/Experience";
 import Projects from "@/features/portfolio/components/Projects";
 import Stack from "@/features/portfolio/components/Stack";
 import Contact from "@/features/portfolio/components/Contact";
+import Terminal from "@/features/os/components/Terminal";
 
 const Home = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
@@ -21,7 +22,7 @@ const Home = async ({ params }: { params: Promise<{ locale: string }> }) => {
         projects: <Projects />,
         stack: <Stack />,
         contact: <Contact />,
-        terminal: null,
+        terminal: <Terminal />,
       }}
     />
   );

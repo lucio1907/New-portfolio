@@ -49,6 +49,10 @@
       "cv": "Download CV",
       "direct": "Go straight to the desktop",
       "hint": "Or tap an object: the mate, the books, the notes, the boxes or the phone."
+    },
+    "terminal": {
+      "welcome": "LucioOS terminal. Type help to see the commands.",
+      "label": "Command"
     }
   },
   "room": {

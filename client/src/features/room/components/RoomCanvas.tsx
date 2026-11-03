@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import RoomScene from "./RoomScene";
+import StatsProbe from "./StatsProbe";
+import type { RenderStats } from "./StatsOverlay";
 import { QUALITY, type Tier, initialTier } from "../lib/quality";
 
 const detectTier = (): Tier =>
@@ -17,9 +19,11 @@ type RoomCanvasProps = {
   highlight: number | null;
   onHover: (id: number | null, x: number, y: number) => void;
   onActivate: (id: number) => void;
+  statsEnabled: boolean;
+  onStats: (stats: RenderStats) => void;
 };
 
-const RoomCanvas = ({ onRendered, highlight, onHover, onActivate }: RoomCanvasProps) => {
+const RoomCanvas = ({ onRendered, highlight, onHover, onActivate, statsEnabled, onStats }: RoomCanvasProps) => {
   const [tier] = useState<Tier>(detectTier);
   const settings = QUALITY[tier];
 
@@ -33,6 +37,7 @@ const RoomCanvas = ({ onRendered, highlight, onHover, onActivate }: RoomCanvasPr
       onCreated={() => requestAnimationFrame(onRendered)}
     >
       <RoomScene settings={settings} highlight={highlight} onHover={onHover} onActivate={onActivate} />
+      <StatsProbe enabled={statsEnabled} tier={tier} onStats={onStats} />
     </Canvas>
   );
 };

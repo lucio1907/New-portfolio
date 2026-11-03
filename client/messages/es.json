@@ -49,6 +49,10 @@
       "cv": "Descargar CV",
       "direct": "Ir directo al escritorio",
       "hint": "O tocá un objeto: el mate, los libros, las notas, las cajas o el celular."
+    },
+    "terminal": {
+      "welcome": "LucioOS terminal. Escribí help para ver los comandos (en inglés, como toda terminal).",
+      "label": "Comando"
     }
   },
   "room": {

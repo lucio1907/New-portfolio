@@ -6,7 +6,7 @@ import IntroCard from "./IntroCard";
 import type { AppId } from "../lib/apps";
 import { appFromHash, hashForApp } from "../lib/hash";
 import { focusedApp } from "../lib/windows";
-import { dispatchDesktop, dispatchExperience, getSnapshot, isRoomReady, useExperience } from "@/features/experience/store";
+import { dispatchDesktop, dispatchExperience, getSnapshot, isRoomReady, toggleStats, useExperience } from "@/features/experience/store";
 
 type OsShellProps = {
   contents: Record<AppId, React.ReactNode>;
@@ -46,6 +46,24 @@ const OsShell = ({ contents, backdrop }: OsShellProps) => {
     document.documentElement.dataset.hydrated = "true";
   }, []);
 
+  // A hello for developers who open the console.
+  useEffect(() => {
+    console.info(
+      "%c  .--------.\n  | LucioOS |  Built with Next.js + Three.js. No models downloaded.\n  '--------'  Press ` for live render stats, or open the Terminal app.",
+      "color:#FFC94A;font-family:monospace",
+    );
+  }, []);
+
+  // ` toggles the developer stats overlay (not while typing).
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      const typing = (event.target as HTMLElement | null)?.closest("input, textarea");
+      if (event.key === "`" && !typing) toggleStats();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   // Deep links (`/es#projects`) and Back/Forward between windows.
   useEffect(() => {
     syncFromHash();
@@ -60,9 +78,13 @@ const OsShell = ({ contents, backdrop }: OsShellProps) => {
     if (hash !== window.location.hash) window.history.replaceState(null, "", pathWithHash(hash));
   }, [onDesktop, focused]);
 
-  // Keyboard focus follows the window that comes to the front.
+  // Keyboard focus follows the window that comes to the front (or the
+  // control inside it marked data-autofocus, like the terminal prompt).
   useEffect(() => {
-    if (focused) document.getElementById(focused)?.focus({ preventScroll: true });
+    if (!focused) return;
+    const frame = document.getElementById(focused);
+    const target = frame?.querySelector<HTMLElement>("[data-autofocus]") ?? frame;
+    target?.focus({ preventScroll: true });
   }, [focused]);
 
   // Animate only when the 3D room is on screen; otherwise open instantly.
