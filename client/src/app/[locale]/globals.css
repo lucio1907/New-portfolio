@@ -2,163 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
- * Code-host palette (values follow the MIT-licensed Primer primitives).
- * Dark is the default; light follows the visitor's system preference.
- * Channels are "R G B" so Tailwind opacity modifiers work (bg-success/15).
- */
-:root {
-  color-scheme: dark;
-  --c-canvas: 13 17 23;
-  --c-subtle: 22 27 34;
-  --c-inset: 1 4 9;
-  --c-line: 48 54 61;
-  --c-line-muted: 33 38 45;
-  --c-fg: 230 237 243;
-  --c-muted: 125 133 144;
-  --c-link: 68 147 248;
-  --c-success: 35 134 54;
-  --c-success-fg: 63 185 80;
-  --c-done: 137 87 229;
-  --c-done-fg: 163 113 247;
-  --c-danger: 248 81 73;
-  --c-attention: 210 153 34;
-  --c-btn: 33 38 45;
-  --c-btn-hover: 48 54 61;
-  --c-diff-add: 18 38 30;
-  --c-diff-add-num: 28 67 40;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-    --c-canvas: 255 255 255;
-    --c-subtle: 246 248 250;
-    --c-inset: 246 248 250;
-    --c-line: 208 215 222;
-    --c-line-muted: 216 222 228;
-    --c-fg: 31 35 40;
-    --c-muted: 101 109 118;
-    --c-link: 9 105 218;
-    --c-success: 31 136 61;
-    --c-success-fg: 26 127 55;
-    --c-done: 130 80 223;
-    --c-done-fg: 130 80 223;
-    --c-danger: 209 36 47;
-    --c-attention: 154 103 0;
-    --c-btn: 246 248 250;
-    --c-btn-hover: 238 241 244;
-    --c-diff-add: 230 255 236;
-    --c-diff-add-num: 204 255 216;
-  }
-}
-
 html {
+  color-scheme: dark;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  /* Sticky header height, so anchored sections are not hidden under it. */
+  scroll-padding-top: 5rem;
 }
 
 body {
   overflow-x: hidden;
-  font-size: 14px;
-  line-height: 1.5;
-  @apply bg-canvas text-fg;
+  @apply bg-night font-sans text-[17px] leading-[1.6] text-parchment antialiased;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
 }
 
 @layer components {
-  .box {
-    @apply rounded-box border border-line bg-canvas;
-  }
-
-  .box-header {
-    @apply flex flex-wrap items-center gap-x-2 gap-y-1 rounded-t-box border-b border-line bg-subtle px-4 py-2;
-  }
-
   .btn {
-    @apply inline-flex h-8 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-box border border-line bg-btn px-3 text-sm font-medium text-fg transition-colors duration-100 hover:bg-btn-hover disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-orbit px-5 font-medium text-parchment transition-colors duration-150 hover:border-haze;
   }
 
-  .btn-primary {
-    @apply border-black/10 bg-success text-white hover:bg-success/90;
+  .btn-sun {
+    @apply border-sun bg-sun text-night hover:border-[#ffd978] hover:bg-[#ffd978];
   }
 
-  .btn-sm {
-    @apply h-7 px-2 text-xs;
+  .link {
+    @apply text-sky underline decoration-sky/40 underline-offset-4 transition-colors hover:decoration-sky;
   }
 
-  .label {
-    @apply inline-flex items-center rounded-full border px-2 text-xs font-medium leading-[18px];
-  }
-
-  .counter {
-    @apply inline-flex min-w-[20px] items-center justify-center rounded-full bg-line/70 px-1.5 text-xs font-medium leading-[18px] text-fg;
-  }
-
-  .state-pill {
-    @apply inline-flex items-center gap-1 rounded-full px-3 py-[5px] text-sm font-medium text-white;
-  }
-
-  /* Triangle pointing from a comment box to its avatar (wide screens). */
-  @media (min-width: 768px) {
-    .comment-arrow-md {
-      position: relative;
-    }
-    .comment-arrow-md::before,
-    .comment-arrow-md::after {
-      content: "";
-      position: absolute;
-      top: 11px;
-      border-style: solid;
-      border-color: transparent;
-      border-width: 8px 8px 8px 0;
-    }
-    .comment-arrow-md::before {
-      left: -8px;
-      border-right-color: rgb(var(--c-line));
-    }
-    .comment-arrow-md::after {
-      left: -7px;
-      border-right-color: rgb(var(--c-subtle));
-    }
-  }
-
-  /* Conversation timeline: the vertical rule behind events and comments. */
-  .timeline {
-    position: relative;
-  }
-  .timeline::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 15px;
-    width: 2px;
-    background: rgb(var(--c-line));
-  }
-  @media (min-width: 768px) {
-    .timeline::before {
-      left: 71px;
-    }
+  /* Landmark coordinates shown next to each section heading. */
+  .coordinate {
+    @apply text-sm text-haze;
+    font-variant-numeric: tabular-nums;
   }
 }
 
 *:focus-visible {
-  outline: 2px solid rgb(var(--c-link));
-  outline-offset: -2px;
+  outline: 2px solid #ffc94a;
+  outline-offset: 3px;
   border-radius: 6px;
 }
 
 ::selection {
-  background: rgb(var(--c-link) / 0.35);
+  background: rgba(255, 201, 74, 0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }

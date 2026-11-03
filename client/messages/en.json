@@ -16,6 +16,61 @@
       "Databases"
     ]
   },
+  "site": {
+    "skip": "Skip to content",
+    "nav": {
+      "label": "Sections",
+      "about": "About",
+      "experience": "Experience",
+      "stack": "Stack",
+      "projects": "Projects",
+      "contact": "Contact"
+    },
+    "header": {
+      "cv": "CV",
+      "cvLabel": "Download CV (PDF)",
+      "home": "Lucio Gastellu, home"
+    },
+    "hero": {
+      "role": "Full Stack Developer",
+      "intro": "I build web products end to end: React and TypeScript on the frontend, Node.js and Python on the backend, PostgreSQL underneath. I use AI every day without losing control of the code.",
+      "available": "Available for new roles",
+      "location": "Buenos Aires, Argentina. Remote or hybrid.",
+      "email": "Email me",
+      "cv": "Download CV",
+      "projects": "See projects"
+    },
+    "sections": {
+      "about": "About",
+      "experience": "Experience",
+      "stack": "Stack",
+      "projects": "Projects",
+      "contact": "Let's talk"
+    },
+    "coordinateLabel": "This section's coordinates on the planet",
+    "experience": {
+      "intro": "From IT support to full stack development."
+    },
+    "stack": {
+      "intro": "What I work with today."
+    },
+    "projects": {
+      "intro": "A selection of things I built.",
+      "demo": "Live demo",
+      "code": "View code",
+      "apiOnly": "API without a public demo",
+      "more": "More projects on the way."
+    },
+    "contact": {
+      "intro": "Have a role or a project in mind? Email me and I'll get back to you.",
+      "copy": "Copy email",
+      "copied": "Email copied",
+      "phone": "Phone"
+    },
+    "footer": {
+      "built": "Built with Next.js and Three.js."
+    }
+  },
   "about": {
     "label": "About",
     "heading": "AI-native, with full ownership of the code.",

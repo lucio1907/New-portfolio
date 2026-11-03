@@ -16,6 +16,61 @@
       "Databases"
     ]
   },
+  "site": {
+    "skip": "Saltar al contenido",
+    "nav": {
+      "label": "Secciones",
+      "about": "Sobre mí",
+      "experience": "Experiencia",
+      "stack": "Stack",
+      "projects": "Proyectos",
+      "contact": "Contacto"
+    },
+    "header": {
+      "cv": "CV",
+      "cvLabel": "Descargar CV (PDF)",
+      "home": "Lucio Gastellu, inicio"
+    },
+    "hero": {
+      "role": "Desarrollador Full Stack",
+      "intro": "Construyo productos web de punta a punta: React y TypeScript en el frontend, Node.js y Python en el backend, PostgreSQL debajo. Uso IA todos los días sin perder el control del código.",
+      "available": "Disponible para nuevos roles",
+      "location": "Buenos Aires, Argentina. Remoto o híbrido.",
+      "email": "Escribime",
+      "cv": "Descargar CV",
+      "projects": "Ver proyectos"
+    },
+    "sections": {
+      "about": "Sobre mí",
+      "experience": "Experiencia",
+      "stack": "Stack",
+      "projects": "Proyectos",
+      "contact": "Hablemos"
+    },
+    "coordinateLabel": "Coordenadas de esta sección en el planeta",
+    "experience": {
+      "intro": "Del soporte técnico al desarrollo full stack."
+    },
+    "stack": {
+      "intro": "Con lo que trabajo hoy."
+    },
+    "projects": {
+      "intro": "Una selección de lo que construí.",
+      "demo": "Ver demo",
+      "code": "Ver código",
+      "apiOnly": "API sin demo pública",
+      "more": "Más proyectos en camino."
+    },
+    "contact": {
+      "intro": "¿Tenés un rol o un proyecto en mente? Escribime y te respondo.",
+      "copy": "Copiar email",
+      "copied": "Email copiado",
+      "phone": "Teléfono"
+    },
+    "footer": {
+      "built": "Hecho con Next.js y Three.js."
+    }
+  },
   "about": {
     "label": "Sobre mí",
     "heading": "AI-native, con ownership total del código.",

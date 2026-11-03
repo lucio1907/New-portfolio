@@ -1,10 +1,23 @@
 import type { Metadata } from "next";
+import { Atkinson_Hyperlegible_Next, Unbounded } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "./globals.css";
 import Script from "next/script";
+
+const display = Unbounded({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-display",
+});
+
+const body = Atkinson_Hyperlegible_Next({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-body",
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -66,7 +79,7 @@ export default async function RootLayout({
         </Script>
       </head>
       <body
-        className="font-sans antialiased"
+        className={`${display.variable} ${body.variable}`}
       >
         <NextIntlClientProvider messages={messages}>
           {children}
