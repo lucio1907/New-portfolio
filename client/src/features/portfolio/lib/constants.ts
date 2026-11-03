@@ -1,9 +1,5 @@
-/** Fixed facts of the pull request the portfolio is dressed up as. */
-export const AUTHOR = "lucio1907";
-export const REPO = "portfolio";
-export const PR_NUMBER = "#0413";
-export const BASE_BRANCH = "main";
-export const HEAD_BRANCH = "feat/hire-lucio";
+/** Contact facts shared by every section. */
+export const OWNER_NAME = "Lucio Gastellu";
 export const EMAIL = "luciogastellu.dev@gmail.com";
 export const PHONE = { href: "tel:+543329402087", label: "+54 3329 402087" };
 export const CV_HREF = "/CV-LucioGastellu.pdf";
