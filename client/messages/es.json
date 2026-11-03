@@ -16,36 +16,100 @@
       "Databases"
     ]
   },
-  "nav": {
-    "about": "Sobre mí",
-    "techStack": "Tech Stack",
-    "projects": "Proyectos",
-    "contact": "Contacto"
-  },
-  "hero": {
-    "label": "Desarrollador Full Stack",
-    "greeting": "Hola, soy",
-    "tagline": "Construyo y lanzo productos reales de extremo a extremo: React y TypeScript en el frontend, FastAPI y Node.js en el backend, PostgreSQL debajo.",
-    "ctaContact": "Contáctame",
-    "ctaDownloadCV": "Descargar CV",
-    "availability": "Disponible para nuevos roles · Buenos Aires, Argentina",
-    "findMe": "Encontrame en",
-    "card": {
-      "title": "DEV PASS",
-      "name": "Nombre",
-      "role": "Rol",
-      "base": "Base",
-      "langs": "Idiomas",
-      "status": "Estado",
-      "roleValue": "Full Stack + IA",
-      "baseValue": "Buenos Aires, AR",
-      "langsValue": "EN B2 · ES nativo",
-      "statusValue": "Disponible"
+  "pr": {
+    "topbar": {
+      "visibility": "Público",
+      "cv": "Descargar CV"
     },
-    "stickers": {
-      "friday": "Deploya los viernes",
-      "ai": "AI-native",
-      "coffee": "Funciona a mate"
+    "header": {
+      "title": "feat(equipo): sumar a Lucio Gastellu, Full Stack Developer",
+      "open": "Abierto",
+      "merged": "Mergeado",
+      "openLine": "<author>{authorName}</author> quiere mergear {commits} commits en <branch>{base}</branch> desde <branch>{head}</branch>",
+      "mergedLine": "<author>{authorName}</author> mergeó {commits} commits en <branch>{base}</branch> desde <branch>{head}</branch>",
+      "role": "Full Stack Developer · AI-native",
+      "tagline": "Construyo y lanzo productos reales de extremo a extremo: React y TypeScript en el frontend, FastAPI y Node.js en el backend, PostgreSQL debajo.",
+      "availability": "Disponible para nuevos roles · Buenos Aires, Argentina",
+      "contact": "Contactame",
+      "cv": "Descargar CV"
+    },
+    "tabs": {
+      "label": "Secciones del pull request",
+      "conversation": "Conversación",
+      "commits": "Commits",
+      "files": "Archivos",
+      "checks": "Checks",
+      "bypass": "Soy recruiter: aprobar y mergear",
+      "bypassShort": "Aprobar",
+      "reset": "Romperlo de nuevo"
+    },
+    "conversation": {
+      "label": "Descripción",
+      "commented": "comentó",
+      "author": "Autor"
+    },
+    "commits": {
+      "label": "Commits: experiencia",
+      "event": "<author>{authorName}</author> agregó {count} commits"
+    },
+    "files": {
+      "label": "Archivos cambiados: stack y proyectos",
+      "event": "<author>{authorName}</author> cambió {count} archivos"
+    },
+    "checks": {
+      "label": "Checks y merge",
+      "event": "<bot>deploy-bot</bot> ejecutó {count} checks",
+      "someFailed": "Algunos checks fallaron",
+      "allPassed": "Todos los checks pasaron",
+      "summary": "{failing, plural, =0 {Ningún check fallando} one {# fallando} other {# fallando}} · {passing, plural, one {# exitoso} other {# exitosos}}",
+      "details": "Detalles",
+      "items": {
+        "about": {
+          "failing": "el deploy desordenó el nombre del autor",
+          "passing": "nombre recuperado"
+        },
+        "stack": {
+          "failing": "el loader del stack quedó trabado",
+          "passing": "stack cargado"
+        },
+        "experience": {
+          "failing": "los commits están desordenados",
+          "passing": "historial ordenado"
+        },
+        "projects": {
+          "failing": "los proyectos se salieron de la grilla",
+          "passing": "layout arreglado"
+        },
+        "contact": {
+          "failing": "falta CONTACT_EMAIL en el deploy",
+          "passing": "deploy configurado"
+        }
+      },
+      "blockedHint": "El merge está bloqueado hasta que pasen todos los checks.",
+      "readyHint": "Todos los checks pasaron. Este branch no tiene conflictos.",
+      "bypass": "Saltear checks (recruiter)",
+      "merge": "Mergear pull request",
+      "mergedTitle": "Pull request mergeado. ¡Bienvenido al equipo!",
+      "reset": "Romperlo de nuevo"
+    },
+    "sidebar": {
+      "label": "Detalles del pull request",
+      "reviewers": "Reviewers",
+      "you": "Vos",
+      "pending": "Pendiente",
+      "approved": "Aprobado",
+      "assignees": "Asignado",
+      "labels": "Etiquetas",
+      "labelNames": {
+        "fullStack": "full-stack",
+        "aiNative": "ai-native",
+        "openToWork": "open-to-work",
+        "remote": "remoto / híbrido"
+      },
+      "milestone": "Milestone",
+      "milestoneName": "Próximo rol",
+      "progress": "{fixed} de {total} checks pasando",
+      "contact": "Contacto"
     }
   },
   "about": {
@@ -86,7 +150,7 @@
     "label": "Proyectos",
     "subtitle": "Una selección de proyectos que he construido.",
     "comingSoon": "// Más proyectos próximamente...",
-    "liveLink": "Ver demo ↗",
+    "liveLink": "Ver demo",
     "codeLink": "Código"
   },
   "contact": {
@@ -105,21 +169,12 @@
     "note": "© 2026 · Diseñado & desarrollado por Lucio Gastellu."
   },
   "debug": {
-    "incident": {
-      "label": "INCIDENTE #0413",
-      "broken": "Deployé a producción un viernes. Ayudame a arreglarlo: {remaining, plural, one {queda # bug} other {quedan # bugs}}.",
-      "resolved": "Todos los sistemas operativos. Gracias por el hotfix."
-    },
-    "hud": {
-      "status": "{fixed} de {total} bugs arreglados",
-      "deployed": "Deploy exitoso",
-      "recruiter": "Soy recruiter, arreglalo vos",
-      "reset": "Romperlo de nuevo",
-      "region": "Progreso de debug"
-    },
     "riddle": {
-      "label": "Acertijo",
-      "hint": "Pista {n}:"
+      "bot": "deploy-bot",
+      "requested": "pidió cambios",
+      "label": "Cambios pedidos",
+      "hint": "Pista {n}:",
+      "resolved": "resolvió el review:"
     },
     "about": {
       "riddle": "Escribí todo este portfolio y el deploy me desordenó el nombre. Tocá las letras en orden y devolvémelo.",
@@ -131,8 +186,8 @@
     },
     "stack": {
       "loading": "Cargando tech stack…",
-      "riddle": "Hablo en el front, en el back, y hasta el JSON lleva mi nombre. Encontrame entre los chips y tocame para destrabar el loader.",
-      "hint1": "Soy un lenguaje. Estoy en la tarjeta de Lenguajes, y no soy Java.",
+      "riddle": "Hablo en el front, en el back, y hasta el JSON lleva mi nombre. Encontrame entre las líneas del diff y tocame para destrabar el loader.",
+      "hint1": "Soy un lenguaje: buscame en stack/languages.json, y no soy Java.",
       "hint2": "JSON = JavaScript Object Notation.",
       "guess": "Elegir {tech}",
       "wrong": "{tech} no es. Seguí buscando.",

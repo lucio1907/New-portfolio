@@ -21,12 +21,13 @@ const INITIAL_LINES: TerminalLine[] = [
   { kind: "output", key: "intro" },
 ];
 
+// The terminal is always dark, so it uses fixed colors instead of theme tokens.
 const LINE_COLORS: Record<TerminalLine["kind"], string> = {
-  input: "text-[#E6E6E6]",
-  text: "text-[#E6E6E6]",
-  output: "text-[#BDBDBD]",
-  error: "text-red",
-  success: "font-bold text-green",
+  input: "text-[#E6ECF4]",
+  text: "text-[#E6ECF4]",
+  output: "text-[#9AA7BA]",
+  error: "text-[#F56360]",
+  success: "font-bold text-[#34C776]",
 };
 
 /** Bug 5: a tiny terminal where the deploy fails until CONTACT_EMAIL is set. */
@@ -92,7 +93,7 @@ const ContactBug = () => {
     if (line.kind === "input") {
       return (
         <>
-          <span className="text-pink">$</span> {line.text}
+          <span className="text-[#63AAFF]">$</span> {line.text}
         </>
       );
     }
@@ -103,19 +104,19 @@ const ContactBug = () => {
   const pending = total - fixedCount;
 
   return (
-    <div className="mb-14">
+    <div>
       <BugNotice
         fixed={fixed}
         riddle={t("riddle")}
         hints={[t("hint1"), t("hint2")]}
         fixedText={t("envSet")}
       />
-      <div className="overflow-hidden rounded-card border-3 border-ink bg-terminal shadow-brutal-lg">
-        <div className="flex items-center gap-2 border-b-3 border-ink bg-white px-4 py-2.5">
-          <span className="h-3.5 w-3.5 rounded-full border-2 border-ink bg-red" />
-          <span className="h-3.5 w-3.5 rounded-full border-2 border-ink bg-yellow" />
-          <span className="h-3.5 w-3.5 rounded-full border-2 border-ink bg-green" />
-          <span className="ml-2 font-mono text-xs font-bold">deploy.sh</span>
+      <div className="overflow-hidden rounded-box border border-line bg-terminal">
+        <div className="flex items-center gap-2 border-b border-white/10 bg-[#121821] px-4 py-2">
+          <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#F56360]" />
+          <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#E5B548]" />
+          <span aria-hidden="true" className="h-2.5 w-2.5 rounded-full bg-[#34C776]" />
+          <span className="ml-2 font-mono text-xs text-[#9AA7BA]">ci / deploy.sh</span>
         </div>
 
         <div
@@ -131,7 +132,7 @@ const ContactBug = () => {
             </p>
           ))}
           {fixed && (
-            <p className={deployed ? "font-bold text-green" : "text-yellow"}>
+            <p className={deployed ? "font-bold text-[#34C776]" : "text-[#E5B548]"}>
               {deployed ? t("success") : t("pending", { remaining: pending })}
             </p>
           )}
@@ -141,7 +142,7 @@ const ContactBug = () => {
           onSubmit={submit}
           className="flex items-center gap-2 px-5 pb-5 pt-2 font-mono text-sm"
         >
-          <label htmlFor="terminal-input" className="shrink-0 text-pink">
+          <label htmlFor="terminal-input" className="shrink-0 text-[#63AAFF]">
             <span aria-hidden="true">{PROMPT}</span>
             <span className="sr-only">{tt("label")}</span>
           </label>
@@ -157,11 +158,11 @@ const ContactBug = () => {
             autoCapitalize="off"
             autoComplete="off"
             autoCorrect="off"
-            className="min-w-0 flex-1 rounded-md bg-transparent px-1 text-[#E6E6E6] caret-yellow outline-none placeholder:text-[#8A8A8A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue"
+            className="min-w-0 flex-1 rounded-md bg-transparent px-1 text-[#E6ECF4] caret-[#E5B548] outline-none placeholder:text-[#6B7890] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#63AAFF]"
           />
           <button
             type="submit"
-            className="rounded-md border-2 border-[#E6E6E6] px-2 py-0.5 text-xs font-bold text-[#E6E6E6] hover:bg-[#E6E6E6] hover:text-ink"
+            className="min-h-[32px] rounded-md border border-[#3A4558] px-2.5 text-xs font-semibold text-[#E6ECF4] hover:bg-[#E6ECF4] hover:text-[#0A0D12]"
           >
             {tt("run")}
           </button>

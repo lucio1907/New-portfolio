@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { subscribeDeploy } from "../useDebugMe";
+import { subscribeMerge } from "../useDebugMe";
 
-const COLORS = ["#FFD23F", "#FF6B9E", "#4361EE", "#2BC48A", "#C3B1FF", "#141414"];
+const COLORS = ["#34C776", "#A687F7", "#63AAFF", "#E5B548", "#F56360", "#E6ECF4"];
 const PARTICLES = 140;
 const DURATION_MS = 2600;
 const GRAVITY = 0.18;
@@ -82,7 +82,7 @@ const Confetti = (): React.ReactElement => {
 
   useEffect(() => {
     let stop = () => {};
-    const unsubscribe = subscribeDeploy(() => {
+    const unsubscribe = subscribeMerge(() => {
       stop();
       if (canvasRef.current) stop = burst(canvasRef.current);
     });

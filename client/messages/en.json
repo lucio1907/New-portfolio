@@ -16,36 +16,100 @@
       "Databases"
     ]
   },
-  "nav": {
-    "about": "About",
-    "techStack": "Tech Stack",
-    "projects": "Projects",
-    "contact": "Contact"
-  },
-  "hero": {
-    "label": "Full Stack Developer",
-    "greeting": "Hi, I am",
-    "tagline": "I build and ship real products end to end: React and TypeScript on the frontend, FastAPI and Node.js on the backend, PostgreSQL underneath.",
-    "ctaContact": "Get in touch",
-    "ctaDownloadCV": "Download CV",
-    "availability": "Available for new roles · Buenos Aires, Argentina",
-    "findMe": "Find me",
-    "card": {
-      "title": "DEV PASS",
-      "name": "Name",
-      "role": "Role",
-      "base": "Base",
-      "langs": "Languages",
-      "status": "Status",
-      "roleValue": "Full Stack + AI",
-      "baseValue": "Buenos Aires, AR",
-      "langsValue": "EN B2 · ES native",
-      "statusValue": "Open to work"
+  "pr": {
+    "topbar": {
+      "visibility": "Public",
+      "cv": "Download CV"
     },
-    "stickers": {
-      "friday": "Ships on Fridays",
-      "ai": "AI-native",
-      "coffee": "Runs on mate"
+    "header": {
+      "title": "feat(team): add Lucio Gastellu, Full Stack Developer",
+      "open": "Open",
+      "merged": "Merged",
+      "openLine": "<author>{authorName}</author> wants to merge {commits} commits into <branch>{base}</branch> from <branch>{head}</branch>",
+      "mergedLine": "<author>{authorName}</author> merged {commits} commits into <branch>{base}</branch> from <branch>{head}</branch>",
+      "role": "Full Stack Developer · AI-native",
+      "tagline": "I build and ship real products end to end: React and TypeScript on the frontend, FastAPI and Node.js on the backend, PostgreSQL underneath.",
+      "availability": "Available for new roles · Buenos Aires, Argentina",
+      "contact": "Contact me",
+      "cv": "Download CV"
+    },
+    "tabs": {
+      "label": "Pull request sections",
+      "conversation": "Conversation",
+      "commits": "Commits",
+      "files": "Files changed",
+      "checks": "Checks",
+      "bypass": "I'm a recruiter: approve & merge",
+      "bypassShort": "Approve",
+      "reset": "Break it again"
+    },
+    "conversation": {
+      "label": "Description",
+      "commented": "commented",
+      "author": "Author"
+    },
+    "commits": {
+      "label": "Commits: experience",
+      "event": "<author>{authorName}</author> added {count} commits"
+    },
+    "files": {
+      "label": "Files changed: stack and projects",
+      "event": "<author>{authorName}</author> changed {count} files"
+    },
+    "checks": {
+      "label": "Checks and merge",
+      "event": "<bot>deploy-bot</bot> ran {count} checks",
+      "someFailed": "Some checks were not successful",
+      "allPassed": "All checks have passed",
+      "summary": "{failing, plural, =0 {No failing checks} one {# failing} other {# failing}} · {passing, plural, one {# successful} other {# successful}}",
+      "details": "Details",
+      "items": {
+        "about": {
+          "failing": "the deploy scrambled the author's name",
+          "passing": "name restored"
+        },
+        "stack": {
+          "failing": "the stack loader is stuck",
+          "passing": "stack loaded"
+        },
+        "experience": {
+          "failing": "commits are out of order",
+          "passing": "history sorted"
+        },
+        "projects": {
+          "failing": "projects escaped the grid",
+          "passing": "layout fixed"
+        },
+        "contact": {
+          "failing": "CONTACT_EMAIL is missing in the deploy",
+          "passing": "deploy configured"
+        }
+      },
+      "blockedHint": "Merging is blocked until every check passes.",
+      "readyHint": "All checks have passed. This branch has no conflicts.",
+      "bypass": "Bypass checks (recruiter)",
+      "merge": "Merge pull request",
+      "mergedTitle": "Pull request merged. Welcome to the team!",
+      "reset": "Break it again"
+    },
+    "sidebar": {
+      "label": "Pull request details",
+      "reviewers": "Reviewers",
+      "you": "You",
+      "pending": "Pending",
+      "approved": "Approved",
+      "assignees": "Assignee",
+      "labels": "Labels",
+      "labelNames": {
+        "fullStack": "full-stack",
+        "aiNative": "ai-native",
+        "openToWork": "open-to-work",
+        "remote": "remote / hybrid"
+      },
+      "milestone": "Milestone",
+      "milestoneName": "Next role",
+      "progress": "{fixed} of {total} checks passing",
+      "contact": "Contact"
     }
   },
   "about": {
@@ -86,7 +150,7 @@
     "label": "Projects",
     "subtitle": "A selection of projects I have built.",
     "comingSoon": "// More projects coming soon...",
-    "liveLink": "Live demo ↗",
+    "liveLink": "Live demo",
     "codeLink": "Code"
   },
   "contact": {
@@ -105,21 +169,12 @@
     "note": "© 2026 · Designed & built with code."
   },
   "debug": {
-    "incident": {
-      "label": "INCIDENT #0413",
-      "broken": "I deployed to production on a Friday. Help me fix it: {remaining, plural, one {# bug left} other {# bugs left}}.",
-      "resolved": "All systems operational. Thanks for the hotfix."
-    },
-    "hud": {
-      "status": "{fixed} of {total} bugs fixed",
-      "deployed": "Deploy successful",
-      "recruiter": "I am a recruiter, fix it all",
-      "reset": "Break it again",
-      "region": "Debug progress"
-    },
     "riddle": {
-      "label": "Riddle",
-      "hint": "Hint {n}:"
+      "bot": "deploy-bot",
+      "requested": "requested changes",
+      "label": "Changes requested",
+      "hint": "Hint {n}:",
+      "resolved": "resolved the review:"
     },
     "about": {
       "riddle": "I wrote this whole portfolio and the deploy scrambled my name. Tap the letters in order and give it back to me.",
@@ -131,8 +186,8 @@
     },
     "stack": {
       "loading": "Loading tech stack…",
-      "riddle": "I speak on the front end, on the back end, and even JSON carries my name. Find me among the chips and tap me to unblock the loader.",
-      "hint1": "I'm a language. I live on the Languages card, and I'm not Java.",
+      "riddle": "I speak on the front end, on the back end, and even JSON carries my name. Find me among the diff lines and tap me to unblock the loader.",
+      "hint1": "I'm a language: look in stack/languages.json, and I'm not Java.",
       "hint2": "JSON = JavaScript Object Notation.",
       "guess": "Pick {tech}",
       "wrong": "Not {tech}. Keep looking.",

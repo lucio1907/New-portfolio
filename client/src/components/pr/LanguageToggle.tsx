@@ -20,7 +20,7 @@ const LanguageToggle = () => {
       type="button"
       onClick={toggleLocale}
       aria-label={nextLocale === "en" ? "Switch to English" : "Cambiar a español"}
-      className="brutal-btn min-h-[42px] bg-pink px-3 font-mono text-[13px]"
+      className="btn min-h-[36px] px-3 font-mono text-xs"
     >
       {locale.toUpperCase()}
       <span aria-hidden="true">→</span>

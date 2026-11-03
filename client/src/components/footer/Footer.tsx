@@ -5,15 +5,18 @@ const Footer = (): React.ReactElement => {
   const t = useTranslations("footer");
 
   return (
-    <footer className="bg-ink text-paper">
-      <div className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-4 px-5 py-9 md:px-10">
-        <span className="flex items-center gap-3 font-mono text-base font-bold">
-          <span className="flex h-9 w-9 -rotate-6 items-center justify-center rounded-btn border-3 border-paper bg-yellow text-sm text-ink">
+    <footer className="mt-16 border-t border-line">
+      <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-3 px-4 py-6 text-xs text-muted md:px-6">
+        <span className="flex items-center gap-2">
+          <span
+            aria-hidden="true"
+            className="flex h-6 w-6 items-center justify-center rounded-md bg-fg font-mono text-[10px] font-bold text-canvas"
+          >
             LG
           </span>
           Lucio Gastellu
         </span>
-        <span className="font-mono text-xs font-medium">{t("note")}</span>
+        <span>{t("note")}</span>
       </div>
     </footer>
   );

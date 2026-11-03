@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -8,10 +8,10 @@ import MotionProvider from "@/components/motion/MotionProvider";
 import "./globals.css";
 import Script from "next/script";
 
-const spaceGrotesk = Space_Grotesk({
+const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
+  variable: "--font-plex-sans",
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -80,7 +80,7 @@ export default async function RootLayout({
         </Script>
       </head>
       <body
-        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans text-ink antialiased`}
+        className={`${plexSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           <MotionProvider>{children}</MotionProvider>

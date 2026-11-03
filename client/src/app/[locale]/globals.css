@@ -2,6 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Code-host inspired palette. Dark is the default look; light follows the
+ * visitor's system preference. Channels are "R G B" so Tailwind can apply
+ * opacity modifiers (bg-accent/15).
+ */
+:root {
+  color-scheme: dark;
+  --c-canvas: 11 15 23;
+  --c-surface: 17 24 36;
+  --c-subtle: 24 32 47;
+  --c-line: 44 54 72;
+  --c-fg: 230 236 244;
+  --c-muted: 143 156 176;
+  --c-accent: 52 199 118;
+  --c-on-accent: 6 20 12;
+  --c-merged: 166 135 247;
+  --c-danger: 245 99 96;
+  --c-attention: 229 181 72;
+  --c-link: 99 170 255;
+  --c-diff-add: 20 52 36;
+  --c-diff-add-line: 28 72 48;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --c-canvas: 246 248 250;
+    --c-surface: 255 255 255;
+    --c-subtle: 240 243 247;
+    --c-line: 214 220 228;
+    --c-fg: 26 34 48;
+    --c-muted: 88 99 116;
+    --c-accent: 29 133 74;
+    --c-on-accent: 255 255 255;
+    --c-merged: 118 77 214;
+    --c-danger: 200 55 52;
+    --c-attention: 150 100 0;
+    --c-link: 18 102 204;
+    --c-diff-add: 222 245 229;
+    --c-diff-add-line: 196 236 208;
+  }
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -9,80 +52,43 @@ html {
 
 body {
   overflow-x: hidden;
-  background-color: #fff4e0;
-  background-image: radial-gradient(rgba(20, 20, 20, 0.14) 1.2px, transparent 1.2px);
-  background-size: 22px 22px;
+  @apply bg-canvas text-fg;
 }
 
 @layer components {
-  .brutal-card {
-    @apply rounded-card border-3 border-ink bg-white shadow-brutal;
+  /* Bordered panel: comment boxes, file diffs, sidebar blocks. */
+  .box {
+    @apply rounded-box border border-line bg-surface;
   }
 
-  .brutal-btn {
-    @apply inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2 rounded-btn border-3 border-ink px-5 font-bold text-ink shadow-brutal transition-[transform,box-shadow] duration-150 ease-out hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg active:translate-x-1 active:translate-y-1 active:shadow-none disabled:cursor-wait disabled:opacity-60;
+  .box-header {
+    @apply flex flex-wrap items-center gap-2 border-b border-line bg-subtle px-4 py-2.5 text-sm;
   }
 
-  .brutal-chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border-2 border-ink px-3 py-1 text-sm font-bold text-ink;
+  .btn {
+    @apply inline-flex min-h-[40px] cursor-pointer items-center justify-center gap-2 rounded-box border border-line bg-subtle px-4 text-sm font-semibold text-fg transition-colors duration-150 hover:border-muted/60 hover:bg-line/60 disabled:cursor-not-allowed disabled:opacity-50;
   }
 
-  .sticker {
-    @apply inline-flex items-center rounded-btn border-3 border-ink px-3 py-1.5 font-bold text-ink shadow-brutal-sm;
-  }
-}
-
-@layer utilities {
-  .hazard-tape {
-    background-image: repeating-linear-gradient(
-      -45deg,
-      #ffd23f 0 12px,
-      #141414 12px 24px
-    );
+  .btn-primary {
+    @apply border-accent bg-accent text-on-accent hover:border-accent hover:bg-accent/85;
   }
 
-  .marker {
-    background-image: linear-gradient(
-      transparent 58%,
-      #ffd23f 58%,
-      #ffd23f 92%,
-      transparent 92%
-    );
+  .label-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-semibold;
   }
 
-  .barcode {
-    background-image: repeating-linear-gradient(
-      90deg,
-      #141414 0 2px,
-      transparent 2px 4px,
-      #141414 4px 7px,
-      transparent 7px 9px
-    );
+  .counter {
+    @apply inline-flex min-w-[22px] items-center justify-center rounded-full bg-line/70 px-1.5 text-xs font-semibold text-fg;
   }
 }
 
 *:focus-visible {
-  outline: 3px solid #4361ee;
-  outline-offset: 3px;
+  outline: 2px solid rgb(var(--c-link));
+  outline-offset: 2px;
 }
 
 ::selection {
-  background: #ffd23f;
-  color: #141414;
-}
-
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #141414;
-  border: 3px solid #fff4e0;
-  border-radius: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #fff4e0;
+  background: rgb(var(--c-link) / 0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {

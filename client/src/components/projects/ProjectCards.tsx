@@ -3,7 +3,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Projects from "@/json/projects.json";
 import Image from "next/image";
 import { StaggerContainer } from "../motion/Reveal";
-import HoverLiftCard from "../motion/HoverLiftCard";
+import { ExternalIcon, FileIcon } from "../pr/Icons";
 import { ProjectSlot } from "@/features/debug-me/bugs/ProjectsBug";
 
 type Locale = "es" | "en";
@@ -18,69 +18,82 @@ interface ProjectsTypes {
   livePreview: string;
 }
 
+const slugify = (name: string): string =>
+  name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
 const ProjectCards = (): React.ReactElement => {
   const locale = useLocale() as Locale;
   const t = useTranslations("projects");
 
   return (
-    <StaggerContainer className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <StaggerContainer className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {Projects.projects.map((item: ProjectsTypes, index: number) => {
         const tags = item.techStack.split(",").map((tag) => tag.trim());
 
         return (
           <ProjectSlot key={item.id} index={index}>
-            <HoverLiftCard className="brutal-card group flex flex-col overflow-hidden transition-shadow duration-150 hover:shadow-brutal-lg">
-              <div className="relative aspect-[16/10] overflow-hidden border-b-3 border-ink bg-paper">
+            <article className="box group flex flex-col overflow-hidden transition-colors duration-150 hover:border-muted/60">
+              <div className="box-header justify-between font-mono text-[13px]">
+                <span className="flex min-w-0 items-center gap-2">
+                  <FileIcon className="h-4 w-4 text-muted" />
+                  <span className="truncate">projects/{slugify(item.projectName)}.md</span>
+                </span>
+                {!item.livePreview && (
+                  <span className="label-chip border-merged/50 text-merged">API</span>
+                )}
+              </div>
+              <div className="relative aspect-[16/9] overflow-hidden border-b border-line bg-subtle">
                 <Image
                   src={item.image}
                   alt={item.projectName}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                 />
-                {!item.livePreview && (
-                  <span className="sticker absolute right-3 top-3 rotate-6 bg-lilac font-mono text-xs">
-                    API
-                  </span>
-                )}
               </div>
 
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="mb-2 text-xl font-bold leading-tight">
+              <div className="flex flex-1 flex-col p-4">
+                <h3 className="mb-1.5 text-lg font-semibold leading-snug">
                   {item.projectName}
                 </h3>
-                <p className="mb-4 flex-1 text-[15px] leading-[1.6] text-ink-soft">
+                <p className="mb-4 flex-1 text-[14.5px] leading-relaxed text-muted">
                   {item.description[locale]}
                 </p>
-                <ul className="mb-5 flex flex-wrap gap-2">
+                <ul className="mb-4 flex flex-wrap gap-1.5">
                   {tags.map((tag) => (
-                    <li key={tag} className="brutal-chip bg-paper px-2.5 py-0.5 font-mono text-xs">
+                    <li key={tag} className="label-chip border-link/40 font-mono font-medium text-link">
                       {tag}
                     </li>
                   ))}
                 </ul>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2">
                   {item.livePreview && (
                     <a
                       href={item.livePreview}
                       target="_blank"
                       rel="noreferrer"
-                      className="brutal-btn min-h-[42px] bg-yellow px-4 text-sm"
+                      className="btn btn-primary min-h-[36px] px-3"
                     >
                       {t("liveLink")}
+                      <ExternalIcon className="h-3.5 w-3.5" />
                     </a>
                   )}
                   <a
                     href={item.codeLink}
                     target="_blank"
                     rel="noreferrer"
-                    className="brutal-btn min-h-[42px] bg-white px-4 text-sm"
+                    className="btn min-h-[36px] px-3"
                   >
                     {t("codeLink")}
+                    <ExternalIcon className="h-3.5 w-3.5" />
                   </a>
                 </div>
               </div>
-            </HoverLiftCard>
+            </article>
           </ProjectSlot>
         );
       })}

@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useBug } from "../useDebugMe";
 import BugNotice from "../components/BugNotice";
+import { SpinnerIcon } from "@/components/pr/Icons";
 import { isStackAnswer } from "../riddles/stack";
 
 const SHAKE = { x: [0, -6, 6, -4, 4, 0] };
@@ -41,17 +42,14 @@ const StackBug = ({ children }: { children: React.ReactNode }) => {
         fixedText={t("loaded")}
       >
         <div className="flex flex-col gap-2">
-          <p className="font-mono text-sm font-bold">{t("loading")}</p>
-          <div
-            aria-hidden="true"
-            className="h-5 overflow-hidden rounded-full border-3 border-ink bg-white"
-          >
-            <div className="hazard-tape h-full w-2/3 border-r-3 border-ink [background-size:40px_40px] motion-safe:animate-stripes" />
-          </div>
+          <p className="flex items-center gap-2 font-mono text-sm text-attention">
+            <SpinnerIcon />
+            {t("loading")}
+          </p>
           {wrong && (
             <p
               role="alert"
-              className="w-fit rounded-btn border-2 border-ink bg-red px-3 py-1.5 font-mono text-sm font-bold"
+              className="w-fit rounded-box border border-danger/50 bg-danger/10 px-3 py-1.5 font-mono text-sm text-danger"
             >
               {t("wrong", { tech: wrong.tech })}
             </p>
@@ -68,16 +66,39 @@ const StackBug = ({ children }: { children: React.ReactNode }) => {
 
 type StackChipProps = {
   tech: string;
-  className: string;
+  /** 1-based line number in the diff. */
+  line: number;
 };
 
-/** A tech chip; while the bug is open it is a guess for the riddle. */
-export const StackChip = ({ tech, className }: StackChipProps) => {
+const lineClassName =
+  "grid w-full grid-cols-[3rem_1.5rem_1fr] items-center bg-diff-add font-mono text-[13px] leading-7 text-left";
+
+const LineContent = ({ tech, line }: StackChipProps) => (
+  <>
+    <span aria-hidden="true" className="select-none border-r border-line/60 bg-diff-add-line pr-2 text-right text-muted">
+      {line}
+    </span>
+    <span aria-hidden="true" className="select-none text-center text-accent">+</span>
+    <span>
+      <span className="text-link">&quot;{tech}&quot;</span>
+      <span className="text-muted">,</span>
+    </span>
+  </>
+);
+
+/** An added diff line; while the bug is open it is a guess for the riddle. */
+export const StackChip = ({ tech, line }: StackChipProps) => {
   const t = useTranslations("debug.stack");
   const context = useContext(StackBugContext);
   const reduceMotion = useReducedMotion();
 
-  if (!context?.open) return <li className={className}>{tech}</li>;
+  if (!context?.open) {
+    return (
+      <li className={lineClassName}>
+        <LineContent tech={tech} line={line} />
+      </li>
+    );
+  }
 
   const { wrong, guess } = context;
   const isWrong = wrong?.tech === tech;
@@ -92,9 +113,9 @@ export const StackChip = ({ tech, className }: StackChipProps) => {
         aria-label={t("guess", { tech })}
         animate={shaking ? SHAKE : undefined}
         transition={{ duration: 0.35 }}
-        className={`${className} cursor-pointer transition-colors hover:bg-yellow active:translate-x-0.5 active:translate-y-0.5 ${isWrong ? "!bg-red" : ""}`}
+        className={`${lineClassName} cursor-pointer transition-colors hover:brightness-125 ${isWrong ? "!bg-danger/25" : ""}`}
       >
-        {tech}
+        <LineContent tech={tech} line={line} />
       </motion.button>
     </li>
   );

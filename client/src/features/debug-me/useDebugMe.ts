@@ -25,9 +25,12 @@ import {
 type Listener = () => void;
 
 const listeners = new Set<Listener>();
-const deployListeners = new Set<Listener>();
+const mergeListeners = new Set<Listener>();
+const mergedListeners = new Set<Listener>();
 let current: BugsState = initialBugsState;
 let loaded = false;
+// Merging is the finale of a session; it is not persisted across reloads.
+let merged = false;
 
 const readStorage = (): string | null => {
   try {
@@ -83,22 +86,45 @@ const dispatch = (action: BugsAction): void => {
   current = next;
   writeStorage(current);
   listeners.forEach((listener) => listener());
-  if (!isDeployed(previous) && isDeployed(next)) {
-    deployListeners.forEach((listener) => listener());
-  }
+};
+
+const setMerged = (value: boolean): void => {
+  if (merged === value) return;
+  merged = value;
+  mergedListeners.forEach((listener) => listener());
+  if (value) mergeListeners.forEach((listener) => listener());
 };
 
 /**
- * Notifies when the visitor finishes fixing the site. Restored progress never
+ * Notifies when the visitor merges the pull request. Restored progress never
  * triggers it, so a reload does not replay the celebration.
  */
-export const subscribeDeploy = (listener: Listener): (() => void) => {
-  deployListeners.add(listener);
-  return () => deployListeners.delete(listener);
+export const subscribeMerge = (listener: Listener): (() => void) => {
+  mergeListeners.add(listener);
+  return () => mergeListeners.delete(listener);
 };
 
-const fixAll = (): void => dispatch({ type: "fixAll" });
-const reset = (): void => dispatch({ type: "reset" });
+const subscribeMerged = (listener: Listener): (() => void) => {
+  mergedListeners.add(listener);
+  return () => mergedListeners.delete(listener);
+};
+
+/** Merges only once every check passes. */
+const merge = (): void => {
+  load();
+  if (isDeployed(current)) setMerged(true);
+};
+
+/** Recruiter shortcut: fix every bug and merge in one go. */
+const bypassAndMerge = (): void => {
+  dispatch({ type: "fixAll" });
+  merge();
+};
+
+const reset = (): void => {
+  dispatch({ type: "reset" });
+  setMerged(false);
+};
 
 export const useDebugMe = () => {
   const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
@@ -107,7 +133,11 @@ export const useDebugMe = () => {
     fixed: fixedCount(state),
     total: BUG_IDS.length,
     deployed: isDeployed(state),
-    fixAll,
+    merged:
+      useSyncExternalStore(subscribeMerged, () => merged, () => false) &&
+      isDeployed(state),
+    merge,
+    bypassAndMerge,
     reset,
   };
 };

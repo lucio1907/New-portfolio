@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
 import BugIcon from "./BugIcon";
+import { CheckIcon, LightbulbIcon } from "@/components/pr/Icons";
 import { revealedHints } from "../riddles/hints";
 
 type BugNoticeProps = {
@@ -42,7 +43,17 @@ const useRevealedHints = (
   return revealed;
 };
 
-/** Sticky-note riddle shown at the top of a "broken" section. */
+/** Bot avatar: a fixed light disc keeps the mascot's ink outlines readable. */
+export const BotAvatar = ({ size = "h-8 w-8" }: { size?: string }) => (
+  <span
+    aria-hidden="true"
+    className={`flex ${size} shrink-0 items-center justify-center rounded-full border border-line bg-[#FFE7A3]`}
+  >
+    <BugIcon className="h-[70%] w-[70%] text-danger" />
+  </span>
+);
+
+/** Review thread from the deploy bot: the riddle, then hints as replies. */
 const BugNotice = ({
   fixed,
   riddle,
@@ -55,41 +66,52 @@ const BugNotice = ({
   const revealed = useRevealedHints(ref, hints.length, !fixed);
 
   if (fixed) {
-    return <p className="brutal-chip mb-8 bg-green font-mono">✓ {fixedText}</p>;
+    return (
+      <p className="mb-5 flex items-center gap-2 rounded-box border border-accent/40 bg-accent/10 px-3 py-2 text-sm">
+        <CheckIcon className="h-4 w-4 text-accent" />
+        <span className="font-semibold">{t("bot")}</span>
+        <span className="text-muted">{t("resolved")}</span>
+        <span className="font-medium">{fixedText}</span>
+      </p>
+    );
   }
 
   return (
-    <div
-      ref={ref}
-      className="mb-8 flex flex-col gap-3 rounded-card border-3 border-ink bg-white p-4 shadow-brutal-sm"
-    >
-      <p className="flex items-start gap-2.5">
-        <BugIcon className="h-8 w-8 shrink-0 text-red motion-safe:animate-wiggle" />
-        <span className="flex flex-col gap-1">
-          <span className="font-mono text-xs font-bold uppercase tracking-[0.12em] text-ink-soft">
-            {t("label")}
-          </span>
-          <span className="text-[17px] font-bold leading-snug">{riddle}</span>
+    <div ref={ref} className="box mb-5 overflow-hidden border-danger/50">
+      <div className="box-header border-danger/30 bg-danger/10">
+        <BotAvatar size="h-6 w-6" />
+        <span className="font-semibold">{t("bot")}</span>
+        <span className="text-muted">{t("requested")}</span>
+        <span className="label-chip ml-auto border-danger/50 text-danger">
+          {t("label")}
         </span>
-      </p>
+      </div>
 
-      <ul aria-live="polite" className="flex flex-col gap-2 empty:hidden">
+      <div className="flex flex-col gap-4 p-4">
+        <p className="text-[16px] font-medium leading-relaxed">{riddle}</p>
+        {children}
+      </div>
+
+      <ul aria-live="polite" className="empty:hidden">
         <AnimatePresence initial={false}>
           {hints.slice(0, revealed).map((hint, index) => (
             <motion.li
               key={index}
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="w-fit rounded-btn border-2 border-ink bg-yellow px-3 py-1.5 font-mono text-sm font-bold"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              className="flex gap-3 border-t border-line bg-subtle/60 px-4 py-3 text-sm"
             >
-              <span aria-hidden="true">💡 </span>
-              {t("hint", { n: index + 1 })} {hint}
+              <LightbulbIcon className="mt-0.5 h-4 w-4 text-attention" />
+              <span>
+                <span className="mr-1.5 font-semibold">
+                  {t("hint", { n: index + 1 })}
+                </span>
+                <span className="font-mono text-[13px]">{hint}</span>
+              </span>
             </motion.li>
           ))}
         </AnimatePresence>
       </ul>
-
-      {children}
     </div>
   );
 };

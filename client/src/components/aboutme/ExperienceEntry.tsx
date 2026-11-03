@@ -1,4 +1,5 @@
 import React from "react";
+import { CommitIcon } from "@/components/pr/Icons";
 
 export type Locale = "es" | "en";
 
@@ -21,49 +22,58 @@ type ExperienceEntryProps = {
   controls?: React.ReactNode;
 };
 
+/** Deterministic 7-char "commit hash" so server and client render the same. */
+export const shortSha = (seed: string): string => {
+  let hash = 2166136261;
+  for (const char of seed) {
+    hash ^= char.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0).toString(16).padStart(8, "0").slice(0, 7);
+};
+
 const ExperienceEntry = ({
   item,
   locale,
   isCurrent,
   controls,
 }: ExperienceEntryProps): React.ReactElement => (
-  <div className="brutal-card p-5">
-    <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-      <span className="brutal-chip bg-yellow font-mono text-xs">
-        {item.timelapse[locale]}
-      </span>
-      <span className="flex items-center gap-2">
-        {isCurrent && (
-          <span className="brutal-chip -rotate-3 bg-green font-mono text-xs">
-            NOW
-          </span>
-        )}
-        {controls}
-      </span>
+  <div className="flex gap-3 px-4 py-4">
+    <CommitIcon className="mt-1 h-4 w-4 text-muted" />
+    <div className="min-w-0 flex-1">
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <h4 className="font-semibold leading-snug">{item.position[locale]}</h4>
+        <span className="flex items-center gap-2">
+          {isCurrent && (
+            <span className="label-chip border-accent/50 text-accent">HEAD</span>
+          )}
+          <code className="rounded-md border border-line bg-subtle px-1.5 py-0.5 font-mono text-xs text-link">
+            {shortSha(`${item.company}-${item.start}`)}
+          </code>
+          {controls}
+        </span>
+      </div>
+      <p className="mt-1 text-sm text-muted">
+        <span className="font-semibold text-fg">{item.company}</span>
+        {" · "}
+        {item.timelapse[locale]} · {item.country} · {item.workModality}
+      </p>
+      <ul className="mt-2.5 flex flex-col gap-1">
+        {item.highlights[locale].map((highlight) => (
+          <li
+            key={highlight}
+            className="relative pl-4 text-[14.5px] leading-relaxed text-muted before:absolute before:left-0 before:text-accent before:content-['+']"
+          >
+            {highlight}
+          </li>
+        ))}
+      </ul>
     </div>
-    <h4 className="text-xl font-bold leading-tight">{item.position[locale]}</h4>
-    <p className="mt-1 font-mono text-sm font-bold text-blue">
-      {item.company}
-      <span className="font-medium text-ink-soft">
-        {" "}
-        · {item.country} · {item.workModality}
-      </span>
-    </p>
-    <ul className="mt-3 flex flex-col gap-1.5">
-      {item.highlights[locale].map((highlight) => (
-        <li
-          key={highlight}
-          className="relative pl-5 text-[15px] leading-[1.6] text-ink-soft before:absolute before:left-0 before:font-bold before:text-pink before:content-['✦']"
-        >
-          {highlight}
-        </li>
-      ))}
-    </ul>
   </div>
 );
 
 export const entryClassName = (isLast: boolean): string =>
-  isLast ? "relative" : "relative mb-5";
+  isLast ? "relative bg-surface" : "relative border-b border-line bg-surface";
 
 /** Newest first, by the ISO-like `start` month. */
 export const sortByNewest = (items: readonly Experience[]): Experience[] =>

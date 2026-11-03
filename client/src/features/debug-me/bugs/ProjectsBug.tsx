@@ -53,7 +53,7 @@ const ProjectsBug = ({ cardCount, children }: ProjectsBugProps) => {
   };
 
   return (
-    <div className="-mx-5 overflow-x-clip px-5 py-2 md:-mx-10 md:px-10">
+    <div className="-mx-4 overflow-x-clip px-4 py-1">
       <BugNotice
         fixed={fixed}
         riddle={t("riddle", { count: cardCount })}

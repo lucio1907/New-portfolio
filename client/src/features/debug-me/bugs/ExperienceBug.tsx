@@ -33,7 +33,7 @@ const moveItem = <T,>(items: readonly T[], from: number, to: number): T[] => {
 };
 
 const controlClassName =
-  "flex h-9 w-9 cursor-pointer items-center justify-center rounded-btn border-2 border-ink bg-white font-mono text-sm font-bold text-ink shadow-brutal-sm transition-colors hover:bg-yellow active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:pointer-events-none disabled:opacity-30";
+  "flex h-9 w-9 cursor-pointer items-center justify-center rounded-box border border-line bg-subtle font-mono text-sm text-fg transition-colors hover:border-link hover:text-link disabled:pointer-events-none disabled:opacity-30";
 
 type ExperienceBugProps = {
   /** Experiences in the correct order (newest first). */
@@ -73,7 +73,7 @@ const ExperienceBug = ({ items }: ExperienceBugProps) => {
     return (
       <>
         {notice}
-        <StaggerContainer className="flex flex-col">
+        <StaggerContainer className="box flex flex-col overflow-hidden">
           {items.map((item, index) => (
             <StaggerItem
               key={item.id}
@@ -98,7 +98,7 @@ const ExperienceBug = ({ items }: ExperienceBugProps) => {
         axis="y"
         values={order}
         onReorder={(next) => update(next, false)}
-        className="flex flex-col"
+        className="box flex flex-col overflow-hidden"
       >
         {order.map((item, index) => (
           <DraggableEntry

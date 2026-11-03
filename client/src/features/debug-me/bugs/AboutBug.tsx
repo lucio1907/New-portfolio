@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useBug } from "../useDebugMe";
@@ -17,7 +16,7 @@ const NAME = "LUCIO";
 const SHAKE = { x: [0, -6, 6, -4, 4, 0] };
 
 const tileClassName =
-  "flex h-12 w-12 items-center justify-center rounded-btn border-3 border-ink font-mono text-xl font-bold shadow-brutal-sm";
+  "flex h-11 w-11 items-center justify-center rounded-box border font-mono text-lg font-bold";
 
 /** Bug 1: the deploy scrambled my name; rebuild it by tapping the letters in order. */
 const AboutBug = ({ children }: { children: React.ReactNode }) => {
@@ -58,7 +57,7 @@ const AboutBug = ({ children }: { children: React.ReactNode }) => {
               <span
                 key={index}
                 aria-hidden="true"
-                className={`${tileClassName} ${progress[index] ? "bg-green" : "border-dashed bg-paper shadow-none"}`}
+                className={`${tileClassName} ${progress[index] ? "border-accent bg-accent/15 text-accent" : "border-dashed border-line bg-canvas"}`}
               >
                 {progress[index] ?? ""}
               </span>
@@ -78,7 +77,7 @@ const AboutBug = ({ children }: { children: React.ReactNode }) => {
                   aria-label={t("letter", { letter })}
                   animate={shaking ? SHAKE : undefined}
                   transition={{ duration: 0.35 }}
-                  className={`${tileClassName} cursor-pointer ${wrong ? "bg-red" : "bg-yellow"} transition-colors hover:bg-pink active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:pointer-events-none disabled:opacity-25`}
+                  className={`${tileClassName} cursor-pointer transition-colors ${wrong ? "border-danger bg-danger/20 text-danger" : "border-line bg-subtle hover:border-link hover:text-link"} disabled:pointer-events-none disabled:opacity-25`}
                 >
                   {letter}
                 </motion.button>
@@ -87,15 +86,6 @@ const AboutBug = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div>
       </BugNotice>
-
-      <Image
-        src="/MeMemoji.webp"
-        alt="Lucio Gastellu"
-        width={112}
-        height={112}
-        priority={false}
-        className="mb-8 h-28 w-28 rounded-full border-3 border-ink bg-yellow object-cover shadow-brutal-sm"
-      />
 
       <div className={fixed ? undefined : "motion-safe:animate-glitch"}>
         {children}
