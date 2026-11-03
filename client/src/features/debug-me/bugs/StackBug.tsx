@@ -1,109 +1,102 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useBug } from "../useDebugMe";
-import BugNotice, {
-  bugActionClassName,
-  bugSecondaryActionClassName,
-} from "../components/BugNotice";
-import CodeChallenge from "../challenges/CodeChallenge";
-import { STACK_CHALLENGE } from "../challenges/jsChallenges";
+import BugNotice from "../components/BugNotice";
+import { isStackAnswer } from "../riddles/stack";
 
-type Phase = "stuck" | "retrying" | "failed";
+const SHAKE = { x: [0, -6, 6, -4, 4, 0] };
 
-const RETRY_DELAY_MS = 800;
+type StackBugContextValue = {
+  open: boolean;
+  wrong: { tech: string; count: number } | null;
+  guess: (tech: string) => void;
+};
 
-/** Bug 2: the tech stack loader never finishes; the second retry works. */
+const StackBugContext = createContext<StackBugContextValue | null>(null);
+
+/** Bug 2: the stack loader is stuck until the visitor taps the riddle's answer. */
 const StackBug = ({ children }: { children: React.ReactNode }) => {
   const t = useTranslations("debug.stack");
-  const tc = useTranslations("debug.challenge");
-  const [showCode, setShowCode] = useState(false);
   const { fixed, fix } = useBug("stack");
-  const [phase, setPhase] = useState<Phase>("stuck");
-  const attempts = useRef(0);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [wrong, setWrong] = useState<StackBugContextValue["wrong"]>(null);
 
-  useEffect(
-    () => () => {
-      if (timer.current) clearTimeout(timer.current);
-    },
-    [],
-  );
-
-  const retry = () => {
-    setPhase("retrying");
-    timer.current = setTimeout(() => {
-      attempts.current += 1;
-      if (attempts.current === 1) {
-        setPhase("failed");
-      } else {
-        fix();
-      }
-    }, RETRY_DELAY_MS);
+  const guess = (tech: string) => {
+    if (isStackAnswer(tech)) {
+      setWrong(null);
+      fix();
+      return;
+    }
+    setWrong((previous) => ({ tech, count: (previous?.count ?? 0) + 1 }));
   };
-
-  const retrying = phase === "retrying";
 
   return (
     <div>
-      <BugNotice fixed={fixed} hint={t("hint")} fixedText={t("loaded")}>
-        <button
-          type="button"
-          onClick={retry}
-          disabled={retrying}
-          className={bugActionClassName}
-        >
-          {retrying ? t("retrying") : t("retry")}
-        </button>
-        <button
-          type="button"
-          aria-expanded={showCode}
-          aria-controls="challenge-stack"
-          onClick={() => setShowCode((open) => !open)}
-          className={bugSecondaryActionClassName}
-        >
-          <span aria-hidden="true">{"</>"}</span>
-          {showCode ? tc("close") : tc("open")}
-        </button>
-      </BugNotice>
-
-      {!fixed && showCode && (
-        <CodeChallenge
-          challenge={STACK_CHALLENGE}
-          fileName="loadStack.js"
-          onSolved={fix}
-        />
-      )}
-
-      {!fixed && (
-        <div className="mb-8 flex flex-col gap-3">
-          <div className="flex items-center gap-3 font-mono text-sm font-bold">
-            {t("loading")}
-          </div>
+      <BugNotice
+        fixed={fixed}
+        riddle={t("riddle")}
+        hints={[t("hint1"), t("hint2")]}
+        fixedText={t("loaded")}
+      >
+        <div className="flex flex-col gap-2">
+          <p className="font-mono text-sm font-bold">{t("loading")}</p>
           <div
             aria-hidden="true"
-            className="h-6 overflow-hidden rounded-full border-3 border-ink bg-white"
+            className="h-5 overflow-hidden rounded-full border-3 border-ink bg-white"
           >
             <div className="hazard-tape h-full w-2/3 border-r-3 border-ink [background-size:40px_40px] motion-safe:animate-stripes" />
           </div>
-          {phase === "failed" && (
+          {wrong && (
             <p
               role="alert"
               className="w-fit rounded-btn border-2 border-ink bg-red px-3 py-1.5 font-mono text-sm font-bold"
             >
-              {t("firstError")}
+              {t("wrong", { tech: wrong.tech })}
             </p>
           )}
         </div>
-      )}
+      </BugNotice>
 
-      <div
-        className={`transition-opacity duration-500 ${fixed ? "opacity-100" : "opacity-75"}`}
-      >
+      <StackBugContext.Provider value={{ open: !fixed, wrong, guess }}>
         {children}
-      </div>
+      </StackBugContext.Provider>
     </div>
+  );
+};
+
+type StackChipProps = {
+  tech: string;
+  className: string;
+};
+
+/** A tech chip; while the bug is open it is a guess for the riddle. */
+export const StackChip = ({ tech, className }: StackChipProps) => {
+  const t = useTranslations("debug.stack");
+  const context = useContext(StackBugContext);
+  const reduceMotion = useReducedMotion();
+
+  if (!context?.open) return <li className={className}>{tech}</li>;
+
+  const { wrong, guess } = context;
+  const isWrong = wrong?.tech === tech;
+  const shaking = isWrong && !reduceMotion;
+
+  return (
+    <li>
+      <motion.button
+        key={shaking ? wrong.count : 0}
+        type="button"
+        onClick={() => guess(tech)}
+        aria-label={t("guess", { tech })}
+        animate={shaking ? SHAKE : undefined}
+        transition={{ duration: 0.35 }}
+        className={`${className} cursor-pointer transition-colors hover:bg-yellow active:translate-x-0.5 active:translate-y-0.5 ${isWrong ? "!bg-red" : ""}`}
+      >
+        {tech}
+      </motion.button>
+    </li>
   );
 };
 

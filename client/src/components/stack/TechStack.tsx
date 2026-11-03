@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import TechStackData from "../../json/techStack.json";
 import SectionHeader from "@/components/common/SectionHeader";
-import StackBug from "@/features/debug-me/bugs/StackBug";
+import StackBug, { StackChip } from "@/features/debug-me/bugs/StackBug";
 import { FadeIn, StaggerContainer, StaggerItem } from "../motion/Reveal";
 
 type Category = {
@@ -51,9 +51,7 @@ const TechStack = (): React.ReactElement => {
                 </h3>
                 <ul className="flex flex-wrap gap-2.5 p-5">
                   {category.items.map((item) => (
-                    <li key={item} className="brutal-chip bg-white">
-                      {item}
-                    </li>
+                    <StackChip key={item} tech={item} className="brutal-chip bg-white" />
                   ))}
                 </ul>
               </div>

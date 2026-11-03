@@ -117,87 +117,56 @@
       "reset": "Break it again",
       "region": "Debug progress"
     },
+    "riddle": {
+      "label": "Riddle",
+      "hint": "Hint {n}:"
+    },
     "about": {
-      "hint": "// a bug is crawling over my photo. Catch it.",
-      "catch": "Catch the bug",
-      "caught": "Caught. About section stable."
+      "riddle": "I wrote this whole portfolio and the deploy scrambled my name. Tap the letters in order and give it back to me.",
+      "hint1": "It has 5 letters and starts with L.",
+      "hint2": "L, U, C, I, O. Yes, that's me.",
+      "letter": "Letter {letter}",
+      "progress": "Name so far: {value}",
+      "solved": "Name restored. About section stable."
     },
     "stack": {
       "loading": "Loading tech stack…",
-      "hint": "// the loader has been spinning since Friday.",
-      "retry": "Retry",
-      "retrying": "Retrying…",
-      "firstError": "ETIMEDOUT: coffee not found. Try again.",
+      "riddle": "I speak on the front end, on the back end, and even JSON carries my name. Find me among the chips and tap me to unblock the loader.",
+      "hint1": "I'm a language. I live on the Languages card, and I'm not Java.",
+      "hint2": "JSON = JavaScript Object Notation.",
+      "guess": "Pick {tech}",
+      "wrong": "Not {tech}. Keep looking.",
       "loaded": "Tech stack loaded."
     },
     "experience": {
-      "hint": "// timeline is shuffled. Sort it by date.",
-      "sort": "Sort by date",
+      "riddle": "The last to arrive always goes first. Put my story in order.",
+      "hint1": "Drag the cards by ⋮⋮ or use the ↑ ↓ arrows.",
+      "hint2": "My current job goes on top; the oldest one at the bottom. Check the dates.",
       "moveUp": "Move {company} up",
       "moveDown": "Move {company} down",
       "dragHandle": "Drag to reorder {company}",
       "sorted": "Timeline sorted."
     },
     "projects": {
-      "hint": "// someone shipped position: absolute.",
-      "apply": "Apply display: grid",
+      "riddle": "{count, plural, one {My project escaped} other {My # projects escaped}} the grid. None of them comes back alone: go get them.",
+      "hint1": "Drag each card and let go (or tap it): it knows its way home.",
+      "hint2": "{remaining, plural, =0 {Almost there!} one {# card is still out of place.} other {# cards are still out of place.}}",
       "applied": "Layout fixed."
     },
     "contact": {
-      "setEnv": "Set CONTACT_EMAIL",
+      "riddle": "The deploy doesn't know where to send my emails. Teach it my email in the terminal and deploy again.",
+      "hint1": "Type help to see the commands.",
+      "hint2": "export CONTACT_EMAIL=luciogastellu.dev@gmail.com, then npm run deploy",
+      "envSet": "CONTACT_EMAIL set.",
       "success": "✓ Deploy successful",
       "pending": "✓ CONTACT_EMAIL set. Deploy blocked: {remaining, plural, one {# bug} other {# bugs}} still open."
-    },
-    "challenge": {
-      "open": "Fix it in code",
-      "close": "Hide code",
-      "run": "Run tests",
-      "running": "Running…",
-      "reset": "Reset code",
-      "editorLabel": "Code editor: {file}",
-      "summary": "{passed} of {total} tests passing",
-      "passed": "All tests green. Bug fixed!",
-      "timeout": "Timed out. Is there an infinite loop?",
-      "error": "Error: {message}",
-      "hintLabel": "Need a hint?",
-      "hints": {
-        "stack": "Two bugs: one is about promises, the other one about counting.",
-        "experience": "Strings cannot be subtracted, and sort() changes the original array.",
-        "projects": "Think grid: columns and a gap. And something absolute has to go."
-      },
-      "tests": {
-        "stack": {
-          "firstTry": "returns the stack on the first try",
-          "retries": "retries after a failed attempt",
-          "givesUp": "gives up after the last retry"
-        },
-        "experience": {
-          "newestFirst": "sorts newest first",
-          "sameYear": "compares months of the same year",
-          "noMutation": "does not mutate the original array"
-        }
-      },
-      "testPassed": "passed",
-      "testFailed": "failed"
-    },
-    "css": {
-      "preview": "Live preview",
-      "ship": "Ship CSS",
-      "notYet": "Make every check pass to ship it.",
-      "checksLabel": "Checks",
-      "checks": {
-        "display": "display is grid",
-        "position": "no absolute positioning",
-        "gap": "cards have a gap",
-        "columns": "grid-template-columns is set"
-      }
     },
     "terminal": {
       "label": "Terminal command",
       "placeholder": "type help",
       "run": "Run",
       "out": {
-        "intro": "// the deploy pipeline is failing. Type help, or use the button below.",
+        "intro": "// the deploy pipeline is failing. Type help to get started.",
         "help": "Commands: help, ls, whoami, export NAME=value, echo $NAME, npm run deploy, clear, hire lucio",
         "whoami": "visitor. Probably a recruiter, maybe a developer. Both are welcome.",
         "hire": "Excellent choice. Email and phone are right below.",

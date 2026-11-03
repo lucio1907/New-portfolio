@@ -1,15 +1,11 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useBug } from "../useDebugMe";
 import { useFinePointer } from "../useFinePointer";
-import BugNotice, {
-  bugActionClassName,
-  bugSecondaryActionClassName,
-} from "../components/BugNotice";
-import CssChallenge from "../challenges/CssChallenge";
+import BugNotice from "../components/BugNotice";
 
 // Deterministic offsets: random values would differ between server and client.
 const OFFSETS = [
@@ -36,11 +32,9 @@ type ProjectsBugProps = {
   children: React.ReactNode;
 };
 
-/** Bug 4: project cards ship misaligned; drag each one home or apply grid. */
+/** Bug 4: project cards ship misaligned; drag (or tap) each one home. */
 const ProjectsBug = ({ cardCount, children }: ProjectsBugProps) => {
   const t = useTranslations("debug.projects");
-  const tc = useTranslations("debug.challenge");
-  const [showCode, setShowCode] = useState(false);
   const { fixed, fix } = useBug("projects");
   const finePointer = useFinePointer();
   const [aligned, setAligned] = useState<ReadonlySet<number>>(new Set());
@@ -60,22 +54,12 @@ const ProjectsBug = ({ cardCount, children }: ProjectsBugProps) => {
 
   return (
     <div className="-mx-5 overflow-x-clip px-5 py-2 md:-mx-10 md:px-10">
-      <BugNotice fixed={fixed} hint={t("hint")} fixedText={t("applied")}>
-        <button type="button" onClick={fix} className={bugActionClassName}>
-          {t("apply")}
-        </button>
-        <button
-          type="button"
-          aria-expanded={showCode}
-          aria-controls="challenge-projects"
-          onClick={() => setShowCode((open) => !open)}
-          className={bugSecondaryActionClassName}
-        >
-          <span aria-hidden="true">{"</>"}</span>
-          {showCode ? tc("close") : tc("open")}
-        </button>
-      </BugNotice>
-      {!fixed && showCode && <CssChallenge onSolved={fix} />}
+      <BugNotice
+        fixed={fixed}
+        riddle={t("riddle", { count: cardCount })}
+        hints={[t("hint1"), t("hint2", { remaining: cardCount - aligned.size })]}
+        fixedText={t("applied")}
+      />
       <ProjectsBugContext.Provider value={value}>
         {children}
       </ProjectsBugContext.Provider>
@@ -97,6 +81,9 @@ export const ProjectSlot = ({ index, children }: ProjectSlotProps) => {
   const { isAligned, align, draggable } = context;
   const aligned = isAligned(index);
   const canDrag = draggable && !aligned;
+  // A drag ends with a click on the card's link; swallow it so the card only
+  // snaps home instead of also navigating.
+  const draggedAt = useRef(0);
 
   return (
     <motion.div
@@ -104,7 +91,19 @@ export const ProjectSlot = ({ index, children }: ProjectSlotProps) => {
       transition={{ type: "spring", stiffness: 160, damping: 20 }}
       drag={canDrag}
       dragMomentum={false}
-      onDragEnd={() => align(index)}
+      onDragEnd={() => {
+        draggedAt.current = Date.now();
+        align(index);
+      }}
+      // Touch and keyboard path: tapping (or pressing Enter on) a stray card
+      // sends it home instead of following its links.
+      onClickCapture={(event: React.MouseEvent) => {
+        const justDragged = Date.now() - draggedAt.current < 400;
+        if (aligned && !justDragged) return;
+        event.preventDefault();
+        event.stopPropagation();
+        align(index);
+      }}
       // Images and links start a native HTML5 drag that cancels the pointer
       // gesture and leaves framer-motion's drag lock stuck.
       onDragStartCapture={(event: React.DragEvent) => {

@@ -117,87 +117,56 @@
       "reset": "Romperlo de nuevo",
       "region": "Progreso de debug"
     },
+    "riddle": {
+      "label": "Acertijo",
+      "hint": "Pista {n}:"
+    },
     "about": {
-      "hint": "// hay un bug caminando sobre mi foto. Atrapalo.",
-      "catch": "Atrapar el bug",
-      "caught": "Atrapado. Sección Sobre mí estable."
+      "riddle": "Escribí todo este portfolio y el deploy me desordenó el nombre. Tocá las letras en orden y devolvémelo.",
+      "hint1": "Son 5 letras y empieza con L.",
+      "hint2": "L, U, C, I, O. Sí, así me llamo.",
+      "letter": "Letra {letter}",
+      "progress": "Nombre armado: {value}",
+      "solved": "Nombre recuperado. Sección Sobre mí estable."
     },
     "stack": {
       "loading": "Cargando tech stack…",
-      "hint": "// el loader está girando desde el viernes.",
-      "retry": "Reintentar",
-      "retrying": "Reintentando…",
-      "firstError": "ETIMEDOUT: coffee not found. Probá de nuevo.",
+      "riddle": "Hablo en el front, en el back, y hasta el JSON lleva mi nombre. Encontrame entre los chips y tocame para destrabar el loader.",
+      "hint1": "Soy un lenguaje. Estoy en la tarjeta de Lenguajes, y no soy Java.",
+      "hint2": "JSON = JavaScript Object Notation.",
+      "guess": "Elegir {tech}",
+      "wrong": "{tech} no es. Seguí buscando.",
       "loaded": "Tech stack cargado."
     },
     "experience": {
-      "hint": "// la línea de tiempo está desordenada. Ordenala por fecha.",
-      "sort": "Ordenar por fecha",
+      "riddle": "El último en llegar siempre va primero. Poné mi historia en orden.",
+      "hint1": "Arrastrá las tarjetas desde ⋮⋮ o usá las flechas ↑ ↓.",
+      "hint2": "Arriba va mi trabajo actual; abajo, el más viejo. Mirá las fechas.",
       "moveUp": "Subir {company}",
       "moveDown": "Bajar {company}",
       "dragHandle": "Arrastrar para reordenar {company}",
       "sorted": "Línea de tiempo ordenada."
     },
     "projects": {
-      "hint": "// alguien deployó position: absolute.",
-      "apply": "Aplicar display: grid",
+      "riddle": "{count, plural, one {Mi proyecto se escapó} other {Mis # proyectos se escaparon}} de la grilla. Ninguno vuelve solo: hay que ir a buscarlos.",
+      "hint1": "Arrastrá cada card y soltala (o tocala): sabe volver a su lugar.",
+      "hint2": "{remaining, plural, =0 {¡Ya casi!} one {Queda # card fuera de lugar.} other {Quedan # cards fuera de lugar.}}",
       "applied": "Layout arreglado."
     },
     "contact": {
-      "setEnv": "Definir CONTACT_EMAIL",
+      "riddle": "El deploy no sabe a dónde mandarme los mails. Enseñale mi email en la terminal y volvé a deployar.",
+      "hint1": "Escribí help para ver los comandos.",
+      "hint2": "export CONTACT_EMAIL=luciogastellu.dev@gmail.com y después npm run deploy",
+      "envSet": "CONTACT_EMAIL definido.",
       "success": "✓ Deploy exitoso",
       "pending": "✓ CONTACT_EMAIL definido. Deploy bloqueado: {remaining, plural, one {queda # bug abierto} other {quedan # bugs abiertos}}."
-    },
-    "challenge": {
-      "open": "Arreglalo en código",
-      "close": "Ocultar código",
-      "run": "Correr tests",
-      "running": "Corriendo…",
-      "reset": "Restaurar código",
-      "editorLabel": "Editor de código: {file}",
-      "summary": "{passed} de {total} tests pasando",
-      "passed": "Todos los tests en verde. ¡Bug arreglado!",
-      "timeout": "Se agotó el tiempo. ¿Hay un loop infinito?",
-      "error": "Error: {message}",
-      "hintLabel": "¿Necesitás una pista?",
-      "hints": {
-        "stack": "Hay dos bugs: uno tiene que ver con promesas, el otro con contar.",
-        "experience": "Los strings no se pueden restar, y sort() modifica el array original.",
-        "projects": "Pensá en grid: columnas y un gap. Y hay algo absoluto que tiene que irse."
-      },
-      "tests": {
-        "stack": {
-          "firstTry": "devuelve el stack al primer intento",
-          "retries": "reintenta después de un intento fallido",
-          "givesUp": "se rinde después del último intento"
-        },
-        "experience": {
-          "newestFirst": "ordena del más nuevo al más viejo",
-          "sameYear": "compara meses del mismo año",
-          "noMutation": "no modifica el array original"
-        }
-      },
-      "testPassed": "pasó",
-      "testFailed": "falló"
-    },
-    "css": {
-      "preview": "Vista previa en vivo",
-      "ship": "Deployar CSS",
-      "notYet": "Hacé pasar todos los checks para deployar.",
-      "checksLabel": "Checks",
-      "checks": {
-        "display": "display es grid",
-        "position": "sin posicionamiento absoluto",
-        "gap": "las cards tienen separación (gap)",
-        "columns": "grid-template-columns está definido"
-      }
     },
     "terminal": {
       "label": "Comando de terminal",
       "placeholder": "escribí help",
       "run": "Ejecutar",
       "out": {
-        "intro": "// el pipeline de deploy está fallando. Escribí help, o usá el botón de abajo.",
+        "intro": "// el pipeline de deploy está fallando. Escribí help para empezar.",
         "help": "Comandos: help, ls, whoami, export NOMBRE=valor, echo $NOMBRE, npm run deploy, clear, hire lucio",
         "whoami": "visitante. Probablemente recruiter, quizás developer. Bienvenidos los dos.",
         "hire": "Excelente elección. El email y el teléfono están justo abajo.",

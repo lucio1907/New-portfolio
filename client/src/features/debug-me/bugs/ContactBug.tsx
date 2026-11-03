@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useBug, useDebugMe } from "../useDebugMe";
-import { bugActionClassName } from "../components/BugNotice";
+import BugNotice from "../components/BugNotice";
 import {
   type CommandResult,
   initialTerminalState,
@@ -12,7 +12,6 @@ import {
   type TerminalLine,
 } from "../terminal/terminal";
 
-const EMAIL = "luciogastellu.dev@gmail.com";
 const MAX_LINES = 60;
 const PROMPT = "visitor@lucio.dev:~$";
 
@@ -105,6 +104,12 @@ const ContactBug = () => {
 
   return (
     <div className="mb-14">
+      <BugNotice
+        fixed={fixed}
+        riddle={t("riddle")}
+        hints={[t("hint1"), t("hint2")]}
+        fixedText={t("envSet")}
+      />
       <div className="overflow-hidden rounded-card border-3 border-ink bg-terminal shadow-brutal-lg">
         <div className="flex items-center gap-2 border-b-3 border-ink bg-white px-4 py-2.5">
           <span className="h-3.5 w-3.5 rounded-full border-2 border-ink bg-red" />
@@ -162,16 +167,6 @@ const ContactBug = () => {
           </button>
         </form>
       </div>
-
-      {!fixed && (
-        <button
-          type="button"
-          onClick={() => execute([`export CONTACT_EMAIL=${EMAIL}`, "npm run deploy"])}
-          className={`${bugActionClassName} mt-5`}
-        >
-          {t("setEnv")}
-        </button>
-      )}
     </div>
   );
 };

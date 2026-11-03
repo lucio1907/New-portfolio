@@ -1,6 +1,6 @@
 # Debug me portfolio
 Objective: interactive "Debug me" portfolio where the visitor fixes 5 micro-bugs that reveal each section, synced with the CV.
-Branch: feat/debug-me · Delivery: ask-on-risk · Test runner: none (exception: lint + build + browser checks).
+Branch: feat/debug-me · Delivery: ask-on-risk · Test runner: `npm test` (node:test) + lint + tsc + browser checks.
 
 ## Specs
 - S1. Everything is created inside `client/` ("hace todo dentro de la carpeta client, no crees nada fuera de esa carpeta").
@@ -12,10 +12,10 @@ Branch: feat/debug-me · Delivery: ask-on-risk · Test runner: none (exception: 
 - S7. Drag & drop is keyboard accessible; fast on mobile; respects prefers-reduced-motion.
 - S8. UI copy in EN and ES (next-intl); code/UI artifacts in English by default.
 - S9. Full visual redesign: "me gusta la idea pero no me gusta el diseño, quiero que lo rediseñes completamente, quiero que se vea divertido". Direction chosen: "Neo-brutalismo juguetón" (light background, thick black borders, hard offset shadows, saturated yellow/pink/blue, sticker-style badges). Game mechanics and content stay.
-- S10. "ya que aparece esa funcion para el recruiter, me gustaria que se pueda resolver algunos bugs con un codigo que no sea ni muy basico ni muy avanzado o que se puedan resolver de otra manera de ademas de tocar los botones". Buttons and the recruiter fix-all stay.
-- S11. Stack: intermediate JS challenge (async retry: missing await + off-by-one) checked by tests. Experience: JS sort challenge (newest first, string dates, no mutation) checked by tests.
-- S12. Visitor code runs only inside a terminable Web Worker with a timeout; never on the main thread, never touching the DOM.
-- S13. Projects: CSS editor with live preview; fixed when the rules pass (display grid, no absolute positioning, gap, columns).
+- S10. "quiero que la parte de resolver bugs sea como con acertijos o alguna otra forma de hacer que no sea apretando un boton, lo que hay ahora de resolver con codigo no me gusta porque no se logra entender la consigna asi que sacalo". Code challenges (JS editor, CSS editor, sandbox) are removed. Chosen direction: "el acertijo que te dice qué hacer" — each bug shows a riddle whose answer is an action on the broken section itself. The recruiter fix-all stays.
+- S11. Per-bug riddles: About → rebuild the scrambled name "LUCIO" by tapping letters in order; Stack → tap the right tech chip (JavaScript); Experience → reorder the timeline (drag or ↑/↓); Projects → drag (or tap) each card home; Contact → set CONTACT_EMAIL and deploy in the terminal.
+- S12. Shortcut fix buttons ("Ordenar por fecha", "Aplicar display: grid", "Reintentar", "Definir CONTACT_EMAIL") are removed.
+- S13. Progressive hints: if the visitor is still stuck ~20 s after the riddle comes into view, a more direct hint appears; a second one later, so nobody gets blocked.
 - S14. Contact: interactive terminal (`export CONTACT_EMAIL=...`, `npm run deploy`, `help`, extras). Every bug can also be fixed from the DevTools console (`debugMe.help()`).
 
 ## Tasks
@@ -31,6 +31,7 @@ Branch: feat/debug-me · Delivery: ask-on-risk · Test runner: none (exception: 
 | T8 Code challenge UI wired to Stack and Experience | S10, S11 | inline | done (browser-verified) | decf685 |
 | T9 CSS challenge with live preview for Projects | S10, S13 | inline | done (browser-verified) | f7e0d6d |
 | T10 Interactive terminal for Contact + DevTools console API | S10, S14 | inline | terminal done (unit-tested, not browser-verified); DevTools API pending | see log |
+| T11 Replace code challenges with riddles + progressive hints, remove shortcut buttons | S10–S13 | inline | done (unit + SSR verified; interaction NOT browser-verified) | see log |
 
 ## Log
 - L1 (2026-11-02): "/home/luciogastellu/Downloads/CV-LucioGastellu-FullStackAI.pdf mi CV lo podes analizar en esa ruta y baja a detalle "debug me""
@@ -40,3 +41,5 @@ Branch: feat/debug-me · Delivery: ask-on-risk · Test runner: none (exception: 
 - L5 (2026-11-02): Redesign shipped (57962a5): cream dotted bg, 3px ink borders, hard shadows, yellow/pink/blue/green/lilac, hero dev-pass card + stickers + tech marquee, card sections, sticker logo "LG". Verified in Chrome: all sections render, recruiter fix-all → deployed state + confetti, no horizontal scroll at 375px (iframe check), mobile HUD fits. Found and fixed: framer-motion inline transform overrides Tailwind rotate on motion elements; projects clip cut shifted cards; per-document store diverged across tabs → storage-event sync (verified on production build with 3 documents). `next build` fails while `next dev` shares .next (Turbopack font error); build passes alone.
 - L6 (2026-11-02): "ya que aparece esa funcion para el recruiter, me gustaria que se pueda resolver algunos bugs con un codigo que no sea ni muy basico ni muy avanzado o que se puedan resolver de otra manera de ademas de tocar los botones, agrega esta idea a engram para guardar en donde nos quedamos y arranca la ejecucion". Saved to Engram (portfolio/debug-me-code-challenges). Node 22.23 runs TS tests natively → `node --test`, no new deps. Risk: item 2 (sandbox for visitor code) → independent verifier at the end.
 - L7 (2026-11-02): T7–T9 done and browser-verified (starter 1/3, infinite loop → timeout with main thread alive, fixes mark bugs). Fixed ICU bug: `</>` in messages parsed as closing tag. T10 terminal committed with 40/40 node tests; NOT yet checked in browser. Pending: DevTools console API (`debugMe.help()`), browser check of terminal, independent verifier for sandbox (Risk item 2), production build.
+- L8 (2026-11-03): "quiero que la parte de resolver bugs sea como con acertijos o alguna otra forma de hacer que no sea apretando un boton, lo que hay ahora de resolver con codigo no me gusta porque no se logra entender la consigna asi que sacalo, que me recomendas para hacer que sea original y divertido" → code challenges removed (challenges/, debug.challenge copy); tsc + lint + 16/16 tests green. Proposal: the riddle is the instruction, solved by acting on the section. User: "dale, el acertijo que te dice qué hacer". S10–S13 rewritten; T7–T9 superseded; sandbox risk (item 2) no longer applies.
+- L9 (2026-11-03): T11 implemented. BugNotice now shows a riddle + progressive hints (20 s steps after first in view, `riddles/hints.ts`). About: anagram "LUCIO" (`riddles/anagram.ts`, crawling bug removed). Stack: tap the JavaScript chip (`StackChip`, `riddles/stack.ts`); retry loader removed. Experience: sort button removed (drag/↑↓ stay). Projects: grid button removed; tapping/Enter on a stray card sends it home (touch + keyboard path), click after drag swallowed. Contact: shortcut button removed; riddle notice above terminal. Unused copy (`debug.css`, shortcut labels) removed. Checks: tsc clean, lint clean, `npm test` 27/27, SSR of /es and /en returns 200 with all 5 riddles. Chrome extension disconnected → real interaction (tap, drag, hint timing, reduced motion) pending manual check. Risk: none (UI only; touched shared BugNotice used by all 5 bugs, all updated).
