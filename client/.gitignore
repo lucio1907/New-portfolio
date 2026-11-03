@@ -39,3 +39,5 @@ next-env.d.ts
 /.claude/skills/
 /.agents/
 /.atl/
+# Local AI runtime state
+.atl/
