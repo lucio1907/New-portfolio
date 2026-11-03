@@ -17,9 +17,12 @@
     ]
   },
   "pr": {
-    "topbar": {
+    "repo": {
       "visibility": "Public",
-      "cv": "Download CV"
+      "code": "Code",
+      "pullRequests": "Pull requests",
+      "actions": "Actions",
+      "nav": "Repository"
     },
     "header": {
       "title": "feat(team): add Lucio Gastellu, Full Stack Developer",
@@ -27,77 +30,114 @@
       "merged": "Merged",
       "openLine": "<author>{authorName}</author> wants to merge {commits} commits into <branch>{base}</branch> from <branch>{head}</branch>",
       "mergedLine": "<author>{authorName}</author> merged {commits} commits into <branch>{base}</branch> from <branch>{head}</branch>",
-      "role": "Full Stack Developer · AI-native",
-      "tagline": "I build and ship real products end to end: React and TypeScript on the frontend, FastAPI and Node.js on the backend, PostgreSQL underneath.",
-      "availability": "Available for new roles · Buenos Aires, Argentina",
       "contact": "Contact me",
       "cv": "Download CV"
     },
     "tabs": {
-      "label": "Pull request sections",
+      "label": "Pull request tabs",
       "conversation": "Conversation",
       "commits": "Commits",
-      "files": "Files changed",
       "checks": "Checks",
-      "bypass": "I'm a recruiter: approve & merge",
-      "bypassShort": "Approve",
-      "reset": "Break it again"
+      "files": "Files changed",
+      "diffstat": "{additions} lines added"
     },
     "conversation": {
-      "label": "Description",
       "commented": "commented",
-      "author": "Author"
+      "owner": "Author",
+      "edited": "edited",
+      "role": "Full Stack Developer · AI-native",
+      "availability": "Available for new roles · Buenos Aires, Argentina (remote / hybrid)",
+      "summary": "Summary",
+      "included": "What this PR includes",
+      "tasks": [
+        "Frontend with React, Next.js and TypeScript",
+        "Backend with Node.js/Express and Python (FastAPI)",
+        "PostgreSQL: schemas, queries and migrations",
+        "Agentic workflows with Claude Code, MCP servers and skills",
+        "End-to-end code ownership"
+      ],
+      "addedCommits": "<author>{authorName}</author> added {count} commits",
+      "labeled": "<author>{authorName}</author> added the labels",
+      "requestedReview": "<author>{authorName}</author> requested a review from <you>you</you>",
+      "mergedEvent": "<author>{authorName}</author> merged commit <sha>{commit}</sha> into <branch>{base}</branch>",
+      "bot": "deploy-bot",
+      "botBadge": "bot",
+      "botIntro": "Latest preview deployments for this pull request:",
+      "table": {
+        "name": "Project",
+        "status": "Status",
+        "preview": "Preview",
+        "code": "Code"
+      },
+      "ready": "Ready",
+      "apiOnly": "API only",
+      "visit": "Visit",
+      "viewCode": "View code"
+    },
+    "merge": {
+      "checksPassed": "All checks have passed",
+      "checksSummary": "{count} successful checks",
+      "showChecks": "Show all checks",
+      "hideChecks": "Hide all checks",
+      "noConflicts": "This branch has no conflicts with the base branch",
+      "noConflictsHint": "Merging can be performed automatically.",
+      "merge": "Merge pull request",
+      "confirm": "Confirm merge",
+      "cancel": "Cancel",
+      "commitTitle": "Commit title",
+      "commitMessage": "Merge pull request {number} from {head}",
+      "mergedTitle": "Pull request successfully merged and closed",
+      "mergedHint": "You're all set! Now let's talk: write to me and we'll set up an interview.",
+      "revert": "Revert",
+      "email": "Email me"
+    },
+    "composer": {
+      "title": "Add a comment",
+      "write": "Write",
+      "preview": "Preview",
+      "placeholder": "Leave a comment for Lucio…",
+      "nothing": "Nothing to preview",
+      "markdown": "Opens your email client with this comment addressed to Lucio.",
+      "comment": "Comment",
+      "subject": "Re: {title} {number}",
+      "label": "Comment"
     },
     "commits": {
-      "label": "Commits: experience",
-      "event": "<author>{authorName}</author> added {count} commits"
-    },
-    "files": {
-      "label": "Files changed: stack and projects",
-      "event": "<author>{authorName}</author> changed {count} files"
+      "group": "Commits on {date}",
+      "copy": "Copy full SHA",
+      "copied": "Copied!",
+      "more": "Show description",
+      "less": "Hide description",
+      "verified": "Verified",
+      "authored": "<author>{authorName}</author> committed · {modality} · {country}"
     },
     "checks": {
-      "label": "Checks and merge",
-      "event": "<bot>deploy-bot</bot> ran {count} checks",
-      "someFailed": "Some checks were not successful",
-      "allPassed": "All checks have passed",
-      "summary": "{failing, plural, =0 {No failing checks} one {# failing} other {# failing}} · {passing, plural, one {# successful} other {# successful}}",
-      "details": "Details",
-      "items": {
-        "about": {
-          "failing": "the deploy scrambled the author's name",
-          "passing": "name restored"
-        },
-        "stack": {
-          "failing": "the stack loader is stuck",
-          "passing": "stack loaded"
-        },
-        "experience": {
-          "failing": "commits are out of order",
-          "passing": "history sorted"
-        },
-        "projects": {
-          "failing": "projects escaped the grid",
-          "passing": "layout fixed"
-        },
-        "contact": {
-          "failing": "CONTACT_EMAIL is missing in the deploy",
-          "passing": "deploy configured"
-        }
-      },
-      "blockedHint": "Merging is blocked until every check passes.",
-      "readyHint": "All checks have passed. This branch has no conflicts.",
-      "bypass": "Bypass checks (recruiter)",
-      "merge": "Merge pull request",
-      "mergedTitle": "Pull request merged. Welcome to the team!",
-      "reset": "Break it again"
+      "workflow": "CI",
+      "workflowFile": "ci.yml",
+      "summary": "All checks have passed",
+      "runs": "{count} successful checks",
+      "jobs": "Jobs",
+      "succeeded": "Succeeded in {seconds}s",
+      "setup": "Set up job",
+      "checkout": "Run actions/checkout@v4",
+      "install": "Install {name}",
+      "complete": "Complete job",
+      "jobsLabel": "Workflow jobs"
+    },
+    "files": {
+      "filter": "Filter files…",
+      "viewed": "Viewed",
+      "viewedCount": "{viewed} / {total} files viewed",
+      "rich": "Display the rich diff",
+      "source": "Display the source diff",
+      "tree": "File tree",
+      "noMatch": "No files match"
     },
     "sidebar": {
       "label": "Pull request details",
       "reviewers": "Reviewers",
-      "you": "You",
-      "pending": "Pending",
-      "approved": "Approved",
+      "awaiting": "Awaiting your review",
+      "you": "you",
       "assignees": "Assignee",
       "labels": "Labels",
       "labelNames": {
@@ -108,7 +148,9 @@
       },
       "milestone": "Milestone",
       "milestoneName": "Next role",
-      "progress": "{fixed} of {total} checks passing",
+      "development": "Development",
+      "developmentText": "Successfully merging this pull request may close these issues.",
+      "issue": "Hire a Full Stack Developer",
       "contact": "Contact"
     }
   },
@@ -147,95 +189,17 @@
     }
   },
   "projects": {
-    "label": "Projects",
-    "subtitle": "A selection of projects I have built.",
-    "comingSoon": "// More projects coming soon...",
-    "liveLink": "Live demo",
-    "codeLink": "Code"
+    "label": "Projects"
   },
   "contact": {
-    "label": "Contact",
-    "heading": "Let's bring your ideas to life.",
-    "subtitle": "Have a project in mind? Drop me a line and let's talk.",
     "rows": {
       "phone": "Phone",
       "github": "GitHub",
       "linkedin": "LinkedIn",
       "twitter": "Twitter / X"
-    },
-    "quote": "\"A good programmer is someone who always looks for a more efficient way to do things.\""
+    }
   },
   "footer": {
     "note": "© 2026 · Designed & built with code."
-  },
-  "debug": {
-    "riddle": {
-      "bot": "deploy-bot",
-      "requested": "requested changes",
-      "label": "Changes requested",
-      "hint": "Hint {n}:",
-      "resolved": "resolved the review:"
-    },
-    "about": {
-      "riddle": "I wrote this whole portfolio and the deploy scrambled my name. Tap the letters in order and give it back to me.",
-      "hint1": "It has 5 letters and starts with L.",
-      "hint2": "L, U, C, I, O. Yes, that's me.",
-      "letter": "Letter {letter}",
-      "progress": "Name so far: {value}",
-      "solved": "Name restored. About section stable."
-    },
-    "stack": {
-      "loading": "Loading tech stack…",
-      "riddle": "I speak on the front end, on the back end, and even JSON carries my name. Find me among the diff lines and tap me to unblock the loader.",
-      "hint1": "I'm a language: look in stack/languages.json, and I'm not Java.",
-      "hint2": "JSON = JavaScript Object Notation.",
-      "guess": "Pick {tech}",
-      "wrong": "Not {tech}. Keep looking.",
-      "loaded": "Tech stack loaded."
-    },
-    "experience": {
-      "riddle": "The last to arrive always goes first. Put my story in order.",
-      "hint1": "Drag the cards by ⋮⋮ or use the ↑ ↓ arrows.",
-      "hint2": "My current job goes on top; the oldest one at the bottom. Check the dates.",
-      "moveUp": "Move {company} up",
-      "moveDown": "Move {company} down",
-      "dragHandle": "Drag to reorder {company}",
-      "sorted": "Timeline sorted."
-    },
-    "projects": {
-      "riddle": "{count, plural, one {My project escaped} other {My # projects escaped}} the grid. None of them comes back alone: go get them.",
-      "hint1": "Drag each card and let go (or tap it): it knows its way home.",
-      "hint2": "{remaining, plural, =0 {Almost there!} one {# card is still out of place.} other {# cards are still out of place.}}",
-      "applied": "Layout fixed."
-    },
-    "contact": {
-      "riddle": "The deploy doesn't know where to send my emails. Teach it my email in the terminal and deploy again.",
-      "hint1": "Type help to see the commands.",
-      "hint2": "export CONTACT_EMAIL=luciogastellu.dev@gmail.com, then npm run deploy",
-      "envSet": "CONTACT_EMAIL set.",
-      "success": "✓ Deploy successful",
-      "pending": "✓ CONTACT_EMAIL set. Deploy blocked: {remaining, plural, one {# bug} other {# bugs}} still open."
-    },
-    "terminal": {
-      "label": "Terminal command",
-      "placeholder": "type help",
-      "run": "Run",
-      "out": {
-        "intro": "// the deploy pipeline is failing. Type help to get started.",
-        "help": "Commands: help, ls, whoami, export NAME=value, echo $NAME, npm run deploy, clear, hire lucio",
-        "whoami": "visitor. Probably a recruiter, maybe a developer. Both are welcome.",
-        "hire": "Excellent choice. Email and phone are right below.",
-        "sudo": "Nice try. This incident will be reported.",
-        "rm": "Not on my portfolio.",
-        "exportUsage": "usage: export NAME=value",
-        "invalidEmail": "\"{value}\" is not a valid email",
-        "exported": "{name} is set",
-        "npmUsage": "only npm run deploy is available here",
-        "missingEnv": "Error: missing env CONTACT_EMAIL",
-        "building": "building… done",
-        "deploySuccess": "✓ Deploy successful",
-        "notFound": "command not found: {command}"
-      }
-    }
   }
 }

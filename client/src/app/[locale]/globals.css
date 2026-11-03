@@ -3,45 +3,53 @@
 @tailwind utilities;
 
 /*
- * Code-host inspired palette. Dark is the default look; light follows the
- * visitor's system preference. Channels are "R G B" so Tailwind can apply
- * opacity modifiers (bg-accent/15).
+ * Code-host palette (values follow the MIT-licensed Primer primitives).
+ * Dark is the default; light follows the visitor's system preference.
+ * Channels are "R G B" so Tailwind opacity modifiers work (bg-success/15).
  */
 :root {
   color-scheme: dark;
-  --c-canvas: 11 15 23;
-  --c-surface: 17 24 36;
-  --c-subtle: 24 32 47;
-  --c-line: 44 54 72;
-  --c-fg: 230 236 244;
-  --c-muted: 143 156 176;
-  --c-accent: 52 199 118;
-  --c-on-accent: 6 20 12;
-  --c-merged: 166 135 247;
-  --c-danger: 245 99 96;
-  --c-attention: 229 181 72;
-  --c-link: 99 170 255;
-  --c-diff-add: 20 52 36;
-  --c-diff-add-line: 28 72 48;
+  --c-canvas: 13 17 23;
+  --c-subtle: 22 27 34;
+  --c-inset: 1 4 9;
+  --c-line: 48 54 61;
+  --c-line-muted: 33 38 45;
+  --c-fg: 230 237 243;
+  --c-muted: 125 133 144;
+  --c-link: 68 147 248;
+  --c-success: 35 134 54;
+  --c-success-fg: 63 185 80;
+  --c-done: 137 87 229;
+  --c-done-fg: 163 113 247;
+  --c-danger: 248 81 73;
+  --c-attention: 210 153 34;
+  --c-btn: 33 38 45;
+  --c-btn-hover: 48 54 61;
+  --c-diff-add: 18 38 30;
+  --c-diff-add-num: 28 67 40;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     color-scheme: light;
-    --c-canvas: 246 248 250;
-    --c-surface: 255 255 255;
-    --c-subtle: 240 243 247;
-    --c-line: 214 220 228;
-    --c-fg: 26 34 48;
-    --c-muted: 88 99 116;
-    --c-accent: 29 133 74;
-    --c-on-accent: 255 255 255;
-    --c-merged: 118 77 214;
-    --c-danger: 200 55 52;
-    --c-attention: 150 100 0;
-    --c-link: 18 102 204;
-    --c-diff-add: 222 245 229;
-    --c-diff-add-line: 196 236 208;
+    --c-canvas: 255 255 255;
+    --c-subtle: 246 248 250;
+    --c-inset: 246 248 250;
+    --c-line: 208 215 222;
+    --c-line-muted: 216 222 228;
+    --c-fg: 31 35 40;
+    --c-muted: 101 109 118;
+    --c-link: 9 105 218;
+    --c-success: 31 136 61;
+    --c-success-fg: 26 127 55;
+    --c-done: 130 80 223;
+    --c-done-fg: 130 80 223;
+    --c-danger: 209 36 47;
+    --c-attention: 154 103 0;
+    --c-btn: 246 248 250;
+    --c-btn-hover: 238 241 244;
+    --c-diff-add: 230 255 236;
+    --c-diff-add-num: 204 255 216;
   }
 }
 
@@ -52,39 +60,92 @@ html {
 
 body {
   overflow-x: hidden;
+  font-size: 14px;
+  line-height: 1.5;
   @apply bg-canvas text-fg;
 }
 
 @layer components {
-  /* Bordered panel: comment boxes, file diffs, sidebar blocks. */
   .box {
-    @apply rounded-box border border-line bg-surface;
+    @apply rounded-box border border-line bg-canvas;
   }
 
   .box-header {
-    @apply flex flex-wrap items-center gap-2 border-b border-line bg-subtle px-4 py-2.5 text-sm;
+    @apply flex flex-wrap items-center gap-x-2 gap-y-1 rounded-t-box border-b border-line bg-subtle px-4 py-2;
   }
 
   .btn {
-    @apply inline-flex min-h-[40px] cursor-pointer items-center justify-center gap-2 rounded-box border border-line bg-subtle px-4 text-sm font-semibold text-fg transition-colors duration-150 hover:border-muted/60 hover:bg-line/60 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex h-8 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-box border border-line bg-btn px-3 text-sm font-medium text-fg transition-colors duration-100 hover:bg-btn-hover disabled:cursor-not-allowed disabled:opacity-50;
   }
 
   .btn-primary {
-    @apply border-accent bg-accent text-on-accent hover:border-accent hover:bg-accent/85;
+    @apply border-black/10 bg-success text-white hover:bg-success/90;
   }
 
-  .label-chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-semibold;
+  .btn-sm {
+    @apply h-7 px-2 text-xs;
+  }
+
+  .label {
+    @apply inline-flex items-center rounded-full border px-2 text-xs font-medium leading-[18px];
   }
 
   .counter {
-    @apply inline-flex min-w-[22px] items-center justify-center rounded-full bg-line/70 px-1.5 text-xs font-semibold text-fg;
+    @apply inline-flex min-w-[20px] items-center justify-center rounded-full bg-line/70 px-1.5 text-xs font-medium leading-[18px] text-fg;
+  }
+
+  .state-pill {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-[5px] text-sm font-medium text-white;
+  }
+
+  /* Triangle pointing from a comment box to its avatar (wide screens). */
+  @media (min-width: 768px) {
+    .comment-arrow-md {
+      position: relative;
+    }
+    .comment-arrow-md::before,
+    .comment-arrow-md::after {
+      content: "";
+      position: absolute;
+      top: 11px;
+      border-style: solid;
+      border-color: transparent;
+      border-width: 8px 8px 8px 0;
+    }
+    .comment-arrow-md::before {
+      left: -8px;
+      border-right-color: rgb(var(--c-line));
+    }
+    .comment-arrow-md::after {
+      left: -7px;
+      border-right-color: rgb(var(--c-subtle));
+    }
+  }
+
+  /* Conversation timeline: the vertical rule behind events and comments. */
+  .timeline {
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 15px;
+    width: 2px;
+    background: rgb(var(--c-line));
+  }
+  @media (min-width: 768px) {
+    .timeline::before {
+      left: 71px;
+    }
   }
 }
 
 *:focus-visible {
   outline: 2px solid rgb(var(--c-link));
-  outline-offset: 2px;
+  outline-offset: -2px;
+  border-radius: 6px;
 }
 
 ::selection {

@@ -1,11 +1,10 @@
 import type { Config } from "tailwindcss";
 
-/** Semantic color tokens; values live in globals.css (light + dark). */
+/** Semantic color tokens; values live in globals.css (dark + light). */
 const token = (name: string) => `rgb(var(--c-${name}) / <alpha-value>)`;
 
 const config: Config = {
   content: [
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
   ],
@@ -13,48 +12,55 @@ const config: Config = {
     extend: {
       colors: {
         canvas: token("canvas"),
-        surface: token("surface"),
         subtle: token("subtle"),
+        inset: token("inset"),
         line: token("line"),
+        "line-muted": token("line-muted"),
         fg: token("fg"),
         muted: token("muted"),
-        accent: token("accent"),
-        "on-accent": token("on-accent"),
-        merged: token("merged"),
+        link: token("link"),
+        success: token("success"),
+        "success-fg": token("success-fg"),
+        done: token("done"),
+        "done-fg": token("done-fg"),
         danger: token("danger"),
         attention: token("attention"),
-        link: token("link"),
+        btn: token("btn"),
+        "btn-hover": token("btn-hover"),
         "diff-add": token("diff-add"),
-        "diff-add-line": token("diff-add-line"),
-        terminal: "#0A0D12",
+        "diff-add-num": token("diff-add-num"),
       },
       fontFamily: {
-        sans: ["var(--font-plex-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-jetbrains-mono)", "ui-monospace", "monospace"],
+        sans: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          '"Noto Sans"',
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
+        mono: [
+          "ui-monospace",
+          "SFMono-Regular",
+          '"SF Mono"',
+          "Menlo",
+          "Consolas",
+          '"Liberation Mono"',
+          "monospace",
+        ],
       },
       borderRadius: {
-        box: "8px",
+        box: "6px",
       },
       keyframes: {
-        glitch: {
-          "0%, 100%": { transform: "translate(0, 0)" },
-          "20%": { transform: "translate(-2px, 1px)" },
-          "40%": { transform: "translate(2px, -1px)" },
-          "60%": { transform: "translate(-1px, 0)" },
-          "80%": { transform: "translate(1px, 1px)" },
-        },
-        wiggle: {
-          "0%, 100%": { transform: "rotate(-4deg)" },
-          "50%": { transform: "rotate(4deg)" },
-        },
-        spin: {
-          to: { transform: "rotate(360deg)" },
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(-4px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
       },
       animation: {
-        glitch: "glitch 2.4s steps(1) infinite",
-        wiggle: "wiggle 0.9s ease-in-out infinite",
-        "spin-slow": "spin 1.2s linear infinite",
+        "fade-in": "fade-in 160ms ease-out",
       },
     },
   },
