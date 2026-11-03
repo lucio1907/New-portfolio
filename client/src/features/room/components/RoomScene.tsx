@@ -124,6 +124,23 @@ const CameraRig = () => {
   return null;
 };
 
+/**
+ * While LucioOS covers the room nothing should render, not even on resize:
+ * freeze the loop on the desktop and resume on-demand rendering otherwise
+ * (the stand-up flight needs it).
+ */
+const FrameloopGate = () => {
+  const setFrameloop = useThree((state) => state.setFrameloop);
+  const invalidate = useThree((state) => state.invalidate);
+  const { experience } = useExperience();
+  useEffect(() => {
+    const frozen = experience.mode === "desktop";
+    setFrameloop(frozen ? "never" : "demand");
+    if (!frozen) invalidate();
+  }, [experience.mode, setFrameloop, invalidate]);
+  return null;
+};
+
 /** The monitor shows a tiny LucioOS: wallpaper, app icons and a window. */
 const screenMaterial = () =>
   new ShaderMaterial({
@@ -264,6 +281,8 @@ const RoomScene = ({ settings, highlight, onHover, onActivate }: RoomSceneProps)
   return (
     <>
       <color attach="background" args={["#0F1640"]} />
+      {/* Must come before the rig: its effect re-enables rendering first. */}
+      <FrameloopGate />
       <CameraRig />
 
       <hemisphereLight args={["#8CCBFF", "#0F1640", 0.85]} />
