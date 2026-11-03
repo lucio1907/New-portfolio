@@ -1,9 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 import { useRender3DStatus } from "../hooks/useCanRender3D";
-import { dispatchExperience, getSnapshot } from "@/features/experience/store";
+import { HOTSPOTS, hotspotById } from "../lib/hotspots";
+import { dispatchDesktop, dispatchExperience, getSnapshot, setRoomReady, useExperience } from "@/features/experience/store";
+import type { AppId } from "@/features/os/lib/apps";
+
+/** Sit down at the computer, opening an app on arrival when given. */
+export const sitDown = (app: AppId | null) => {
+  if (app) dispatchDesktop({ type: "open", app });
+  dispatchExperience({ type: "sit", animate: true });
+};
+
+type Hover = { id: number; x: number; y: number } | null;
 
 // three.js and React Three Fiber live in this lazy chunk only.
 const RoomCanvas = dynamic(() => import("./RoomCanvas"), { ssr: false });
@@ -23,8 +34,32 @@ const RoomPoster = () => (
  * motion or data saving) the visitor goes straight to the desktop.
  */
 const RoomStage = () => {
+  const t = useTranslations("room");
   const status = useRender3DStatus();
+  const { experience } = useExperience();
   const [rendered, setRendered] = useState(false);
+  const [hover, setHover] = useState<Hover>(null);
+  const [focusId, setFocusId] = useState<number | null>(null);
+  const inRoom = experience.mode === "room";
+
+  const onRendered = useCallback(() => {
+    setRoomReady(true);
+    setRendered(true);
+  }, []);
+
+  useEffect(() => () => setRoomReady(false), []);
+
+  const onHover = useCallback((id: number | null, x: number, y: number) => {
+    setHover(id === null ? null : { id, x, y });
+  }, []);
+
+  const onActivate = useCallback((id: number) => {
+    setHover(null);
+    sitDown(hotspotById(id)?.app ?? null);
+  }, []);
+
+  const highlight = inRoom ? (focusId ?? hover?.id ?? null) : null;
+  const hovered = hover && inRoom ? hotspotById(hover.id) : null;
 
   useEffect(() => {
     if (status === "unavailable" && getSnapshot().experience.mode === "room") {
@@ -39,8 +74,37 @@ const RoomStage = () => {
       </div>
       {status === "ready" && (
         <div className={`absolute inset-0 transition-opacity duration-700 ${rendered ? "opacity-100" : "opacity-0"}`}>
-          <RoomCanvas onRendered={() => setRendered(true)} />
+          <RoomCanvas onRendered={onRendered} highlight={highlight} onHover={onHover} onActivate={onActivate} />
         </div>
+      )}
+
+      {hovered && (
+        <p
+          role="status"
+          className="pointer-events-none fixed z-30 rounded-full bg-sun px-3 py-1 text-sm font-medium text-night shadow-lg"
+          style={{ left: hover!.x + 14, top: hover!.y + 14 }}
+        >
+          {t(`hotspots.${hovered.name}`)}
+        </p>
+      )}
+
+      {/* Keyboard path to every object: focusing one makes it glow. */}
+      {status === "ready" && inRoom && (
+        <ul aria-label={t("objectsLabel")} className="absolute right-4 top-4 z-30 flex flex-col items-end gap-2">
+          {HOTSPOTS.filter((hotspot) => hotspot.name !== "chair").map((hotspot) => (
+            <li key={hotspot.name}>
+              <button
+                type="button"
+                onFocus={() => setFocusId(hotspot.id)}
+                onBlur={() => setFocusId(null)}
+                onClick={() => sitDown(hotspot.app)}
+                className="sr-only rounded-full bg-sun px-3 py-1.5 text-sm font-medium text-night focus:not-sr-only"
+              >
+                {t(`hotspots.${hotspot.name}`)}
+              </button>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

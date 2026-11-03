@@ -47,7 +47,20 @@
       "location": "Buenos Aires, remoto o híbrido.",
       "sit": "Sentarse a la compu",
       "cv": "Descargar CV",
-      "direct": "Ir directo al escritorio"
+      "direct": "Ir directo al escritorio",
+      "hint": "O tocá un objeto: el mate, los libros, las notas, las cajas o el celular."
+    }
+  },
+  "room": {
+    "objectsLabel": "Objetos del escritorio",
+    "hotspots": {
+      "monitor": "Sentarse a la compu",
+      "chair": "Sentarse a la compu",
+      "mate": "Sobre mí",
+      "books": "Experiencia",
+      "notes": "Stack",
+      "boxes": "Proyectos",
+      "phone": "Contacto"
     }
   },
   "site": {

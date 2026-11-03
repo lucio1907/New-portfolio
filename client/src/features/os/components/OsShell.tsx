@@ -6,7 +6,7 @@ import IntroCard from "./IntroCard";
 import type { AppId } from "../lib/apps";
 import { appFromHash, hashForApp } from "../lib/hash";
 import { focusedApp } from "../lib/windows";
-import { dispatchDesktop, dispatchExperience, getSnapshot, useExperience } from "@/features/experience/store";
+import { dispatchDesktop, dispatchExperience, getSnapshot, isRoomReady, useExperience } from "@/features/experience/store";
 
 type OsShellProps = {
   contents: Record<AppId, React.ReactNode>;
@@ -65,8 +65,15 @@ const OsShell = ({ contents, backdrop }: OsShellProps) => {
     if (focused) document.getElementById(focused)?.focus({ preventScroll: true });
   }, [focused]);
 
-  // The 3D sit-down animation arrives with the room; until then it is instant.
-  const sit = useCallback(() => dispatchExperience({ type: "sit", animate: false }), []);
+  // Animate only when the 3D room is on screen; otherwise open instantly.
+  const sit = useCallback(() => dispatchExperience({ type: "sit", animate: isRoomReady() }), []);
+
+  // Safety net: if the camera flight never reports back, open the desktop anyway.
+  useEffect(() => {
+    if (experience.mode !== "sitting") return;
+    const timer = setTimeout(() => dispatchExperience({ type: "arrived" }), 2500);
+    return () => clearTimeout(timer);
+  }, [experience.mode]);
 
   const standUp = useCallback(() => {
     dispatchDesktop({ type: "closeAll" });

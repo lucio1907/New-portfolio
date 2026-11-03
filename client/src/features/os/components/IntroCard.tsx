@@ -36,7 +36,8 @@ const IntroCard = ({ visible, onSit }: IntroCardProps) => {
           {t("cv")}
         </a>
       </div>
-      <a href="#desktop" onClick={onSit} className="link mt-4 inline-block text-sm">
+      <p className="mt-4 text-sm text-haze">{t("hint")}</p>
+      <a href="#desktop" className="link mt-2 inline-block text-sm">
         {t("direct")}
       </a>
     </section>

@@ -47,7 +47,20 @@
       "location": "Buenos Aires, remote or hybrid.",
       "sit": "Sit at the computer",
       "cv": "Download CV",
-      "direct": "Go straight to the desktop"
+      "direct": "Go straight to the desktop",
+      "hint": "Or tap an object: the mate, the books, the notes, the boxes or the phone."
+    }
+  },
+  "room": {
+    "objectsLabel": "Objects on the desk",
+    "hotspots": {
+      "monitor": "Sit at the computer",
+      "chair": "Sit at the computer",
+      "mate": "About",
+      "books": "Experience",
+      "notes": "Stack",
+      "boxes": "Projects",
+      "phone": "Contact"
     }
   },
   "site": {

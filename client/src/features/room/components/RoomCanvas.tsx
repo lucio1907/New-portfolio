@@ -14,9 +14,12 @@ const detectTier = (): Tier =>
 type RoomCanvasProps = {
   /** Called once the first frame is on screen, to cross-fade from the poster. */
   onRendered: () => void;
+  highlight: number | null;
+  onHover: (id: number | null, x: number, y: number) => void;
+  onActivate: (id: number) => void;
 };
 
-const RoomCanvas = ({ onRendered }: RoomCanvasProps) => {
+const RoomCanvas = ({ onRendered, highlight, onHover, onActivate }: RoomCanvasProps) => {
   const [tier] = useState<Tier>(detectTier);
   const settings = QUALITY[tier];
 
@@ -29,7 +32,7 @@ const RoomCanvas = ({ onRendered }: RoomCanvasProps) => {
       gl={{ antialias: true, powerPreference: "high-performance" }}
       onCreated={() => requestAnimationFrame(onRendered)}
     >
-      <RoomScene settings={settings} />
+      <RoomScene settings={settings} highlight={highlight} onHover={onHover} onActivate={onActivate} />
     </Canvas>
   );
 };

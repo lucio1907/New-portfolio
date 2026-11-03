@@ -61,6 +61,10 @@ body {
   .os-desktop[data-open="false"] {
     display: none;
   }
+  /* LucioOS takes over the monitor at the end of the camera flight. */
+  .os-desktop[data-open="true"] {
+    animation: os-power-on 320ms ease-out;
+  }
 
   .os-icons {
     @apply grid flex-1 grid-cols-3 content-center justify-items-center gap-x-2 gap-y-5 p-6 pb-24 sm:grid-cols-4 md:flex md:flex-col md:flex-wrap md:content-start md:items-start md:gap-1 md:p-4;
@@ -91,6 +95,17 @@ body {
 
   .os-taskbar {
     @apply absolute inset-x-0 bottom-0 z-[60] flex h-14 items-center gap-3 border-t border-orbit/70 bg-night/90 px-3 backdrop-blur-xl md:px-4;
+  }
+}
+
+@keyframes os-power-on {
+  from {
+    opacity: 0;
+    filter: brightness(1.6);
+  }
+  to {
+    opacity: 1;
+    filter: none;
   }
 }
 

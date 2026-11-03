@@ -43,6 +43,16 @@ export const dispatchDesktop = (action: DesktopAction) => {
 
 export const getSnapshot = () => snapshot;
 
+/**
+ * Whether the 3D room is on screen. Sitting down animates only when it is;
+ * otherwise (loading, no WebGL) the desktop opens instantly.
+ */
+let roomReady = false;
+export const setRoomReady = (ready: boolean) => {
+  roomReady = ready;
+};
+export const isRoomReady = () => roomReady;
+
 const subscribe = (listener: () => void) => {
   listeners.add(listener);
   return () => listeners.delete(listener);
