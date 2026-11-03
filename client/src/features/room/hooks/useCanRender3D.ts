@@ -13,24 +13,30 @@ const supportsWebGL = (): boolean => {
   }
 };
 
+export type Render3DStatus = "pending" | "ready" | "unavailable";
+
 /**
- * True once the page is idle and the device can and should render 3D:
- * WebGL available and the visitor has not asked to save data.
+ * "ready" once the page is idle and the device can and should render 3D;
+ * "unavailable" without WebGL, when the visitor saves data or prefers
+ * reduced motion (the room is decorative: they go straight to the desktop).
  */
-export const useCanRender3D = (): boolean => {
-  const [ready, setReady] = useState(false);
+export const useRender3DStatus = (): Render3DStatus => {
+  const [status, setStatus] = useState<Render3DStatus>("pending");
 
   useEffect(() => {
     const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
-    if (connection?.saveData || !supportsWebGL()) return;
-
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (connection?.saveData || reducedMotion || !supportsWebGL()) {
+      const timer = setTimeout(() => setStatus("unavailable"), 0);
+      return () => clearTimeout(timer);
+    }
     if ("requestIdleCallback" in window) {
-      const id = window.requestIdleCallback(() => setReady(true), { timeout: 2000 });
+      const id = window.requestIdleCallback(() => setStatus("ready"), { timeout: 2000 });
       return () => window.cancelIdleCallback(id);
     }
-    const timer = setTimeout(() => setReady(true), 1200);
+    const timer = setTimeout(() => setStatus("ready"), 1200);
     return () => clearTimeout(timer);
   }, []);
 
-  return ready;
+  return status;
 };

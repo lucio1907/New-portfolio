@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import OsShell from "@/features/os/components/OsShell";
+import RoomStage from "@/features/room/components/RoomStage";
 import About from "@/features/portfolio/components/About";
 import Experience from "@/features/portfolio/components/Experience";
 import Projects from "@/features/portfolio/components/Projects";
@@ -13,6 +14,7 @@ const Home = async ({ params }: { params: Promise<{ locale: string }> }) => {
   // Window contents render on the server: every section is in the HTML.
   return (
     <OsShell
+      backdrop={<RoomStage />}
       contents={{
         about: <About />,
         experience: <Experience />,
