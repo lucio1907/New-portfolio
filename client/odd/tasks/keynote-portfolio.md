@@ -5,7 +5,7 @@ Branch: feat/keynote-portfolio · Delivery: ask-on-risk (chain strategy to be as
 ## Specs
 - S1. "olvidate del 3d" → no 3D anywhere: room, three.js and React Three Fiber are removed. Assumption (in the approved plan): LucioOS goes too, because the page scrolls again; it stays in git history.
 - S2. "elimina las skills que haya en el proyecto para hacer modelos 3d y three js del proyecto tambien" → the project's `threejs-*` skills and the `three` dependencies are removed.
-- S3. "Quiero que hagas un buen portfolio, que sea lindo de ver" → Keynote concept: warm paper, huge type, one idea per screen.
+- S3. "Quiero que hagas un buen portfolio, que sea lindo de ver" → Keynote concept: thermal paper, huge type, one idea per screen.
 - S4. "que tenga muy buenas animaciones al estilo de apple" → scroll-linked motion that moves with the scroll in both directions, native scroll, at most 2 pinned sections, only transform/opacity/clip-path, reduced motion shows final states.
 - S5. "necesito que se vea original y no parezca hecho por la IA" → no dark gradient, glass cards, gradient text, icon card grids, tech pills, Inter, emoji greeting, typewriter or generic copy. Copy only from real facts. No AI-generated images.
 - S6. Concept chosen by the user: "Keynote (Recomendado)" → each project is a launch: big headline, a real number, the image shrinking with scroll. Sections and motion as in the approved plan.
@@ -15,7 +15,7 @@ Branch: feat/keynote-portfolio · Delivery: ask-on-risk (chain strategy to be as
 |---|---|---|---|---|
 | W0 Remove 3D, skills, dependencies, LucioOS; plain scrollable page | S1, S2 | inline | done (independent verifier 6/6 PASS, no blockers) | 4a04cf0 |
 | W1 Foundation: tokens, fonts, GSAP, useScene, motion math | S3, S4, S5 | inline | done (its dependency check goes with the feature-end verifier) | 225c0c7 |
-| W2 Hero + Manifesto + POS chapter; user checkpoint | S3–S6 | inline | built, waiting for the user at the checkpoint | see log |
+| W2 Hero + Manifesto + POS chapter; user checkpoint | S3–S6 | inline | built, waiting for the user at the checkpoint | 321047d |
 | W3 Other chapters + Numbers | S3–S6 | inline | pending | — |
 | W4 Trajectory, Stack, Contact, Nav, footer | S3–S6 | inline | pending | — |
 | W5 QA and docs | S1–S6 | inline | pending | — |
