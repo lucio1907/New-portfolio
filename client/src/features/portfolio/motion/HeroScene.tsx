@@ -23,12 +23,22 @@ const build = (root: HTMLElement, phone: boolean, { gsap }: SceneTools) => {
     if (!phone) name.style.visibility = landed ? "hidden" : "visible";
   };
 
+  // GSAP only undoes its own tweens: these inline styles would outlive a resize
+  // that switches between the desktop and phone versions of this scene.
+  const reset = () => {
+    navName.style.opacity = "";
+    name.style.visibility = "";
+  };
+
   if (phone) {
     const observer = new IntersectionObserver(([entry]) => show(!entry.isIntersecting), {
       rootMargin: "-56px 0px 0px 0px",
     });
     observer.observe(name);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      reset();
+    };
   }
 
   const distance = () => window.innerHeight * LANDING;
@@ -56,6 +66,8 @@ const build = (root: HTMLElement, phone: boolean, { gsap }: SceneTools) => {
     ease: "none",
     scrollTrigger: { start: 0, end: () => distance() * 0.45, scrub: true },
   });
+
+  return reset;
 };
 
 const HeroScene = ({ children }: { children: React.ReactNode }) => {

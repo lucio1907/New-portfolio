@@ -78,8 +78,6 @@ body {
     padding: calc(var(--nav-height) + 16px) var(--gutter) clamp(20px, 3vh, 36px);
   }
   .hero-name {
-    position: relative;
-    z-index: 50;
     width: fit-content;
     font-size: 23.5vw;
     transform-origin: 0 0;
@@ -237,6 +235,11 @@ body {
     .pos-shot {
       /* Never taller than what the stage has left under the headline. */
       width: min(100%, calc((100svh - var(--nav-height) - 240px) * 16 / 9));
+    }
+    /* Above the nav only while it flies there; elsewhere it passes underneath. */
+    .motion .hero-name {
+      position: relative;
+      z-index: 50;
     }
     .motion .pos-track {
       height: 380svh;
@@ -708,6 +711,16 @@ section[id] {
   outline: 2px solid #1b2bd6;
   outline-offset: 3px;
   border-radius: 6px;
+}
+
+/* The default ring is cobalt: it would vanish on this section's background. */
+.contact :focus-visible {
+  outline-color: #f3f4f1;
+}
+
+/* The name waits off stage while the hero holds it, but not for the keyboard. */
+.motion .nav-name:focus-visible {
+  opacity: 1 !important;
 }
 
 ::selection {

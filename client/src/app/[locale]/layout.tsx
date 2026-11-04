@@ -4,6 +4,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import MotionFlag from "@/features/portfolio/motion/MotionFlag";
 import "./globals.css";
 import Script from "next/script";
 
@@ -90,6 +91,7 @@ export default async function RootLayout({
       </head>
       <body className={`${sans.variable} ${mono.variable}`}>
         <NextIntlClientProvider messages={messages}>
+          <MotionFlag />
           {children}
         </NextIntlClientProvider>
       </body>
