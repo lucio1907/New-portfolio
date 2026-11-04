@@ -288,7 +288,7 @@ section[id] {
     padding-inline: var(--gutter);
   }
   .chapter-title {
-    font-size: clamp(2.75rem, min(9.6vw, 16vh), 9rem);
+    font-size: clamp(2.75rem, min(7.8vw, 13.5vh), 7.5rem);
     line-height: 0.96;
   }
   .chapter-frame {

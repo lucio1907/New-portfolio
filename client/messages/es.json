@@ -66,9 +66,9 @@
     "visit": "Ver el sitio",
     "code": "Ver el código",
     "crm": {
-      "first": "Un CRM a medida.",
-      "second": "Sin plantillas.",
-      "body": "Sistemas de gestión de clientes hechos para cada negocio, de la pantalla a los datos.",
+      "first": "Hice CRMs a medida.",
+      "second": "De la pantalla a los datos.",
+      "body": "Sistemas de gestión de clientes, pensados para cada negocio.",
       "layers": [
         "Interfaz",
         "Lógica de negocio",
@@ -77,14 +77,14 @@
       ]
     },
     "nadira": {
-      "first": "Probar un perfume.",
-      "second": "Sin comprar el frasco.",
-      "body": "Un ecommerce de decants de perfumes, hecho con Next.js y en producción."
+      "first": "Hice una tienda de perfumes.",
+      "second": "Y está en producción.",
+      "body": "Un ecommerce de decants, con Next.js, Tailwind y TypeScript."
     },
     "sitiohoy": {
-      "first": "Tu sitio web en 24 horas.",
-      "second": "Sin vueltas.",
-      "body": "Un proyecto en conjunto para vender sitios web con entrega en menos de 24 horas."
+      "first": "Armé sitios web en menos de 24 horas.",
+      "second": "En equipo.",
+      "body": "Un proyecto en conjunto, dedicado a la venta de sitios web."
     }
   },
   "more": {

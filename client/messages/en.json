@@ -66,9 +66,9 @@
     "visit": "Visit the site",
     "code": "See the code",
     "crm": {
-      "first": "A custom CRM.",
-      "second": "No templates.",
-      "body": "Customer management systems made for each business, from the screen down to the data.",
+      "first": "I built custom CRMs.",
+      "second": "From the screen to the data.",
+      "body": "Customer management systems, designed for each business.",
       "layers": [
         "Interface",
         "Business logic",
@@ -77,14 +77,14 @@
       ]
     },
     "nadira": {
-      "first": "Try a perfume.",
-      "second": "Without buying the bottle.",
-      "body": "An ecommerce for perfume decants, built with Next.js and live in production."
+      "first": "I built a perfume store.",
+      "second": "And it is live.",
+      "body": "An ecommerce for decants, with Next.js, Tailwind and TypeScript."
     },
     "sitiohoy": {
-      "first": "Your website in 24 hours.",
-      "second": "No fuss.",
-      "body": "A joint project selling websites with delivery in under 24 hours."
+      "first": "I built websites in under 24 hours.",
+      "second": "As a team.",
+      "body": "A joint project focused on selling websites."
     }
   },
   "more": {
