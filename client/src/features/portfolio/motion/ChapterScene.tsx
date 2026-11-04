@@ -4,8 +4,9 @@ import React from "react";
 import { type SceneTools, useScene } from "./useScene";
 
 /**
- * The headline rises line by line, then the full-width screenshot settles into
- * a framed picture as it crosses the screen, with its image easing out behind.
+ * The headline rises line by line, then the full-width screenshot shrinks into
+ * place as it crosses the screen. It scales rather than crops, so the site's
+ * logo and nav at its edges stay in the picture.
  */
 const build = (root: HTMLElement, phone: boolean, { gsap }: SceneTools) => {
   gsap.fromTo(
@@ -20,12 +21,11 @@ const build = (root: HTMLElement, phone: boolean, { gsap }: SceneTools) => {
   );
 
   const frame = root.querySelector("[data-frame]");
-  const inset = phone ? "inset(0% 5% 0% 5% round 12px)" : "inset(0% 8% 0% 8% round 20px)";
   gsap.fromTo(
     frame,
-    { clipPath: "inset(0% 0% 0% 0% round 0px)" },
+    { scale: 1 },
     {
-      clipPath: inset,
+      scale: phone ? 0.9 : 0.84,
       ease: "none",
       scrollTrigger: { trigger: frame, start: "top 72%", end: "top 16%", scrub: true },
     },
@@ -33,7 +33,7 @@ const build = (root: HTMLElement, phone: boolean, { gsap }: SceneTools) => {
   if (phone) return;
   gsap.fromTo(
     root.querySelector("[data-picture]"),
-    { scale: 1.16 },
+    { scale: 1.08 },
     {
       scale: 1,
       ease: "none",

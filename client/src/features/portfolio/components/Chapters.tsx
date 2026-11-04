@@ -48,7 +48,7 @@ export const CrmChapter = () => {
 
 type ProjectChapterProps = { name: keyof typeof LAUNCHES; offset?: boolean };
 
-/** A launch with a real screenshot: full width, then it settles into a frame. */
+/** A launch with a real screenshot: full width, then it shrinks into place, whole. */
 export const ProjectChapter = ({ name, offset = false }: ProjectChapterProps) => {
   const t = useTranslations("chapters");
   const project = projectById(projects, LAUNCHES[name]);
@@ -59,7 +59,7 @@ export const ProjectChapter = ({ name, offset = false }: ProjectChapterProps) =>
         <Headline first={t(`${name}.first`)} second={t(`${name}.second`)} />
       </div>
       <div data-frame className="chapter-frame">
-        <Image data-picture src={project.image} alt={project.projectName} fill sizes="100vw" className="object-cover" />
+        <Image data-picture src={project.image} alt={project.projectName} fill sizes="100vw" quality={90} className="object-cover" />
       </div>
       <div className="chapter-foot">
         <p className="chapter-body">{t(`${name}.body`)}</p>

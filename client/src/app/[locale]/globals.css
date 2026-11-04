@@ -270,7 +270,12 @@ section[id] {
     margin-top: clamp(40px, 8vh, 88px);
     aspect-ratio: 16 / 9;
     overflow: hidden;
+    border-radius: clamp(10px, 1.6vw, 22px);
     background: theme("colors.ink");
+    /* Keeps a light screenshot apart from the paper behind it. */
+    box-shadow:
+      0 0 0 1px rgba(16, 19, 34, 0.1),
+      0 28px 80px -20px rgba(16, 19, 34, 0.35);
   }
   .chapter-foot {
     display: grid;
