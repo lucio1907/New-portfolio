@@ -45,6 +45,22 @@ export const box = (
   return geometry;
 };
 
+/**
+ * A box whose faces are split into cells of about `cell` meters. Light is
+ * stored per vertex, so big surfaces need the extra vertices to show it.
+ */
+export const panel = (
+  cell: number,
+  width: number,
+  height: number,
+  depth: number,
+  hex: string,
+  position: Tuple3 = [0, 0, 0],
+): BufferGeometry => {
+  const segments = (size: number) => Math.max(1, Math.ceil(size / cell));
+  return shape(new BoxGeometry(width, height, depth, segments(width), segments(height), segments(depth)), hex, position);
+};
+
 /** Merges parts (all must share the same attributes) and frees them. */
 export const merge = (parts: BufferGeometry[]): BufferGeometry => {
   const merged = mergeGeometries(parts);
@@ -53,9 +69,13 @@ export const merge = (parts: BufferGeometry[]): BufferGeometry => {
   return merged;
 };
 
-/** Marks every vertex with an object id (hover glow and picking). */
-export const tag = (geometry: BufferGeometry, id: number): BufferGeometry => {
+/**
+ * Marks every vertex with an object id (hover glow and picking) and whether it
+ * glows by itself, which keeps the light bake away from it.
+ */
+export const tag = (geometry: BufferGeometry, id: number, emissive = false): BufferGeometry => {
   const count = geometry.getAttribute("position").count;
   geometry.setAttribute("objectId", new BufferAttribute(new Float32Array(count).fill(id), 1));
+  geometry.setAttribute("emissive", new BufferAttribute(new Float32Array(count).fill(emissive ? 1 : 0), 1));
   return geometry;
 };
