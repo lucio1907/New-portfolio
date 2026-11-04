@@ -4,6 +4,7 @@ import React from "react";
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 
+/** Names the other language in that language, so its speakers can find it. */
 const LanguageToggle = () => {
   const locale = useLocale();
   const pathname = usePathname();
@@ -16,15 +17,8 @@ const LanguageToggle = () => {
   };
 
   return (
-    <button
-      type="button"
-      onClick={toggleLocale}
-      aria-label={nextLocale === "en" ? "Switch to English" : "Cambiar a español"}
-      className="btn min-h-[36px] px-3 text-sm"
-    >
-      {locale.toUpperCase()}
-      <span aria-hidden="true">→</span>
-      {nextLocale.toUpperCase()}
+    <button type="button" lang={nextLocale} onClick={toggleLocale} className="nav-link">
+      {nextLocale === "en" ? "English" : "Español"}
     </button>
   );
 };

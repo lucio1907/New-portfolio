@@ -33,6 +33,239 @@ body {
 
 }
 
+/* ── Keynote ─────────────────────────────────────────────────────────── */
+:root {
+  --nav-height: 56px;
+  --gutter: clamp(20px, 3vw, 44px);
+}
+
+@layer components {
+  .display {
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+  }
+
+  /* Nav: a solid strip of paper, and the printer the receipt comes out of. */
+  .site-nav {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 40;
+    display: flex;
+    height: var(--nav-height);
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--gutter);
+    background: theme("colors.paper");
+  }
+  .nav-name {
+    display: inline-block;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+    white-space: nowrap;
+  }
+  .motion .nav-name {
+    opacity: 0;
+  }
+  .nav-link {
+    display: inline-flex;
+    min-height: 44px;
+    min-width: 44px;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 500;
+    text-underline-offset: 4px;
+  }
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Hero */
+  .hero {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: clamp(28px, 5vh, 56px);
+    padding: calc(var(--nav-height) + 16px) var(--gutter) clamp(20px, 3vh, 36px);
+  }
+  .hero-name {
+    position: relative;
+    z-index: 50;
+    width: fit-content;
+    font-size: 23.5vw;
+    transform-origin: 0 0;
+    white-space: normal;
+  }
+  .hero-rise {
+    display: block;
+    padding-bottom: 0.1em;
+    margin-bottom: -0.1em;
+  }
+
+  /* Manifesto */
+  .manifesto {
+    padding: clamp(96px, 24vh, 240px) var(--gutter);
+  }
+  .manifesto p {
+    max-width: 21em;
+    font-size: clamp(2rem, 4.7vw, 4.75rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.04;
+    text-wrap: wrap;
+  }
+
+  /* POS chapter */
+  .pos-stage {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    gap: 40px;
+    padding: 72px var(--gutter);
+  }
+  .pos-bg {
+    position: absolute;
+    inset: 0;
+    background: theme("colors.cobalt");
+  }
+  .pos-copy {
+    position: relative;
+    color: theme("colors.paper");
+  }
+  .pos-title {
+    font-size: clamp(3rem, min(14.5vw, 15vh), 8.5rem);
+    line-height: 0.96;
+  }
+  .pos-body {
+    max-width: 30em;
+    margin-top: 24px;
+    color: theme("colors.mist");
+    font-size: clamp(1.0625rem, 1.5vw, 1.375rem);
+    line-height: 1.4;
+  }
+  .receipt-slot {
+    position: relative;
+  }
+  /* On phones the receipt has its own slot to come out of. */
+  .receipt-slit {
+    height: 10px;
+    border-radius: 5px;
+    background: theme("colors.ink");
+  }
+  .receipt-clip {
+    overflow: hidden;
+    margin-inline: 12px;
+    padding-bottom: 12px;
+  }
+  .receipt {
+    position: relative;
+    padding: 28px 24px 22px;
+    background: theme("colors.receipt");
+    color: theme("colors.ink");
+    font-family: theme("fontFamily.mono");
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  /* The torn edge, cut in zigzag. */
+  .receipt::after {
+    content: "";
+    position: absolute;
+    inset: calc(100% - 1px) 0 auto;
+    height: 9px;
+    background:
+      linear-gradient(135deg, theme("colors.receipt") 50%, transparent 50%) 0 0 / 12px 8px repeat-x,
+      linear-gradient(225deg, theme("colors.receipt") 50%, transparent 50%) 0 0 / 12px 8px repeat-x;
+  }
+  .receipt-rule {
+    margin-block: 14px;
+    border: 0;
+    border-top: 1px dashed currentColor;
+  }
+  .receipt-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .receipt-row + .receipt-row {
+    margin-top: 6px;
+  }
+  .receipt-row dd {
+    font-weight: 500;
+    text-align: right;
+  }
+
+  @media (min-width: 768px) {
+    .hero-name {
+      font-size: 14.2vw;
+      white-space: nowrap;
+    }
+    .hero-rise {
+      display: inline;
+    }
+    .pos-stage {
+      min-height: calc(100svh - var(--nav-height));
+      grid-template-columns: minmax(0, 1fr) clamp(280px, 27vw, 400px);
+      align-items: end;
+      padding-block: 0 clamp(28px, 6vh, 64px);
+    }
+    /* The nav's edge is the printer's slot: its shadow falls on the panel. */
+    .pos-bg {
+      background:
+        linear-gradient(rgba(16, 19, 34, 0.34), transparent) top / 100% 16px no-repeat,
+        theme("colors.cobalt");
+    }
+    .receipt-slit {
+      display: none;
+    }
+    .receipt-slot {
+      align-self: start;
+    }
+    .receipt {
+      padding: 32px 28px 26px;
+      font-size: clamp(13px, 1.75vh, 16px);
+    }
+    /* Only with scenes running: a tall track with the stage stuck inside it. */
+    .motion .pos-track {
+      height: 320svh;
+    }
+    .motion .pos-stage {
+      position: sticky;
+      top: var(--nav-height);
+      height: calc(100svh - var(--nav-height));
+    }
+  }
+}
+
+/* The hero's one entrance. Pure CSS, so nothing waits for JavaScript. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-rise,
+  .hero-lede {
+    animation: rise 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .hero-rise + .hero-rise {
+    animation-delay: 90ms;
+  }
+  .hero-lede {
+    animation-delay: 380ms;
+  }
+}
+
+@keyframes rise {
+  from {
+    clip-path: inset(-0.1em -0.1em 100% -0.1em);
+    transform: translateY(0.18em);
+  }
+  to {
+    clip-path: inset(-0.1em -0.1em -0.1em -0.1em);
+    transform: none;
+  }
+}
+
 *:focus-visible {
   outline: 2px solid #1b2bd6;
   outline-offset: 3px;

@@ -21,7 +21,9 @@
     "experience": "Experiencia",
     "projects": "Proyectos",
     "stack": "Stack",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "cv": "CV",
+    "home": "Lucio Gastellu, inicio"
   },
   "role": "Desarrollador Full Stack",
   "site": {
@@ -88,6 +90,41 @@
       "github": "GitHub",
       "linkedin": "LinkedIn",
       "twitter": "Twitter / X"
+    }
+  },
+  "hero": {
+    "lede": "Soy desarrollador full stack. Hago los sistemas con los que trabaja la gente.",
+    "available": "Disponible para nuevos roles.",
+    "location": "Buenos Aires, remoto o híbrido."
+  },
+  "manifesto": "Construyo productos web de punta a punta: React y TypeScript en el frontend, Python y Node en el backend, PostgreSQL debajo de todo. Uso IA todos los días, con workflows propios, y sigo siendo dueño de cada línea que entrego.",
+  "pos": {
+    "label": "Sistema POS",
+    "first": "Facturar con ARCA.",
+    "second": "Sin pensarlo.",
+    "body": "Un sistema POS a medida. La factura electrónica sale sola, integrada con ARCA.",
+    "receipt": {
+      "title": "SISTEMA POS",
+      "subtitle": "Trabajo freelance, 2026",
+      "rows": [
+        [
+          "Punto de venta",
+          "a medida"
+        ],
+        [
+          "Factura electrónica",
+          "automática"
+        ],
+        [
+          "Integración",
+          "ARCA"
+        ],
+        [
+          "Facturas a mano",
+          "0"
+        ]
+      ],
+      "thanks": "Gracias por leer"
     }
   }
 }
