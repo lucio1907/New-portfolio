@@ -189,12 +189,7 @@ body {
     display: grid;
     gap: 5px;
   }
-  .receipt-sign {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .receipt-sign dd {
+  .receipt-block dd {
     font-weight: 500;
   }
 
@@ -228,6 +223,20 @@ body {
     .receipt {
       padding: 28px 24px 22px;
       font-size: clamp(12.5px, 1.6vh, 14.5px);
+    }
+    /* The whole receipt has to come out on short laptop screens too. */
+    @media (max-height: 720px) {
+      .receipt {
+        padding-block: 14px 12px;
+        font-size: 12px;
+        line-height: 1.36;
+      }
+      .receipt-rule {
+        margin-block: 7px;
+      }
+      .receipt-items {
+        gap: 1px;
+      }
     }
     /* Only with scenes running: a tall track with the stage stuck inside it. */
     .pos-shot {

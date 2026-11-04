@@ -57,12 +57,17 @@
         "Productos con variantes y stock",
         "Ventas en espera y descuentos",
         "Caja, gastos y cierres",
-        "Estadísticas",
-        "Sincronización"
+        "Estadísticas y sincronización"
       ],
       "by": "Desarrollo",
       "thanks": "Gracias por leer",
-      "team": "SitioHoy"
+      "team": "Lucio Gastellu, en SitioHoy",
+      "stackLabel": "Stack",
+      "stack": [
+        "React, TypeScript, Vite",
+        "PHP, WordPress, WooCommerce",
+        "Vitest, Playwright, Docker"
+      ]
     }
   },
   "chapters": {

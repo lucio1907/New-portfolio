@@ -18,7 +18,14 @@ const Receipt = () => {
         ))}
       </ul>
       <hr className="receipt-rule" />
-      <dl className="receipt-sign">
+      <dl className="receipt-block">
+        <dt>{t("stackLabel")}</dt>
+        {(t.raw("stack") as string[]).map((line) => (
+          <dd key={line}>{line}</dd>
+        ))}
+      </dl>
+      <hr className="receipt-rule" />
+      <dl className="receipt-block">
         <dt>{t("by")}</dt>
         <dd>{t("team")}</dd>
       </dl>

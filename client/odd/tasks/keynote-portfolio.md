@@ -14,6 +14,8 @@ Branch: feat/keynote-portfolio · Delivery: ask-on-risk (chain strategy to be as
 - S9. "esta es una captura del pos, no me gusta mucho la parte del pos porque parece que lo estoy vendiendo y la idea es venderme a mi como desarrollador, fijate como lo podes adaptar o dame ideas para adaptarlo" → the POS chapter speaks as the developer: first-person headline, the user's real screenshot as proof, and the receipt itemizes the work and is signed by the owner. Assumption, to confirm with the user: the receipt's items are read from the screenshot and the CV.
 - S10. "si cambialos asi" (answer to the proposal) → CRM: "Hice CRMs a medida. De la pantalla a los datos."; Nadira Decants: "Hice una tienda de perfumes. Y está en producción."; SitioHoy: "Armé sitios web en menos de 24 horas. En equipo." Supporting lines reworded so they do not repeat the headlines.
 - S11. "al ticket del pos agregale sistema de notificaciones, funciona sin conexion y lo realice en equipo, no lo hice solo" → the receipt lists the notification system and that it works offline, and the chapter says the team built it: "Hicimos un POS. Y lo conectamos con ARCA.". The receipt reads "Desarrollo: SitioHoy" ("en el ticket donde dice desarrollo ponele SitioHoy").
+- S12. "dale ponele asi Desarrollo: Lucio Gastellu, en SitioHoy", plus the POS stack (PHP, WordPress, WooCommerce, React 19, TypeScript, Vite, Vitest, Testing Library, Playwright, axe-core, Docker, GitHub Actions): "trata de resumirlo con lo mas importante para que no se haga tan largo el ticket".
+- S13. "crea el ci/cd en este repositorio" → GitHub Actions for this repository (the portfolio). Assumption: the deploy target is Vercel, where the owner's other projects live; no config in the repository says so.
 
 ## Tasks
 | ID | Specs | Route | Status | Commit |
@@ -28,7 +30,9 @@ Branch: feat/keynote-portfolio · Delivery: ask-on-risk (chain strategy to be as
 | W7 POS chapter speaks as the developer | S9 | inline | done | b7f6514 |
 | W8 Fix the verifier's blockers | S4, S7 | inline | done, independent recheck PASS | 59585b1 |
 | W9 The other launches speak as the developer | S10 | inline | done | 0803e7c |
-| W10 POS: offline, notifications, built as a team | S11 | inline | done | see git log |
+| W10 POS: offline, notifications, built as a team | S11 | inline | done | 56f7186 |
+| W11 Receipt: signature and summarized stack | S12 | inline | done | see git log |
+| W12 CI/CD | S13 | inline | in progress | — |
 
 Route evidence: inline by default; no Writer trigger reason (no parallel independent units, and later units depend on W1). W0 and W1 name high-risk item 5 (dependencies), so they get an independent verifier.
 
@@ -48,3 +52,4 @@ Route evidence: inline by default; no Writer trigger reason (no parallel indepen
 - L13 (2026-11-04): User: "al ticket del pos agregale sistema de notificaciones, funciona sin conexion y lo realice en equipo, no lo hice solo". Answers the open question about authorship: headline and receipt moved from first person singular to "we", and the signature names the team.
 - L14 (2026-11-04): User: "en el ticket donde dice desarrollo ponele SitioHoy". Signature value changed from "Lucio Gastellu y equipo" to "SitioHoy"; read as replacing the value under the "Desarrollo" label. The owner's name is no longer on the receipt. Checks on production: tsc, lint, npm test 16/0, W2 scenes and blocker probes PASS before this one-word change, rerun after it.
 - L15 (2026-11-04): Independent recheck limited to the three blockers, on 0803e7c: B1, B2 and B3 PASS. The later 56f7186 (POS copy, receipt, one CSS rule) was checked by the parent only: CDP 47/47 and blocker probes on production.
+- L16 (2026-11-04): User: "dale ponele asi Desarrollo: Lucio Gastellu, en SitioHoy" and the POS stack: "trata de resumirlo con lo mas importante para que no se haga tan largo el ticket". Receipt signature set, stack summarized in three lines by layer (React, TypeScript, Vite; PHP, WordPress, WooCommerce; Vitest, Playwright, Docker); "Estadísticas" and "Sincronización" merged to offset the length; tighter receipt on screens under 720 px tall so it comes out whole.

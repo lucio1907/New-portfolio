@@ -57,12 +57,17 @@
         "Product variants and stock",
         "Held sales and discounts",
         "Cash register, expenses, closings",
-        "Statistics",
-        "Sync"
+        "Statistics and sync"
       ],
       "by": "Built by",
       "thanks": "Thanks for reading",
-      "team": "SitioHoy"
+      "team": "Lucio Gastellu, at SitioHoy",
+      "stackLabel": "Stack",
+      "stack": [
+        "React, TypeScript, Vite",
+        "PHP, WordPress, WooCommerce",
+        "Vitest, Playwright, Docker"
+      ]
     }
   },
   "chapters": {
