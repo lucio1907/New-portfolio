@@ -17,80 +17,22 @@
     ]
   },
   "nav": {
-    "about": "Sobre mí",
-    "experience": "Experiencia",
-    "projects": "Proyectos",
-    "stack": "Stack",
-    "contact": "Contacto",
     "cv": "CV",
-    "home": "Lucio Gastellu, inicio"
-  },
-  "role": "Desarrollador Full Stack",
-  "site": {
-    "hero": {
-      "cv": "Descargar CV"
-    },
-    "experience": {
-      "intro": "Del soporte técnico al desarrollo full stack."
-    },
-    "stack": {
-      "intro": "Con lo que trabajo hoy."
-    },
-    "projects": {
-      "intro": "Una selección de lo que construí.",
-      "demo": "Ver demo",
-      "code": "Ver código",
-      "apiOnly": "API sin demo pública",
-      "more": "Más proyectos en camino."
-    },
-    "contact": {
-      "intro": "¿Tenés un rol o un proyecto en mente? Escribime y te respondo.",
-      "copy": "Copiar email",
-      "copied": "Email copiado",
-      "phone": "Teléfono"
-    }
-  },
-  "about": {
-    "label": "Sobre mí",
-    "heading": "AI-native, con ownership total del código.",
-    "bio1": "Soy Desarrollador Full Stack con experiencia construyendo y lanzando productos reales de extremo a extremo. Manejo React y TypeScript en el frontend, y me hago cargo de servicios en Python (FastAPI) y Node.js/Express en el backend, sobre PostgreSQL con diseño de schemas, optimización de queries y migraciones.",
-    "bio2": "La IA es una parte central de mi flujo diario: escribo prompts en inglés, uso MCP servers y skills, y desarrollo mis propios workflows agentic con herramientas como Claude Code, validando el output e integrando resultados sin perder ownership del código. Proactivo por default, con experiencia trabajando bajo Scrum.",
-    "experienceLabel": "Experiencia",
-    "educationLabel": "Educación",
-    "education": [
-      {
-        "title": "Analista en Sistemas",
-        "place": "UNSADA",
-        "period": "2025 - Presente"
-      },
-      {
-        "title": "Desarrollo Web Full Stack",
-        "place": "Coderhouse",
-        "period": "2022 - 2023"
-      }
-    ],
-    "languagesLabel": "Idiomas",
-    "languages": "Inglés B2 · Español (nativo)"
-  },
-  "techStack": {
-    "label": "Tech Stack",
-    "subtitle": "Tecnologías con las que estoy trabajando actualmente.",
-    "categories": {
-      "languages": "Lenguajes",
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "data": "Bases de datos",
-      "tools": "Herramientas y proceso",
-      "ai": "Workflow con IA"
-    }
+    "home": "Lucio Gastellu, inicio",
+    "work": "Trabajo",
+    "trajectory": "Trayectoria",
+    "contact": "Contacto"
   },
   "contact": {
-    "rows": {
-      "phone": "Teléfono",
-      "github": "GitHub",
-      "linkedin": "LinkedIn",
-      "twitter": "Twitter / X"
-    }
+    "title": "¿Tenés un rol o un proyecto en mente?",
+    "lead": "Escribime y te respondo.",
+    "copy": "Copiar email",
+    "copied": "Email copiado",
+    "cv": "Descargar CV",
+    "phone": "Teléfono",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter / X"
   },
   "hero": {
     "lede": "Soy desarrollador full stack. Hago los sistemas con los que trabaja la gente.",
@@ -126,5 +68,78 @@
       ],
       "thanks": "Gracias por leer"
     }
+  },
+  "chapters": {
+    "visit": "Ver el sitio",
+    "code": "Ver el código",
+    "crm": {
+      "first": "Un CRM a medida.",
+      "second": "Sin plantillas.",
+      "body": "Sistemas de gestión de clientes hechos para cada negocio, de la pantalla a los datos.",
+      "layers": [
+        "Interfaz",
+        "Lógica de negocio",
+        "Gestión de clientes",
+        "Persistencia"
+      ]
+    },
+    "nadira": {
+      "first": "Probar un perfume.",
+      "second": "Sin comprar el frasco.",
+      "body": "Un ecommerce de decants de perfumes, hecho con Next.js y en producción."
+    },
+    "sitiohoy": {
+      "first": "Tu sitio web en 24 horas.",
+      "second": "Sin vueltas.",
+      "body": "Un proyecto en conjunto para vender sitios web con entrega en menos de 24 horas."
+    }
+  },
+  "more": {
+    "title": "Y además.",
+    "demo": "Ver demo",
+    "code": "Ver código",
+    "apiOnly": "API sin demo pública"
+  },
+  "number": {
+    "text": "menos de tiempo de respuesta en las APIs de Nexus Digital, optimizando búsqueda y filtrado."
+  },
+  "trajectory": {
+    "title": "Del soporte técnico al desarrollo full stack."
+  },
+  "how": {
+    "title": "AI-native, con ownership total del código.",
+    "lines": [
+      "Escribo prompts en inglés y uso MCP servers y skills.",
+      "Desarrollo mis propios workflows agentic con Claude Code.",
+      "Valido el output antes de integrarlo.",
+      "Diseño schemas, optimizo queries y escribo migraciones.",
+      "Trabajo bajo Scrum, y proactivo por default."
+    ]
+  },
+  "sheet": {
+    "title": "Ficha técnica.",
+    "education": "Formación",
+    "languages": "Idiomas",
+    "languagesValue": "Inglés B2, español nativo.",
+    "categories": {
+      "languages": "Lenguajes",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "data": "Bases de datos",
+      "tools": "Herramientas y proceso",
+      "ai": "Workflow con IA"
+    },
+    "studies": [
+      {
+        "title": "Analista en Sistemas",
+        "place": "UNSADA",
+        "period": "2025 - Presente"
+      },
+      {
+        "title": "Desarrollo Web Full Stack",
+        "place": "Coderhouse",
+        "period": "2022 - 2023"
+      }
+    ]
   }
 }

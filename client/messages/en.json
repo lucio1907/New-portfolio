@@ -17,80 +17,22 @@
     ]
   },
   "nav": {
-    "about": "About",
-    "experience": "Experience",
-    "projects": "Projects",
-    "stack": "Stack",
-    "contact": "Contact",
     "cv": "CV",
-    "home": "Lucio Gastellu, home"
-  },
-  "role": "Full Stack Developer",
-  "site": {
-    "hero": {
-      "cv": "Download CV"
-    },
-    "experience": {
-      "intro": "From IT support to full stack development."
-    },
-    "stack": {
-      "intro": "What I work with today."
-    },
-    "projects": {
-      "intro": "A selection of things I built.",
-      "demo": "Live demo",
-      "code": "View code",
-      "apiOnly": "API without a public demo",
-      "more": "More projects on the way."
-    },
-    "contact": {
-      "intro": "Have a role or a project in mind? Email me and I'll get back to you.",
-      "copy": "Copy email",
-      "copied": "Email copied",
-      "phone": "Phone"
-    }
-  },
-  "about": {
-    "label": "About",
-    "heading": "AI-native, with full ownership of the code.",
-    "bio1": "I am a Full Stack Developer with experience building and launching real products end to end. I work with React and TypeScript on the frontend, and I own Python (FastAPI) and Node.js/Express services on the backend, on top of PostgreSQL with schema design, query optimization and migrations.",
-    "bio2": "AI is a core part of my daily workflow: I write prompts in English, use MCP servers and skills, and build my own agentic workflows with tools like Claude Code, validating the output and integrating results without losing ownership of the code. Proactive by default, used to working in Scrum teams.",
-    "experienceLabel": "Experience",
-    "educationLabel": "Education",
-    "education": [
-      {
-        "title": "Systems Analyst",
-        "place": "UNSADA",
-        "period": "2025 - Present"
-      },
-      {
-        "title": "Full Stack Web Development",
-        "place": "Coderhouse",
-        "period": "2022 - 2023"
-      }
-    ],
-    "languagesLabel": "Languages",
-    "languages": "English B2 · Spanish (native)"
-  },
-  "techStack": {
-    "label": "Tech Stack",
-    "subtitle": "Technologies I currently work with.",
-    "categories": {
-      "languages": "Languages",
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "data": "Databases",
-      "tools": "Tools & Process",
-      "ai": "AI workflow"
-    }
+    "home": "Lucio Gastellu, home",
+    "work": "Work",
+    "trajectory": "Career",
+    "contact": "Contact"
   },
   "contact": {
-    "rows": {
-      "phone": "Phone",
-      "github": "GitHub",
-      "linkedin": "LinkedIn",
-      "twitter": "Twitter / X"
-    }
+    "title": "Do you have a role or a project in mind?",
+    "lead": "Write to me and I will answer.",
+    "copy": "Copy email",
+    "copied": "Email copied",
+    "cv": "Download CV",
+    "phone": "Phone",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter / X"
   },
   "hero": {
     "lede": "I'm a full stack developer. I build the systems people work with.",
@@ -126,5 +68,78 @@
       ],
       "thanks": "Thanks for reading"
     }
+  },
+  "chapters": {
+    "visit": "Visit the site",
+    "code": "See the code",
+    "crm": {
+      "first": "A custom CRM.",
+      "second": "No templates.",
+      "body": "Customer management systems made for each business, from the screen down to the data.",
+      "layers": [
+        "Interface",
+        "Business logic",
+        "Customer management",
+        "Persistence"
+      ]
+    },
+    "nadira": {
+      "first": "Try a perfume.",
+      "second": "Without buying the bottle.",
+      "body": "An ecommerce for perfume decants, built with Next.js and live in production."
+    },
+    "sitiohoy": {
+      "first": "Your website in 24 hours.",
+      "second": "No fuss.",
+      "body": "A joint project selling websites with delivery in under 24 hours."
+    }
+  },
+  "more": {
+    "title": "And also.",
+    "demo": "Live demo",
+    "code": "See code",
+    "apiOnly": "API with no public demo"
+  },
+  "number": {
+    "text": "less response time in the Nexus Digital APIs, by optimizing search and filtering."
+  },
+  "trajectory": {
+    "title": "From IT support to full stack development."
+  },
+  "how": {
+    "title": "AI-native, with full ownership of the code.",
+    "lines": [
+      "I write prompts in English and use MCP servers and skills.",
+      "I build my own agentic workflows with Claude Code.",
+      "I validate the output before integrating it.",
+      "I design schemas, optimize queries and write migrations.",
+      "I work under Scrum, proactive by default."
+    ]
+  },
+  "sheet": {
+    "title": "Technical sheet.",
+    "education": "Education",
+    "languages": "Languages",
+    "languagesValue": "English B2, native Spanish.",
+    "categories": {
+      "languages": "Languages",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "data": "Databases",
+      "tools": "Tools and process",
+      "ai": "AI workflow"
+    },
+    "studies": [
+      {
+        "title": "Systems Analyst",
+        "place": "UNSADA",
+        "period": "2025 - Present"
+      },
+      {
+        "title": "Full Stack Web Development",
+        "place": "Coderhouse",
+        "period": "2022 - 2023"
+      }
+    ]
   }
 }

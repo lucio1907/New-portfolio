@@ -18,21 +18,6 @@ body {
   }
 }
 
-@layer components {
-  .btn {
-    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-orbit px-5 font-medium text-parchment transition-colors duration-150 hover:border-haze;
-  }
-
-  .btn-sun {
-    @apply border-sun bg-sun text-night hover:border-[#ffd978] hover:bg-[#ffd978];
-  }
-
-  .link {
-    @apply text-sky underline decoration-sky/40 underline-offset-4 transition-colors hover:decoration-sky;
-  }
-
-}
-
 /* ── Keynote ─────────────────────────────────────────────────────────── */
 :root {
   --nav-height: 56px;
@@ -237,6 +222,431 @@ body {
       position: sticky;
       top: var(--nav-height);
       height: calc(100svh - var(--nav-height));
+    }
+  }
+}
+
+/* ── Everything after the POS chapter ─────────────────────────────────── */
+section[id] {
+  scroll-margin-top: var(--nav-height);
+}
+
+@layer components {
+  /* Masks for lines that rise into place. Padding keeps descenders uncut. */
+  .rise-mask {
+    display: block;
+    overflow: hidden;
+    padding: 0.05em 0.08em 0.14em;
+    margin: -0.05em -0.08em -0.14em;
+  }
+  .rise-mask > * {
+    display: block;
+  }
+
+  .text-link {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+    padding-bottom: 2px;
+    font-weight: 500;
+    transition: background-size 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .text-link:hover {
+    background-size: 0 1px;
+    background-position: 100% 100%;
+  }
+
+  /* Launches */
+  .chapter {
+    padding-top: clamp(96px, 20vh, 220px);
+  }
+  .chapter-head {
+    padding-inline: var(--gutter);
+  }
+  .chapter-title {
+    font-size: clamp(2.75rem, min(9.6vw, 16vh), 9rem);
+    line-height: 0.96;
+  }
+  .chapter-frame {
+    position: relative;
+    margin-top: clamp(40px, 8vh, 88px);
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: theme("colors.ink");
+  }
+  .chapter-foot {
+    display: grid;
+    gap: 16px;
+    padding: clamp(28px, 4vh, 44px) var(--gutter) 0;
+  }
+  .chapter-body {
+    max-width: 30em;
+    font-size: clamp(1.125rem, 1.7vw, 1.5rem);
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    line-height: 1.3;
+  }
+
+  /* CRM: the system as stacked layers */
+  .layers {
+    margin-top: clamp(40px, 8vh, 88px);
+    overflow: hidden;
+  }
+  .layer {
+    padding: clamp(14px, 2.2vw, 30px) var(--gutter);
+    font-size: clamp(1.9rem, 7vw, 6.75rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .layer:nth-child(1) {
+    background: theme("colors.mist");
+    color: theme("colors.ink");
+  }
+  .layer:nth-child(2) {
+    background: theme("colors.cobalt");
+    color: theme("colors.paper");
+  }
+  .layer:nth-child(3) {
+    background: theme("colors.ink");
+    color: theme("colors.paper");
+  }
+  .layer:nth-child(4) {
+    background: #dfe1da;
+    color: theme("colors.ink");
+  }
+
+  /* More projects */
+  .more {
+    padding: clamp(112px, 22vh, 240px) var(--gutter) 0;
+  }
+  .more-title {
+    font-size: clamp(2.5rem, 7vw, 6.5rem);
+  }
+  .more-list {
+    margin-top: clamp(32px, 6vh, 64px);
+  }
+  .more-row {
+    position: relative;
+    display: grid;
+    gap: 8px 32px;
+    padding-block: clamp(20px, 3.4vh, 34px);
+  }
+  .rule {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: currentColor;
+    transform-origin: 0 50%;
+  }
+  .more-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  .more-name {
+    font-size: clamp(1.5rem, 3vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .more-preview {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 30;
+    width: clamp(280px, 26vw, 420px);
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 10px;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  /* The number */
+  .number {
+    display: grid;
+    overflow: hidden;
+    gap: 20px;
+    padding: clamp(112px, 22vh, 240px) var(--gutter);
+  }
+  .number-value {
+    font-size: 38vw;
+    font-variant-numeric: tabular-nums;
+    line-height: 0.82;
+  }
+  /* Room for two digits from the start, so counting never moves the text. */
+  .number-value [data-count] {
+    display: inline-block;
+    min-width: calc(2ch - 0.09em); /* ch ignores the display type's tracking */
+    text-align: right;
+  }
+  .number-text {
+    max-width: 22em;
+    font-size: clamp(1.5rem, 2.9vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+  }
+
+  /* Trajectory */
+  .trajectory {
+    position: relative;
+    isolation: isolate;
+    padding: clamp(96px, 18vh, 200px) var(--gutter) clamp(72px, 14vh, 160px);
+    color: theme("colors.paper");
+  }
+  .trajectory-panel {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: theme("colors.ink");
+  }
+  .trajectory-title {
+    max-width: 11em;
+    font-size: clamp(2.5rem, 7.2vw, 7rem);
+    line-height: 0.96;
+  }
+  .trajectory-rail {
+    display: none;
+  }
+  .role {
+    padding-top: clamp(48px, 9vh, 96px);
+  }
+  .role-date {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .role-name {
+    margin-top: 16px;
+    font-size: clamp(1.625rem, 3vw, 2.875rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.06;
+  }
+  .role-place {
+    margin-top: 8px;
+    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    opacity: 0.72;
+  }
+  .role-list {
+    display: grid;
+    gap: 10px;
+    max-width: 34em;
+    margin-top: 20px;
+    font-size: clamp(1rem, 1.25vw, 1.125rem);
+    line-height: 1.45;
+    opacity: 0.84;
+  }
+
+  /* How I work */
+  .how {
+    padding: clamp(112px, 22vh, 240px) var(--gutter) 0;
+  }
+  .how-title {
+    max-width: 12em;
+    font-size: clamp(2.5rem, 7.2vw, 7rem);
+    line-height: 0.96;
+  }
+  .how-list {
+    display: grid;
+    gap: clamp(16px, 3vh, 32px);
+    margin-top: clamp(40px, 8vh, 88px);
+    font-size: clamp(1.5rem, 3.3vw, 3.25rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  /* Technical sheet */
+  .sheet {
+    padding: clamp(112px, 22vh, 240px) var(--gutter);
+  }
+  .sheet-title {
+    font-size: clamp(2.5rem, 7vw, 6.5rem);
+  }
+  .sheet-list {
+    margin-top: clamp(32px, 6vh, 64px);
+  }
+  .sheet-row {
+    position: relative;
+    display: grid;
+    gap: 6px 32px;
+    padding-block: clamp(16px, 2.6vh, 26px);
+  }
+  .sheet-row dt {
+    color: theme("colors.muted");
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .sheet-row dd {
+    font-size: clamp(1.25rem, 2.3vw, 2.125rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.16;
+  }
+
+  /* Contact */
+  .contact {
+    overflow: hidden;
+    background: theme("colors.cobalt");
+    color: theme("colors.paper");
+  }
+  .contact-inner {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 56px;
+    padding: clamp(96px, 16vh, 160px) var(--gutter) clamp(24px, 4vh, 40px);
+  }
+  .contact-title {
+    max-width: 13em;
+    font-size: clamp(2.5rem, 7.2vw, 7rem);
+    line-height: 0.96;
+  }
+  .contact-lead {
+    margin-top: 20px;
+    color: theme("colors.mist");
+    font-size: clamp(1.125rem, 1.8vw, 1.625rem);
+  }
+  .contact-email {
+    display: inline-block;
+    font-size: 9vw;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 0.05em no-repeat;
+    padding-bottom: 0.1em;
+    transition: background-size 480ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .contact-email:hover,
+  .contact-email:focus-visible {
+    background-size: 100% 0.05em;
+  }
+  .action {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 22px;
+    border: 1.5px solid theme("colors.paper");
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+  .action:hover {
+    background: theme("colors.paper");
+    color: theme("colors.cobalt");
+  }
+  .action-solid {
+    background: theme("colors.paper");
+    color: theme("colors.cobalt");
+  }
+  .action-solid:hover {
+    background: transparent;
+    color: theme("colors.paper");
+  }
+  .contact-links {
+    display: grid;
+    gap: 12px 40px;
+    font-size: 16px;
+  }
+  .contact-links span {
+    display: block;
+    color: theme("colors.mist");
+    font-size: 15px;
+  }
+
+  @media (min-width: 768px) {
+    .chapter-foot {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+    }
+    .chapter-offset .chapter-head {
+      padding-left: 24vw;
+    }
+    .more-row {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 5fr) 17rem;
+      align-items: baseline;
+    }
+    .more-links {
+      justify-content: flex-end;
+    }
+    .number {
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: end;
+      gap: 40px;
+    }
+    .number-value {
+      font-size: 30vw;
+    }
+    .how-list {
+      padding-left: 24vw;
+    }
+    .sheet-row {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+      align-items: baseline;
+    }
+    .contact-email {
+      font-size: clamp(2.5rem, 6.2vw, 6.25rem);
+    }
+    .contact-links {
+      grid-auto-flow: column;
+      justify-content: start;
+    }
+
+    /* Only with scenes running: the date stays beside the roles and rolls. */
+    .motion .trajectory-body {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      gap: 40px;
+    }
+    .motion .trajectory-rail {
+      position: sticky;
+      top: var(--nav-height);
+      display: flex;
+      height: calc(100svh - var(--nav-height));
+      align-items: center;
+    }
+    .motion .rail-window {
+      height: 1em;
+      overflow: hidden;
+      font-size: clamp(3.5rem, 8.6vw, 8.5rem);
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 1;
+    }
+    .motion .rail-window > div > span {
+      display: block;
+      height: 1em;
+      white-space: nowrap;
+    }
+    .motion .role {
+      display: flex;
+      min-height: 76svh;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 0;
+    }
+    .motion .role-date {
+      display: none;
+    }
+    .motion .role-name {
+      margin-top: 0;
+    }
+  }
+
+  /* The preview that follows the cursor needs a real cursor. */
+  @media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+    .motion .more-preview {
+      display: block;
     }
   }
 }

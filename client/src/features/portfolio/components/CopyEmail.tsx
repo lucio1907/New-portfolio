@@ -6,7 +6,7 @@ import { EMAIL } from "../lib/constants";
 
 /** Copies the email; the confirmation is announced to screen readers. */
 const CopyEmail = () => {
-  const t = useTranslations("site.contact");
+  const t = useTranslations("contact");
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
@@ -20,7 +20,7 @@ const CopyEmail = () => {
   };
 
   return (
-    <button type="button" onClick={copy} className="btn min-h-[40px] px-4 text-sm">
+    <button type="button" onClick={copy} className="action action-solid">
       <span aria-live="polite">{copied ? t("copied") : t("copy")}</span>
     </button>
   );
