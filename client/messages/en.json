@@ -16,42 +16,14 @@
       "Databases"
     ]
   },
-  "os": {
-    "desktopLabel": "LucioOS desktop",
-    "iconsLabel": "Apps",
-    "apps": {
-      "about": "About",
-      "experience": "Experience",
-      "projects": "Projects",
-      "stack": "Stack",
-      "contact": "Contact",
-      "terminal": "Terminal",
-      "cv": "CV.pdf"
-    },
-    "window": {
-      "close": "Close {title}",
-      "minimize": "Minimize {title}",
-      "back": "Back to the desktop"
-    },
-    "taskbar": {
-      "label": "Taskbar",
-      "openWindows": "Open windows",
-      "standUp": "Stand up",
-      "clock": "Time in Buenos Aires: {time}"
-    },
-    "terminal": {
-      "welcome": "LucioOS terminal. Type help to see the commands.",
-      "label": "Command"
-    },
-    "identity": {
-      "role": "Full Stack Developer",
-      "available": "Available for new roles.",
-      "location": "Buenos Aires, remote or hybrid."
-    }
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "stack": "Stack",
+    "contact": "Contact"
   },
-  "room": {
-    "sit": "Sit at the computer"
-  },
+  "role": "Full Stack Developer",
   "site": {
     "hero": {
       "cv": "Download CV"

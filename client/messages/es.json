@@ -16,42 +16,14 @@
       "Databases"
     ]
   },
-  "os": {
-    "desktopLabel": "Escritorio de LucioOS",
-    "iconsLabel": "Aplicaciones",
-    "apps": {
-      "about": "Sobre mí",
-      "experience": "Experiencia",
-      "projects": "Proyectos",
-      "stack": "Stack",
-      "contact": "Contacto",
-      "terminal": "Terminal",
-      "cv": "CV.pdf"
-    },
-    "window": {
-      "close": "Cerrar {title}",
-      "minimize": "Minimizar {title}",
-      "back": "Volver al escritorio"
-    },
-    "taskbar": {
-      "label": "Barra de tareas",
-      "openWindows": "Ventanas abiertas",
-      "standUp": "Levantarse",
-      "clock": "Hora en Buenos Aires: {time}"
-    },
-    "terminal": {
-      "welcome": "LucioOS terminal. Escribí help para ver los comandos (en inglés, como toda terminal).",
-      "label": "Comando"
-    },
-    "identity": {
-      "role": "Desarrollador Full Stack",
-      "available": "Disponible para nuevos roles.",
-      "location": "Buenos Aires, remoto o híbrido."
-    }
+  "nav": {
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "stack": "Stack",
+    "contact": "Contacto"
   },
-  "room": {
-    "sit": "Sentarse a la compu"
-  },
+  "role": "Desarrollador Full Stack",
   "site": {
     "hero": {
       "cv": "Descargar CV"
