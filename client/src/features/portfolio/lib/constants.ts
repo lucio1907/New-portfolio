@@ -8,5 +8,5 @@ export const GITHUB_URL = "https://github.com/lucio1907";
 export const SOCIAL_LINKS = [
   { key: "github", href: GITHUB_URL, value: "@lucio1907" },
   { key: "linkedin", href: "https://www.linkedin.com/in/luciogastellu/", value: "luciogastellu" },
-  { key: "twitter", href: "https://x.com/Lu_Gastellu", value: "@Lu_Gastellu" },
+  { key: "twitter", href: "https://x.com/luciogastellu", value: "@luciogastellu" },
 ] as const;
