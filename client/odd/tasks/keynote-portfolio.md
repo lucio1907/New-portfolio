@@ -23,10 +23,10 @@ Branch: feat/keynote-portfolio · Delivery: ask-on-risk (chain strategy to be as
 | W2 Hero + Manifesto + POS chapter; user checkpoint | S3–S6 | inline | done, direction kept by the user | 321047d |
 | W3 Other chapters, more projects, number | S3–S7 | inline | done | see log |
 | W4 Trajectory, how I work, technical sheet, contact, nav, footer | S3–S7 | inline | done | see log |
-| W5 QA and docs | S1–S7 | inline | done, independent verifier pending | d207895 |
+| W5 QA and docs | S1–S7 | inline | done, independent verifier run | d207895 |
 | W6 Fresh captures of the two launches | S8 | inline | done | 3eb2e33 |
 | W7 POS chapter speaks as the developer | S9 | inline | done | b7f6514 |
-| W8 Fix the verifier's blockers | S4, S7 | inline | done, recheck pending | 59585b1 |
+| W8 Fix the verifier's blockers | S4, S7 | inline | done, independent recheck PASS | 59585b1 |
 | W9 The other launches speak as the developer | S10 | inline | done | 0803e7c |
 | W10 POS: offline, notifications, built as a team | S11 | inline | done | see git log |
 
@@ -47,3 +47,4 @@ Route evidence: inline by default; no Writer trigger reason (no parallel indepen
 - L12 (2026-11-04): User, on the proposal to move the other launches to the developer's voice: "si cambialos asi". Headlines applied as proposed.
 - L13 (2026-11-04): User: "al ticket del pos agregale sistema de notificaciones, funciona sin conexion y lo realice en equipo, no lo hice solo". Answers the open question about authorship: headline and receipt moved from first person singular to "we", and the signature names the team.
 - L14 (2026-11-04): User: "en el ticket donde dice desarrollo ponele SitioHoy". Signature value changed from "Lucio Gastellu y equipo" to "SitioHoy"; read as replacing the value under the "Desarrollo" label. The owner's name is no longer on the receipt. Checks on production: tsc, lint, npm test 16/0, W2 scenes and blocker probes PASS before this one-word change, rerun after it.
+- L15 (2026-11-04): Independent recheck limited to the three blockers, on 0803e7c: B1, B2 and B3 PASS. The later 56f7186 (POS copy, receipt, one CSS rule) was checked by the parent only: CDP 47/47 and blocker probes on production.
