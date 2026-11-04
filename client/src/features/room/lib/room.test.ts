@@ -2,7 +2,7 @@ import { describe, test } from "node:test";
 import assert from "node:assert/strict";
 import { BoxGeometry, Color } from "three";
 import { box, merge, shape, tag } from "./geometry.ts";
-import { DECOR, HOTSPOT_IDS, ROOM_BOUNDS, buildRoomGeometry, buildSkylineGeometry } from "./furniture.ts";
+import { DECOR, HOTSPOT_IDS, ROOM_BOUNDS, buildRoomGeometry } from "./furniture.ts";
 import { QUALITY } from "./quality.ts";
 
 const triangles = (geometry: { getAttribute: (name: string) => { count: number } }) =>
@@ -65,15 +65,31 @@ describe("room", () => {
   }
 
   test("triangle budgets: ≤ 60k on desktop tiers, ≤ 25k on mobile", () => {
-    const skyline = triangles(buildSkylineGeometry(9));
-    assert.ok(triangles(buildRoomGeometry(QUALITY.high)) + skyline <= 60_000);
-    assert.ok(triangles(buildRoomGeometry(QUALITY.low)) + skyline <= 25_000);
+    assert.ok(triangles(buildRoomGeometry(QUALITY.high)) <= 60_000);
+    assert.ok(triangles(buildRoomGeometry(QUALITY.medium)) <= 60_000);
+    assert.ok(triangles(buildRoomGeometry(QUALITY.low)) <= 25_000);
   });
 
-  test("the skyline is deterministic and cheap", () => {
-    const a = buildSkylineGeometry(9).getAttribute("position").array;
-    const b = buildSkylineGeometry(9).getAttribute("position").array;
-    assert.deepEqual(Array.from(a), Array.from(b));
-    assert.ok(a.length / 9 <= 4000);
+  test("the baked light is deterministic, in range, and leaves no build attributes", () => {
+    const a = buildRoomGeometry(QUALITY.low);
+    const b = buildRoomGeometry(QUALITY.low);
+    const colors = Array.from(a.getAttribute("color").array);
+    assert.deepEqual(colors, Array.from(b.getAttribute("color").array));
+    assert.ok(colors.every((value) => Number.isFinite(value) && value >= 0 && value <= 1));
+    assert.equal(a.getAttribute("normal"), undefined);
+    assert.equal(a.getAttribute("emissive"), undefined);
+  });
+
+  test("the room has real contrast: bright pools and dark corners", () => {
+    const colors = buildRoomGeometry(QUALITY.low).getAttribute("color");
+    let darkest = Infinity;
+    let brightest = 0;
+    for (let i = 0; i < colors.count; i++) {
+      const luminance = 0.2126 * colors.getX(i) + 0.7152 * colors.getY(i) + 0.0722 * colors.getZ(i);
+      darkest = Math.min(darkest, luminance);
+      brightest = Math.max(brightest, luminance);
+    }
+    assert.ok(brightest > 0.5, `brightest ${brightest}`);
+    assert.ok(darkest < 0.05, `darkest ${darkest}`);
   });
 });

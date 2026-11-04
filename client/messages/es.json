@@ -39,6 +39,10 @@
       "standUp": "Levantarse",
       "clock": "Hora en Buenos Aires: {time}"
     },
+    "terminal": {
+      "welcome": "LucioOS terminal. Escribí help para ver los comandos (en inglés, como toda terminal).",
+      "label": "Comando"
+    },
     "intro": {
       "greeting": "Hola, soy",
       "role": "Desarrollador Full Stack",
@@ -49,23 +53,10 @@
       "cv": "Descargar CV",
       "direct": "Ir directo al escritorio",
       "hint": "O tocá un objeto: el mate, los libros, las notas, las cajas o el celular."
-    },
-    "terminal": {
-      "welcome": "LucioOS terminal. Escribí help para ver los comandos (en inglés, como toda terminal).",
-      "label": "Comando"
     }
   },
   "room": {
-    "objectsLabel": "Objetos del escritorio",
-    "hotspots": {
-      "monitor": "Sentarse a la compu",
-      "chair": "Sentarse a la compu",
-      "mate": "Sobre mí",
-      "books": "Experiencia",
-      "notes": "Stack",
-      "boxes": "Proyectos",
-      "phone": "Contacto"
-    }
+    "sit": "Sentarse a la compu"
   },
   "site": {
     "hero": {

@@ -1,59 +1,60 @@
 "use client";
 
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import {
-  BufferAttribute,
-  BufferGeometry,
-  MeshLambertMaterial,
-  type PerspectiveCamera,
-  PlaneGeometry,
-  ShaderMaterial,
-} from "three";
+import { type BufferGeometry, MeshBasicMaterial, type PerspectiveCamera, PlaneGeometry, ShaderMaterial, Vector3 } from "three";
 import RoomInteraction from "./RoomInteraction";
-import { createRandom } from "../lib/random";
-import { type Framing, easeInOutCubic, lerpPose, roomFraming, sitPose } from "../lib/camera";
-import { HOTSPOT_IDS } from "../lib/furniture";
+import { type DragOrbit, type Framing, type Orbit, ORBIT_LIMITS, REST_VIEW_SLOPE, createDragOrbit, easeInOutCubic, lerpPose, roomFraming, sitPose } from "../lib/camera";
 import { dispatchExperience, getSnapshot, useExperience } from "@/features/experience/store";
-import { LAMP_BULB, SCREEN, WINDOW, buildRoomGeometry, buildSkylineGeometry } from "../lib/furniture";
+import { SCREEN, WINDOW, buildRoomInSteps } from "../lib/furniture";
 import type { QualitySettings } from "../lib/quality";
 
 const SIT_MS = 1100;
 const STAND_MS = 900;
-const PARALLAX = { x: 0.16, y: 0.08 };
+/** How far the pointer turns the room, as a share of the orbit limits. */
+const PARALLAX = 0.14;
+/** How fast the view catches up with a drag, and how it springs back after one. */
+const FOLLOW_RATE = 14;
+const SPRING_RATE = 4.5;
+/** Longest the light bake may hold the main thread at a time (ms). */
+const BAKE_SLICE = 8;
 
 type Tween = { from: Framing; to: Framing; start: number; duration: number; arrive: boolean };
 
+const screenCenter = new Vector3();
+
 /**
  * Frames the room for the viewport, follows the pointer with a little
- * parallax, and flies into the monitor when the visitor sits down (and back
- * out when they stand up). Renders only while something moves.
+ * parallax and a drag with a limited orbit, and flies into the monitor when
+ * the visitor sits down (and back out when they stand up). Keeps the ring on
+ * the monitor. Renders only while something moves.
  */
-const CameraRig = () => {
+const CameraRig = ({ drag, onScreenMove }: { drag: DragOrbit; onScreenMove: (x: number, y: number) => void }) => {
   const get = useThree((state) => state.get);
   const size = useThree((state) => state.size);
   const { experience } = useExperience();
   const pose = useRef<Framing | null>(null);
   const tween = useRef<Tween | null>(null);
   const pointer = useRef({ x: 0, y: 0 });
-  const parallax = useRef({ x: 0, y: 0 });
+  const view = useRef<Orbit>({ yaw: 0, pitch: 0 });
 
   const apply = useCallback(
-    (framing: Framing, shift = { x: 0, y: 0 }) => {
+    (framing: Framing) => {
       const { camera: current, size: viewport } = get();
       const camera = current as PerspectiveCamera;
-      const [x, y, z] = framing.position;
-      camera.position.set(x + shift.x * PARALLAX.x, y + shift.y * PARALLAX.y, z);
+      camera.position.set(...framing.position);
       camera.fov = framing.fov;
       camera.lookAt(...framing.target);
-      camera.setViewOffset(viewport.width, viewport.height, framing.offset.x * viewport.width, framing.offset.y * viewport.height, viewport.width, viewport.height);
       camera.updateProjectionMatrix();
+      camera.updateMatrixWorld();
+      screenCenter.set(...SCREEN.center).project(camera);
+      onScreenMove(((screenCenter.x + 1) / 2) * viewport.width, ((1 - screenCenter.y) / 2) * viewport.height);
     },
-    [get],
+    [get, onScreenMove],
   );
 
   const resting = useCallback(
-    () => (getSnapshot().experience.mode === "room" ? roomFraming(size.width / size.height) : sitPose(size.width / size.height)),
+    () => (getSnapshot().experience.mode === "room" ? roomFraming(size.width / size.height, view.current) : sitPose(size.width / size.height)),
     [size],
   );
 
@@ -77,6 +78,7 @@ const CameraRig = () => {
     if (experience.mode === "sitting") {
       tween.current = { from, to: sitPose(aspect), start: now, duration: SIT_MS, arrive: true };
     } else if (experience.mode === "room") {
+      view.current = { yaw: 0, pitch: 0 };
       tween.current = { from, to: roomFraming(aspect), start: now, duration: STAND_MS, arrive: false };
     } else if (!tween.current) {
       // Deep links land on the desktop directly: no flight, just the pose.
@@ -107,18 +109,21 @@ const CameraRig = () => {
       if (t >= 1) {
         tween.current = null;
         pose.current = flight.to;
-        parallax.current = { x: 0, y: 0 };
         if (flight.arrive) dispatchExperience({ type: "arrived" });
       } else state.invalidate();
       return;
     }
     if (getSnapshot().experience.mode !== "room" || !pose.current) return;
-    // Ease the parallax toward the pointer; keep rendering until it settles.
-    const k = 1 - Math.exp(-delta * 6);
-    parallax.current.x += (pointer.current.x - parallax.current.x) * k;
-    parallax.current.y += (pointer.current.y - parallax.current.y) * k;
-    apply(pose.current, parallax.current);
-    if (Math.abs(pointer.current.x - parallax.current.x) + Math.abs(pointer.current.y - parallax.current.y) > 0.002) state.invalidate();
+    // Ease the view toward the drag, or the pointer once it ends (the spring
+    // back); keep rendering until it settles.
+    const dragged = drag.get();
+    const yaw = dragged ? dragged.yaw : pointer.current.x * ORBIT_LIMITS.yaw * PARALLAX;
+    const pitch = dragged ? dragged.pitch : pointer.current.y * ORBIT_LIMITS.pitch * PARALLAX;
+    const k = 1 - Math.exp(-delta * (dragged ? FOLLOW_RATE : SPRING_RATE));
+    view.current = { yaw: view.current.yaw + (yaw - view.current.yaw) * k, pitch: view.current.pitch + (pitch - view.current.pitch) * k };
+    pose.current = roomFraming(state.size.width / state.size.height, view.current);
+    apply(pose.current);
+    if (Math.abs(yaw - view.current.yaw) + Math.abs(pitch - view.current.pitch) > 0.0004) state.invalidate();
   });
 
   return null;
@@ -159,7 +164,7 @@ const screenMaterial = () =>
         return 1.0 - smoothstep(0.0, 0.004, length(max(d, 0.0)) - radius);
       }
       void main() {
-        vec3 color = mix(vec3(0.06, 0.09, 0.25), vec3(0.14, 0.19, 0.43), vUv.y);
+        vec3 color = mix(vec3(0.09, 0.15, 0.42), vec3(0.24, 0.36, 0.78), vUv.y);
         vec3 tints[5];
         tints[0] = vec3(1.0, 0.79, 0.29);
         tints[1] = vec3(0.55, 0.8, 1.0);
@@ -169,8 +174,8 @@ const screenMaterial = () =>
         for (int i = 0; i < 5; i++) {
           color = mix(color, tints[i], rect(vUv, vec2(0.07, 0.86 - float(i) * 0.15), vec2(0.035, 0.055), 0.012));
         }
-        float window = rect(vUv, vec2(0.56, 0.55), vec2(0.3, 0.3), 0.02);
-        color = mix(color, vec3(0.07, 0.1, 0.27), window);
+        float appWindow = rect(vUv, vec2(0.56, 0.55), vec2(0.3, 0.3), 0.02);
+        color = mix(color, vec3(0.07, 0.1, 0.27), appWindow);
         color = mix(color, vec3(0.2, 0.26, 0.52), rect(vUv, vec2(0.56, 0.82), vec2(0.3, 0.035), 0.01));
         color = mix(color, vec3(0.06, 0.08, 0.2), rect(vUv, vec2(0.5, 0.035), vec2(0.5, 0.035), 0.0));
         gl_FragColor = vec4(color, 1.0);
@@ -178,129 +183,185 @@ const screenMaterial = () =>
     `,
   });
 
-/** Night sky behind the skyline: gradient plus a moon. */
-const skyMaterial = () =>
+/**
+ * Buenos Aires at night, painted on one plane deep in the window opening. A
+ * diorama floating in the dark cannot have real geometry behind its wall, so
+ * each layer shifts with the view angle and the window still looks deep.
+ */
+const windowMaterial = () =>
   new ShaderMaterial({
     toneMapped: false,
-    depthWrite: false,
+    uniforms: {
+      uRestSlope: { value: REST_VIEW_SLOPE },
+      uOpening: { value: [WINDOW.x0, WINDOW.y0, WINDOW.x1, WINDOW.y1] },
+    },
     vertexShader: /* glsl */ `
-      varying vec2 vUv;
+      varying vec3 vWorld;
       void main() {
-        vUv = uv;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        vWorld = (modelMatrix * vec4(position, 1.0)).xyz;
+        gl_Position = projectionMatrix * viewMatrix * vec4(vWorld, 1.0);
       }
     `,
     fragmentShader: /* glsl */ `
-      varying vec2 vUv;
+      uniform vec2 uRestSlope;
+      uniform vec4 uOpening;
+      varying vec3 vWorld;
+
+      float random1(float n) { return fract(sin(n * 12.9898) * 43758.5453); }
+      float random2(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+
+      // One row of buildings: rgb color, alpha set where a building stands.
+      vec4 buildings(vec2 p, float seed, float columnWidth, float tallest, vec3 wall) {
+        float column = floor(p.x / columnWidth);
+        float top = 0.12 + random1(column + seed) * tallest;
+        if (p.y > top) return vec4(0.0);
+        vec2 grid = vec2(p.x, p.y) / vec2(0.042, 0.05);
+        vec2 cell = floor(grid);
+        vec2 inside = fract(grid);
+        float pane = step(0.25, inside.x) * step(inside.x, 0.75) * step(0.25, inside.y) * step(inside.y, 0.75);
+        float lit = step(0.66, random2(cell + seed));
+        return vec4(mix(wall, vec3(1.0, 0.78, 0.38), pane * lit), 1.0);
+      }
+
       void main() {
-        vec3 color = mix(vec3(0.17, 0.23, 0.5), vec3(0.03, 0.05, 0.16), smoothstep(0.0, 0.85, vUv.y));
-        float moon = 1.0 - smoothstep(0.028, 0.032, distance(vUv * vec2(1.8, 1.0), vec2(0.62 * 1.8, 0.78)));
-        color = mix(color, vec3(0.95, 0.93, 0.87), moon);
+        vec3 view = normalize(vWorld - cameraPosition);
+        // Parallax relative to the resting view, so the skyline stays framed.
+        vec2 slope = view.xy / max(-view.z, 0.05) - uRestSlope;
+        vec2 size = uOpening.zw - uOpening.xy;
+        vec2 local = (vWorld.xy - uOpening.xy) / size.y;
+
+        vec2 skyUv = local + slope * 0.16;
+        vec3 color = mix(vec3(0.33, 0.27, 0.56), vec3(0.05, 0.07, 0.24), smoothstep(0.0, 0.95, skyUv.y));
+
+        vec2 starCell = floor(skyUv * 42.0);
+        float star = step(0.93, random2(starCell)) * smoothstep(0.1, 0.0, distance(fract(skyUv * 42.0), vec2(0.5)));
+        color += vec3(0.9, 0.88, 0.8) * star * smoothstep(0.3, 0.6, skyUv.y);
+
+        float moon = smoothstep(0.075, 0.068, distance(skyUv, vec2(0.74, 0.76)));
+        color = mix(color, vec3(0.98, 0.95, 0.84), moon);
+
+        vec2 back = local + slope * 0.1;
+        vec4 far = buildings(back, 3.0, 0.11, 0.42, vec3(0.1, 0.11, 0.32));
+        color = mix(color, far.rgb, far.a);
+
+        // The Obelisco, between the two rows of buildings.
+        vec2 tower = local + slope * 0.07 - vec2(0.42, 0.0);
+        float halfWidth = 0.022 - tower.y * 0.012;
+        float shaft = step(abs(tower.x), halfWidth) * step(tower.y, 0.56);
+        float tip = step(abs(tower.x), max(0.0, (0.62 - tower.y) * 0.25)) * step(0.56, tower.y);
+        color = mix(color, vec3(0.86, 0.83, 0.76), max(shaft, tip));
+
+        vec2 front = local + slope * 0.04;
+        vec4 near = buildings(front, 11.0, 0.15, 0.24, vec3(0.05, 0.06, 0.2));
+        color = mix(color, near.rgb, near.a);
+
         gl_FragColor = vec4(color, 1.0);
       }
     `,
   });
 
 /**
- * Lambert with vertex colors plus a warm glow on the hovered object, read
- * from the `objectId` attribute: highlighting costs no extra draw call.
+ * The light is baked into the vertex colors, so the room is unlit. The hover
+ * glow reads the `objectId` attribute: highlighting costs no extra draw call.
  */
 const roomMaterial = () => {
-  const uniforms = { uHovered: { value: -10 }, uHoveredAlt: { value: -10 } };
-  const material = new MeshLambertMaterial({ vertexColors: true });
+  const glow = { value: 0 };
+  const material = new MeshBasicMaterial({ vertexColors: true, toneMapped: false });
   material.onBeforeCompile = (shader) => {
-    shader.uniforms.uHovered = uniforms.uHovered;
-    shader.uniforms.uHoveredAlt = uniforms.uHoveredAlt;
+    shader.uniforms.uGlow = glow;
     shader.vertexShader = shader.vertexShader
       .replace("#include <common>", "#include <common>\nattribute float objectId;\nvarying float vObjectId;")
       .replace("#include <begin_vertex>", "#include <begin_vertex>\nvObjectId = objectId;");
     shader.fragmentShader = shader.fragmentShader
-      .replace("#include <common>", "#include <common>\nuniform float uHovered;\nuniform float uHoveredAlt;\nvarying float vObjectId;")
-      .replace(
-        "#include <opaque_fragment>",
-        "float glow = max(1.0 - step(0.5, abs(vObjectId - uHovered)), 1.0 - step(0.5, abs(vObjectId - uHoveredAlt)));\noutgoingLight += vec3(1.0, 0.8, 0.45) * 0.3 * glow;\n#include <opaque_fragment>",
-      );
+      .replace("#include <common>", "#include <common>\nuniform float uGlow;\nvarying float vObjectId;")
+      .replace("#include <opaque_fragment>", "outgoingLight *= 1.0 + vec3(0.8, 0.55, 0.2) * uGlow * step(-0.5, vObjectId);\noutgoingLight += vec3(0.012, 0.008, 0.002) * uGlow * step(-0.5, vObjectId);\n#include <opaque_fragment>");
   };
-  /** Glow one object (and an optional partner); -10 matches nothing. */
-  const setHover = (id: number, partner: number) => {
-    uniforms.uHovered.value = id;
-    uniforms.uHoveredAlt.value = partner;
+  /** Decor has a negative id; the computer glows as one. */
+  const setGlow = (on: boolean) => {
+    glow.value = on ? 1 : 0;
   };
-  return { material, setHover };
+  return { material, setGlow };
 };
 
-const starGeometry = (count: number) => {
-  const random = createRandom(2026);
-  const positions = new Float32Array(count * 3);
-  for (let i = 0; i < count; i++) {
-    positions.set([-3 + random() * 7.5, 1.4 + random() * 3.2, -5.2 - random() * 0.4], i * 3);
-  }
-  const geometry = new BufferGeometry();
-  geometry.setAttribute("position", new BufferAttribute(positions, 3));
-  return geometry;
+/**
+ * Builds the room a few milliseconds at a time: baking the light is too much
+ * work for a single task, above all on a phone. Null until it is done.
+ */
+const useRoomGeometry = (settings: QualitySettings) => {
+  const [room, setRoom] = useState<BufferGeometry | null>(null);
+  useEffect(() => {
+    const steps = buildRoomInSteps(settings);
+    let timer: ReturnType<typeof setTimeout>;
+    const work = () => {
+      const deadline = performance.now() + BAKE_SLICE;
+      let step = steps.next();
+      while (!step.done && performance.now() < deadline) step = steps.next();
+      if (step.done) setRoom(step.value);
+      else timer = setTimeout(work);
+    };
+    timer = setTimeout(work);
+    return () => clearTimeout(timer);
+  }, [settings]);
+  useEffect(() => () => room?.dispose(), [room]);
+  return room;
 };
 
 type RoomSceneProps = {
   settings: QualitySettings;
-  highlight: number | null;
-  onHover: (id: number | null, x: number, y: number) => void;
-  onActivate: (id: number) => void;
+  /** Called once the finished room's first frame is on its way to the screen. */
+  onReady: () => void;
+  highlight: boolean;
+  /** Where the monitor is on screen, in CSS pixels. */
+  onScreenMove: (x: number, y: number) => void;
+  onHover: (hovering: boolean) => void;
+  onActivate: () => void;
 };
 
-/** Monitor and chair both mean "sit down", so they glow together. */
-const partnerOf = (id: number | null) =>
-  id === HOTSPOT_IDS.monitor ? HOTSPOT_IDS.chair : id === HOTSPOT_IDS.chair ? HOTSPOT_IDS.monitor : -10;
-
-/** The desk room and the night outside its window. Everything is procedural. */
-const RoomScene = ({ settings, highlight, onHover, onActivate }: RoomSceneProps) => {
+/** The diorama and the night in its window. Everything is procedural. */
+const RoomScene = ({ settings, onReady, highlight, onScreenMove, onHover, onActivate }: RoomSceneProps) => {
   const invalidate = useThree((state) => state.invalidate);
-  const { material: roomShader, setHover } = useMemo(() => roomMaterial(), []);
+  const { material: roomShader, setGlow } = useMemo(() => roomMaterial(), []);
+  const drag = useMemo(() => createDragOrbit(), []);
 
   useEffect(() => {
-    setHover(highlight ?? -10, partnerOf(highlight));
+    setGlow(highlight);
     invalidate();
-  }, [highlight, setHover, invalidate]);
+  }, [highlight, setGlow, invalidate]);
 
-  const room = useMemo(() => buildRoomGeometry(settings), [settings]);
-  const skyline = useMemo(() => buildSkylineGeometry(9), []);
-  const stars = useMemo(() => starGeometry(settings.stars), [settings.stars]);
+  const room = useRoomGeometry(settings);
   const screen = useMemo(() => new PlaneGeometry(SCREEN.width, SCREEN.height), []);
-  const sky = useMemo(() => new PlaneGeometry(10, 6), []);
+  const sky = useMemo(() => new PlaneGeometry(WINDOW.x1 - WINDOW.x0, WINDOW.y1 - WINDOW.y0), []);
   const screenShader = useMemo(() => screenMaterial(), []);
-  const skyShader = useMemo(() => skyMaterial(), []);
+  const skyShader = useMemo(() => windowMaterial(), []);
 
   useEffect(
     () => () => {
-      for (const resource of [room, skyline, stars, screen, sky, screenShader, skyShader, roomShader]) resource.dispose();
+      for (const resource of [screen, sky, screenShader, skyShader, roomShader]) resource.dispose();
     },
-    [room, skyline, stars, screen, sky, screenShader, skyShader, roomShader],
+    [screen, sky, screenShader, skyShader, roomShader],
   );
 
-  const windowCenter: [number, number, number] = [(WINDOW.x0 + WINDOW.x1) / 2, (WINDOW.y0 + WINDOW.y1) / 2, WINDOW.z];
+  useEffect(() => {
+    if (!room) return;
+    invalidate();
+    const frame = requestAnimationFrame(onReady);
+    return () => cancelAnimationFrame(frame);
+  }, [room, invalidate, onReady]);
 
   return (
     <>
-      <color attach="background" args={["#0F1640"]} />
       {/* Must come before the rig: its effect re-enables rendering first. */}
       <FrameloopGate />
-      <CameraRig />
+      <CameraRig drag={drag} onScreenMove={onScreenMove} />
 
-      <hemisphereLight args={["#8CCBFF", "#0F1640", 0.85]} />
-      <directionalLight position={[windowCenter[0], 2.4, -3]} color="#A9C2FF" intensity={1.1} />
-      <pointLight position={LAMP_BULB} color="#FFB86B" intensity={3.2} distance={3.6} decay={1.6} />
-      <pointLight position={[SCREEN.center[0], SCREEN.center[1], SCREEN.center[2] + 0.35]} color="#8CCBFF" intensity={0.7} distance={1.6} decay={2} />
-
-      <mesh geometry={room} material={roomShader} />
-      <RoomInteraction room={room} highlight={highlight} onHover={onHover} onActivate={onActivate} />
-      <mesh geometry={screen} material={screenShader} position={SCREEN.center} />
-
-      <mesh geometry={sky} material={skyShader} position={[1.2, 2.6, -5.6]} />
-      <points geometry={stars}>
-        <pointsMaterial color="#EEE8DA" size={1.4} sizeAttenuation={false} transparent opacity={0.8} depthWrite={false} />
-      </points>
-      <mesh geometry={skyline}>
-        <meshBasicMaterial vertexColors toneMapped={false} />
-      </mesh>
+      {room && (
+        <>
+          <mesh geometry={room} material={roomShader} />
+          <RoomInteraction room={room} drag={drag} onHover={onHover} onActivate={onActivate} />
+          <mesh geometry={screen} material={screenShader} position={SCREEN.center} />
+          <mesh geometry={sky} material={skyShader} position={[(WINDOW.x0 + WINDOW.x1) / 2, (WINDOW.y0 + WINDOW.y1) / 2, WINDOW.z]} />
+        </>
+      )}
     </>
   );
 };

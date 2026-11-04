@@ -1,58 +1,41 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
 import { Ray, Vector3 } from "three";
-import { HOTSPOTS, hotspotIndex, pickHotspot } from "./hotspots.ts";
-import { HOTSPOT_IDS, SCREEN, buildRoomGeometry } from "./furniture.ts";
+import { hotspotIndex, pickHotspot } from "./hotspots.ts";
+import { DECOR_SPOTS, HOTSPOT_IDS, SCREEN, buildRoomGeometry } from "./furniture.ts";
 import { QUALITY } from "./quality.ts";
 import { easeInOutCubic, lerpPose, roomFraming, sitPose } from "./camera.ts";
 
+const eye = new Vector3(...roomFraming(16 / 9).position);
+const rayTo = (point: Vector3) => new Ray(eye, point.clone().sub(eye).normalize());
+
 describe("hotspots", () => {
-  test("map every interactive object to what it opens", () => {
-    const opens = Object.fromEntries(HOTSPOTS.map((hotspot) => [hotspot.name, hotspot.app]));
-    assert.deepEqual(opens, {
-      monitor: null,
-      chair: null,
-      mate: "about",
-      books: "experience",
-      notes: "stack",
-      boxes: "projects",
-      phone: "contact",
+  const index = hotspotIndex(buildRoomGeometry(QUALITY.low));
+
+  test("only the computer is interactive: the monitor and the chair", () => {
+    assert.deepEqual([...index.boxes.keys()].sort(), [HOTSPOT_IDS.monitor, HOTSPOT_IDS.chair].sort());
+    assert.deepEqual(Object.keys(HOTSPOT_IDS).sort(), ["chair", "monitor"]);
+    for (const box of index.boxes.values()) assert.ok(!box.isEmpty());
+    for (const corners of index.triangles.values()) assert.equal(corners.length % 9, 0);
+  });
+
+  test("a ray at the screen picks the monitor", () => {
+    assert.equal(pickHotspot(rayTo(new Vector3(...SCREEN.center)), index), HOTSPOT_IDS.monitor);
+  });
+
+  test("a ray at the chair picks the chair", () => {
+    const center = index.boxes.get(HOTSPOT_IDS.chair)!.getCenter(new Vector3());
+    assert.equal(pickHotspot(rayTo(center), index), HOTSPOT_IDS.chair);
+  });
+
+  for (const [name, spot] of Object.entries(DECOR_SPOTS)) {
+    test(`clicking the ${name} does nothing`, () => {
+      assert.equal(pickHotspot(rayTo(new Vector3(...spot)), index), null);
     });
-    for (const hotspot of HOTSPOTS) assert.equal(hotspot.id, HOTSPOT_IDS[hotspot.name]);
-  });
-
-  const index = hotspotIndex(buildRoomGeometry(QUALITY.high));
-  const boxes = index.boxes;
-
-  test("one bounding box and a triangle list per hotspot", () => {
-    assert.equal(boxes.size, HOTSPOTS.length);
-    for (const box of boxes.values()) assert.ok(!box.isEmpty());
-    for (const hotspot of HOTSPOTS) assert.ok(index.triangles.get(hotspot.id)!.length % 9 === 0);
-  });
-
-  test("regression: the chair's loose bounding box does not steal the phone", () => {
-    // From the default camera, the ray to the phone crosses the chair's
-    // bounding box but none of the chair's triangles.
-    const camera = new Vector3(2.35, 1.75, 2.55);
-    const phone = boxes.get(HOTSPOT_IDS.phone)!.getCenter(new Vector3());
-    const ray = new Ray(camera, phone.clone().sub(camera).normalize());
-    assert.equal(pickHotspot(ray, index), HOTSPOT_IDS.phone);
-  });
-
-  test("a ray through an object's center picks it", () => {
-    const camera = new Vector3(2.35, 1.75, 2.55);
-    for (const hotspot of HOTSPOTS) {
-      const center = boxes.get(hotspot.id)!.getCenter(new Vector3());
-      const ray = new Ray(camera, center.clone().sub(camera).normalize());
-      const picked = pickHotspot(ray, index);
-      // The chair stands in front of the desk, so it may legitimately win.
-      assert.ok(picked === hotspot.id || picked === HOTSPOT_IDS.chair, `${hotspot.name}: picked ${picked}`);
-    }
-  });
+  }
 
   test("a ray into empty space picks nothing", () => {
-    const ray = new Ray(new Vector3(0, 1, 3), new Vector3(0, 1, 0));
-    assert.equal(pickHotspot(ray, index), null);
+    assert.equal(pickHotspot(new Ray(new Vector3(0, 1, 3), new Vector3(0, 1, 0)), index), null);
   });
 });
 
@@ -81,7 +64,6 @@ describe("camera poses", () => {
       // The screen covers the view in at least one direction and is never cropped in both.
       assert.ok(Math.abs(visibleWidth - SCREEN.width) < 1e-9 || Math.abs(visibleHeight - SCREEN.height) < 1e-9, `aspect ${aspect}`);
       assert.deepEqual(pose.target, SCREEN.center);
-      assert.deepEqual(pose.offset, { x: 0, y: 0 });
     }
   });
 

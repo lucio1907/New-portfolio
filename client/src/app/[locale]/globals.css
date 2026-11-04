@@ -46,6 +46,69 @@ body {
 
 }
 
+/* ── Room ────────────────────────────────────────────────────────────── */
+@layer components {
+  /* The only thing to press in the room: a pulse on the monitor. The camera
+     rig keeps --ring-x/--ring-y on the screen. CSS animates it, so the pulse
+     never asks WebGL for a frame. */
+  .room-ring {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    /* Before the camera takes over: the monitor's place on the poster. */
+    --poster-unit: min(100vw / 1440, 100vh / 900);
+    transform: translate(var(--ring-x, calc(50vw + 88 * var(--poster-unit))), var(--ring-y, calc(50vh - 58 * var(--poster-unit))));
+  }
+  .room-ring[data-visible="false"] {
+    display: none;
+  }
+  .room-ring::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 2.5px solid #ffc94a;
+    border-radius: 9999px;
+    animation: room-ring-pulse 2.2s ease-out infinite;
+  }
+  .room-ring-dot {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #fff6dc;
+    border-radius: 9999px;
+    background: #ffc94a;
+    box-shadow: 0 0 0 2px rgba(7, 9, 26, 0.55), 0 0 18px 4px rgba(255, 201, 74, 0.8);
+  }
+  /* The monitor is small on a phone: same touch target, smaller mark. */
+  @media (max-width: 767px) {
+    .room-ring::before {
+      inset: 13px;
+    }
+    .room-ring-dot {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}
+
+@keyframes room-ring-pulse {
+  from {
+    opacity: 0.9;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.1);
+  }
+}
+
 /* ── LucioOS ─────────────────────────────────────────────────────────── */
 @layer components {
   .os-intro {

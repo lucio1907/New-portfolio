@@ -24,6 +24,7 @@ describe("quality tiers", () => {
   test("detail shrinks from high to low", () => {
     assert.ok(QUALITY.high.curveSegments > QUALITY.medium.curveSegments);
     assert.ok(QUALITY.medium.curveSegments > QUALITY.low.curveSegments);
-    assert.ok(QUALITY.high.stars > QUALITY.low.stars);
+    assert.ok(QUALITY.high.bakeCell < QUALITY.low.bakeCell);
+    assert.ok(QUALITY.high.bakeSamples > QUALITY.low.bakeSamples);
   });
 });

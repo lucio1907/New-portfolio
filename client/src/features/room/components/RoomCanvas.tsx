@@ -14,16 +14,17 @@ const detectTier = (): Tier =>
   });
 
 type RoomCanvasProps = {
-  /** Called once the first frame is on screen, to cross-fade from the poster. */
+  /** Called once the finished room is on screen, to cross-fade from the poster. */
   onRendered: () => void;
-  highlight: number | null;
-  onHover: (id: number | null, x: number, y: number) => void;
-  onActivate: (id: number) => void;
+  highlight: boolean;
+  onScreenMove: (x: number, y: number) => void;
+  onHover: (hovering: boolean) => void;
+  onActivate: () => void;
   statsEnabled: boolean;
   onStats: (stats: RenderStats) => void;
 };
 
-const RoomCanvas = ({ onRendered, highlight, onHover, onActivate, statsEnabled, onStats }: RoomCanvasProps) => {
+const RoomCanvas = ({ onRendered, highlight, onScreenMove, onHover, onActivate, statsEnabled, onStats }: RoomCanvasProps) => {
   const [tier] = useState<Tier>(detectTier);
   const settings = QUALITY[tier];
 
@@ -32,11 +33,10 @@ const RoomCanvas = ({ onRendered, highlight, onHover, onActivate, statsEnabled, 
       flat
       frameloop="demand"
       dpr={[1, settings.maxDpr]}
-      camera={{ fov: 40, near: 0.05, far: 30 }}
-      gl={{ antialias: true, powerPreference: "high-performance" }}
-      onCreated={() => requestAnimationFrame(onRendered)}
+      camera={{ fov: 30, near: 0.05, far: 60 }}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >
-      <RoomScene settings={settings} highlight={highlight} onHover={onHover} onActivate={onActivate} />
+      <RoomScene settings={settings} onReady={onRendered} highlight={highlight} onScreenMove={onScreenMove} onHover={onHover} onActivate={onActivate} />
       <StatsProbe enabled={statsEnabled} tier={tier} onStats={onStats} />
     </Canvas>
   );
