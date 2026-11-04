@@ -43,16 +43,10 @@
       "welcome": "LucioOS terminal. Escribí help para ver los comandos (en inglés, como toda terminal).",
       "label": "Comando"
     },
-    "intro": {
-      "greeting": "Hola, soy",
+    "identity": {
       "role": "Desarrollador Full Stack",
-      "tagline": "Construyo productos web de punta a punta y trabajo con IA todos los días. Sentate en mi compu y mirá lo que hago.",
       "available": "Disponible para nuevos roles.",
-      "location": "Buenos Aires, remoto o híbrido.",
-      "sit": "Sentarse a la compu",
-      "cv": "Descargar CV",
-      "direct": "Ir directo al escritorio",
-      "hint": "O tocá un objeto: el mate, los libros, las notas, las cajas o el celular."
+      "location": "Buenos Aires, remoto o híbrido."
     }
   },
   "room": {

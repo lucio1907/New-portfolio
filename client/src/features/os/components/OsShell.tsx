@@ -1,16 +1,17 @@
 "use client";
 
 import React, { useCallback, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import Desktop from "./Desktop";
-import IntroCard from "./IntroCard";
 import type { AppId } from "../lib/apps";
 import { appFromHash, hashForApp } from "../lib/hash";
 import { focusedApp } from "../lib/windows";
-import { dispatchDesktop, dispatchExperience, getSnapshot, isRoomReady, toggleStats, useExperience } from "@/features/experience/store";
+import { dispatchDesktop, dispatchExperience, getSnapshot, toggleStats, useExperience } from "@/features/experience/store";
+import { OWNER_NAME } from "@/features/portfolio/lib/constants";
 
 type OsShellProps = {
   contents: Record<AppId, React.ReactNode>;
-  /** The room (3D or its poster) behind the intro card. */
+  /** The room (3D or its poster) the visitor sits down in. */
   backdrop?: React.ReactNode;
 };
 
@@ -35,8 +36,9 @@ const syncFromHash = () => {
   }
 };
 
-/** Fixed, no-scroll app shell: room + intro card, or the LucioOS desktop. */
+/** Fixed, no-scroll app shell: the room, or the LucioOS desktop on top of it. */
 const OsShell = ({ contents, backdrop }: OsShellProps) => {
+  const t = useTranslations("os.identity");
   const { experience, desktop } = useExperience();
   const focused = focusedApp(desktop);
   const onDesktop = experience.mode === "desktop";
@@ -87,9 +89,6 @@ const OsShell = ({ contents, backdrop }: OsShellProps) => {
     target?.focus({ preventScroll: true });
   }, [focused]);
 
-  // Animate only when the 3D room is on screen; otherwise open instantly.
-  const sit = useCallback(() => dispatchExperience({ type: "sit", animate: isRoomReady() }), []);
-
   // Safety net: if the camera flight never reports back, open the desktop anyway.
   useEffect(() => {
     if (experience.mode !== "sitting") return;
@@ -117,10 +116,13 @@ const OsShell = ({ contents, backdrop }: OsShellProps) => {
 
   return (
     <div className="fixed inset-0 overflow-hidden">
+      {/* The room shows no text, but the page still says whose it is. */}
+      <h1 className="sr-only">
+        {OWNER_NAME}, {t("role")}
+      </h1>
       <div aria-hidden={onDesktop} className="absolute inset-0">
         {backdrop}
       </div>
-      <IntroCard visible={experience.mode === "room"} onSit={sit} />
       <Desktop visible={onDesktop} desktop={desktop} contents={contents} onStandUp={standUp} />
     </div>
   );

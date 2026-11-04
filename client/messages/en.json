@@ -43,16 +43,10 @@
       "welcome": "LucioOS terminal. Type help to see the commands.",
       "label": "Command"
     },
-    "intro": {
-      "greeting": "Hi, I'm",
+    "identity": {
       "role": "Full Stack Developer",
-      "tagline": "I build web products end to end and work with AI every day. Take a seat at my computer and see what I do.",
       "available": "Available for new roles.",
-      "location": "Buenos Aires, remote or hybrid.",
-      "sit": "Sit at the computer",
-      "cv": "Download CV",
-      "direct": "Go straight to the desktop",
-      "hint": "Or tap an object: the mate, the books, the notes, the boxes or the phone."
+      "location": "Buenos Aires, remote or hybrid."
     }
   },
   "room": {

@@ -111,13 +111,6 @@ body {
 
 /* ── LucioOS ─────────────────────────────────────────────────────────── */
 @layer components {
-  .os-intro {
-    @apply absolute bottom-6 left-4 right-4 z-10 max-w-md rounded-3xl border border-orbit/70 bg-night/85 p-6 shadow-2xl shadow-black/40 backdrop-blur-md transition-opacity duration-300 md:bottom-auto md:left-12 md:top-1/2 md:-translate-y-1/2 md:p-8;
-  }
-  .os-intro[data-open="false"] {
-    @apply pointer-events-none opacity-0;
-  }
-
   .os-desktop {
     @apply absolute inset-0 z-20 flex flex-col bg-[radial-gradient(1px_1px_at_14%_22%,#EEE8DA_99%,transparent),radial-gradient(1px_1px_at_68%_14%,#EEE8DA_99%,transparent),radial-gradient(1.5px_1.5px_at_84%_58%,#EEE8DA_99%,transparent),radial-gradient(1px_1px_at_34%_76%,#A9AECC_99%,transparent),radial-gradient(1px_1px_at_52%_40%,#A9AECC_99%,transparent),radial-gradient(1200px_700px_at_70%_-10%,#24306E_0%,transparent_60%),linear-gradient(180deg,#121A48_0%,#0F1640_100%)];
   }
@@ -127,6 +120,10 @@ body {
   /* LucioOS takes over the monitor at the end of the camera flight. */
   .os-desktop[data-open="true"] {
     animation: os-power-on 320ms ease-out;
+  }
+
+  .os-identity {
+    @apply shrink-0 px-6 pt-10 text-center text-parchment md:pointer-events-none md:absolute md:bottom-20 md:right-10 md:p-0 md:text-right;
   }
 
   .os-icons {

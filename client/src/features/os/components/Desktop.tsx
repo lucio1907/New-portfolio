@@ -7,8 +7,7 @@ import Window from "./Window";
 import Taskbar from "./Taskbar";
 import { APPS, type AppId } from "../lib/apps";
 import { type DesktopState, focusedApp } from "../lib/windows";
-import { CV_HREF } from "@/features/portfolio/lib/constants";
-
+import { CV_HREF, OWNER_NAME } from "@/features/portfolio/lib/constants";
 
 /** Cascade so new windows never open exactly on top of each other. */
 const cascade = (app: AppId) => {
@@ -39,6 +38,17 @@ const Desktop = ({ visible, desktop, contents, onStandUp }: DesktopProps) => {
 
   return (
     <div id="desktop" data-open={visible} aria-label={t("desktopLabel")} className="os-desktop">
+      {/* Who this is, on the wallpaper: the first thing a recruiter reads. */}
+      <div className="os-identity">
+        <p className="font-display text-[clamp(1.9rem,4.4vw,3.75rem)] font-semibold leading-none tracking-[-0.03em]">{OWNER_NAME}</p>
+        <p className="mt-2 font-display text-base font-light md:mt-3 md:text-xl">{t("identity.role")}</p>
+        <p className="mt-2 text-sm md:mt-3">
+          <span aria-hidden="true" className="mr-2 inline-block h-2 w-2 rounded-full bg-sun align-[0.05em]" />
+          <span className="font-medium">{t("identity.available")}</span>{" "}
+          <span className="text-haze">{t("identity.location")}</span>
+        </p>
+      </div>
+
       <nav aria-label={t("iconsLabel")} className="os-icons">
         {APPS.map(({ id }) => (
           <a key={id} href={`#${id}`} className={iconClassName}>
