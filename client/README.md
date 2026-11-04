@@ -25,8 +25,24 @@ npx tsc --noEmit && npm run lint
 - Animations use `transform`, `opacity` and `clip-path`, so they never move the layout.
 - GSAP loads after the page. All content is in the HTML and readable in its final state without JavaScript or with reduced motion.
 
+## CI/CD
+
+`.github/workflows/ci-cd.yml`, at the repository root, runs on every pull request and on pushes to `main` and `development`:
+
+- **Quality:** lint, types, unit tests, build, and a smoke test that starts the production build and checks that `/es` and `/en` have their main sections. Mark this check as required in the branch protection of `main`.
+- **Security audit:** `npm audit` for production dependencies. It reports without blocking until the advisories in Next are fixed; then remove `continue-on-error`.
+- **Deploy:** production on Vercel, only for pushes to `main` that passed Quality. Without its secrets it deploys nothing and leaves a warning on the run.
+
+To turn the deploy on:
+
+1. Set the Vercel project's **Root Directory** to `client`.
+2. In GitHub, under Settings, Secrets and variables, Actions, add `VERCEL_TOKEN`, `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID`.
+3. If the project is connected to this repository in Vercel, turn off its automatic deployments for `main`; otherwise each merge deploys twice, once without waiting for the checks.
+
+To roll back, promote an earlier deployment from the Vercel dashboard, or run `vercel rollback`.
+
 ## Before shipping
 
 - [ ] `npm test`, `npx tsc --noEmit`, `npm run lint` and `npm run build` pass
 - [ ] Scroll the whole page on a real phone, above all iOS Safari
-- [ ] Update Next: `npm audit --omit=dev` reports advisories in it
+- [ ] Update Next: `npm audit --omit=dev` reports advisories in it, including a critical one

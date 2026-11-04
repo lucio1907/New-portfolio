@@ -31,8 +31,8 @@ Branch: feat/keynote-portfolio · Delivery: ask-on-risk (chain strategy to be as
 | W8 Fix the verifier's blockers | S4, S7 | inline | done, independent recheck PASS | 59585b1 |
 | W9 The other launches speak as the developer | S10 | inline | done | 0803e7c |
 | W10 POS: offline, notifications, built as a team | S11 | inline | done | 56f7186 |
-| W11 Receipt: signature and summarized stack | S12 | inline | done | see git log |
-| W12 CI/CD | S13 | inline | in progress | — |
+| W11 Receipt: signature and summarized stack | S12 | inline | done | 1dc567c |
+| W12 CI/CD | S13 | inline | done, independent verifier pending | see git log |
 
 Route evidence: inline by default; no Writer trigger reason (no parallel independent units, and later units depend on W1). W0 and W1 name high-risk item 5 (dependencies), so they get an independent verifier.
 
@@ -53,3 +53,4 @@ Route evidence: inline by default; no Writer trigger reason (no parallel indepen
 - L14 (2026-11-04): User: "en el ticket donde dice desarrollo ponele SitioHoy". Signature value changed from "Lucio Gastellu y equipo" to "SitioHoy"; read as replacing the value under the "Desarrollo" label. The owner's name is no longer on the receipt. Checks on production: tsc, lint, npm test 16/0, W2 scenes and blocker probes PASS before this one-word change, rerun after it.
 - L15 (2026-11-04): Independent recheck limited to the three blockers, on 0803e7c: B1, B2 and B3 PASS. The later 56f7186 (POS copy, receipt, one CSS rule) was checked by the parent only: CDP 47/47 and blocker probes on production.
 - L16 (2026-11-04): User: "dale ponele asi Desarrollo: Lucio Gastellu, en SitioHoy" and the POS stack: "trata de resumirlo con lo mas importante para que no se haga tan largo el ticket". Receipt signature set, stack summarized in three lines by layer (React, TypeScript, Vite; PHP, WordPress, WooCommerce; Vitest, Playwright, Docker); "Estadísticas" and "Sincronización" merged to offset the length; tighter receipt on screens under 720 px tall so it comes out whole.
+- L17 (2026-11-04): User: "crea el ci/cd en este repositorio". Repository had none and no deploy configuration; the owner's other projects are on vercel.app, so Vercel is the assumed target. .github/workflows/ci-cd.yml at the root, app in client/. Quality gates lint, types, tests, build, smoke test. Audit reports without blocking because a critical advisory in next would keep the pipeline red; updating Next is the user's decision. Deploy only on pushes to main after Quality, and skips with a warning when its secrets are missing; vercel@65.0.0 pinned (at least two weeks old, latest was a day old). Verified locally: actionlint clean; every `run` step of Quality extracted from the workflow and executed in a clean copy from git archive; each gate seen failing (test, types, lint, missing section). That negative test found the smoke test leaving its server up, so it passed against a stale build; fixed by starting the binary directly. Not verified: a real GitHub Actions run and a real Vercel deploy; nothing was pushed and no remote or secret was touched. Risk: item 5 (CI, deploy), independent verifier follows.
