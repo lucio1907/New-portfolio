@@ -41,15 +41,17 @@
   },
   "manifesto": "Construyo productos web de punta a punta: React y TypeScript en el frontend, Python y Node en el backend, PostgreSQL debajo de todo. Uso IA todos los días, con workflows propios, y sigo siendo dueño de cada línea que entrego.",
   "pos": {
-    "first": "Hice un POS.",
-    "second": "Y lo conecté con ARCA.",
+    "first": "Hicimos un POS.",
+    "second": "Y lo conectamos con ARCA.",
     "body": "Para que cada venta se facture sola.",
     "alt": "Pantalla de venta del sistema POS: catálogo de productos y carrito",
     "receipt": {
-      "title": "LO QUE HICE",
+      "title": "LO QUE HICIMOS",
       "subtitle": "Sistema POS, freelance 2026",
       "items": [
         "Factura electrónica con ARCA",
+        "Funciona sin conexión",
+        "Sistema de notificaciones",
         "Lector de códigos de barras",
         "Atajos de teclado",
         "Productos con variantes y stock",
@@ -59,7 +61,8 @@
         "Sincronización"
       ],
       "by": "Desarrollo",
-      "thanks": "Gracias por leer"
+      "thanks": "Gracias por leer",
+      "team": "SitioHoy"
     }
   },
   "chapters": {

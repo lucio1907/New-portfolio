@@ -185,19 +185,17 @@ body {
     border: 0;
     border-top: 1px dashed currentColor;
   }
-  .receipt-row {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-  }
   .receipt-items {
     display: grid;
     gap: 5px;
   }
-  .receipt-row dd {
+  .receipt-sign {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .receipt-sign dd {
     font-weight: 500;
-    text-align: right;
   }
 
   @media (min-width: 768px) {

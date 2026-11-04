@@ -2,9 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import PosScene from "../motion/PosScene";
-import { OWNER_NAME } from "../lib/constants";
 
-/** Not a sale: an itemized account of the work, signed by the person who did it. */
+/** Not a sale: an itemized account of the work, signed by the people who did it. */
 const Receipt = () => {
   const t = useTranslations("pos.receipt");
 
@@ -19,11 +18,9 @@ const Receipt = () => {
         ))}
       </ul>
       <hr className="receipt-rule" />
-      <dl>
-        <div className="receipt-row">
-          <dt>{t("by")}</dt>
-          <dd>{OWNER_NAME}</dd>
-        </div>
+      <dl className="receipt-sign">
+        <dt>{t("by")}</dt>
+        <dd>{t("team")}</dd>
       </dl>
       <hr className="receipt-rule" />
       <p className="text-center">{t("thanks")}</p>
@@ -31,7 +28,7 @@ const Receipt = () => {
   );
 };
 
-/** The strongest project, told by the developer: what I built, then the proof. */
+/** The strongest project, told by the team that built it: what we did, then the proof. */
 const PosChapter = () => {
   const t = useTranslations("pos");
 

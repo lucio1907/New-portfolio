@@ -41,15 +41,17 @@
   },
   "manifesto": "I build web products end to end: React and TypeScript on the frontend, Python and Node on the backend, PostgreSQL under it all. I use AI every day, with workflows of my own, and I still own every line I ship.",
   "pos": {
-    "first": "I built a POS.",
+    "first": "We built a POS.",
     "second": "And linked it to ARCA.",
     "body": "So every sale invoices itself with Argentina’s tax agency.",
     "alt": "Sales screen of the POS system: product catalog and cart",
     "receipt": {
-      "title": "WHAT I BUILT",
+      "title": "WHAT WE BUILT",
       "subtitle": "POS system, freelance 2026",
       "items": [
         "Electronic invoicing with ARCA",
+        "Works offline",
+        "Notification system",
         "Barcode scanner support",
         "Keyboard shortcuts",
         "Product variants and stock",
@@ -59,7 +61,8 @@
         "Sync"
       ],
       "by": "Built by",
-      "thanks": "Thanks for reading"
+      "thanks": "Thanks for reading",
+      "team": "SitioHoy"
     }
   },
   "chapters": {
