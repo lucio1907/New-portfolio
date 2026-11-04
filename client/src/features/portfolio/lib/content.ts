@@ -30,9 +30,6 @@ export type Project = {
 export const sortByNewest = (items: readonly Experience[]): Experience[] =>
   [...items].sort((a, b) => b.start.localeCompare(a.start));
 
-/** Oldest first: the career told as a story. Does not mutate the input. */
-export const sortByOldest = (items: readonly Experience[]): Experience[] => sortByNewest(items).reverse();
-
 /** Where a period like "Dic 2023 - Jul 2024" begins. */
 export const periodStart = (period: string): string => period.split(" - ")[0];
 

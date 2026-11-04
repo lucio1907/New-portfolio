@@ -105,7 +105,8 @@
     "text": "menos de tiempo de respuesta en las APIs de Nexus Digital, optimizando búsqueda y filtrado."
   },
   "trajectory": {
-    "title": "Del soporte técnico al desarrollo full stack."
+    "first": "Hoy, full stack.",
+    "second": "Empecé en soporte técnico."
   },
   "how": {
     "title": "AI-native, con ownership total del código.",

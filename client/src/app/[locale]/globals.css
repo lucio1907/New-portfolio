@@ -442,7 +442,6 @@ section[id] {
     background: theme("colors.ink");
   }
   .trajectory-title {
-    max-width: 11em;
     font-size: clamp(2.5rem, 7.2vw, 7rem);
     line-height: 0.96;
   }
