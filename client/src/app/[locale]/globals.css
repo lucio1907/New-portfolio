@@ -2,19 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  color-scheme: dark;
-}
-
 body {
-  @apply bg-night font-sans text-[17px] leading-[1.6] text-parchment antialiased;
+  @apply bg-paper font-sans text-[17px] leading-[1.6] text-ink antialiased;
 }
 
 @layer base {
   h1,
   h2,
   h3 {
-    @apply font-display;
     text-wrap: balance;
   }
 
@@ -39,13 +34,13 @@ body {
 }
 
 *:focus-visible {
-  outline: 2px solid #ffc94a;
+  outline: 2px solid #1b2bd6;
   outline-offset: 3px;
   border-radius: 6px;
 }
 
 ::selection {
-  background: rgba(255, 201, 74, 0.35);
+  background: rgba(27, 43, 214, 0.2);
 }
 
 @media (prefers-reduced-motion: reduce) {

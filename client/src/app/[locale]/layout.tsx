@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Atkinson_Hyperlegible_Next, Unbounded } from "next/font/google";
+import { DM_Mono, Schibsted_Grotesk } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -7,17 +7,26 @@ import { routing } from "@/i18n/routing";
 import "./globals.css";
 import Script from "next/script";
 
-const display = Unbounded({
+const sans = Schibsted_Grotesk({
   subsets: ["latin"],
   weight: "variable",
-  variable: "--font-display",
+  variable: "--font-sans",
 });
 
-const body = Atkinson_Hyperlegible_Next({
+/** Only for the receipt in the POS chapter, where monospace is what it is. */
+const mono = DM_Mono({
   subsets: ["latin"],
-  weight: "variable",
-  variable: "--font-body",
+  weight: ["400", "500"],
+  variable: "--font-mono",
+  preload: false,
 });
+
+/**
+ * Marks the page before it paints when scroll scenes will run, so the tall
+ * scroll tracks they need are there from the start and nothing jumps. Without
+ * JavaScript or with reduced motion, every section stays in normal flow.
+ */
+const MOTION_FLAG = `if(matchMedia("(prefers-reduced-motion: no-preference)").matches)document.documentElement.classList.add("motion")`;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -61,8 +70,9 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} data-scroll-behavior="smooth">
+    <html lang={locale} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: MOTION_FLAG }} />
         <link rel="shortcut icon" href="MeMemoji.webp" type="image/x-icon" />
         {/* Google Analytics */}
         <Script
@@ -78,9 +88,7 @@ export default async function RootLayout({
           `}
         </Script>
       </head>
-      <body
-        className={`${display.variable} ${body.variable}`}
-      >
+      <body className={`${sans.variable} ${mono.variable}`}>
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>

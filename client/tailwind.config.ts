@@ -1,8 +1,9 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Star-chart palette: night-sky indigo instead of black, parchment text,
- * a solar yellow for actions and an atmosphere blue for links.
+ * Thermal receipt paper, the blue-black of its print and one saturated cobalt.
+ * The last group only keeps the old section bodies readable until they are
+ * rebuilt on these tokens.
  */
 const config: Config = {
   content: [
@@ -12,17 +13,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        night: "#0F1640",
-        deep: "#161F52",
-        orbit: "#2C3770",
-        parchment: "#EEE8DA",
-        haze: "#A9AECC",
-        sun: "#FFC94A",
-        sky: "#8CCBFF",
+        paper: "#F3F4F1",
+        ink: "#101322",
+        muted: "#585D6E",
+        cobalt: "#1B2BD6",
+        mist: "#D5D9FC",
+        receipt: "#FCFCF8",
+
+        night: "#101322",
+        deep: "#E6E8E2",
+        orbit: "#C8CBD2",
+        parchment: "#101322",
+        haze: "#585D6E",
+        sun: "#1B2BD6",
+        sky: "#1B2BD6",
       },
       fontFamily: {
-        display: ["var(--font-display)", "system-ui", "sans-serif"],
-        sans: ["var(--font-body)", "system-ui", "sans-serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       maxWidth: {
         prose: "34rem",
