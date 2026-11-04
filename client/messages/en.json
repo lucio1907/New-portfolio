@@ -41,31 +41,24 @@
   },
   "manifesto": "I build web products end to end: React and TypeScript on the frontend, Python and Node on the backend, PostgreSQL under it all. I use AI every day, with workflows of my own, and I still own every line I ship.",
   "pos": {
-    "label": "POS system",
-    "first": "Invoicing with ARCA.",
-    "second": "On its own.",
-    "body": "A custom POS system. The electronic invoice goes out by itself, integrated with ARCA, the Argentine tax agency.",
+    "first": "I built a POS.",
+    "second": "And linked it to ARCA.",
+    "body": "So every sale invoices itself with Argentina’s tax agency.",
+    "alt": "Sales screen of the POS system: product catalog and cart",
     "receipt": {
-      "title": "POS SYSTEM",
-      "subtitle": "Freelance work, 2026",
-      "rows": [
-        [
-          "Point of sale",
-          "custom"
-        ],
-        [
-          "Electronic invoice",
-          "automatic"
-        ],
-        [
-          "Integration",
-          "ARCA"
-        ],
-        [
-          "Invoices by hand",
-          "0"
-        ]
+      "title": "WHAT I BUILT",
+      "subtitle": "POS system, freelance 2026",
+      "items": [
+        "Electronic invoicing with ARCA",
+        "Barcode scanner support",
+        "Keyboard shortcuts",
+        "Product variants and stock",
+        "Held sales and discounts",
+        "Cash register, expenses, closings",
+        "Statistics",
+        "Sync"
       ],
+      "by": "Built by",
       "thanks": "Thanks for reading"
     }
   },

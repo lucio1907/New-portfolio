@@ -41,31 +41,24 @@
   },
   "manifesto": "Construyo productos web de punta a punta: React y TypeScript en el frontend, Python y Node en el backend, PostgreSQL debajo de todo. Uso IA todos los días, con workflows propios, y sigo siendo dueño de cada línea que entrego.",
   "pos": {
-    "label": "Sistema POS",
-    "first": "Facturar con ARCA.",
-    "second": "Sin pensarlo.",
-    "body": "Un sistema POS a medida. La factura electrónica sale sola, integrada con ARCA.",
+    "first": "Hice un POS.",
+    "second": "Y lo conecté con ARCA.",
+    "body": "Para que cada venta se facture sola.",
+    "alt": "Pantalla de venta del sistema POS: catálogo de productos y carrito",
     "receipt": {
-      "title": "SISTEMA POS",
-      "subtitle": "Trabajo freelance, 2026",
-      "rows": [
-        [
-          "Punto de venta",
-          "a medida"
-        ],
-        [
-          "Factura electrónica",
-          "automática"
-        ],
-        [
-          "Integración",
-          "ARCA"
-        ],
-        [
-          "Facturas a mano",
-          "0"
-        ]
+      "title": "LO QUE HICE",
+      "subtitle": "Sistema POS, freelance 2026",
+      "items": [
+        "Factura electrónica con ARCA",
+        "Lector de códigos de barras",
+        "Atajos de teclado",
+        "Productos con variantes y stock",
+        "Ventas en espera y descuentos",
+        "Caja, gastos y cierres",
+        "Estadísticas",
+        "Sincronización"
       ],
+      "by": "Desarrollo",
       "thanks": "Gracias por leer"
     }
   },

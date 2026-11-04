@@ -117,20 +117,37 @@ body {
     inset: 0;
     background: theme("colors.cobalt");
   }
-  .pos-copy {
+  .pos-main {
     position: relative;
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: clamp(20px, 3vh, 32px);
+  }
+  .pos-copy {
     color: theme("colors.paper");
   }
   .pos-title {
-    font-size: clamp(3rem, min(14.5vw, 15vh), 8.5rem);
-    line-height: 0.96;
+    width: fit-content;
+    font-size: clamp(2.75rem, min(5vw, 8.4vh), 5rem);
+    line-height: 0.98;
+    transform-origin: 0 0;
   }
   .pos-body {
-    max-width: 30em;
-    margin-top: 24px;
+    max-width: 34em;
+    margin-top: 12px;
     color: theme("colors.mist");
     font-size: clamp(1.0625rem, 1.5vw, 1.375rem);
-    line-height: 1.4;
+    line-height: 1.35;
+  }
+  /* The source is 1920 px wide: this size keeps it sharp on retina screens. */
+  .pos-shot {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: clamp(8px, 1vw, 14px);
+    box-shadow: 0 24px 70px -18px rgba(16, 19, 34, 0.6);
   }
   .receipt-slot {
     position: relative;
@@ -176,8 +193,9 @@ body {
     justify-content: space-between;
     gap: 12px;
   }
-  .receipt-row + .receipt-row {
-    margin-top: 6px;
+  .receipt-items {
+    display: grid;
+    gap: 5px;
   }
   .receipt-row dd {
     font-weight: 500;
@@ -194,9 +212,9 @@ body {
     }
     .pos-stage {
       min-height: calc(100svh - var(--nav-height));
-      grid-template-columns: minmax(0, 1fr) clamp(280px, 27vw, 400px);
-      align-items: end;
-      padding-block: 0 clamp(28px, 6vh, 64px);
+      grid-template-columns: minmax(0, 1fr) clamp(290px, 25vw, 360px);
+      align-items: center;
+      padding-block: 24px;
     }
     /* The nav's edge is the printer's slot: its shadow falls on the panel. */
     .pos-bg {
@@ -209,14 +227,19 @@ body {
     }
     .receipt-slot {
       align-self: start;
+      margin-top: -24px; /* Past the stage's padding, right up to the nav. */
     }
     .receipt {
-      padding: 32px 28px 26px;
-      font-size: clamp(13px, 1.75vh, 16px);
+      padding: 28px 24px 22px;
+      font-size: clamp(12.5px, 1.6vh, 14.5px);
     }
     /* Only with scenes running: a tall track with the stage stuck inside it. */
+    .pos-shot {
+      /* Never taller than what the stage has left under the headline. */
+      width: min(100%, calc((100svh - var(--nav-height) - 240px) * 16 / 9));
+    }
     .motion .pos-track {
-      height: 320svh;
+      height: 380svh;
     }
     .motion .pos-stage {
       position: sticky;
