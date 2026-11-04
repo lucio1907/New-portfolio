@@ -29,17 +29,17 @@ npx tsc --noEmit && npm run lint
 
 `.github/workflows/ci-cd.yml`, at the repository root, runs on every pull request and on pushes to `main` and `development`:
 
-- **Quality:** lint, types, unit tests, build, and a smoke test that starts the production build and checks that `/es` and `/en` have their main sections. Mark this check as required in the branch protection of `main`.
-- **Security audit:** `npm audit` for production dependencies. It reports without blocking until the advisories in Next are fixed; then remove `continue-on-error`.
+- **Quality:** lint, types, unit tests, build, and a smoke test that starts the production build and checks that `/es` and `/en` have their main sections. In the branch protection of `main`, mark it as required; GitHub lists it as "Lint, types, tests, build and smoke test".
+- **Security audit:** `npm audit` for production dependencies. It reports without blocking until the advisories in Next are fixed, so its job shows as failed while the run stays green; then remove `continue-on-error`.
 - **Deploy:** production on Vercel, only for pushes to `main` that passed Quality. Without its secrets it deploys nothing and leaves a warning on the run.
 
 To turn the deploy on:
 
 1. Set the Vercel project's **Root Directory** to `client`.
-2. In GitHub, under Settings, Secrets and variables, Actions, add `VERCEL_TOKEN`, `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID`.
-3. If the project is connected to this repository in Vercel, turn off its automatic deployments for `main`; otherwise each merge deploys twice, once without waiting for the checks.
+2. In GitHub, under Settings, Secrets and variables, Actions, add `VERCEL_TOKEN`, `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID`. The token comes from your Vercel account settings; both IDs are in `.vercel/project.json` after running `vercel link` locally.
+3. If the project is connected to this repository in Vercel, disconnect it under the project's Settings, Git; otherwise each merge deploys twice, once without waiting for the checks.
 
-To roll back, promote an earlier deployment from the Vercel dashboard, or run `vercel rollback`.
+To roll back, use Instant Rollback in the Vercel dashboard. After a rollback Vercel stops assigning production domains, so later runs of this pipeline stay green without going live until you use Undo Rollback or `vercel promote`.
 
 ## Before shipping
 
