@@ -461,6 +461,8 @@ section[id] {
   .trajectory {
     position: relative;
     isolation: isolate;
+    /* Roles arrive from outside their column, and must not widen the page. */
+    overflow-x: clip;
     padding: clamp(72px, 13vh, 130px) var(--gutter) clamp(56px, 10vh, 100px);
     color: theme("colors.paper");
   }
@@ -474,8 +476,83 @@ section[id] {
     font-size: clamp(2rem, 4.6vw, 4.25rem);
     line-height: 0.96;
   }
-  .trajectory-rail {
+  /* The road. The scene measures the roles and draws it among them. */
+  .road-list {
+    position: relative;
+  }
+  .road {
     display: none;
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .motion .road {
+    display: block;
+  }
+  /* With no scene to draw the road, a plain line still ties the roles together. */
+  :root:not(.motion) .road-list::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 8px;
+    width: 2px;
+    background: currentColor;
+    opacity: 0.3;
+  }
+  :root:not(.motion) .road-list {
+    padding-left: 32px;
+  }
+  .road-track,
+  .road-line {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+  }
+  .road-track {
+    stroke-width: 2;
+    stroke-dasharray: 1 9;
+    opacity: 0.26;
+  }
+  .road-line {
+    stroke-width: 3;
+  }
+  .road-stop-ring {
+    fill: theme("colors.ink");
+    stroke: currentColor;
+    stroke-width: 2;
+    opacity: 0.4;
+    transition: opacity 300ms ease;
+  }
+  .road-stop-dot {
+    fill: currentColor;
+    transform: scale(0);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .road-stop-pulse {
+    fill: currentColor;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .is-reached .road-stop-ring {
+    opacity: 1;
+  }
+  .is-reached .road-stop-dot {
+    transform: scale(1);
+  }
+  .is-reached .road-stop-pulse {
+    animation: road-pulse 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .road-head-glow {
+    fill: currentColor;
+    opacity: 0.22;
+  }
+  .road-head-core {
+    fill: currentColor;
   }
   .role {
     padding-top: clamp(36px, 6vh, 64px);
@@ -677,44 +754,74 @@ section[id] {
       justify-content: start;
     }
 
-    /* Only with scenes running: the date stays beside the roles and rolls. */
-    .motion .trajectory-body {
+    /* The road runs down the middle: each role on one side, its date across from it. */
+    .trajectory-body {
+      margin-top: clamp(24px, 5vh, 48px);
+    }
+    .road-list {
+      --road-width: clamp(96px, 13vw, 190px);
+    }
+    :root:not(.motion) .road-list {
+      padding-left: 0;
+    }
+    :root:not(.motion) .road-list::before {
+      left: calc(50% - 1px);
+    }
+    .road {
+      left: calc(50% - var(--road-width) / 2);
+      width: var(--road-width);
+    }
+    .role {
       display: grid;
-      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-      gap: 40px;
-    }
-    .motion .trajectory-rail {
-      position: sticky;
-      top: var(--nav-height);
-      display: flex;
-      height: calc(100svh - var(--nav-height));
+      min-height: 46svh;
+      grid-template-columns: minmax(0, 1fr) var(--road-width) minmax(0, 1fr);
+      column-gap: 24px;
       align-items: center;
-    }
-    .motion .rail-window {
-      height: 1em;
-      overflow: hidden;
-      font-size: clamp(2.75rem, 5.6vw, 5.25rem);
-      font-weight: 800;
-      letter-spacing: -0.045em;
-      line-height: 1;
-    }
-    .motion .rail-window > div > span {
-      display: block;
-      height: 1em;
-      white-space: nowrap;
-    }
-    .motion .role {
-      display: flex;
-      min-height: 58svh;
-      flex-direction: column;
-      justify-content: center;
       padding-top: 0;
     }
-    .motion .role-date {
-      display: none;
+    .role-date,
+    .role-body {
+      grid-row: 1;
     }
-    .motion .role-name {
+    .role-date {
+      font-size: clamp(2.75rem, 5.6vw, 5.25rem);
+      letter-spacing: -0.045em;
+      white-space: nowrap;
+    }
+    .role-name {
       margin-top: 0;
+    }
+    .role:nth-child(odd) .role-date {
+      grid-column: 1;
+      justify-self: end;
+    }
+    .role:nth-child(odd) .role-body {
+      grid-column: 3;
+    }
+    .role:nth-child(even) .role-date {
+      grid-column: 3;
+      justify-self: start;
+    }
+    .role:nth-child(even) .role-body {
+      grid-column: 1;
+      justify-self: end;
+    }
+  }
+
+  /* No room for two columns: roles take turns against each edge, the road on the other. */
+  @media (max-width: 767px) {
+    .motion .role {
+      padding-top: 72px;
+    }
+    .motion .role:nth-child(odd) {
+      margin-left: 40px;
+    }
+    .motion .role:nth-child(even) {
+      margin-right: 40px;
+      text-align: right;
+    }
+    .motion .role:nth-child(even) .role-list {
+      text-align: left;
     }
   }
 
@@ -773,6 +880,17 @@ section[id] {
   to {
     clip-path: inset(-0.1em -0.1em -0.1em -0.1em);
     transform: none;
+  }
+}
+
+@keyframes road-pulse {
+  from {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.8);
   }
 }
 

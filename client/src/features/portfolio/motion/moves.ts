@@ -19,10 +19,16 @@ export const riseLines = (gsap: Gsap, root: HTMLElement, options: RiseOptions = 
  * opacity rather than visibility so links stay reachable by keyboard, and hands
  * the styles back to CSS when done, so hover states and resting opacity still apply.
  */
-export const revealOnce = (gsap: Gsap, targets: gsap.TweenTarget, trigger: Element | null, start = "top 88%") => {
+export const revealOnce = (
+  gsap: Gsap,
+  targets: gsap.TweenTarget,
+  trigger: Element | null,
+  start = "top 88%",
+  offset: { x?: number; y?: number } = { y: 22 },
+) => {
   gsap.from(targets, {
     opacity: 0,
-    y: 22,
+    ...offset,
     duration: 0.8,
     ease: "power3.out",
     stagger: 0.07,
