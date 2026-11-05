@@ -71,13 +71,12 @@ jobs:
       - name: Check the page in a real browser
         run: npm run check:browser
 
-  # Reports known vulnerabilities without blocking. Remove continue-on-error to
-  # make it a gate, once the advisories in next and its dependencies are fixed.
+  # Fails on high or critical advisories in production dependencies. Deploy does
+  # not wait for it, so a new advisory cannot hold back an urgent fix.
   audit:
-    name: Security audit (not blocking yet)
+    name: Security audit
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v7
 
