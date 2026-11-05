@@ -22,7 +22,7 @@ jobs:
   quality:
     name: Lint, types, tests, build and smoke test
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
 
@@ -66,6 +66,10 @@ jobs:
               fi
             done
           done
+
+      # Uses the Google Chrome already installed on the runner.
+      - name: Check the page in a real browser
+        run: npm run check:browser
 
   # Reports known vulnerabilities without blocking. Remove continue-on-error to
   # make it a gate, once the advisories in next and its dependencies are fixed.
