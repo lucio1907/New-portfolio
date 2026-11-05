@@ -9,7 +9,7 @@ import {
   projectById,
   projectTags,
   slugify,
-  sortByNewest,
+  sortByOldest,
 } from "./content.ts";
 
 const experience = (id: number, start: string): Experience => ({
@@ -33,10 +33,10 @@ const project: Project = {
   livePreview: "",
 };
 
-describe("sortByNewest", () => {
-  test("sorts newest first without mutating the input", () => {
-    const items = [experience(1, "2023-01"), experience(2, "2026-04"), experience(3, "2023-12")];
-    assert.deepEqual(sortByNewest(items).map((item) => item.id), [2, 3, 1]);
+describe("sortByOldest", () => {
+  test("sorts oldest first, ending on the current role, without mutating the input", () => {
+    const items = [experience(1, "2026-04"), experience(2, "2023-01"), experience(3, "2023-12")];
+    assert.deepEqual(sortByOldest(items).map((item) => item.id), [2, 3, 1]);
     assert.deepEqual(items.map((item) => item.id), [1, 2, 3]);
   });
 });

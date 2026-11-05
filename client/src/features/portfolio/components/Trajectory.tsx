@@ -3,11 +3,11 @@ import { useLocale, useTranslations } from "next-intl";
 import WorkExperiences from "@/json/experiencies.json";
 import TrajectoryScene from "../motion/TrajectoryScene";
 import RiseTitle from "./RiseTitle";
-import { type Experience, type Locale, periodStart, sortByNewest } from "../lib/content";
+import { type Experience, type Locale, periodStart, sortByOldest } from "../lib/content";
 
-const roles = sortByNewest(WorkExperiences.experiencies as Experience[]);
+const roles = sortByOldest(WorkExperiences.experiencies as Experience[]);
 
-/** The career, newest first, along a road: each role on one side, the next on the other. */
+/** The career along a road, from its start to the current role: each role on one side, the next on the other. */
 const Trajectory = () => {
   const t = useTranslations("trajectory");
   const locale = useLocale() as Locale;

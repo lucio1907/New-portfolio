@@ -26,9 +26,9 @@ export type Project = {
   livePreview: string;
 };
 
-/** Newest first, by the ISO-like `start` month. Does not mutate the input. */
-export const sortByNewest = (items: readonly Experience[]): Experience[] =>
-  [...items].sort((a, b) => b.start.localeCompare(a.start));
+/** Oldest first, by the ISO-like `start` month. Does not mutate the input. */
+export const sortByOldest = (items: readonly Experience[]): Experience[] =>
+  [...items].sort((a, b) => a.start.localeCompare(b.start));
 
 /** Where a period like "Dic 2023 - Jul 2024" begins. */
 export const periodStart = (period: string): string => period.split(" - ")[0];
