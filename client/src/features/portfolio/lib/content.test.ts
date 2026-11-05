@@ -38,7 +38,7 @@ const read = (path: string) => readFileSync(new URL(`../../../../${path}`, impor
 
 describe("the site agrees with the CV", () => {
   const { experiencies } = JSON.parse(read("src/json/experiencies.json")) as { experiencies: Experience[] };
-  const toyota = experiencies.find((role) => role.company === "Toyota");
+  const toyota = experiencies.find((role) => role.company === "Toyota Argentina");
 
   test("the career starts in infrastructure, in the title and in the role", () => {
     assert.equal(toyota?.position.es, "Infraestructura");
@@ -56,10 +56,15 @@ describe("the site agrees with the CV", () => {
     }
   });
 
-  test('the copy no longer says "AI-native"', () => {
+  test('the copy no longer says "AI-native" or "proactive by default"', () => {
     for (const locale of ["es", "en"]) {
-      assert.doesNotMatch(read(`messages/${locale}.json`), /ai[\s-]?native/i, locale);
+      assert.doesNotMatch(read(`messages/${locale}.json`), /ai[\s-]?native|proactiv/i, locale);
     }
+  });
+
+  test("the how-I-work section describes Scrum as the CV does", () => {
+    assert.ok(JSON.parse(read("messages/es.json")).how.lines.includes("Trabajo de forma colaborativa bajo Scrum."));
+    assert.ok(JSON.parse(read("messages/en.json")).how.lines.includes("I work collaboratively under Scrum."));
   });
 });
 
