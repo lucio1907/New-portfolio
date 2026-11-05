@@ -1,5 +1,6 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
   type Experience,
   type Project,
@@ -32,6 +33,33 @@ const project: Project = {
   codeLink: "https://example.com/code",
   livePreview: "",
 };
+
+describe("the owner's title", () => {
+  const read = (path: string) => readFileSync(new URL(`../../../../${path}`, import.meta.url), "utf8");
+
+  // The course's official name, which has to match its certificate.
+  const COURSE = { es: "Desarrollo Web Full Stack", en: "Full Stack Web Development" };
+
+  test('the copy says "software developer", never "full stack", except in the course\'s name', () => {
+    for (const path of ["messages/es.json", "messages/en.json", "src/json/experiencies.json", "src/json/projects.json", "src/json/techStack.json"]) {
+      const copy = read(path).replaceAll(COURSE.es, "").replaceAll(COURSE.en, "");
+      assert.doesNotMatch(copy, /full[\s-]?stack/i, path);
+    }
+  });
+
+  test("the Coderhouse course keeps its official name", () => {
+    for (const locale of ["es", "en"] as const) {
+      const { studies } = JSON.parse(read(`messages/${locale}.json`)).sheet;
+      const course = studies.find((study: { place: string }) => study.place === "Coderhouse");
+      assert.equal(course.title, COURSE[locale]);
+    }
+  });
+
+  test("the trajectory's title opens with it", () => {
+    assert.equal(JSON.parse(read("messages/es.json")).trajectory.first, "Desarrollador de software.");
+    assert.equal(JSON.parse(read("messages/en.json")).trajectory.first, "Software developer.");
+  });
+});
 
 describe("sortByOldest", () => {
   test("sorts oldest first, ending on the current role, without mutating the input", () => {

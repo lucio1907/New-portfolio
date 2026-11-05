@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Lucio Gastellu",
-    "description": "Lucio Gastellu — Full Stack Developer (React, TypeScript, Node.js, Python, PostgreSQL). AI-native workflow.",
+    "description": "Lucio Gastellu — Software Developer (React, TypeScript, Node.js, Python, PostgreSQL). AI-native workflow.",
     "keywords": [
       "Professional",
       "Web",
@@ -35,7 +35,7 @@
     "twitter": "Twitter / X"
   },
   "hero": {
-    "lede": "I'm a full stack developer. I build the systems people work with.",
+    "lede": "I'm a software developer. I build the systems people work with.",
     "available": "Available for new roles.",
     "location": "Buenos Aires, remote or hybrid."
   },
@@ -105,7 +105,7 @@
     "text": "less response time in the Nexus Digital APIs, by optimizing search and filtering."
   },
   "trajectory": {
-    "first": "Full stack today.",
+    "first": "Software developer.",
     "second": "I started in IT support."
   },
   "how": {
