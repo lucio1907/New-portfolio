@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
+import { riseLines } from "./moves";
 import { type SceneTools, useScene } from "./useScene";
 
-/** Each statement comes forward as it reaches the middle of the screen. */
+/** The title rises, then each statement comes forward as it nears the middle of the screen. */
 const build = (root: HTMLElement, _phone: boolean, { gsap }: SceneTools) => {
+  riseLines(gsap, root);
   gsap.utils.toArray<HTMLElement>(root.querySelectorAll("[data-line]")).forEach((line) => {
     gsap.fromTo(
       line,

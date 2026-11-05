@@ -1,16 +1,23 @@
 "use client";
 
 import React from "react";
+import { revealOnce, riseLines } from "./moves";
 import { type SceneTools, useScene } from "./useScene";
 
 /** Roles other than the one in front stay this visible. */
 const RESTING = 0.2;
 
 /**
- * A dark panel opens up as this section arrives. On desktop the date stays stuck
- * (CSS sticky) and rolls like an odometer while each role comes into focus.
+ * A dark panel opens up as this section arrives and each role's details arrive
+ * one by one. On desktop the date stays stuck (CSS sticky) and rolls like an
+ * odometer while each role comes into focus.
  */
 const build = (root: HTMLElement, phone: boolean, { gsap }: SceneTools) => {
+  riseLines(gsap, root);
+  gsap.utils.toArray<HTMLElement>(root.querySelectorAll("[data-role]")).forEach((role) => {
+    revealOnce(gsap, role.querySelectorAll(".role-name, .role-place, .role-list > li"), role, "top 82%");
+  });
+
   gsap.fromTo(
     root.querySelector("[data-panel]"),
     { clipPath: "inset(0% 2.5% 0% 2.5% round 32px 32px 0px 0px)" },

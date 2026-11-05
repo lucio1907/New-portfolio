@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import ContactScene from "../motion/ContactScene";
 import CopyEmail from "./CopyEmail";
+import RiseTitle from "./RiseTitle";
 import { CV_HREF, EMAIL, PHONE, SOCIAL_LINKS } from "../lib/constants";
 
 const [localPart, domain] = EMAIL.split("@");
@@ -14,7 +15,7 @@ const ContactSection = () => {
     <ContactScene>
       <div data-contact className="contact-inner">
         <div>
-          <h2 className="contact-title display">{t("title")}</h2>
+          <RiseTitle className="contact-title" lines={[t("title")]} />
           <p className="contact-lead">{t("lead")}</p>
         </div>
         <div>
@@ -23,7 +24,7 @@ const ContactSection = () => {
             {localPart}@<wbr />
             {domain}
           </a>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="contact-actions mt-6 flex flex-wrap gap-3">
             <CopyEmail />
             <a href={CV_HREF} target="_blank" rel="noreferrer" className="action">
               {t("cv")}

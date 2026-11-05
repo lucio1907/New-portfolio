@@ -1,6 +1,22 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
-import { countAt, splitWords } from "./motion.ts";
+import { countAt, splitWords, tiltFor } from "./motion.ts";
+
+describe("tiltFor", () => {
+  test("leans the way the cursor moves, in proportion to its speed", () => {
+    assert.equal(tiltFor(10), 2);
+    assert.equal(tiltFor(-10), -2);
+  });
+
+  test("stays upright when the cursor stops", () => {
+    assert.equal(tiltFor(0), 0);
+  });
+
+  test("never leans past the limit, however fast the cursor goes", () => {
+    assert.equal(tiltFor(900), 6);
+    assert.equal(tiltFor(-900), -6);
+  });
+});
 
 describe("splitWords", () => {
   test("splits on any whitespace and keeps punctuation with its word", () => {

@@ -2,6 +2,7 @@ import React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import WorkExperiences from "@/json/experiencies.json";
 import TrajectoryScene from "../motion/TrajectoryScene";
+import RiseTitle from "./RiseTitle";
 import { type Experience, type Locale, periodStart, sortByNewest } from "../lib/content";
 
 const roles = sortByNewest(WorkExperiences.experiencies as Experience[]);
@@ -14,10 +15,7 @@ const Trajectory = () => {
   return (
     <TrajectoryScene>
       <div data-panel className="trajectory-panel" />
-      <h2 className="trajectory-title display">
-        <span className="block">{t("first")}</span>
-        <span className="block">{t("second")}</span>
-      </h2>
+      <RiseTitle className="trajectory-title" lines={[t("first"), t("second")]} />
       <div className="trajectory-body">
         <div aria-hidden="true" className="trajectory-rail">
           <div className="rail-window">

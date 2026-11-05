@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import TechStackData from "@/json/techStack.json";
 import SheetScene from "../motion/SheetScene";
+import RiseTitle from "./RiseTitle";
 
 type Study = { title: string; place: string; period: string };
 
@@ -19,7 +20,7 @@ const TechSheet = () => {
 
   return (
     <SheetScene>
-      <h2 className="sheet-title display">{t("title")}</h2>
+      <RiseTitle className="sheet-title" lines={[t("title")]} />
       <dl className="sheet-list">
         {TechStackData.categories.map((category) => (
           <Row key={category.key} label={t(`categories.${category.key}`)}>

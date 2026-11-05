@@ -2,6 +2,7 @@
 
 import React from "react";
 import { countAt } from "../lib/motion";
+import { revealOnce } from "./moves";
 import { type SceneTools, useScene } from "./useScene";
 
 const TARGET = 35;
@@ -14,6 +15,7 @@ const build = (root: HTMLElement, _phone: boolean, { gsap }: SceneTools) => {
     count.textContent = String(countAt(TARGET, progress));
   };
   show(0);
+  revealOnce(gsap, root.querySelector(".number-text"), root, "top 60%");
   gsap.fromTo(
     root.querySelector(".number-value"),
     { xPercent: -14 },

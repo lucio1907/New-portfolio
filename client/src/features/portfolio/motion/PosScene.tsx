@@ -8,7 +8,7 @@ const NAV = "top 56px";
 const UNPRINTED = -112;
 
 /** The largest the headline may start at. */
-const TITLE_SCALE = 1.9;
+const TITLE_SCALE = 2.2;
 
 /**
  * Desktop: the cobalt panel opens up and the headline fills the screen. The

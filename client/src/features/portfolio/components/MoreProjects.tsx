@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import ProjectsData from "@/json/projects.json";
 import MoreScene from "../motion/MoreScene";
 import { LAUNCHES } from "./Chapters";
+import RiseTitle from "./RiseTitle";
 import { type Locale, type Project, otherProjects } from "../lib/content";
 
 const rows = otherProjects(ProjectsData.projects as Project[], Object.values(LAUNCHES)).reverse();
@@ -15,13 +16,13 @@ const MoreProjects = () => {
 
   return (
     <MoreScene>
-      <h2 className="more-title display">{t("title")}</h2>
+      <RiseTitle className="more-title" lines={[t("title")]} />
       <ul className="more-list">
         {rows.map((project) => (
           <li key={project.id} data-row={project.image ? project.id : undefined} className="more-row">
             <span data-rule aria-hidden="true" className="rule" />
             <h3 className="more-name">{project.projectName}</h3>
-            <p className="text-[16px] leading-snug text-muted">{project.description[locale]}</p>
+            <p className="text-[15px] leading-snug text-muted">{project.description[locale]}</p>
             <p className="more-links">
               {project.livePreview ? (
                 <a href={project.livePreview} target="_blank" rel="noreferrer" className="text-link">

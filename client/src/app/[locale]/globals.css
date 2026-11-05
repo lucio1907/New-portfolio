@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-paper font-sans text-[17px] leading-[1.6] text-ink antialiased;
+  @apply bg-paper font-sans text-[16px] leading-[1.6] text-ink antialiased;
 }
 
 @layer base {
@@ -45,7 +45,7 @@ body {
   }
   .nav-name {
     display: inline-block;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 800;
     letter-spacing: -0.045em;
     line-height: 0.92;
@@ -55,17 +55,37 @@ body {
     opacity: 0;
   }
   .nav-link {
+    position: relative;
     display: inline-flex;
     min-height: 44px;
     min-width: 44px;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
-    text-underline-offset: 4px;
   }
-  .nav-link:hover {
-    text-decoration: underline;
+  /* The underline draws in from the left and leaves through the right. */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 9px;
+    height: 1.5px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: 100% 50%;
+    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: 0 50%;
+  }
+  .scroll-progress {
+    position: absolute;
+    inset: auto 0 0;
+    height: 2px;
+    background: theme("colors.cobalt");
+    transform: scaleX(0);
+    transform-origin: 0 50%;
   }
 
   /* Hero */
@@ -74,31 +94,37 @@ body {
     min-height: 100svh;
     flex-direction: column;
     justify-content: flex-end;
-    gap: clamp(28px, 5vh, 56px);
+    gap: clamp(20px, 4vh, 40px);
     padding: calc(var(--nav-height) + 16px) var(--gutter) clamp(20px, 3vh, 36px);
   }
   .hero-name {
     width: fit-content;
-    font-size: 23.5vw;
+    font-size: 19vw;
     transform-origin: 0 0;
     white-space: normal;
   }
+  /* A mask per word, for its letters to rise from. Padding keeps glyphs uncut. */
   .hero-rise {
     display: block;
-    padding-bottom: 0.1em;
-    margin-bottom: -0.1em;
+    overflow: hidden;
+    padding: 0.12em 0.06em 0.1em;
+    margin: -0.12em -0.06em -0.1em;
+  }
+  .hero-letter {
+    display: inline-block;
+    transform-origin: 0 100%;
   }
 
   /* Manifesto */
   .manifesto {
-    padding: clamp(96px, 24vh, 240px) var(--gutter);
+    padding: clamp(72px, 16vh, 150px) var(--gutter);
   }
   .manifesto p {
-    max-width: 21em;
-    font-size: clamp(2rem, 4.7vw, 4.75rem);
+    max-width: 24em;
+    font-size: clamp(1.5rem, 3.1vw, 3rem);
     font-weight: 700;
-    letter-spacing: -0.035em;
-    line-height: 1.04;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
     text-wrap: wrap;
   }
 
@@ -107,8 +133,8 @@ body {
     position: relative;
     overflow: hidden;
     display: grid;
-    gap: 40px;
-    padding: 72px var(--gutter);
+    gap: 32px;
+    padding: 56px var(--gutter);
   }
   .pos-bg {
     position: absolute;
@@ -127,15 +153,15 @@ body {
   }
   .pos-title {
     width: fit-content;
-    font-size: clamp(2.75rem, min(5vw, 8.4vh), 5rem);
+    font-size: clamp(2.125rem, min(3.6vw, 6.4vh), 3.5rem);
     line-height: 0.98;
     transform-origin: 0 0;
   }
   .pos-body {
     max-width: 34em;
-    margin-top: 12px;
+    margin-top: 10px;
     color: theme("colors.mist");
-    font-size: clamp(1.0625rem, 1.5vw, 1.375rem);
+    font-size: clamp(1rem, 1.25vw, 1.125rem);
     line-height: 1.35;
   }
   /* The source is 1920 px wide: this size keeps it sharp on retina screens. */
@@ -195,15 +221,16 @@ body {
 
   @media (min-width: 768px) {
     .hero-name {
-      font-size: 14.2vw;
+      font-size: 10vw;
       white-space: nowrap;
     }
     .hero-rise {
-      display: inline;
+      display: inline-block;
     }
     .pos-stage {
       min-height: calc(100svh - var(--nav-height));
-      grid-template-columns: minmax(0, 1fr) clamp(290px, 25vw, 360px);
+      /* Wide enough for the receipt's longest line to stay on one row. */
+      grid-template-columns: minmax(0, 1fr) clamp(300px, 24.5vw, 360px);
       align-items: center;
       padding-block: 24px;
     }
@@ -241,7 +268,7 @@ body {
     /* Only with scenes running: a tall track with the stage stuck inside it. */
     .pos-shot {
       /* Never taller than what the stage has left under the headline. */
-      width: min(100%, calc((100svh - var(--nav-height) - 240px) * 16 / 9));
+      width: min(100%, 62vw, calc((100svh - var(--nav-height) - 200px) * 16 / 9));
     }
     /* Above the nav only while it flies there; elsewhere it passes underneath. */
     .motion .hero-name {
@@ -249,7 +276,7 @@ body {
       z-index: 50;
     }
     .motion .pos-track {
-      height: 380svh;
+      height: 300svh;
     }
     .motion .pos-stage {
       position: sticky;
@@ -289,48 +316,50 @@ section[id] {
 
   /* Launches */
   .chapter {
-    padding-top: clamp(96px, 20vh, 220px);
+    --frame-width: calc(100% - 2 * var(--gutter));
+    padding-top: clamp(72px, 14vh, 140px);
   }
   .chapter-head {
     padding-inline: var(--gutter);
   }
   .chapter-title {
-    font-size: clamp(2.75rem, min(7.8vw, 13.5vh), 7.5rem);
+    font-size: clamp(2.125rem, min(5.2vw, 9vh), 5rem);
     line-height: 0.96;
   }
   .chapter-frame {
     position: relative;
-    margin-top: clamp(40px, 8vh, 88px);
+    width: var(--frame-width);
+    margin: clamp(28px, 5vh, 56px) 0 0 var(--gutter);
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    border-radius: clamp(10px, 1.6vw, 22px);
+    border-radius: clamp(10px, 1.2vw, 18px);
     background: theme("colors.ink");
     /* Keeps a light screenshot apart from the paper behind it. */
     box-shadow:
       0 0 0 1px rgba(16, 19, 34, 0.1),
-      0 28px 80px -20px rgba(16, 19, 34, 0.35);
+      0 24px 64px -20px rgba(16, 19, 34, 0.35);
   }
   .chapter-foot {
     display: grid;
-    gap: 16px;
-    padding: clamp(28px, 4vh, 44px) var(--gutter) 0;
+    gap: 14px;
+    padding: clamp(20px, 3vh, 32px) var(--gutter) 0;
   }
   .chapter-body {
-    max-width: 30em;
-    font-size: clamp(1.125rem, 1.7vw, 1.5rem);
+    max-width: 32em;
+    font-size: clamp(1rem, 1.3vw, 1.1875rem);
     font-weight: 500;
     letter-spacing: -0.012em;
-    line-height: 1.3;
+    line-height: 1.35;
   }
 
   /* CRM: the system as stacked layers */
   .layers {
-    margin-top: clamp(40px, 8vh, 88px);
+    margin-top: clamp(28px, 5vh, 56px);
     overflow: hidden;
   }
   .layer {
-    padding: clamp(14px, 2.2vw, 30px) var(--gutter);
-    font-size: clamp(1.9rem, 7vw, 6.75rem);
+    padding: clamp(10px, 1.4vw, 20px) var(--gutter);
+    font-size: clamp(1.375rem, 4.2vw, 3.75rem);
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1;
@@ -354,19 +383,19 @@ section[id] {
 
   /* More projects */
   .more {
-    padding: clamp(112px, 22vh, 240px) var(--gutter) 0;
+    padding: clamp(80px, 15vh, 150px) var(--gutter) 0;
   }
   .more-title {
-    font-size: clamp(2.5rem, 7vw, 6.5rem);
+    font-size: clamp(2rem, 4.6vw, 4.25rem);
   }
   .more-list {
-    margin-top: clamp(32px, 6vh, 64px);
+    margin-top: clamp(24px, 4vh, 44px);
   }
   .more-row {
     position: relative;
     display: grid;
-    gap: 8px 32px;
-    padding-block: clamp(20px, 3.4vh, 34px);
+    gap: 6px 32px;
+    padding-block: clamp(14px, 2.2vh, 22px);
   }
   .rule {
     position: absolute;
@@ -379,14 +408,14 @@ section[id] {
     display: flex;
     flex-wrap: wrap;
     gap: 4px 20px;
-    font-size: 16px;
+    font-size: 15px;
     white-space: nowrap;
   }
   .more-name {
-    font-size: clamp(1.5rem, 3vw, 2.75rem);
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
     font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
   }
   .more-preview {
     display: none;
@@ -394,7 +423,7 @@ section[id] {
     left: 0;
     top: 0;
     z-index: 30;
-    width: clamp(280px, 26vw, 420px);
+    width: clamp(240px, 22vw, 340px);
     aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: 10px;
@@ -406,11 +435,11 @@ section[id] {
   .number {
     display: grid;
     overflow: hidden;
-    gap: 20px;
-    padding: clamp(112px, 22vh, 240px) var(--gutter);
+    gap: 16px;
+    padding: clamp(80px, 15vh, 150px) var(--gutter);
   }
   .number-value {
-    font-size: 38vw;
+    font-size: 26vw;
     font-variant-numeric: tabular-nums;
     line-height: 0.82;
   }
@@ -421,18 +450,18 @@ section[id] {
     text-align: right;
   }
   .number-text {
-    max-width: 22em;
-    font-size: clamp(1.5rem, 2.9vw, 2.75rem);
+    max-width: 24em;
+    font-size: clamp(1.25rem, 2vw, 1.875rem);
     font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.08;
+    letter-spacing: -0.025em;
+    line-height: 1.14;
   }
 
   /* Trajectory */
   .trajectory {
     position: relative;
     isolation: isolate;
-    padding: clamp(96px, 18vh, 200px) var(--gutter) clamp(72px, 14vh, 160px);
+    padding: clamp(72px, 13vh, 130px) var(--gutter) clamp(56px, 10vh, 100px);
     color: theme("colors.paper");
   }
   .trajectory-panel {
@@ -442,88 +471,88 @@ section[id] {
     background: theme("colors.ink");
   }
   .trajectory-title {
-    font-size: clamp(2.5rem, 7.2vw, 7rem);
+    font-size: clamp(2rem, 4.6vw, 4.25rem);
     line-height: 0.96;
   }
   .trajectory-rail {
     display: none;
   }
   .role {
-    padding-top: clamp(48px, 9vh, 96px);
+    padding-top: clamp(36px, 6vh, 64px);
   }
   .role-date {
-    font-size: clamp(2.5rem, 12vw, 4rem);
+    font-size: clamp(2rem, 9vw, 3rem);
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1;
   }
   .role-name {
-    margin-top: 16px;
-    font-size: clamp(1.625rem, 3vw, 2.875rem);
+    margin-top: 12px;
+    font-size: clamp(1.375rem, 2.1vw, 2rem);
     font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.06;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
   }
   .role-place {
-    margin-top: 8px;
-    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    margin-top: 6px;
+    font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
     opacity: 0.72;
   }
   .role-list {
     display: grid;
-    gap: 10px;
-    max-width: 34em;
-    margin-top: 20px;
-    font-size: clamp(1rem, 1.25vw, 1.125rem);
-    line-height: 1.45;
+    gap: 8px;
+    max-width: 36em;
+    margin-top: 16px;
+    font-size: clamp(0.9375rem, 1.05vw, 1rem);
+    line-height: 1.5;
     opacity: 0.84;
   }
 
   /* How I work */
   .how {
-    padding: clamp(112px, 22vh, 240px) var(--gutter) 0;
+    padding: clamp(80px, 15vh, 150px) var(--gutter) 0;
   }
   .how-title {
-    max-width: 12em;
-    font-size: clamp(2.5rem, 7.2vw, 7rem);
+    max-width: 14em;
+    font-size: clamp(2rem, 4.6vw, 4.25rem);
     line-height: 0.96;
   }
   .how-list {
     display: grid;
-    gap: clamp(16px, 3vh, 32px);
-    margin-top: clamp(40px, 8vh, 88px);
-    font-size: clamp(1.5rem, 3.3vw, 3.25rem);
+    gap: clamp(12px, 2.2vh, 22px);
+    margin-top: clamp(28px, 5vh, 56px);
+    font-size: clamp(1.25rem, 2.2vw, 2rem);
     font-weight: 600;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
+    letter-spacing: -0.025em;
+    line-height: 1.16;
   }
 
   /* Technical sheet */
   .sheet {
-    padding: clamp(112px, 22vh, 240px) var(--gutter);
+    padding: clamp(80px, 15vh, 150px) var(--gutter);
   }
   .sheet-title {
-    font-size: clamp(2.5rem, 7vw, 6.5rem);
+    font-size: clamp(2rem, 4.6vw, 4.25rem);
   }
   .sheet-list {
-    margin-top: clamp(32px, 6vh, 64px);
+    margin-top: clamp(24px, 4vh, 44px);
   }
   .sheet-row {
     position: relative;
     display: grid;
-    gap: 6px 32px;
-    padding-block: clamp(16px, 2.6vh, 26px);
+    gap: 4px 32px;
+    padding-block: clamp(12px, 1.9vh, 18px);
   }
   .sheet-row dt {
     color: theme("colors.muted");
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.5;
   }
   .sheet-row dd {
-    font-size: clamp(1.25rem, 2.3vw, 2.125rem);
+    font-size: clamp(1.0625rem, 1.5vw, 1.375rem);
     font-weight: 600;
-    letter-spacing: -0.025em;
-    line-height: 1.16;
+    letter-spacing: -0.02em;
+    line-height: 1.22;
   }
 
   /* Contact */
@@ -537,22 +566,22 @@ section[id] {
     min-height: 100svh;
     flex-direction: column;
     justify-content: space-between;
-    gap: 56px;
-    padding: clamp(96px, 16vh, 160px) var(--gutter) clamp(24px, 4vh, 40px);
+    gap: 40px;
+    padding: clamp(80px, 14vh, 140px) var(--gutter) clamp(24px, 4vh, 40px);
   }
   .contact-title {
-    max-width: 13em;
-    font-size: clamp(2.5rem, 7.2vw, 7rem);
+    max-width: 14em;
+    font-size: clamp(2rem, 4.6vw, 4.25rem);
     line-height: 0.96;
   }
   .contact-lead {
-    margin-top: 20px;
+    margin-top: 16px;
     color: theme("colors.mist");
-    font-size: clamp(1.125rem, 1.8vw, 1.625rem);
+    font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
   }
   .contact-email {
     display: inline-block;
-    font-size: 9vw;
+    font-size: 7.4vw;
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1;
@@ -566,13 +595,13 @@ section[id] {
   }
   .action {
     display: inline-flex;
-    min-height: 48px;
+    min-height: 44px;
     align-items: center;
     justify-content: center;
-    padding-inline: 22px;
+    padding-inline: 20px;
     border: 1.5px solid theme("colors.paper");
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     transition:
       background-color 180ms ease,
@@ -593,21 +622,30 @@ section[id] {
   .contact-links {
     display: grid;
     gap: 12px 40px;
-    font-size: 16px;
+    font-size: 15px;
   }
   .contact-links span {
     display: block;
     color: theme("colors.mist");
-    font-size: 15px;
+    font-size: 14px;
   }
 
   @media (min-width: 768px) {
+    .chapter {
+      --frame-width: min(72vw, 1120px);
+    }
     .chapter-foot {
+      width: calc(var(--frame-width) + 2 * var(--gutter));
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: end;
     }
-    .chapter-offset .chapter-head {
-      padding-left: 24vw;
+    /* The offset launch hangs from the right edge, its text aligned with the picture. */
+    .chapter-offset .chapter-head,
+    .chapter-offset .chapter-foot {
+      margin-left: calc(100% - var(--frame-width) - 2 * var(--gutter));
+    }
+    .chapter-offset .chapter-frame {
+      margin-left: calc(100% - var(--frame-width) - var(--gutter));
     }
     .more-row {
       grid-template-columns: minmax(0, 5fr) minmax(0, 5fr) 17rem;
@@ -619,20 +657,20 @@ section[id] {
     .number {
       grid-template-columns: auto minmax(0, 1fr);
       align-items: end;
-      gap: 40px;
+      gap: 32px;
     }
     .number-value {
-      font-size: 30vw;
+      font-size: 18vw;
     }
     .how-list {
-      padding-left: 24vw;
+      padding-left: 20vw;
     }
     .sheet-row {
       grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
       align-items: baseline;
     }
     .contact-email {
-      font-size: clamp(2.5rem, 6.2vw, 6.25rem);
+      font-size: clamp(2rem, 4.2vw, 4.25rem);
     }
     .contact-links {
       grid-auto-flow: column;
@@ -655,7 +693,7 @@ section[id] {
     .motion .rail-window {
       height: 1em;
       overflow: hidden;
-      font-size: clamp(3.5rem, 8.6vw, 8.5rem);
+      font-size: clamp(2.75rem, 5.6vw, 5.25rem);
       font-weight: 800;
       letter-spacing: -0.045em;
       line-height: 1;
@@ -667,7 +705,7 @@ section[id] {
     }
     .motion .role {
       display: flex;
-      min-height: 76svh;
+      min-height: 58svh;
       flex-direction: column;
       justify-content: center;
       padding-top: 0;
@@ -688,17 +726,42 @@ section[id] {
   }
 }
 
-/* The hero's one entrance. Pure CSS, so nothing waits for JavaScript. */
+/*
+ * The page's entrance. Pure CSS, so nothing waits for JavaScript. The fill only
+ * runs backwards: once finished, these elements belong to the scroll scenes.
+ */
 @media (prefers-reduced-motion: no-preference) {
-  .hero-rise,
-  .hero-lede {
-    animation: rise 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  .hero-rise + .hero-rise {
-    animation-delay: 90ms;
+  .hero-letter {
+    animation: letter-rise 1000ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation-delay: calc(var(--i) * 34ms);
   }
   .hero-lede {
-    animation-delay: 380ms;
+    animation: rise 1100ms cubic-bezier(0.16, 1, 0.3, 1) 480ms backwards;
+  }
+  .site-nav nav {
+    animation: drop-in 800ms cubic-bezier(0.16, 1, 0.3, 1) 640ms backwards;
+  }
+
+  /* Only real cursors: on touch a hover state stays stuck after the tap. */
+  @media (hover: hover) {
+    .more-name {
+      transition:
+        transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+        color 240ms ease;
+    }
+    .more-row:hover .more-name {
+      color: theme("colors.cobalt");
+      transform: translateX(12px);
+    }
+  }
+}
+
+@keyframes letter-rise {
+  from {
+    transform: translateY(112%) rotate(7deg);
+  }
+  to {
+    transform: none;
   }
 }
 
@@ -709,6 +772,17 @@ section[id] {
   }
   to {
     clip-path: inset(-0.1em -0.1em -0.1em -0.1em);
+    transform: none;
+  }
+}
+
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
     transform: none;
   }
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import LanguageToggle from "./LanguageToggle";
 import SmoothLink from "./SmoothLink";
+import ScrollProgress from "../motion/ScrollProgress";
 import { CV_HREF, OWNER_NAME } from "../lib/constants";
 
 const SECTIONS = ["work", "trajectory", "contact"] as const;
@@ -26,6 +27,7 @@ const Nav = () => {
         </a>
         <LanguageToggle />
       </nav>
+      <ScrollProgress />
     </header>
   );
 };
