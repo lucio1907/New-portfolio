@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Lucio Gastellu",
-    "description": "Lucio Gastellu — Software Developer (React, TypeScript, Node.js, Python, PostgreSQL). AI-native workflow.",
+    "description": "Lucio Gastellu — Software Developer (React, TypeScript, Node.js, Python, PostgreSQL). AI integrated into the workflow.",
     "keywords": [
       "Professional",
       "Web",
@@ -106,10 +106,10 @@
   },
   "trajectory": {
     "first": "Software developer.",
-    "second": "I started in IT support."
+    "second": "I started in infrastructure."
   },
   "how": {
-    "title": "AI-native, with full ownership of the code.",
+    "title": "AI in my workflow, with full ownership of the code.",
     "lines": [
       "I write prompts in English and use MCP servers and skills.",
       "I build my own agentic workflows with Claude Code.",

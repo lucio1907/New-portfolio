@@ -6,8 +6,8 @@
       "company": "Toyota",
       "country": "Argentina",
       "position": {
-        "es": "Soporte Técnico IT",
-        "en": "IT Support"
+        "es": "Infraestructura",
+        "en": "Infrastructure"
       },
       "workModality": "Full-time",
       "timelapse": {
@@ -16,12 +16,14 @@
       },
       "highlights": {
         "es": [
-          "Soporte técnico L1 de hardware, software y conectividad de red.",
-          "Gestión de tickets vía Help Desk, inventario, configuración de equipos y accesos."
+          "Infraestructura IT con herramientas Microsoft, soporte L1, configuración de equipos y accesos.",
+          "Formulario automatizado en Power Apps para solicitudes de cambio de equipo, con tickets automáticos en Help Desk.",
+          "SharePoint para almacenar, organizar y compartir información interna."
         ],
         "en": [
-          "L1 support for hardware, software and network connectivity.",
-          "Help Desk ticket lifecycle, inventory, device setup and access management."
+          "IT infrastructure with Microsoft tools, L1 support, device setup and access management.",
+          "Automated Power Apps form for device change requests, with automatic Help Desk tickets.",
+          "SharePoint to store, organize and share internal information."
         ]
       }
     },

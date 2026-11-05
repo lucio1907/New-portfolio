@@ -34,9 +34,36 @@ const project: Project = {
   livePreview: "",
 };
 
-describe("the owner's title", () => {
-  const read = (path: string) => readFileSync(new URL(`../../../../${path}`, import.meta.url), "utf8");
+const read = (path: string) => readFileSync(new URL(`../../../../${path}`, import.meta.url), "utf8");
 
+describe("the site agrees with the CV", () => {
+  const { experiencies } = JSON.parse(read("src/json/experiencies.json")) as { experiencies: Experience[] };
+  const toyota = experiencies.find((role) => role.company === "Toyota");
+
+  test("the career starts in infrastructure, in the title and in the role", () => {
+    assert.equal(toyota?.position.es, "Infraestructura");
+    assert.equal(toyota?.position.en, "Infrastructure");
+    assert.equal(JSON.parse(read("messages/es.json")).trajectory.second, "Empecé en infraestructura.");
+    assert.equal(JSON.parse(read("messages/en.json")).trajectory.second, "I started in infrastructure.");
+  });
+
+  test("the role lists the CV's tasks, in both languages", () => {
+    for (const locale of ["es", "en"] as const) {
+      const tasks = toyota?.highlights[locale].join(" ") ?? "";
+      for (const task of ["Microsoft", "L1", "Power Apps", "Help Desk", "SharePoint"]) {
+        assert.match(tasks, new RegExp(task), `${locale}: ${task}`);
+      }
+    }
+  });
+
+  test('the copy no longer says "AI-native"', () => {
+    for (const locale of ["es", "en"]) {
+      assert.doesNotMatch(read(`messages/${locale}.json`), /ai[\s-]?native/i, locale);
+    }
+  });
+});
+
+describe("the owner's title", () => {
   // The course's official name, which has to match its certificate.
   const COURSE = { es: "Desarrollo Web Full Stack", en: "Full Stack Web Development" };
 
