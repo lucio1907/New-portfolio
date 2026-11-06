@@ -43,7 +43,7 @@
         "es": "Proyecto personal de aplicación fitness API RESTful",
         "en": "Personal project — a RESTful fitness API application."
       },
-      "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1770307659/Projects/Gemini_Generated_Image_jxub5ujxub5ujxub-Editado_qwhvbn.webp",
+      "image": "",
       "techStack": "NodeJS, Express, Typescript, PostgreSQL",
       "codeLink": "https://github.com/lucio1907/FitnessAPP/tree/main/api",
       "livePreview": ""
@@ -55,7 +55,7 @@
         "es": "Proyecto Ecommerce para la venta de perfumes, desarrollado con Next JS y TailwindCSS",
         "en": "Ecommerce project for selling perfumes, built with Next JS and TailwindCSS."
       },
-      "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1782934812/Skills/Screenshot_from_2026-06-29_17-22-57_ipo1ul.png",
+      "image": "/projects/nadira-decants.webp",
       "techStack": "NextJS, TailwindCSS, Typescript",
       "codeLink": "https://github.com/lucio1907/Nadira-Decants",
       "livePreview": "https://www.nadiradecants.com.ar/"
@@ -67,9 +67,10 @@
         "es": "Proyecto en conjunto, dedicado a la venta de sitios web con entrega en menos de 24hs.",
         "en": "Collaborative project focused on selling websites with delivery in less than 24 hours."
       },
-      "image": "https://res.cloudinary.com/dxtsx9ln9/image/upload/v1782935276/Skills/Screenshot_from_2026-07-01_16-46-44_afxzf3.png",
+      "image": "/projects/sitiohoy.webp",
       "techStack": "HTML, CSS, JS",
       "codeLink": "",
-      "livePreview": "https://sitiohoy.com.ar/"} 
+      "livePreview": "https://sitiohoy.com.ar/"
+    }
   ]
 }

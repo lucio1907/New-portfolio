@@ -3,22 +3,32 @@
     {
       "id": 1,
       "key": "languages",
-      "items": ["JavaScript", "TypeScript", "Python", "Java"]
+      "items": ["TypeScript", "JavaScript", "Python", "Java"]
     },
     {
       "id": 2,
-      "key": "backend",
-      "items": ["Node.js", "Express", "Spring Boot"]
+      "key": "frontend",
+      "items": ["React", "Next.js", "Tailwind CSS", "Shadcn/ui", "Material UI"]
     },
     {
       "id": 3,
-      "key": "frontend",
-      "items": ["React", "Tailwind CSS", "HTML", "CSS"]
+      "key": "backend",
+      "items": ["Node.js", "Express", "FastAPI", "Django", "Spring Boot"]
     },
     {
       "id": 4,
+      "key": "data",
+      "items": ["PostgreSQL", "MongoDB", "MySQL"]
+    },
+    {
+      "id": 5,
       "key": "tools",
-      "items": ["PostgreSQL", "MongoDB", "Git / GitHub", "Claude Code"]
+      "items": ["Git", "CI/CD", "Code review", "Scrum"]
+    },
+    {
+      "id": 6,
+      "key": "ai",
+      "items": ["Claude Code", "Codex", "MCP servers", "Skills", "Agentic workflows"]
     }
   ]
 }

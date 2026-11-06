@@ -34,3 +34,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# agent skills (restore with: npx skills experimental_install)
+/.claude/skills/
+/.agents/
+/.atl/
+# Local AI runtime state
+.atl/

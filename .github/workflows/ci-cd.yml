@@ -1,0 +1,135 @@
+name: CI/CD
+
+on:
+  pull_request:
+  push:
+    branches: [main, development]
+
+# A newer push replaces a pending check on the same pull request, but a deploy
+# already running on main is never cancelled halfway.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: client
+
+jobs:
+  quality:
+    name: Lint, types, tests, build and smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Smoke test the production build
+        run: |
+          # The binary itself: through npx, killing the wrapper would leave the server up.
+          ./node_modules/.bin/next start -p 3100 > /dev/null 2>&1 &
+          server=$!
+          trap 'kill "$server"' EXIT
+          for _ in $(seq 1 30); do
+            curl -fs -o /dev/null http://localhost:3100/es && break
+            sleep 1
+          done
+          for locale in es en; do
+            page=$(curl -fsS "http://localhost:3100/$locale")
+            for section in top work trajectory contact; do
+              if ! grep -q "id=\"$section\"" <<< "$page"; then
+                echo "::error::Section #$section is missing from /$locale"
+                exit 1
+              fi
+            done
+          done
+
+      # Uses the Google Chrome already installed on the runner.
+      - name: Check the page in a real browser
+        run: npm run check:browser
+
+  # Fails on high or critical advisories in production dependencies. Deploy does
+  # not wait for it, so a new advisory cannot hold back an urgent fix.
+  audit:
+    name: Security audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+  # Production only, and only once the checks above passed. It runs from the
+  # repository root, so the Vercel project's Root Directory must be `client`.
+  deploy:
+    name: Deploy to Vercel
+    needs: quality
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: .
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_CLI: vercel@65.0.0
+    steps:
+      - name: Check the deploy is configured
+        id: config
+        run: |
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "::warning::Nothing was deployed: set VERCEL_TOKEN, VERCEL_ORG_ID and VERCEL_PROJECT_ID in the repository secrets."
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v7
+        if: steps.config.outputs.enabled == 'true'
+
+      - uses: actions/setup-node@v7
+        if: steps.config.outputs.enabled == 'true'
+        with:
+          node-version: 22
+
+      - name: Pull the project settings
+        if: steps.config.outputs.enabled == 'true'
+        run: npx --yes "$VERCEL_CLI" pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build
+        if: steps.config.outputs.enabled == 'true'
+        run: npx --yes "$VERCEL_CLI" build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy
+        if: steps.config.outputs.enabled == 'true'
+        run: npx --yes "$VERCEL_CLI" deploy --prebuilt --prod --token="$VERCEL_TOKEN"

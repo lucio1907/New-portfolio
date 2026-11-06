@@ -1,36 +1,38 @@
-import AboutMePage from "@/components/aboutme/AboutMePage";
-import ContactMe from "@/components/contact/ContactMe";
-import Footer from "@/components/footer/Footer";
-import Navbar from "@/components/home/Navbar/Navbar";
-import HomeView from "@/components/home/homepage/HomeView";
-import Projects from "@/components/projects/Projects";
-import TechStack from "@/components/stack/TechStack";
-import GridBackground from "@/components/motion/GridBackground";
 import { setRequestLocale } from "next-intl/server";
+import Nav from "@/features/portfolio/components/Nav";
+import Hero from "@/features/portfolio/components/Hero";
+import Manifesto from "@/features/portfolio/components/Manifesto";
+import PosChapter from "@/features/portfolio/components/PosChapter";
+import { CrmChapter, ProjectChapter } from "@/features/portfolio/components/Chapters";
+import MoreProjects from "@/features/portfolio/components/MoreProjects";
+import BigNumber from "@/features/portfolio/components/BigNumber";
+import Trajectory from "@/features/portfolio/components/Trajectory";
+import HowIWork from "@/features/portfolio/components/HowIWork";
+import TechSheet from "@/features/portfolio/components/TechSheet";
+import ContactSection from "@/features/portfolio/components/ContactSection";
 
-const Home = async ({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) => {
+const Home = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
   setRequestLocale(locale);
 
   return (
-    <div className="relative w-full h-full">
-      <GridBackground />
-      <div className="relative z-10">
-        <Navbar />
-        <HomeView />
-        <main>
-          <AboutMePage />
-          <TechStack />
-          <Projects />
-          <ContactMe />
-        </main>
-        <Footer />
-      </div>
-    </div>
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <Manifesto />
+        <PosChapter />
+        <CrmChapter />
+        <ProjectChapter name="nadira" />
+        <ProjectChapter name="sitiohoy" offset />
+        <MoreProjects />
+        <BigNumber />
+        <Trajectory />
+        <HowIWork />
+        <TechSheet />
+        <ContactSection />
+      </main>
+    </>
   );
 };
 

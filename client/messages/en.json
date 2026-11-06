@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Lucio Gastellu",
-    "description": "Lucio Gastellu professional portfolio",
+    "description": "Lucio Gastellu — Software Developer (React, TypeScript, Node.js, Python, PostgreSQL). AI integrated into the workflow.",
     "keywords": [
       "Professional",
       "Web",
@@ -17,55 +17,131 @@
     ]
   },
   "nav": {
-    "about": "About",
-    "techStack": "Tech Stack",
-    "projects": "Projects",
+    "cv": "CV",
+    "home": "Lucio Gastellu, home",
+    "work": "Work",
+    "trajectory": "Career",
     "contact": "Contact"
   },
+  "contact": {
+    "title": "Do you have a role or a project in mind?",
+    "lead": "Write to me and I will answer.",
+    "copy": "Copy email",
+    "copied": "Email copied",
+    "cv": "Download CV",
+    "phone": "Phone",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter / X"
+  },
   "hero": {
-    "label": "// FULL STACK DEVELOPER",
-    "greeting": "Hi 👋, I'm",
-    "tagline": "Passionate about building applications and bringing them to life through code.",
-    "ctaContact": "Get in touch",
-    "ctaDownloadCV": "Download CV"
+    "lede": "I'm a software developer. I build the systems people work with.",
+    "available": "Available for new roles.",
+    "location": "Buenos Aires, remote or hybrid."
   },
-  "about": {
-    "label": "About",
-    "heading": "I build the logic behind things.",
-    "bio1": "Hi! I'm Lucio, a Full Stack Developer grounded in the MERN/PERN stack. I build dynamic interfaces with React and design efficient backend services with Node.js, Express, and Java/Spring Boot, always thinking about how systems work as a whole.",
-    "bio2": "I write clean, scalable code, aiming to optimize both user experience and server performance. I bring AI tools like Claude Code into my workflow to speed up development, and I'm here to help with your next project.",
-    "experienceLabel": "Experience"
-  },
-  "techStack": {
-    "label": "Tech Stack",
-    "subtitle": "Technologies I currently work with.",
-    "categories": {
-      "languages": "Languages",
-      "backend": "Backend",
-      "frontend": "Frontend",
-      "tools": "Data & Tools"
+  "manifesto": "I build web products end to end: React and TypeScript on the frontend, Python and Node on the backend, PostgreSQL under it all. I use AI every day, with workflows of my own, and I still own every line I ship.",
+  "pos": {
+    "first": "We built a POS.",
+    "second": "And linked it to ARCA.",
+    "body": "So every sale invoices itself with Argentina’s tax agency.",
+    "alt": "Sales screen of the POS system: product catalog and cart",
+    "receipt": {
+      "title": "WHAT WE BUILT",
+      "subtitle": "POS system, freelance 2026",
+      "items": [
+        "Electronic invoicing with ARCA",
+        "Works offline",
+        "Notification system",
+        "Barcode scanner support",
+        "Keyboard shortcuts",
+        "Product variants and stock",
+        "Held sales and discounts",
+        "Cash register, expenses, closings",
+        "Statistics and sync"
+      ],
+      "by": "Built by",
+      "thanks": "Thanks for reading",
+      "team": "Lucio Gastellu, at SitioHoy",
+      "stackLabel": "Stack",
+      "stack": [
+        "React, TypeScript, Vite",
+        "PHP, WordPress, WooCommerce",
+        "Vitest, Playwright, Docker"
+      ]
     }
   },
-  "projects": {
-    "label": "Projects",
-    "subtitle": "A selection of projects I have built.",
-    "comingSoon": "// More projects coming soon...",
-    "liveLink": "Live demo ↗",
-    "codeLink": "Code"
-  },
-  "contact": {
-    "label": "Contact",
-    "heading": "Let's bring your ideas to life.",
-    "subtitle": "Have a project in mind? Drop me a line and let's talk.",
-    "rows": {
-      "phone": "Phone",
-      "github": "GitHub",
-      "linkedin": "LinkedIn",
-      "twitter": "Twitter / X"
+  "chapters": {
+    "visit": "Visit the site",
+    "code": "See the code",
+    "crm": {
+      "first": "I built custom CRMs.",
+      "second": "From the screen to the data.",
+      "body": "Customer management systems, designed for each business.",
+      "layers": [
+        "Interface",
+        "Business logic",
+        "Customer management",
+        "Persistence"
+      ]
     },
-    "quote": "\"A good programmer is someone who always looks for a more efficient way to do things.\""
+    "nadira": {
+      "first": "I built a perfume store.",
+      "second": "And it is live.",
+      "body": "An ecommerce for decants, with Next.js, Tailwind and TypeScript."
+    },
+    "sitiohoy": {
+      "first": "I built websites in under 24 hours.",
+      "second": "As a team.",
+      "body": "A joint project focused on selling websites."
+    }
   },
-  "footer": {
-    "note": "© 2026 · Designed & built with code."
+  "more": {
+    "title": "And also.",
+    "demo": "Live demo",
+    "code": "See code",
+    "apiOnly": "API with no public demo"
+  },
+  "number": {
+    "text": "less response time in the Nexus Digital APIs, by optimizing search and filtering."
+  },
+  "trajectory": {
+    "first": "Software developer.",
+    "second": "I started in infrastructure."
+  },
+  "how": {
+    "title": "AI in my workflow, with full ownership of the code.",
+    "lines": [
+      "I write prompts in English and use MCP servers and skills.",
+      "I build my own agentic workflows with Claude Code.",
+      "I validate the output before integrating it.",
+      "I design schemas, optimize queries and write migrations.",
+      "I work collaboratively under Scrum."
+    ]
+  },
+  "sheet": {
+    "title": "Technical sheet.",
+    "education": "Education",
+    "languages": "Languages",
+    "languagesValue": "English B2, native Spanish.",
+    "categories": {
+      "languages": "Languages",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "data": "Databases",
+      "tools": "Tools and process",
+      "ai": "AI workflow"
+    },
+    "studies": [
+      {
+        "title": "Systems Analyst",
+        "place": "UNSADA",
+        "period": "2025 - Present"
+      },
+      {
+        "title": "Full Stack Web Development",
+        "place": "Coderhouse",
+        "period": "2022 - 2023"
+      }
+    ]
   }
 }

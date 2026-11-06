@@ -2,56 +2,928 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
 body {
-  overflow-x: hidden;
+  @apply bg-paper font-sans text-[16px] leading-[1.6] text-ink antialiased;
 }
 
-@layer utilities {
-  .card-surface {
-    @apply bg-surface border border-border rounded-card;
+@layer base {
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
   }
-  .glass {
-    background-color: rgba(10, 10, 11, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-  .bg-grid-fade {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
-  }
-  .bg-terminal {
-    background: linear-gradient(180deg, #141416, #0e0e10);
+
+  p {
+    text-wrap: pretty;
   }
 }
 
-::selection {
-  background: #4f8cff;
-  color: #0a0a0b;
+/* ── Keynote ─────────────────────────────────────────────────────────── */
+:root {
+  --nav-height: 56px;
+  --gutter: clamp(20px, 3vw, 44px);
 }
 
-::-webkit-scrollbar {
-  width: 10px;
+@layer components {
+  .display {
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+  }
+
+  /* Nav: a solid strip of paper, and the printer the receipt comes out of. */
+  .site-nav {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 40;
+    display: flex;
+    height: var(--nav-height);
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--gutter);
+    background: theme("colors.paper");
+  }
+  .nav-name {
+    display: inline-block;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+    white-space: nowrap;
+  }
+  .motion .nav-name {
+    opacity: 0;
+  }
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    min-height: 44px;
+    min-width: 44px;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  /* The underline draws in from the left and leaves through the right. */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 9px;
+    height: 1.5px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: 100% 50%;
+    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: 0 50%;
+  }
+  .scroll-progress {
+    position: absolute;
+    inset: auto 0 0;
+    height: 2px;
+    background: theme("colors.cobalt");
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+  }
+
+  /* Hero */
+  .hero {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: clamp(20px, 4vh, 40px);
+    padding: calc(var(--nav-height) + 16px) var(--gutter) clamp(20px, 3vh, 36px);
+  }
+  .hero-name {
+    width: fit-content;
+    font-size: 19vw;
+    transform-origin: 0 0;
+    white-space: normal;
+  }
+  /* A mask per word, for its letters to rise from. Padding keeps glyphs uncut. */
+  .hero-rise {
+    display: block;
+    overflow: hidden;
+    padding: 0.12em 0.06em 0.1em;
+    margin: -0.12em -0.06em -0.1em;
+  }
+  .hero-letter {
+    display: inline-block;
+    transform-origin: 0 100%;
+  }
+
+  /* Manifesto */
+  .manifesto {
+    padding: clamp(72px, 16vh, 150px) var(--gutter);
+  }
+  .manifesto p {
+    max-width: 24em;
+    font-size: clamp(1.5rem, 3.1vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    text-wrap: wrap;
+  }
+
+  /* POS chapter */
+  .pos-stage {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    gap: 32px;
+    padding: 56px var(--gutter);
+  }
+  .pos-bg {
+    position: absolute;
+    inset: 0;
+    background: theme("colors.cobalt");
+  }
+  .pos-main {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: clamp(20px, 3vh, 32px);
+  }
+  .pos-copy {
+    color: theme("colors.paper");
+  }
+  .pos-title {
+    width: fit-content;
+    font-size: clamp(2.125rem, min(3.6vw, 6.4vh), 3.5rem);
+    line-height: 0.98;
+    transform-origin: 0 0;
+  }
+  .pos-body {
+    max-width: 34em;
+    margin-top: 10px;
+    color: theme("colors.mist");
+    font-size: clamp(1rem, 1.25vw, 1.125rem);
+    line-height: 1.35;
+  }
+  /* The source is 1920 px wide: this size keeps it sharp on retina screens. */
+  .pos-shot {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: clamp(8px, 1vw, 14px);
+    box-shadow: 0 24px 70px -18px rgba(16, 19, 34, 0.6);
+  }
+  .receipt-slot {
+    position: relative;
+  }
+  /* On phones the receipt has its own slot to come out of. */
+  .receipt-slit {
+    height: 10px;
+    border-radius: 5px;
+    background: theme("colors.ink");
+  }
+  .receipt-clip {
+    overflow: hidden;
+    margin-inline: 12px;
+    padding-bottom: 12px;
+  }
+  .receipt {
+    position: relative;
+    padding: 28px 24px 22px;
+    background: theme("colors.receipt");
+    color: theme("colors.ink");
+    font-family: theme("fontFamily.mono");
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  /* The torn edge, cut in zigzag. */
+  .receipt::after {
+    content: "";
+    position: absolute;
+    inset: calc(100% - 1px) 0 auto;
+    height: 9px;
+    background:
+      linear-gradient(135deg, theme("colors.receipt") 50%, transparent 50%) 0 0 / 12px 8px repeat-x,
+      linear-gradient(225deg, theme("colors.receipt") 50%, transparent 50%) 0 0 / 12px 8px repeat-x;
+  }
+  .receipt-rule {
+    margin-block: 14px;
+    border: 0;
+    border-top: 1px dashed currentColor;
+  }
+  .receipt-items {
+    display: grid;
+    gap: 5px;
+  }
+  .receipt-block dd {
+    font-weight: 500;
+  }
+
+  @media (min-width: 768px) {
+    .hero-name {
+      font-size: 10vw;
+      white-space: nowrap;
+    }
+    .hero-rise {
+      display: inline-block;
+    }
+    .pos-stage {
+      min-height: calc(100svh - var(--nav-height));
+      /* Wide enough for the receipt's longest line to stay on one row. */
+      grid-template-columns: minmax(0, 1fr) clamp(300px, 24.5vw, 360px);
+      align-items: center;
+      padding-block: 24px;
+    }
+    /* The nav's edge is the printer's slot: its shadow falls on the panel. */
+    .pos-bg {
+      background:
+        linear-gradient(rgba(16, 19, 34, 0.34), transparent) top / 100% 16px no-repeat,
+        theme("colors.cobalt");
+    }
+    .receipt-slit {
+      display: none;
+    }
+    .receipt-slot {
+      align-self: start;
+      margin-top: -24px; /* Past the stage's padding, right up to the nav. */
+    }
+    .receipt {
+      padding: 28px 24px 22px;
+      font-size: clamp(12.5px, 1.6vh, 14.5px);
+    }
+    /* The whole receipt has to come out on short laptop screens too. */
+    @media (max-height: 720px) {
+      .receipt {
+        padding-block: 14px 12px;
+        font-size: 12px;
+        line-height: 1.36;
+      }
+      .receipt-rule {
+        margin-block: 7px;
+      }
+      .receipt-items {
+        gap: 1px;
+      }
+    }
+    /* Only with scenes running: a tall track with the stage stuck inside it. */
+    .pos-shot {
+      /* Never taller than what the stage has left under the headline. */
+      width: min(100%, 62vw, calc((100svh - var(--nav-height) - 200px) * 16 / 9));
+    }
+    /* Above the nav only while it flies there; elsewhere it passes underneath. */
+    .motion .hero-name {
+      position: relative;
+      z-index: 50;
+    }
+    .motion .pos-track {
+      height: 300svh;
+    }
+    .motion .pos-stage {
+      position: sticky;
+      top: var(--nav-height);
+      height: calc(100svh - var(--nav-height));
+    }
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: #26262a;
+/* ── Everything after the POS chapter ─────────────────────────────────── */
+section[id] {
+  scroll-margin-top: var(--nav-height);
+}
+
+@layer components {
+  /* Masks for lines that rise into place. Padding keeps descenders uncut. */
+  .rise-mask {
+    display: block;
+    overflow: hidden;
+    padding: 0.05em 0.08em 0.14em;
+    margin: -0.05em -0.08em -0.14em;
+  }
+  .rise-mask > * {
+    display: block;
+  }
+
+  .text-link {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+    padding-bottom: 2px;
+    font-weight: 500;
+    transition: background-size 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .text-link:hover {
+    background-size: 0 1px;
+    background-position: 100% 100%;
+  }
+
+  /* Launches */
+  .chapter {
+    --frame-width: calc(100% - 2 * var(--gutter));
+    padding-top: clamp(72px, 14vh, 140px);
+  }
+  .chapter-head {
+    padding-inline: var(--gutter);
+  }
+  .chapter-title {
+    font-size: clamp(2.125rem, min(5.2vw, 9vh), 5rem);
+    line-height: 0.96;
+  }
+  .chapter-frame {
+    position: relative;
+    width: var(--frame-width);
+    margin: clamp(28px, 5vh, 56px) 0 0 var(--gutter);
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: clamp(10px, 1.2vw, 18px);
+    background: theme("colors.ink");
+    /* Keeps a light screenshot apart from the paper behind it. */
+    box-shadow:
+      0 0 0 1px rgba(16, 19, 34, 0.1),
+      0 24px 64px -20px rgba(16, 19, 34, 0.35);
+  }
+  .chapter-foot {
+    display: grid;
+    gap: 14px;
+    padding: clamp(20px, 3vh, 32px) var(--gutter) 0;
+  }
+  .chapter-body {
+    max-width: 32em;
+    font-size: clamp(1rem, 1.3vw, 1.1875rem);
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    line-height: 1.35;
+  }
+
+  /* CRM: the system as stacked layers */
+  .layers {
+    margin-top: clamp(28px, 5vh, 56px);
+    overflow: hidden;
+  }
+  .layer {
+    padding: clamp(10px, 1.4vw, 20px) var(--gutter);
+    font-size: clamp(1.375rem, 4.2vw, 3.75rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .layer:nth-child(1) {
+    background: theme("colors.mist");
+    color: theme("colors.ink");
+  }
+  .layer:nth-child(2) {
+    background: theme("colors.cobalt");
+    color: theme("colors.paper");
+  }
+  .layer:nth-child(3) {
+    background: theme("colors.ink");
+    color: theme("colors.paper");
+  }
+  .layer:nth-child(4) {
+    background: #dfe1da;
+    color: theme("colors.ink");
+  }
+
+  /* More projects */
+  .more {
+    padding: clamp(80px, 15vh, 150px) var(--gutter) 0;
+  }
+  .more-title {
+    font-size: clamp(2rem, 4.6vw, 4.25rem);
+  }
+  .more-list {
+    margin-top: clamp(24px, 4vh, 44px);
+  }
+  .more-row {
+    position: relative;
+    display: grid;
+    gap: 6px 32px;
+    padding-block: clamp(14px, 2.2vh, 22px);
+  }
+  .rule {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: currentColor;
+    transform-origin: 0 50%;
+  }
+  .more-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  .more-name {
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  .more-preview {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 30;
+    width: clamp(240px, 22vw, 340px);
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 10px;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  /* The number */
+  .number {
+    display: grid;
+    overflow: hidden;
+    gap: 16px;
+    padding: clamp(80px, 15vh, 150px) var(--gutter);
+  }
+  .number-value {
+    font-size: 26vw;
+    font-variant-numeric: tabular-nums;
+    line-height: 0.82;
+  }
+  /* Room for two digits from the start, so counting never moves the text. */
+  .number-value [data-count] {
+    display: inline-block;
+    min-width: calc(2ch - 0.09em); /* ch ignores the display type's tracking */
+    text-align: right;
+  }
+  .number-text {
+    max-width: 24em;
+    font-size: clamp(1.25rem, 2vw, 1.875rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.14;
+  }
+
+  /* Trajectory */
+  .trajectory {
+    position: relative;
+    isolation: isolate;
+    /* Roles arrive from outside their column, and must not widen the page. */
+    overflow-x: clip;
+    padding: clamp(72px, 13vh, 130px) var(--gutter) clamp(56px, 10vh, 100px);
+    color: theme("colors.paper");
+  }
+  .trajectory-panel {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: theme("colors.ink");
+  }
+  .trajectory-title {
+    font-size: clamp(2rem, 4.6vw, 4.25rem);
+    line-height: 0.96;
+  }
+  /* Room between the title and the road's first stretch. */
+  .trajectory-body {
+    margin-top: clamp(24px, 5vh, 48px);
+  }
+  /* The road. The scene measures the roles and draws it among them. */
+  .road-list {
+    position: relative;
+  }
+  .road {
+    display: none;
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .motion .road {
+    display: block;
+  }
+  /* With no scene to draw the road, a plain line still ties the roles together. */
+  :root:not(.motion) .road-list::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 8px;
+    width: 2px;
+    background: currentColor;
+    opacity: 0.3;
+  }
+  :root:not(.motion) .road-list {
+    padding-left: 32px;
+  }
+  .road-track,
+  .road-line {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+  }
+  .road-track {
+    stroke-width: 2;
+    stroke-dasharray: 1 9;
+    opacity: 0.26;
+  }
+  .road-line {
+    stroke-width: 3;
+  }
+  .road-stop-ring {
+    fill: theme("colors.ink");
+    stroke: currentColor;
+    stroke-width: 2;
+    opacity: 0.4;
+    transition: opacity 300ms ease;
+  }
+  .road-stop-dot {
+    fill: currentColor;
+    transform: scale(0);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .road-stop-pulse {
+    fill: currentColor;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .is-reached .road-stop-ring {
+    opacity: 1;
+  }
+  .is-reached .road-stop-dot {
+    transform: scale(1);
+  }
+  .is-reached .road-stop-pulse {
+    animation: road-pulse 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .road-head-glow {
+    fill: currentColor;
+    opacity: 0.22;
+  }
+  .road-head-core {
+    fill: currentColor;
+  }
+  .role {
+    padding-top: clamp(36px, 6vh, 64px);
+  }
+  .role-date {
+    font-size: clamp(2rem, 9vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .role-name {
+    margin-top: 12px;
+    font-size: clamp(1.375rem, 2.1vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  .role-place {
+    margin-top: 6px;
+    font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+    opacity: 0.72;
+  }
+  .role-list {
+    display: grid;
+    gap: 8px;
+    max-width: 36em;
+    margin-top: 16px;
+    font-size: clamp(0.9375rem, 1.05vw, 1rem);
+    line-height: 1.5;
+    opacity: 0.84;
+  }
+
+  /* How I work */
+  .how {
+    padding: clamp(80px, 15vh, 150px) var(--gutter) 0;
+  }
+  .how-title {
+    max-width: 14em;
+    font-size: clamp(2rem, 4.6vw, 4.25rem);
+    line-height: 0.96;
+  }
+  .how-list {
+    display: grid;
+    gap: clamp(12px, 2.2vh, 22px);
+    margin-top: clamp(28px, 5vh, 56px);
+    font-size: clamp(1.25rem, 2.2vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.16;
+  }
+
+  /* Technical sheet */
+  .sheet {
+    padding: clamp(80px, 15vh, 150px) var(--gutter);
+  }
+  .sheet-title {
+    font-size: clamp(2rem, 4.6vw, 4.25rem);
+  }
+  .sheet-list {
+    margin-top: clamp(24px, 4vh, 44px);
+  }
+  .sheet-row {
+    position: relative;
+    display: grid;
+    gap: 4px 32px;
+    padding-block: clamp(12px, 1.9vh, 18px);
+  }
+  .sheet-row dt {
+    color: theme("colors.muted");
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .sheet-row dd {
+    font-size: clamp(1.0625rem, 1.5vw, 1.375rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.22;
+  }
+
+  /* Contact */
+  .contact {
+    overflow: hidden;
+    background: theme("colors.cobalt");
+    color: theme("colors.paper");
+  }
+  .contact-inner {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+    padding: clamp(80px, 14vh, 140px) var(--gutter) clamp(24px, 4vh, 40px);
+  }
+  .contact-title {
+    max-width: 14em;
+    font-size: clamp(2rem, 4.6vw, 4.25rem);
+    line-height: 0.96;
+  }
+  .contact-lead {
+    margin-top: 16px;
+    color: theme("colors.mist");
+    font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  }
+  .contact-email {
+    display: inline-block;
+    font-size: 7.4vw;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 0.05em no-repeat;
+    padding-bottom: 0.1em;
+    transition: background-size 480ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .contact-email:hover,
+  .contact-email:focus-visible {
+    background-size: 100% 0.05em;
+  }
+  .action {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 20px;
+    border: 1.5px solid theme("colors.paper");
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+  .action:hover {
+    background: theme("colors.paper");
+    color: theme("colors.cobalt");
+  }
+  .action-solid {
+    background: theme("colors.paper");
+    color: theme("colors.cobalt");
+  }
+  .action-solid:hover {
+    background: transparent;
+    color: theme("colors.paper");
+  }
+  .contact-links {
+    display: grid;
+    gap: 12px 40px;
+    font-size: 15px;
+  }
+  .contact-links span {
+    display: block;
+    color: theme("colors.mist");
+    font-size: 14px;
+  }
+
+  @media (min-width: 768px) {
+    .chapter {
+      --frame-width: min(72vw, 1120px);
+    }
+    .chapter-foot {
+      width: calc(var(--frame-width) + 2 * var(--gutter));
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+    }
+    /* The offset launch hangs from the right edge, its text aligned with the picture. */
+    .chapter-offset .chapter-head,
+    .chapter-offset .chapter-foot {
+      margin-left: calc(100% - var(--frame-width) - 2 * var(--gutter));
+    }
+    .chapter-offset .chapter-frame {
+      margin-left: calc(100% - var(--frame-width) - var(--gutter));
+    }
+    .more-row {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 5fr) 17rem;
+      align-items: baseline;
+    }
+    .more-links {
+      justify-content: flex-end;
+    }
+    .number {
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: end;
+      gap: 32px;
+    }
+    .number-value {
+      font-size: 18vw;
+    }
+    .how-list {
+      padding-left: 20vw;
+    }
+    .sheet-row {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+      align-items: baseline;
+    }
+    .contact-email {
+      font-size: clamp(2rem, 4.2vw, 4.25rem);
+    }
+    .contact-links {
+      grid-auto-flow: column;
+      justify-content: start;
+    }
+
+    /* The road runs down the middle: each role on one side, its date across from it. */
+    .road-list {
+      --road-width: clamp(96px, 13vw, 190px);
+    }
+    :root:not(.motion) .road-list {
+      padding-left: 0;
+    }
+    :root:not(.motion) .road-list::before {
+      left: calc(50% - 1px);
+    }
+    .road {
+      left: calc(50% - var(--road-width) / 2);
+      width: var(--road-width);
+    }
+    .role {
+      display: grid;
+      min-height: 46svh;
+      grid-template-columns: minmax(0, 1fr) var(--road-width) minmax(0, 1fr);
+      column-gap: 24px;
+      align-items: center;
+      padding-top: 0;
+    }
+    .role-date,
+    .role-body {
+      grid-row: 1;
+    }
+    .role-date {
+      font-size: clamp(2.75rem, 5.6vw, 5.25rem);
+      letter-spacing: -0.045em;
+      white-space: nowrap;
+    }
+    .role-name {
+      margin-top: 0;
+    }
+    .role:nth-child(odd) .role-date {
+      grid-column: 1;
+      justify-self: end;
+    }
+    .role:nth-child(odd) .role-body {
+      grid-column: 3;
+    }
+    .role:nth-child(even) .role-date {
+      grid-column: 3;
+      justify-self: start;
+    }
+    .role:nth-child(even) .role-body {
+      grid-column: 1;
+      justify-self: end;
+    }
+  }
+
+  /* No room for two columns: roles take turns against each edge, the road on the other. */
+  @media (max-width: 767px) {
+    .motion .role {
+      padding-top: 72px;
+    }
+    .motion .role:nth-child(odd) {
+      margin-left: 40px;
+    }
+    .motion .role:nth-child(even) {
+      margin-right: 40px;
+      text-align: right;
+    }
+    .motion .role:nth-child(even) .role-list {
+      text-align: left;
+    }
+  }
+
+  /* The preview that follows the cursor needs a real cursor. */
+  @media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+    .motion .more-preview {
+      display: block;
+    }
+  }
+}
+
+/*
+ * The page's entrance. Pure CSS, so nothing waits for JavaScript. The fill only
+ * runs backwards: once finished, these elements belong to the scroll scenes.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-letter {
+    animation: letter-rise 1000ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation-delay: calc(var(--i) * 34ms);
+  }
+  .hero-lede {
+    animation: rise 1100ms cubic-bezier(0.16, 1, 0.3, 1) 480ms backwards;
+  }
+  .site-nav nav {
+    animation: drop-in 800ms cubic-bezier(0.16, 1, 0.3, 1) 640ms backwards;
+  }
+
+  /* Only real cursors: on touch a hover state stays stuck after the tap. */
+  @media (hover: hover) {
+    .more-name {
+      transition:
+        transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+        color 240ms ease;
+    }
+    .more-row:hover .more-name {
+      color: theme("colors.cobalt");
+      transform: translateX(12px);
+    }
+  }
+}
+
+@keyframes letter-rise {
+  from {
+    transform: translateY(112%) rotate(7deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes rise {
+  from {
+    clip-path: inset(-0.1em -0.1em 100% -0.1em);
+    transform: translateY(0.18em);
+  }
+  to {
+    clip-path: inset(-0.1em -0.1em -0.1em -0.1em);
+    transform: none;
+  }
+}
+
+@keyframes road-pulse {
+  from {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.8);
+  }
+}
+
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+*:focus-visible {
+  outline: 2px solid #1b2bd6;
+  outline-offset: 3px;
   border-radius: 6px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: #3a3a42;
+/* The default ring is cobalt: it would vanish on this section's background. */
+.contact :focus-visible {
+  outline-color: #f3f4f1;
 }
 
-::-webkit-scrollbar-track {
-  background-color: #0a0a0b;
+/* The name waits off stage while the hero holds it, but not for the keyboard. */
+.motion .nav-name:focus-visible {
+  opacity: 1 !important;
+}
+
+::selection {
+  background: rgba(27, 43, 214, 0.2);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -61,6 +933,5 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }

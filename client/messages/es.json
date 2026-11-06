@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Lucio Gastellu",
-    "description": "Lucio Gastellu professional portfolio",
+    "description": "Lucio Gastellu — Desarrollador de Software (React, TypeScript, Node.js, Python, PostgreSQL). IA integrada en el flujo de trabajo.",
     "keywords": [
       "Professional",
       "Web",
@@ -17,55 +17,131 @@
     ]
   },
   "nav": {
-    "about": "Sobre mí",
-    "techStack": "Tech Stack",
-    "projects": "Proyectos",
+    "cv": "CV",
+    "home": "Lucio Gastellu, inicio",
+    "work": "Trabajo",
+    "trajectory": "Trayectoria",
     "contact": "Contacto"
   },
+  "contact": {
+    "title": "¿Tenés un rol o un proyecto en mente?",
+    "lead": "Escribime y te respondo.",
+    "copy": "Copiar email",
+    "copied": "Email copiado",
+    "cv": "Descargar CV",
+    "phone": "Teléfono",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter / X"
+  },
   "hero": {
-    "label": "// DESARROLLADOR FULL STACK",
-    "greeting": "Hola 👋, soy",
-    "tagline": "Apasionado por crear aplicaciones y darles vida a través del código.",
-    "ctaContact": "Contáctame",
-    "ctaDownloadCV": "Descargar CV"
+    "lede": "Soy desarrollador de software. Hago los sistemas con los que trabaja la gente.",
+    "available": "Disponible para nuevos roles.",
+    "location": "Buenos Aires, remoto o híbrido."
   },
-  "about": {
-    "label": "Sobre mí",
-    "heading": "Construyo la lógica detrás de las cosas.",
-    "bio1": "¡Hola! Soy Lucio, Desarrollador Full Stack con base en el stack MERN/PERN. Construyo interfaces dinámicas con React y diseño servicios backend eficientes con Node.js, Express y Java/Spring Boot, siempre pensando en el funcionamiento integral de los sistemas.",
-    "bio2": "Escribo código limpio y escalable, buscando optimizar la experiencia del usuario y el rendimiento del servidor. Incorporo herramientas de IA como Claude Code a mi flujo de trabajo para acelerar el desarrollo, y estoy aquí para ayudarte con tu próximo proyecto.",
-    "experienceLabel": "Experiencia"
-  },
-  "techStack": {
-    "label": "Tech Stack",
-    "subtitle": "Tecnologías con las que estoy trabajando actualmente.",
-    "categories": {
-      "languages": "Lenguajes",
-      "backend": "Backend",
-      "frontend": "Frontend",
-      "tools": "Datos & Tools"
+  "manifesto": "Construyo productos web de punta a punta: React y TypeScript en el frontend, Python y Node en el backend, PostgreSQL debajo de todo. Uso IA todos los días, con workflows propios, y sigo siendo dueño de cada línea que entrego.",
+  "pos": {
+    "first": "Hicimos un POS.",
+    "second": "Y lo conectamos con ARCA.",
+    "body": "Para que cada venta se facture sola.",
+    "alt": "Pantalla de venta del sistema POS: catálogo de productos y carrito",
+    "receipt": {
+      "title": "LO QUE HICIMOS",
+      "subtitle": "Sistema POS, freelance 2026",
+      "items": [
+        "Factura electrónica con ARCA",
+        "Funciona sin conexión",
+        "Sistema de notificaciones",
+        "Lector de códigos de barras",
+        "Atajos de teclado",
+        "Productos con variantes y stock",
+        "Ventas en espera y descuentos",
+        "Caja, gastos y cierres",
+        "Estadísticas y sincronización"
+      ],
+      "by": "Desarrollo",
+      "thanks": "Gracias por leer",
+      "team": "Lucio Gastellu, en SitioHoy",
+      "stackLabel": "Stack",
+      "stack": [
+        "React, TypeScript, Vite",
+        "PHP, WordPress, WooCommerce",
+        "Vitest, Playwright, Docker"
+      ]
     }
   },
-  "projects": {
-    "label": "Proyectos",
-    "subtitle": "Una selección de proyectos que he construido.",
-    "comingSoon": "// Más proyectos próximamente...",
-    "liveLink": "Ver demo ↗",
-    "codeLink": "Código"
-  },
-  "contact": {
-    "label": "Contacto",
-    "heading": "Demos vida a tus ideas.",
-    "subtitle": "¿Tienes un proyecto en mente? Escríbeme y hablemos.",
-    "rows": {
-      "phone": "Teléfono",
-      "github": "GitHub",
-      "linkedin": "LinkedIn",
-      "twitter": "Twitter / X"
+  "chapters": {
+    "visit": "Ver el sitio",
+    "code": "Ver el código",
+    "crm": {
+      "first": "Hice CRMs a medida.",
+      "second": "De la pantalla a los datos.",
+      "body": "Sistemas de gestión de clientes, pensados para cada negocio.",
+      "layers": [
+        "Interfaz",
+        "Lógica de negocio",
+        "Gestión de clientes",
+        "Persistencia"
+      ]
     },
-    "quote": "\"Un buen programador es alguien que siempre busca una forma más eficiente de hacer las cosas.\""
+    "nadira": {
+      "first": "Hice una tienda de perfumes.",
+      "second": "Y está en producción.",
+      "body": "Un ecommerce de decants, con Next.js, Tailwind y TypeScript."
+    },
+    "sitiohoy": {
+      "first": "Armé sitios web en menos de 24 horas.",
+      "second": "En equipo.",
+      "body": "Un proyecto en conjunto, dedicado a la venta de sitios web."
+    }
   },
-  "footer": {
-    "note": "© 2026 · Diseñado & desarrollado por Lucio Gastellu."
+  "more": {
+    "title": "Y además.",
+    "demo": "Ver demo",
+    "code": "Ver código",
+    "apiOnly": "API sin demo pública"
+  },
+  "number": {
+    "text": "menos de tiempo de respuesta en las APIs de Nexus Digital, optimizando búsqueda y filtrado."
+  },
+  "trajectory": {
+    "first": "Desarrollador de software.",
+    "second": "Empecé en infraestructura."
+  },
+  "how": {
+    "title": "IA en mi flujo de trabajo, con ownership total del código.",
+    "lines": [
+      "Escribo prompts en inglés y uso MCP servers y skills.",
+      "Desarrollo mis propios workflows agentic con Claude Code.",
+      "Valido el output antes de integrarlo.",
+      "Diseño schemas, optimizo queries y escribo migraciones.",
+      "Trabajo de forma colaborativa bajo Scrum."
+    ]
+  },
+  "sheet": {
+    "title": "Ficha técnica.",
+    "education": "Formación",
+    "languages": "Idiomas",
+    "languagesValue": "Inglés B2, español nativo.",
+    "categories": {
+      "languages": "Lenguajes",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "data": "Bases de datos",
+      "tools": "Herramientas y proceso",
+      "ai": "Workflow con IA"
+    },
+    "studies": [
+      {
+        "title": "Analista en Sistemas",
+        "place": "UNSADA",
+        "period": "2025 - Presente"
+      },
+      {
+        "title": "Desarrollo Web Full Stack",
+        "place": "Coderhouse",
+        "period": "2022 - 2023"
+      }
+    ]
   }
 }

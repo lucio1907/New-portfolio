@@ -2,58 +2,106 @@
   "experiencies": [
     {
       "id": 1,
-      "company": "Toyota",
+      "start": "2023-01",
+      "company": "Toyota Argentina",
       "country": "Argentina",
       "position": {
-        "es": "Infraestructura IT",
-        "en": "IT Infrastructure"
+        "es": "Infraestructura",
+        "en": "Infrastructure"
       },
       "workModality": "Full-time",
       "timelapse": {
         "es": "Ene 2023 - Abr 2023",
         "en": "Jan 2023 - Apr 2023"
+      },
+      "highlights": {
+        "es": [
+          "Infraestructura IT con herramientas Microsoft, soporte L1, configuración de equipos y accesos.",
+          "Formulario automatizado en Power Apps para solicitudes de cambio de equipo, con tickets automáticos en Help Desk.",
+          "SharePoint para almacenar, organizar y compartir información interna."
+        ],
+        "en": [
+          "IT infrastructure with Microsoft tools, L1 support, device setup and access management.",
+          "Automated Power Apps form for device change requests, with automatic Help Desk tickets.",
+          "SharePoint to store, organize and share internal information."
+        ]
       }
     },
     {
       "id": 2,
+      "start": "2023-12",
       "company": "Nexus Digital",
       "country": "Argentina",
       "position": {
-        "es": "Frontend Developer",
-        "en": "Frontend Developer"
-      },
-      "workModality": "Full-time",
-      "timelapse": {
-        "es": "Dic 2023 - May 2024",
-        "en": "Dec 2023 - May 2024"
-      }
-    },
-    {
-      "id": 3,
-      "company": "No Country",
-      "country": "Argentina",
-      "position": {
-        "es": "Backend Developer (Voluntariado)",
-        "en": "Backend Developer (Volunteer)"
-      },
-      "workModality": "Full-time",
-      "timelapse": {
-        "es": "Nov 2025 - Dic 2025",
-        "en": "Nov 2025 - Dec 2025"
-      }
-    },
-    {
-      "id": 4,
-      "company": "SitioHoy",
-      "country": "Argentina",
-      "position": {
-        "es": "Software Developer",
+        "es": "Desarrollador de Software",
         "en": "Software Developer"
       },
       "workModality": "Full-time",
       "timelapse": {
-        "es": "Mar 2026 - Presente",
-        "en": "Mar 2026 - Present"
+        "es": "Dic 2023 - Jul 2024",
+        "en": "Dec 2023 - Jul 2024"
+      },
+      "highlights": {
+        "es": [
+          "APIs RESTful con Node.js y Express: 35% menos de tiempo de respuesta optimizando búsqueda y filtrado.",
+          "Componentes React + Tailwind con una arquitectura escalable y reutilizable."
+        ],
+        "en": [
+          "RESTful APIs with Node.js and Express: 35% faster response times by optimizing search and filtering.",
+          "React + Tailwind components with a scalable, reusable architecture."
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "start": "2025-11",
+      "company": "No Country",
+      "country": "Argentina",
+      "position": {
+        "es": "Desarrollador Backend (Voluntariado)",
+        "en": "Backend Developer (Volunteer)"
+      },
+      "workModality": "Scrum",
+      "timelapse": {
+        "es": "Nov 2025 - Dic 2025",
+        "en": "Nov 2025 - Dec 2025"
+      },
+      "highlights": {
+        "es": [
+          "Backend completo con Java y Spring Boot aplicando Clean Architecture.",
+          "Spring Security + OAuth 2.0, Spring Data JPA e Hibernate sobre SQL."
+        ],
+        "en": [
+          "Full backend with Java and Spring Boot following Clean Architecture.",
+          "Spring Security + OAuth 2.0, Spring Data JPA and Hibernate over SQL."
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "start": "2026-04",
+      "company": "Freelance",
+      "country": "Argentina",
+      "position": {
+        "es": "Desarrollador de Software",
+        "en": "Software Developer"
+      },
+      "workModality": "Freelance",
+      "timelapse": {
+        "es": "Abr 2026 - Presente",
+        "en": "Apr 2026 - Present"
+      },
+      "highlights": {
+        "es": [
+          "Sistemas CRM a medida: interfaz, lógica de negocio, gestión de clientes y persistencia.",
+          "Sistema POS con facturación electrónica automática integrada con ARCA.",
+          "Landing pages responsivas, desde la implementación hasta producción."
+        ],
+        "en": [
+          "Custom CRM systems: UI, business logic, client management and persistence.",
+          "POS system with automatic e-invoicing integrated with ARCA.",
+          "Responsive landing pages, from implementation to production."
+        ]
       }
     }
   ]

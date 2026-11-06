@@ -3,15 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "node --test \"src/**/*.test.ts\"",
+    "check:browser": "node scripts/browser-check.mjs"
   },
   "dependencies": {
-    "framer-motion": "^12.42.2",
-    "next": "16.2.9",
+    "gsap": "3.15.1",
+    "next": "16.4.5",
     "next-intl": "^4.13.1",
     "react": "19.2.7",
     "react-dom": "19.2.7"
@@ -21,7 +26,8 @@
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "eslint": "^9.39.4",
-    "eslint-config-next": "16.2.9",
+    "eslint-config-next": "16.4.5",
+    "playwright-core": "1.64.1",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
@@ -31,6 +37,9 @@
     "@types/react-dom": "19.2.3",
     "next": {
       "postcss": "^8.5.10"
+    },
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^11.0.1"
     }
   }
 }

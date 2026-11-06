@@ -1,24 +1,33 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { DM_Mono, Schibsted_Grotesk } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import MotionProvider from "@/components/motion/MotionProvider";
+import MotionFlag from "@/features/portfolio/motion/MotionFlag";
 import "./globals.css";
 import Script from "next/script";
 
-const spaceGrotesk = Space_Grotesk({
+const sans = Schibsted_Grotesk({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
+  weight: "variable",
+  variable: "--font-sans",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+/** Only for the receipt in the POS chapter, where monospace is what it is. */
+const mono = DM_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-jetbrains-mono",
+  weight: ["400", "500"],
+  variable: "--font-mono",
+  preload: false,
 });
+
+/**
+ * Marks the page before it paints when scroll scenes will run, so the tall
+ * scroll tracks they need are there from the start and nothing jumps. Without
+ * JavaScript or with reduced motion, every section stays in normal flow.
+ */
+const MOTION_FLAG = `if(matchMedia("(prefers-reduced-motion: no-preference)").matches)document.documentElement.classList.add("motion")`;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -62,8 +71,9 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} data-scroll-behavior="smooth">
+    <html lang={locale} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: MOTION_FLAG }} />
         <link rel="shortcut icon" href="MeMemoji.webp" type="image/x-icon" />
         {/* Google Analytics */}
         <Script
@@ -79,11 +89,10 @@ export default async function RootLayout({
           `}
         </Script>
       </head>
-      <body
-        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans bg-background text-muted scroll-smooth`}
-      >
+      <body className={`${sans.variable} ${mono.variable}`}>
         <NextIntlClientProvider messages={messages}>
-          <MotionProvider>{children}</MotionProvider>
+          <MotionFlag />
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>
