@@ -39,7 +39,7 @@
     "available": "Disponible para nuevos roles.",
     "location": "Buenos Aires, remoto o híbrido."
   },
-  "manifesto": "Construyo productos web de punta a punta: React y TypeScript en el frontend, Python y Node en el backend, PostgreSQL debajo de todo. Uso IA todos los días, con workflows propios, y sigo siendo dueño de cada línea que entrego.",
+  "manifesto": "Construyo productos web de punta a punta: React y TypeScript en el frontend, Node.js y Express en el backend, PostgreSQL debajo de todo. Integro la IA a mi trabajo diario, con mis propios workflows, y sigo siendo dueño de cada línea que entrego.",
   "pos": {
     "first": "Hicimos un POS.",
     "second": "Y lo conectamos con ARCA.",
