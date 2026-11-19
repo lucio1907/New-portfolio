@@ -39,7 +39,7 @@
     "available": "Available for new roles.",
     "location": "Buenos Aires, remote or hybrid."
   },
-  "manifesto": "I build web products end to end: React and TypeScript on the frontend, Python and Node on the backend, PostgreSQL under it all. I use AI every day, with workflows of my own, and I still own every line I ship.",
+  "manifesto": "I build web products end to end: React and TypeScript on the frontend, Node.js and Express on the backend, PostgreSQL under it all. I integrate AI into my daily work, with workflows of my own, and I still own every line I ship.",
   "pos": {
     "first": "We built a POS.",
     "second": "And linked it to ARCA.",
